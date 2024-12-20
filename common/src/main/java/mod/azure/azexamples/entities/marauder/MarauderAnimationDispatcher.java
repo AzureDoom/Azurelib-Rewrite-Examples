@@ -2,6 +2,8 @@ package mod.azure.azexamples.entities.marauder;
 
 import mod.azure.azurelib.core2.animation.dispatch.AzDispatcher;
 import mod.azure.azurelib.core2.animation.dispatch.command.AzDispatchCommand;
+import net.minecraft.world.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 
 import mod.azure.azexamples.CommonMod;
 
@@ -31,27 +33,27 @@ public class MarauderAnimationDispatcher {
         .playAnimation("base_controller", CommonMod.SPAWN_ANIMATION_NAME)
         .build();
 
-    public void clientIdle() {
-        AzDispatcher.fromClient(IDLE_COMMAND);
+    public void clientIdle(@NotNull Entity entity) {
+        AzDispatcher.fromClient(IDLE_COMMAND).sendForEntity(entity);
     }
 
-    public void clientWalk() {
-        AzDispatcher.fromClient(WALK_COMMAND);
+    public void clientWalk(@NotNull Entity entity) {
+        AzDispatcher.fromClient(WALK_COMMAND).sendForEntity(entity);
     }
 
-    public void clientRun() {
-        AzDispatcher.fromClient(RUN_COMMAND);
+    public void clientRun(@NotNull Entity entity) {
+        AzDispatcher.fromClient(RUN_COMMAND).sendForEntity(entity);
     }
 
-    public void serverMelee() {
-        AzDispatcher.fromServer(MELEE_COMMAND);
+    public void serverMelee(@NotNull Entity entity) {
+        AzDispatcher.fromServer(MELEE_COMMAND).sendForEntity(entity);
     }
 
-    public void clientDeath() {
-        AzDispatcher.fromClient(DEATH_COMMAND);
+    public void clientDeath(@NotNull Entity entity) {
+        AzDispatcher.fromClient(DEATH_COMMAND).sendForEntity(entity);
     }
 
-    public void clientSpawn() {
-        AzDispatcher.fromClient(SPAWN_COMMAND);
+    public void clientSpawn(@NotNull Entity entity) {
+        AzDispatcher.fromClient(SPAWN_COMMAND).sendForEntity(entity);
     }
 }
