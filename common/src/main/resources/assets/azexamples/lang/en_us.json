@@ -1,0 +1,15 @@
+{
+  "entity.azexamples.marauder": "Marauder",
+  "entity.azexamples.doomhunter": "Doomhunter",
+  "entity.azexamples.stargate_block_entity": "Stargate",
+  "item.azexamples.marauder_spawn_egg": "Marauder Spawn Egg",
+  "item.azexamples.doomhunter_spawn_egg": "Doomhunter Spawn Egg",
+  "item.azexamples.doomicorn_helmet": "Doomicorn Helmet",
+  "item.azexamples.doomicorn_chestplate": "Doomicorn Chestplate",
+  "item.azexamples.doomicorn_leggings": "Doomicorn Leggings",
+  "item.azexamples.doomicorn_boots": "Doomicorn Boots",
+  "item.azexamples.pistol": "Pistol",
+  "item.azexamples.stargate": "Stargate",
+  "block.azexamples.stargate": "Stargate",
+  "itemGroup.azexamples.examplemod_items": "AzureLib Examples"
+}
