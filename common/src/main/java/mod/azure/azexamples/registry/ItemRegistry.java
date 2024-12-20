@@ -12,6 +12,8 @@ import mod.azure.azexamples.services.AzExampleServices;
 
 public class ItemRegistry {
 
+    private ItemRegistry() {}
+
     public static final Supplier<Item> PISTOL = registerItem(
         "pistol",
         PistolItem::new

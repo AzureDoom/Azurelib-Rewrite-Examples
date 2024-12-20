@@ -19,7 +19,12 @@ public class PistolItem extends Item {
     }
 
     @Override
-    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+    public void onUseTick(
+        @NotNull Level level,
+        @NotNull LivingEntity livingEntity,
+        @NotNull ItemStack stack,
+        int remainingUseDuration
+    ) {
         super.onUseTick(level, livingEntity, stack, remainingUseDuration);
         if (livingEntity instanceof Player player && !level.isClientSide()) {
             dispatcher.serverFire(player, stack);

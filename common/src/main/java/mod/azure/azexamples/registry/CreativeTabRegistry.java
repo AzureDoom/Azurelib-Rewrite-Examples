@@ -44,6 +44,8 @@ import mod.azure.azexamples.services.AzExampleServices;
  */
 public class CreativeTabRegistry {
 
+    private CreativeTabRegistry() {}
+
     public static final Supplier<CreativeModeTab> EXAMPLEMOD_TAB = AzExampleServices.COMMON_REGISTRY
         .registerCreativeModeTab(
             "examplemod_items",

@@ -13,6 +13,8 @@ import mod.azure.azexamples.services.AzExampleServices;
 
 public class BlockRegistry {
 
+    private BlockRegistry() {}
+
     public static final Supplier<StargateBlock> STARGATE = registerBlock(
         "stargate",
         () -> new StargateBlock(

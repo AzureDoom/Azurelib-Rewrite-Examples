@@ -22,7 +22,9 @@ public class CommonMod {
 
     public static final String MELEE_ANIMATION_NAME = "axe_attack";
 
-    public static final ResourceLocation modResource(String name) {
+    private CommonMod() {}
+
+    public static ResourceLocation modResource(String name) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 

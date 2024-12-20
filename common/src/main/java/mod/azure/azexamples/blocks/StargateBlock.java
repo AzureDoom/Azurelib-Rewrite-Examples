@@ -24,7 +24,7 @@ public class StargateBlock extends BaseEntityBlock {
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return EntityRegistry.STARGATE_BLOCK_ENTITY.get().create(pos, state);
     }
 }

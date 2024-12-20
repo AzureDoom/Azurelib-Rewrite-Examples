@@ -89,5 +89,5 @@ public class MarauderEntity extends Monster {
     }
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState state) {}
+    protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state) {}
 }

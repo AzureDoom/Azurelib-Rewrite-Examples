@@ -15,6 +15,8 @@ import mod.azure.azexamples.services.AzExampleServices;
 
 public class EntityRegistry {
 
+    private EntityRegistry() {}
+
     public static final Supplier<BlockEntityType<StargateBlockEntity>> STARGATE_BLOCK_ENTITY = registerBlockEntity(
         "stargate_block_entity",
         () -> BlockEntityType.Builder.of(
