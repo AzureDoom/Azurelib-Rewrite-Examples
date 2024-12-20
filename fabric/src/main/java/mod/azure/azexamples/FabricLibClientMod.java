@@ -25,7 +25,7 @@ public class FabricLibClientMod implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.STARGATE.get(), RenderType.translucent());
         // BlockEntityRenderers.register(
         // EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
-        // (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateRender()
+        // (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
         // );
     }
 }

@@ -33,7 +33,7 @@ public class NeoForgeClientMod {
         event.registerEntityRenderer(EntityRegistry.MARAUDER.get(), MarauderRenderer::new);
         // event.registerBlockEntityRenderer(
         // EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
-        // (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateRender()
+        // (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
         // );
     }
 }
