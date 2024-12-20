@@ -18,7 +18,7 @@ public class DoomHunterEntity extends Monster {
         super.tick();
 
         if (this.level().isClientSide && !this.isAggressive()) {
-            animationDispatcher.clientIdle();
+            animationDispatcher.clientIdle(this);
         }
     }
 }
