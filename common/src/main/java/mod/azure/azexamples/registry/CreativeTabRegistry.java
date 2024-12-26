@@ -1,5 +1,6 @@
 package mod.azure.azexamples.registry;
 
+import mod.azure.azexamples.CommonStrings;
 import mod.azure.azurelib.common.platform.Services;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -50,7 +51,7 @@ public class CreativeTabRegistry {
         .registerCreativeModeTab(
             "examplemod_items",
             () -> Services.COMMON_REGISTRY.newCreativeTabBuilder()
-                .title(Component.translatable("itemGroup." + CommonMod.MOD_ID + ".examplemod_items"))
+                .title(Component.translatable(CommonStrings.CREATIVE_TAB))
                 .icon(() -> new ItemStack(BlockRegistry.STARGATE_ITEM.get()))
                 .displayItems((enabledFeatures, entries) -> {
                     entries.accept(BlockRegistry.STARGATE_ITEM.get());

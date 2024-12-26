@@ -17,6 +17,12 @@ import java.util.function.Supplier;
 import mod.azure.azexamples.NeoForgeMod;
 import mod.azure.azexamples.services.CommonRegistry;
 
+/**
+ * The NeoForgeCommonRegistry class provides a concrete implementation of the CommonRegistry interface
+ * for use with NeoForge. It facilitates centralized registration of blocks, items, entities, block entities,
+ * and creative mode tabs. This implementation leverages the NeoForgeMod's deferred registers
+ * to manage the creation and registration of these objects.
+ */
 public class NeoForgeCommonRegistry implements CommonRegistry {
 
     @Override
@@ -43,11 +49,6 @@ public class NeoForgeCommonRegistry implements CommonRegistry {
     @Override
     public <T extends Item> Supplier<T> registerItem(String itemName, Supplier<T> item) {
         return NeoForgeMod.itemDeferredRegister.register(itemName, item);
-    }
-
-    @Override
-    public <T extends SoundEvent> Supplier<T> registerSound(String soundName, Supplier<T> sound) {
-        return NeoForgeMod.soundEventDeferredRegister.register(soundName, sound);
     }
 
     @Override

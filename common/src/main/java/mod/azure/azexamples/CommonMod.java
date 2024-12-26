@@ -8,26 +8,19 @@ import mod.azure.azexamples.registry.EntityRegistry;
 
 public class CommonMod {
 
-    public static final String MOD_ID = "azexamples";
-
-    public static final String IDLE_ANIMATION_NAME = "idle";
-
-    public static final String WALK_ANIMATION_NAME = "walk";
-
-    public static final String SPAWN_ANIMATION_NAME = "spawn";
-
-    public static final String DEATH_ANIMATION_NAME = "death";
-
-    public static final String RUN_ANIMATION_NAME = "run";
-
-    public static final String MELEE_ANIMATION_NAME = "axe_attack";
-
     private CommonMod() {}
 
     public static ResourceLocation modResource(String name) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(CommonStrings.MOD_ID, name);
     }
 
+    /**
+     * Initializes the registries for the mod, including blocks, entities, and creative tabs.
+     * </br>
+     * </br>
+     * This method should be called early in the mod's initialization process to ensure
+     * that all components are properly registered before being accessed.
+     */
     public static void initRegistries() {
         BlockRegistry.initialize();
         EntityRegistry.initialize();

@@ -1,23 +1,24 @@
 package mod.azure.azexamples.entities.doomhunter;
 
-import mod.azure.azurelib.common.internal.common.AzureLib;
+import mod.azure.azexamples.CommonMod;
+import mod.azure.azexamples.CommonStrings;
 import mod.azure.azurelib.core2.animation.AzAnimatorConfig;
 import mod.azure.azurelib.core2.animation.controller.AzAnimationController;
 import mod.azure.azurelib.core2.animation.controller.AzAnimationControllerContainer;
 import mod.azure.azurelib.core2.animation.impl.AzEntityAnimator;
-import mod.azure.azurelib.core2.animation.primitive.AzRawAnimation;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-import mod.azure.azexamples.CommonMod;
-
+/**
+ * The DoomHunterAnimator class is responsible for controlling the animations
+ * of the Doom Hunter entity in the game. It inherits from the {@code AzEntityAnimator}
+ * and is used specifically for the {@code DoomHunterEntity}.
+ */
 public class DoomHunterAnimator extends AzEntityAnimator<DoomHunterEntity> {
 
-    private static final ResourceLocation ANIMATIONS = AzureLib.modResource(
+    private static final ResourceLocation ANIMATIONS = CommonMod.modResource(
         "animations/entity/doomhunter.animation.json"
     );
-
-    private static final AzRawAnimation IDLE_ANIMATION = AzRawAnimation.begin().thenLoop(CommonMod.IDLE_ANIMATION_NAME);
 
     public DoomHunterAnimator() {
         super(AzAnimatorConfig.defaultConfig());
@@ -26,9 +27,7 @@ public class DoomHunterAnimator extends AzEntityAnimator<DoomHunterEntity> {
     @Override
     public void registerControllers(AzAnimationControllerContainer<DoomHunterEntity> animationControllerContainer) {
         animationControllerContainer.add(
-            AzAnimationController.builder(this, "base_controller")
-                .triggerableAnim(CommonMod.IDLE_ANIMATION_NAME, IDLE_ANIMATION)
-                .build()
+            AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).build()
         );
     }
 

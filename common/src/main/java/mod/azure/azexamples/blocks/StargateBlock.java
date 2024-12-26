@@ -27,11 +27,27 @@ public class StargateBlock extends BaseEntityBlock {
         return CODEC;
     }
 
+    /**
+     * Creates a new {@link BlockEntity} instance for the Stargate block at the specified position and state.
+     *
+     * @param pos   The position of the block in the world.
+     * @param state The current block state for this block entity.
+     * @return A new {@link BlockEntity} instance associated with the Stargate block, or {@code null} if none is available.
+     */
     @Override
     public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return EntityRegistry.STARGATE_BLOCK_ENTITY.get().create(pos, state);
     }
 
+    /**
+     * Determines the appropriate ticker for a block entity to handle its periodic updates.
+     *
+     * @param level The current level or world instance.
+     * @param state The block state of the associated block.
+     * @param type  The type of the block entity to obtain the ticker for.
+     * @param <T>   A subtype of BlockEntity.
+     * @return A BlockEntityTicker for the specified block entity type, or null if no ticker is applicable.
+     */
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
             @NotNull Level level,

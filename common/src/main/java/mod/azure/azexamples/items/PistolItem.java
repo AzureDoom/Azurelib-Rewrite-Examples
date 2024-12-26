@@ -2,6 +2,7 @@ package mod.azure.azexamples.items;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -16,6 +17,11 @@ public class PistolItem extends Item {
     public PistolItem() {
         super(new Properties());
         this.dispatcher = new PistolAnimationDispatcher();
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
     }
 
     @Override

@@ -10,6 +10,12 @@ import mod.azure.azexamples.items.PistolItem;
 import mod.azure.azexamples.items.armors.DoomicornArmor;
 import mod.azure.azexamples.services.AzExampleServices;
 
+/**
+ * The ItemRegistry class is responsible for managing the registration of items within the mod.
+ * It contains predefined static fields for various item types and provides a utility method
+ * to register custom items to the game's registry. This class is intended to centralize and
+ * simplify item registration.
+ */
 public class ItemRegistry {
 
     private ItemRegistry() {}

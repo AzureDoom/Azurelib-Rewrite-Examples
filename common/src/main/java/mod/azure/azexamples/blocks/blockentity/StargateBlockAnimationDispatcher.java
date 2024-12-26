@@ -1,18 +1,26 @@
 package mod.azure.azexamples.blocks.blockentity;
 
-import mod.azure.azurelib.core2.animation.dispatch.AzDispatcher;
-import mod.azure.azurelib.core2.animation.dispatch.command.AzDispatchCommand;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import mod.azure.azexamples.CommonStrings;
+import mod.azure.azurelib.core2.animation.dispatch.command.AzCommand;
 
+/**
+ * The StargateBlockAnimationDispatcher class is responsible for managing and triggering
+ * animation commands for block entities, specifically for the Stargate block entity.
+ */
 public class StargateBlockAnimationDispatcher {
 
-    private static final String SPIN_ANIMATION_NAME = "spinning";
+    private static final AzCommand SPINNING_COMMAND = AzCommand.create(
+            CommonStrings.BASE_CONTROLLER,
+            CommonStrings.SPIN_ANIMATION_NAME
+    );
 
-    private static final AzDispatchCommand SPINNING_COMMAND = AzDispatchCommand.builder()
-        .playAnimation("base_controller", SPIN_ANIMATION_NAME)
-        .build();
+    private final StargateBlockEntity stargateBlockEntity;
 
-    public void serverSpin(BlockEntity entity) {
-        AzDispatcher.fromClient(SPINNING_COMMAND).sendForBlockEntity(entity);
+    public StargateBlockAnimationDispatcher(StargateBlockEntity stargateBlockEntity) {
+        this.stargateBlockEntity = stargateBlockEntity;
+    }
+
+    public void serverSpin() {
+        SPINNING_COMMAND.sendForBlockEntity(stargateBlockEntity);
     }
 }

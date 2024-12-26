@@ -1,19 +1,36 @@
 package mod.azure.azexamples.entities.doomhunter;
 
-import mod.azure.azurelib.core2.animation.dispatch.AzDispatcher;
-import mod.azure.azurelib.core2.animation.dispatch.command.AzDispatchCommand;
+import mod.azure.azexamples.CommonStrings;
+import mod.azure.azurelib.core2.animation.dispatch.command.AzCommand;
 
-import mod.azure.azexamples.CommonMod;
-import net.minecraft.world.entity.Entity;
-import org.jetbrains.annotations.NotNull;
+import mod.azure.azurelib.core2.animation.primitive.AzLoopType;
 
+/**
+ * The DoomHunterAnimationDispatcher class is responsible for managing and sending animation
+ * commands for the Doom Hunter entity. It acts as a utility to dispatch specific animation
+ * actions, such as playing the idle animation, to the entity's client-side.
+ * </br>
+ * </br>
+ * This class integrates with the AzureLib animation dispatch system to construct and send
+ * predefined commands, ensuring that animations are triggered consistently and efficiently
+ * in the game environment.
+ * </br>
+ * </br>
+ * Usage of this class is tied to the entity lifecycle and is typically triggered during specific
+ * game events or entity states, as demonstrated in the {@code DoomHunterEntity} class.
+ */
 public class DoomHunterAnimationDispatcher {
 
-    private static final AzDispatchCommand IDLE_COMMAND = AzDispatchCommand.builder()
-        .playAnimation("base_controller", CommonMod.IDLE_ANIMATION_NAME)
-        .build();
+    private final AzCommand IDLE_COMMAND = AzCommand
+            .create(CommonStrings.BASE_CONTROLLER, CommonStrings.IDLE_ANIMATION_NAME, AzLoopType.LOOP);
 
-    public void clientIdle(@NotNull Entity entity) {
-        AzDispatcher.fromClient(IDLE_COMMAND).sendForEntity(entity);
+    private final DoomHunterEntity doomHunter;
+
+    public DoomHunterAnimationDispatcher(DoomHunterEntity doomHunter) {
+        this.doomHunter = doomHunter;
+    }
+
+    public void clientIdle() {
+        IDLE_COMMAND.sendForEntity(doomHunter);
     }
 }

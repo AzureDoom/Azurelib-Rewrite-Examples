@@ -1,12 +1,11 @@
 package mod.azure.azexamples.entities.marauder;
 
+import mod.azure.azexamples.CommonStrings;
 import mod.azure.azurelib.core2.animation.AzAnimatorConfig;
 import mod.azure.azurelib.core2.animation.controller.AzAnimationController;
 import mod.azure.azurelib.core2.animation.controller.AzAnimationControllerContainer;
-import mod.azure.azurelib.core2.animation.controller.keyframe.AzKeyFrameCallbacks;
+import mod.azure.azurelib.core2.animation.controller.keyframe.AzKeyframeCallbacks;
 import mod.azure.azurelib.core2.animation.impl.AzEntityAnimator;
-import mod.azure.azurelib.core2.animation.primitive.AzLoopType;
-import mod.azure.azurelib.core2.animation.primitive.AzRawAnimation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,26 +13,21 @@ import org.jetbrains.annotations.NotNull;
 
 import mod.azure.azexamples.CommonMod;
 
+/**
+ * The {@code MarauderAnimator} class is responsible for controlling the animations
+ * of a {@link MarauderEntity}. It defines the animation workflows for various states
+ * such as idle, walking, running, spawning, attacking, and dying, and binds these
+ * animations to the corresponding keyframe events.
+ * </br>
+ * </br>
+ * This class extends the {@code AzEntityAnimator} framework, providing an implementation
+ * specific to the {@code MarauderEntity}.
+ */
 public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
 
     private static final ResourceLocation ANIMATIONS = CommonMod.modResource(
         "animations/entity/marauder.animation.json"
     );
-
-    private static final AzRawAnimation IDLE_ANIMATION = AzRawAnimation.begin().thenLoop(CommonMod.IDLE_ANIMATION_NAME);
-
-    private static final AzRawAnimation WALK_ANIMATION = AzRawAnimation.begin().thenLoop(CommonMod.WALK_ANIMATION_NAME);
-
-    private static final AzRawAnimation SPAWN_ANIMATION = AzRawAnimation.begin()
-        .then(CommonMod.SPAWN_ANIMATION_NAME, AzLoopType.PLAY_ONCE);
-
-    private static final AzRawAnimation DEATH_ANIMATION = AzRawAnimation.begin()
-        .then(CommonMod.DEATH_ANIMATION_NAME, AzLoopType.HOLD_ON_LAST_FRAME);
-
-    private static final AzRawAnimation RUN_ANIMATION = AzRawAnimation.begin().thenLoop(CommonMod.RUN_ANIMATION_NAME);
-
-    private static final AzRawAnimation MELEE_ANIMATION = AzRawAnimation.begin()
-        .then(CommonMod.MELEE_ANIMATION_NAME, AzLoopType.PLAY_ONCE);
 
     public MarauderAnimator() {
         super(AzAnimatorConfig.defaultConfig());
@@ -42,10 +36,10 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
     @Override
     public void registerControllers(AzAnimationControllerContainer<MarauderEntity> animationControllerContainer) {
         animationControllerContainer.add(
-            AzAnimationController.builder(this, "base_controller")
+            AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER)
                 .setTransitionLength(5)
-                .setKeyFrameCallbacks(
-                    AzKeyFrameCallbacks.<MarauderEntity>builder()
+                .setKeyframeCallbacks(
+                    AzKeyframeCallbacks.<MarauderEntity>builder()
                         .setSoundKeyframeHandler(
                             event -> {
                                 if (event.getKeyframeData().getSound().equals("walk")) {
@@ -108,12 +102,6 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
                         )
                         .build()
                 )
-                .triggerableAnim(CommonMod.IDLE_ANIMATION_NAME, IDLE_ANIMATION)
-                .triggerableAnim(CommonMod.WALK_ANIMATION_NAME, WALK_ANIMATION)
-                .triggerableAnim(CommonMod.RUN_ANIMATION_NAME, RUN_ANIMATION)
-                .triggerableAnim(CommonMod.MELEE_ANIMATION_NAME, MELEE_ANIMATION)
-                .triggerableAnim(CommonMod.DEATH_ANIMATION_NAME, DEATH_ANIMATION)
-                .triggerableAnim(CommonMod.SPAWN_ANIMATION_NAME, SPAWN_ANIMATION)
                 .build()
         );
     }
@@ -121,10 +109,5 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
     @Override
     public @NotNull ResourceLocation getAnimationLocation(MarauderEntity drone) {
         return ANIMATIONS;
-    }
-
-    @Override
-    public void setCustomAnimations(MarauderEntity animatable) {
-        super.setCustomAnimations(animatable);
     }
 }

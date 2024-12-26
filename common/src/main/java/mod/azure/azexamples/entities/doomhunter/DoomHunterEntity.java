@@ -10,15 +10,28 @@ public class DoomHunterEntity extends Monster {
 
     public DoomHunterEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
-        this.animationDispatcher = new DoomHunterAnimationDispatcher();
+        this.animationDispatcher = new DoomHunterAnimationDispatcher(this);
     }
 
+    /**
+     * Overrides the default tick behavior for the entity to include additional animation logic.
+     * </br>
+     * </br>
+     * Invokes the super method to perform core tick operations and checks if the current
+     * level is client-side and the entity is not in an aggressive state. If these conditions
+     * are satisfied, this method triggers the client-side idle animation for the entity
+     * using the {@code DoomHunterAnimationDispatcher}.
+     * </br>
+     * </br>
+     * The animation dispatcher handles animation commands by utilizing a client-side
+     * dispatcher setup for controlling the entity's animation state.
+     */
     @Override
     public void tick() {
         super.tick();
 
         if (this.level().isClientSide && !this.isAggressive()) {
-            animationDispatcher.clientIdle(this);
+            animationDispatcher.clientIdle();
         }
     }
 }

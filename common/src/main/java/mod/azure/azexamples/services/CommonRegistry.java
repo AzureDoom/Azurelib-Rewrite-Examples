@@ -1,6 +1,5 @@
 package mod.azure.azexamples.services;
 
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -13,6 +12,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.function.Supplier;
 
+/**
+ * The CommonRegistry interface provides a set of methods for registering various types of objects
+ * and creating specific tools used in mod development, such as blocks, entities, items, sounds,
+ * and creative mode tabs. This interface is designed to be implemented differently based on the
+ * platform to handle registration in a unified way.
+ */
 public interface CommonRegistry {
 
     <T extends BlockEntity> Supplier<BlockEntityType<T>> registerBlockEntity(
@@ -28,8 +33,6 @@ public interface CommonRegistry {
     );
 
     <T extends Item> Supplier<T> registerItem(String itemName, Supplier<T> item);
-
-    <T extends SoundEvent> Supplier<T> registerSound(String soundName, Supplier<T> sound);
 
     <T extends CreativeModeTab> Supplier<T> registerCreativeModeTab(String tabName, Supplier<T> tab);
 

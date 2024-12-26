@@ -1,9 +1,9 @@
 package mod.azure.azexamples.entities.marauder;
 
+import mod.azure.azexamples.entities.marauder.ai.DelayedMeleeAttackGoal;
 import mod.azure.azurelib.common.api.common.ai.pathing.AzureNavigation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -15,13 +15,24 @@ import org.jetbrains.annotations.NotNull;
 
 public class MarauderEntity extends Monster {
 
-    private final MarauderAnimationDispatcher animationDispatcher;
+    /**
+     * Handles the animation state transitions for the {@link MarauderEntity}.
+     * This dispatcher is responsible for deciding and applying the appropriate
+     * animations to the entity based on its current state and actions, such as
+     * walking, running, idling, spawning, attacking, or dying.
+     * </br>
+     * </br>
+     * This instance operates primarily on the client side to handle visual
+     * representation of the {@link MarauderEntity} and is updated within
+     * the entity's tick lifecycle.
+     */
+    public final MarauderAnimationDispatcher animationDispatcher;
 
     private final MoveAnalysis moveAnalysis;
 
     public MarauderEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
-        this.animationDispatcher = new MarauderAnimationDispatcher();
+        this.animationDispatcher = new MarauderAnimationDispatcher(this);
         this.moveAnalysis = new MoveAnalysis(this);
     }
 
@@ -51,31 +62,33 @@ public class MarauderEntity extends Monster {
 
         if (this.level().isClientSide) {
             var isMovingOnGround = moveAnalysis.isMovingHorizontally() && onGround();
+            Runnable animationRunner;
             if (!this.isAlive()) {
-                animationDispatcher.clientDeath(this);
-            } else if (this.tickCount < 270) {
-                animationDispatcher.clientSpawn(this);
+                animationRunner = animationDispatcher::clientDeath;
+//            } else if (this.tickCount < 270) {
+//                animationDispatcher.clientSpawn();
             } else if (isMovingOnGround) {
                 if (this.isAggressive()) {
-                    animationDispatcher.clientRun(this);
+                    animationRunner = animationDispatcher::clientRun;
                 } else {
-                    animationDispatcher.clientWalk(this);
+                    animationRunner = animationDispatcher::clientWalk;
                 }
             } else {
-                animationDispatcher.clientIdle(this);
+                animationRunner = animationDispatcher::clientIdle;
             }
+            animationRunner.run();
         } else {
-            if (this.tickCount < 280 && this.isAlive()) {
-                if (this.getNavigation() instanceof AzureNavigation azureNavigation) {
-                    azureNavigation.hardStop();
-                    azureNavigation.stop();
-                }
-                this.setYBodyRot(0);
-                this.setYHeadRot(0);
-                this.getEyePosition(90);
-                this.setXRot(0);
-                this.setYRot(0);
-            }
+//            if (this.tickCount < 280 && this.isAlive()) {
+//                if (this.getNavigation() instanceof AzureNavigation azureNavigation) {
+//                    azureNavigation.hardStop();
+//                    azureNavigation.stop();
+//                }
+//                this.setYBodyRot(0);
+//                this.setYHeadRot(0);
+//                this.getEyePosition(90);
+//                this.setXRot(0);
+//                this.setYRot(0);
+//            }
         }
     }
 
@@ -85,7 +98,7 @@ public class MarauderEntity extends Monster {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(7, new RandomStrollGoal(this, 0.3F));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 0.6F, true));
+        this.goalSelector.addGoal(2, new DelayedMeleeAttackGoal(this, 0.6F, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
     }
 

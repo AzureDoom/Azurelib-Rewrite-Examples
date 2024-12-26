@@ -11,6 +11,10 @@ import mod.azure.azexamples.blocks.StargateBlock;
 import mod.azure.azexamples.blocks.StargateBlockItem;
 import mod.azure.azexamples.services.AzExampleServices;
 
+/**
+ * A registry class for managing the initialization and registration of custom blocks
+ * and their associated items in the mod.
+ */
 public class BlockRegistry {
 
     private BlockRegistry() {}

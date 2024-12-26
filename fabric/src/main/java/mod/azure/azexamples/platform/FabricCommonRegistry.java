@@ -1,5 +1,6 @@
 package mod.azure.azexamples.platform;
 
+import mod.azure.azexamples.CommonStrings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,6 +21,20 @@ import java.util.function.Supplier;
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.services.CommonRegistry;
 
+/**
+ * The FabricCommonRegistry class provides an implementation of the CommonRegistry interface
+ * specifically designed for the Fabric platform. It facilitates the registration of various
+ * Minecraft modding constructs such as blocks, items, entities, block entities, and creative tabs.
+ * </br>
+ * </br>
+ * This class provides a centralized approach to managing registrations, ensuring compatibility
+ * and reducing redundancy by leveraging the Fabric API's mechanisms for modded object
+ * registration.
+ * </br>
+ * </br>
+ * Methods include registering game objects like blocks, entities, items, and block entities
+ * as well as creating other utilities for modding, such as spawn eggs and creative mode tabs.
+ */
 public class FabricCommonRegistry implements CommonRegistry {
 
     private static <T, R extends Registry<? super T>> Supplier<T> registerSupplier(
@@ -29,7 +44,7 @@ public class FabricCommonRegistry implements CommonRegistry {
     ) {
         final T registeredObject = Registry.register(
             (Registry<T>) registry,
-            ResourceLocation.fromNamespaceAndPath(CommonMod.MOD_ID, id),
+            ResourceLocation.fromNamespaceAndPath(CommonStrings.MOD_ID, id),
             object.get()
         );
 
@@ -60,11 +75,6 @@ public class FabricCommonRegistry implements CommonRegistry {
     @Override
     public <T extends Item> Supplier<T> registerItem(String itemName, Supplier<T> item) {
         return registerSupplier(BuiltInRegistries.ITEM, itemName, item);
-    }
-
-    @Override
-    public <T extends SoundEvent> Supplier<T> registerSound(String soundName, Supplier<T> sound) {
-        return registerSupplier(BuiltInRegistries.SOUND_EVENT, soundName, sound);
     }
 
     @Override
