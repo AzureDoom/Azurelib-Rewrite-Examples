@@ -30,12 +30,13 @@ public abstract class NetheriteSwordMixin extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if (isSelected && !level.isClientSide && stack.is(Items.NETHERITE_SWORD) && !isPlayingAnimation) {
-            dispatcher.serverOpening(entity, stack);
-            isPlayingAnimation = true;
-        }
-        if (isPlayingAnimation && !isSelected) {
-            isPlayingAnimation = false;
+        if (!level.isClientSide && stack.is(Items.NETHERITE_SWORD)) {
+            if (isSelected && !isPlayingAnimation) {
+                dispatcher.serverOpening(entity, stack);
+                isPlayingAnimation = true;
+            } else if (!isSelected && isPlayingAnimation) {
+                isPlayingAnimation = false;
+            }
         }
     }
 }
