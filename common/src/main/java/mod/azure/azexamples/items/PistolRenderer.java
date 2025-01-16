@@ -1,7 +1,7 @@
 package mod.azure.azexamples.items;
 
-import mod.azure.azurelib.core2.render.item.AzItemRenderer;
-import mod.azure.azurelib.core2.render.item.AzItemRendererConfig;
+import mod.azure.azurelib.rewrite.render.item.AzItemRenderer;
+import mod.azure.azurelib.rewrite.render.item.AzItemRendererConfig;
 import net.minecraft.resources.ResourceLocation;
 
 import mod.azure.azexamples.CommonMod;
@@ -14,9 +14,9 @@ public class PistolRenderer extends AzItemRenderer {
 
     public PistolRenderer() {
         super(
-                AzItemRendererConfig.builder(itemStack -> MODEL, itemStack -> TEXTURE)
-                        .setAnimatorProvider(PistolAnimator::new)
-                        .build()
+            AzItemRendererConfig.builder(itemStack -> MODEL, itemStack -> TEXTURE)
+                .setAnimatorProvider(PistolAnimator::new)
+                .build()
         );
     }
 }

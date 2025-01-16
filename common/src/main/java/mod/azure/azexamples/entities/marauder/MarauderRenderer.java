@@ -1,8 +1,8 @@
 package mod.azure.azexamples.entities.marauder;
 
-import mod.azure.azurelib.core2.render.entity.AzEntityRenderer;
-import mod.azure.azurelib.core2.render.entity.AzEntityRendererConfig;
-import mod.azure.azurelib.core2.render.layer.AzAutoGlowingLayer;
+import mod.azure.azurelib.rewrite.render.entity.AzEntityRenderer;
+import mod.azure.azurelib.rewrite.render.entity.AzEntityRendererConfig;
+import mod.azure.azurelib.rewrite.render.layer.AzAutoGlowingLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
@@ -16,12 +16,12 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
 
     public MarauderRenderer(EntityRendererProvider.Context context) {
         super(
-                AzEntityRendererConfig.<MarauderEntity>builder(MODEL, TEXTURE)
-                        .addRenderLayer(new AzAutoGlowingLayer<>())
-                        .setAnimatorProvider(MarauderAnimator::new)
-                        .setDeathMaxRotation(0F)
-                        .build(),
-                context
+            AzEntityRendererConfig.<MarauderEntity>builder(MODEL, TEXTURE)
+                .addRenderLayer(new AzAutoGlowingLayer<>())
+                .setAnimatorProvider(MarauderAnimator::new)
+                .setDeathMaxRotation(0F)
+                .build(),
+            context
         );
     }
 }

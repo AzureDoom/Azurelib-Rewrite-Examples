@@ -1,15 +1,18 @@
 package mod.azure.azexamples.entities.creeper;
 
-import mod.azure.azexamples.CommonStrings;
-import mod.azure.azurelib.core2.animation.dispatch.command.AzCommand;
-import mod.azure.azurelib.core2.animation.primitive.AzLoopType;
+import mod.azure.azurelib.rewrite.animation.dispatch.command.AzCommand;
+import mod.azure.azurelib.rewrite.animation.play_behavior.AzPlayBehaviors;
 import net.minecraft.world.entity.monster.Creeper;
+
+import mod.azure.azexamples.CommonStrings;
 
 public class CreeperAnimationDispatcher {
 
-    private final AzCommand IDLE_COMMAND = AzCommand.create(CommonStrings.BASE_CONTROLLER,
-                    CommonStrings.IDLE_ANIMATION_NAME,
-                    AzLoopType.LOOP);
+    private final AzCommand IDLE_COMMAND = AzCommand.create(
+        CommonStrings.BASE_CONTROLLER,
+        CommonStrings.IDLE_ANIMATION_NAME,
+        AzPlayBehaviors.LOOP
+    );
 
     private final Creeper creeper;
 

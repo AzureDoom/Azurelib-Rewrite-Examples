@@ -14,17 +14,11 @@ public class DoomHunterEntity extends Monster {
     }
 
     /**
-     * Overrides the default tick behavior for the entity to include additional animation logic.
-     * </br>
-     * </br>
-     * Invokes the super method to perform core tick operations and checks if the current
-     * level is client-side and the entity is not in an aggressive state. If these conditions
-     * are satisfied, this method triggers the client-side idle animation for the entity
-     * using the {@code DoomHunterAnimationDispatcher}.
-     * </br>
-     * </br>
-     * The animation dispatcher handles animation commands by utilizing a client-side
-     * dispatcher setup for controlling the entity's animation state.
+     * Overrides the default tick behavior for the entity to include additional animation logic. Invokes the super
+     * method to perform core tick operations and checks if the current level is client-side and the entity is not in an
+     * aggressive state. If these conditions are satisfied, this method triggers the client-side idle animation for the
+     * entity using the {@code DoomHunterAnimationDispatcher}. The animation dispatcher handles animation commands by
+     * utilizing a client-side dispatcher setup for controlling the entity's animation state.
      */
     @Override
     public void tick() {

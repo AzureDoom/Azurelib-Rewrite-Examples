@@ -17,8 +17,8 @@ public class StargateBlockEntity extends BlockEntity {
     }
 
     /**
-     * Handles the tick behavior for the StargateBlockEntity, triggering server-side spinning animations
-     * if the block entity and level instance are valid and the method is executed on the client side.
+     * Handles the tick behavior for the StargateBlockEntity, triggering server-side spinning animations if the block
+     * entity and level instance are valid and the method is executed on the client side.
      *
      * @param level       The current level or world instance.
      * @param pos         The position of the block in the world.

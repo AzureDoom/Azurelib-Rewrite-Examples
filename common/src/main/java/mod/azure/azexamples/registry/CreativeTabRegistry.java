@@ -1,6 +1,5 @@
 package mod.azure.azexamples.registry;
 
-import mod.azure.azexamples.CommonStrings;
 import mod.azure.azurelib.common.platform.Services;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -8,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Supplier;
 
-import mod.azure.azexamples.CommonMod;
+import mod.azure.azexamples.CommonStrings;
 import mod.azure.azexamples.services.AzExampleServices;
 
 /**

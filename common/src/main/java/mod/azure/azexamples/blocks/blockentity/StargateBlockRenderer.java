@@ -1,8 +1,8 @@
 package mod.azure.azexamples.blocks.blockentity;
 
 import mod.azure.azurelib.common.internal.common.AzureLib;
-import mod.azure.azurelib.core2.render.block.AzBlockEntityRenderer;
-import mod.azure.azurelib.core2.render.block.AzBlockEntityRendererConfig;
+import mod.azure.azurelib.rewrite.render.block.AzBlockEntityRenderer;
+import mod.azure.azurelib.rewrite.render.block.AzBlockEntityRendererConfig;
 import net.minecraft.resources.ResourceLocation;
 
 public class StargateBlockRenderer extends AzBlockEntityRenderer<StargateBlockEntity> {
@@ -13,9 +13,9 @@ public class StargateBlockRenderer extends AzBlockEntityRenderer<StargateBlockEn
 
     public StargateBlockRenderer() {
         super(
-                AzBlockEntityRendererConfig.<StargateBlockEntity>builder(MODEL, TEXTURE)
-                        .setAnimatorProvider(StargateBlockEntityAnimator::new)
-                        .build()
+            AzBlockEntityRendererConfig.<StargateBlockEntity>builder(MODEL, TEXTURE)
+                .setAnimatorProvider(StargateBlockEntityAnimator::new)
+                .build()
         );
     }
 }

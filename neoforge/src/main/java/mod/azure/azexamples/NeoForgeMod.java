@@ -1,7 +1,6 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.registry.ItemRegistry;
-import mod.azure.azurelib.core2.animation.cache.AzIdentityRegistry;
+import mod.azure.azurelib.rewrite.animation.cache.AzIdentityRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
@@ -17,6 +16,7 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import mod.azure.azexamples.registry.EntityRegistry;
+import mod.azure.azexamples.registry.ItemRegistry;
 
 @Mod(CommonStrings.MOD_ID)
 public final class NeoForgeMod {
@@ -59,16 +59,17 @@ public final class NeoForgeMod {
 
     public void commonSetup(final FMLCommonSetupEvent event) {
         AzIdentityRegistry.register(
-                ItemRegistry.PISTOL.get(),
-                ItemRegistry.DOOMICORN_HELMET.get(),
-                ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-                ItemRegistry.DOOMICORN_LEGGINGS.get(),
-                ItemRegistry.DOOMICORN_BOOTS.get(),
-                Items.NETHERITE_SWORD,
-                Items.NETHERITE_HELMET,
-                Items.NETHERITE_CHESTPLATE,
-                Items.NETHERITE_LEGGINGS,
-                Items.NETHERITE_BOOTS);
+            ItemRegistry.PISTOL.get(),
+            ItemRegistry.DOOMICORN_HELMET.get(),
+            ItemRegistry.DOOMICORN_CHESTPLATE.get(),
+            ItemRegistry.DOOMICORN_LEGGINGS.get(),
+            ItemRegistry.DOOMICORN_BOOTS.get(),
+            Items.NETHERITE_SWORD,
+            Items.NETHERITE_HELMET,
+            Items.NETHERITE_CHESTPLATE,
+            Items.NETHERITE_LEGGINGS,
+            Items.NETHERITE_BOOTS
+        );
     }
 
     public void createEntityAttributes(final EntityAttributeCreationEvent event) {

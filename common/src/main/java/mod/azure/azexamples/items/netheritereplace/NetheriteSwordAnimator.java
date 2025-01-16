@@ -1,14 +1,15 @@
 package mod.azure.azexamples.items.netheritereplace;
 
-import mod.azure.azexamples.CommonMod;
-import mod.azure.azexamples.CommonStrings;
-import mod.azure.azurelib.core2.animation.AzAnimatorConfig;
-import mod.azure.azurelib.core2.animation.controller.AzAnimationController;
-import mod.azure.azurelib.core2.animation.controller.AzAnimationControllerContainer;
-import mod.azure.azurelib.core2.animation.impl.AzItemAnimator;
+import mod.azure.azurelib.rewrite.animation.AzAnimatorConfig;
+import mod.azure.azurelib.rewrite.animation.controller.AzAnimationController;
+import mod.azure.azurelib.rewrite.animation.controller.AzAnimationControllerContainer;
+import mod.azure.azurelib.rewrite.animation.impl.AzItemAnimator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+
+import mod.azure.azexamples.CommonMod;
+import mod.azure.azexamples.CommonStrings;
 
 public class NetheriteSwordAnimator extends AzItemAnimator {
 

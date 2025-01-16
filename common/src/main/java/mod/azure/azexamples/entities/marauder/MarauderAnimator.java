@@ -1,27 +1,23 @@
 package mod.azure.azexamples.entities.marauder;
 
-import mod.azure.azexamples.CommonStrings;
-import mod.azure.azurelib.core2.animation.AzAnimatorConfig;
-import mod.azure.azurelib.core2.animation.controller.AzAnimationController;
-import mod.azure.azurelib.core2.animation.controller.AzAnimationControllerContainer;
-import mod.azure.azurelib.core2.animation.controller.keyframe.AzKeyframeCallbacks;
-import mod.azure.azurelib.core2.animation.impl.AzEntityAnimator;
+import mod.azure.azurelib.rewrite.animation.AzAnimatorConfig;
+import mod.azure.azurelib.rewrite.animation.controller.AzAnimationController;
+import mod.azure.azurelib.rewrite.animation.controller.AzAnimationControllerContainer;
+import mod.azure.azurelib.rewrite.animation.controller.keyframe.AzKeyframeCallbacks;
+import mod.azure.azurelib.rewrite.animation.impl.AzEntityAnimator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import org.jetbrains.annotations.NotNull;
 
 import mod.azure.azexamples.CommonMod;
+import mod.azure.azexamples.CommonStrings;
 
 /**
- * The {@code MarauderAnimator} class is responsible for controlling the animations
- * of a {@link MarauderEntity}. It defines the animation workflows for various states
- * such as idle, walking, running, spawning, attacking, and dying, and binds these
- * animations to the corresponding keyframe events.
- * </br>
- * </br>
- * This class extends the {@code AzEntityAnimator} framework, providing an implementation
- * specific to the {@code MarauderEntity}.
+ * The {@code MarauderAnimator} class is responsible for controlling the animations of a {@link MarauderEntity}. It
+ * defines the animation workflows for various states such as idle, walking, running, spawning, attacking, and dying,
+ * and binds these animations to the corresponding keyframe events. This class extends the {@code AzEntityAnimator}
+ * framework, providing an implementation specific to the {@code MarauderEntity}.
  */
 public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
 

@@ -15,11 +15,9 @@ public class CommonMod {
     }
 
     /**
-     * Initializes the registries for the mod, including blocks, entities, and creative tabs.
-     * </br>
-     * </br>
-     * This method should be called early in the mod's initialization process to ensure
-     * that all components are properly registered before being accessed.
+     * Initializes the registries for the mod, including blocks, entities, and creative tabs. This method should be
+     * called early in the mod's initialization process to ensure that all components are properly registered before
+     * being accessed.
      */
     public static void initRegistries() {
         BlockRegistry.initialize();

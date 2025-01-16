@@ -1,9 +1,10 @@
 package mod.azure.azexamples.items.netheritereplace;
 
-import mod.azure.azexamples.CommonMod;
-import mod.azure.azurelib.core2.render.item.AzItemRenderer;
-import mod.azure.azurelib.core2.render.item.AzItemRendererConfig;
+import mod.azure.azurelib.rewrite.render.item.AzItemRenderer;
+import mod.azure.azurelib.rewrite.render.item.AzItemRendererConfig;
 import net.minecraft.resources.ResourceLocation;
+
+import mod.azure.azexamples.CommonMod;
 
 public class NetheriteSwordRenderer extends AzItemRenderer {
 
@@ -13,9 +14,9 @@ public class NetheriteSwordRenderer extends AzItemRenderer {
 
     public NetheriteSwordRenderer() {
         super(
-                AzItemRendererConfig.builder(itemStack -> MODEL, itemStack -> TEXTURE)
-                        .setAnimatorProvider(NetheriteSwordAnimator::new)
-                        .build()
+            AzItemRendererConfig.builder(itemStack -> MODEL, itemStack -> TEXTURE)
+                .setAnimatorProvider(NetheriteSwordAnimator::new)
+                .build()
         );
     }
 }

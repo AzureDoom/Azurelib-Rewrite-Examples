@@ -1,7 +1,7 @@
 package mod.azure.azexamples.entities.doomhunter;
 
-import mod.azure.azurelib.core2.render.entity.AzEntityRenderer;
-import mod.azure.azurelib.core2.render.entity.AzEntityRendererConfig;
+import mod.azure.azurelib.rewrite.render.entity.AzEntityRenderer;
+import mod.azure.azurelib.rewrite.render.entity.AzEntityRendererConfig;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
@@ -15,10 +15,10 @@ public class DoomHunterRenderer extends AzEntityRenderer<DoomHunterEntity> {
 
     public DoomHunterRenderer(EntityRendererProvider.Context context) {
         super(
-                AzEntityRendererConfig.<DoomHunterEntity>builder(MODEL, TEXTURE)
-                        .setAnimatorProvider(DoomHunterAnimator::new)
-                        .build(),
-                context
+            AzEntityRendererConfig.<DoomHunterEntity>builder(MODEL, TEXTURE)
+                .setAnimatorProvider(DoomHunterAnimator::new)
+                .build(),
+            context
         );
     }
 }

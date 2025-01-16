@@ -1,17 +1,18 @@
 package mod.azure.azexamples.items;
 
-import mod.azure.azexamples.CommonStrings;
-import mod.azure.azurelib.core2.animation.dispatch.command.AzCommand;
-import mod.azure.azurelib.core2.animation.primitive.AzLoopType;
+import mod.azure.azurelib.rewrite.animation.dispatch.command.AzCommand;
+import mod.azure.azurelib.rewrite.animation.play_behavior.AzPlayBehaviors;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+
+import mod.azure.azexamples.CommonStrings;
 
 public class PistolAnimationDispatcher {
 
     private static final AzCommand FIRING_COMMAND = AzCommand.create(
-            CommonStrings.BASE_CONTROLLER,
-            CommonStrings.FIRING_ANIMATION_NAME,
-            AzLoopType.PLAY_ONCE
+        CommonStrings.BASE_CONTROLLER,
+        CommonStrings.FIRING_ANIMATION_NAME,
+        AzPlayBehaviors.PLAY_ONCE
     );
 
     public void serverFire(Entity entity, ItemStack itemStack) {

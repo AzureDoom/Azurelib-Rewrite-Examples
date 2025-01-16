@@ -1,7 +1,7 @@
 package mod.azure.azexamples.entities.marauder;
 
-import mod.azure.azexamples.entities.marauder.ai.DelayedMeleeAttackGoal;
 import mod.azure.azurelib.common.api.common.ai.pathing.AzureNavigation;
+import mod.azure.azurelib.rewrite.util.MoveAnalysis;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
@@ -13,18 +13,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
+import mod.azure.azexamples.entities.marauder.ai.DelayedMeleeAttackGoal;
+
 public class MarauderEntity extends Monster {
 
     /**
-     * Handles the animation state transitions for the {@link MarauderEntity}.
-     * This dispatcher is responsible for deciding and applying the appropriate
-     * animations to the entity based on its current state and actions, such as
-     * walking, running, idling, spawning, attacking, or dying.
-     * </br>
-     * </br>
-     * This instance operates primarily on the client side to handle visual
-     * representation of the {@link MarauderEntity} and is updated within
-     * the entity's tick lifecycle.
+     * Handles the animation state transitions for the {@link MarauderEntity}. This dispatcher is responsible for
+     * deciding and applying the appropriate animations to the entity based on its current state and actions, such as
+     * walking, running, idling, spawning, attacking, or dying. This instance operates primarily on the client side to
+     * handle visual representation of the {@link MarauderEntity} and is updated within the entity's tick lifecycle.
      */
     public final MarauderAnimationDispatcher animationDispatcher;
 
@@ -65,8 +62,8 @@ public class MarauderEntity extends Monster {
             Runnable animationRunner;
             if (!this.isAlive()) {
                 animationRunner = animationDispatcher::clientDeath;
-//            } else if (this.tickCount < 270) {
-//                animationDispatcher.clientSpawn();
+                // } else if (this.tickCount < 270) {
+                // animationDispatcher.clientSpawn();
             } else if (isMovingOnGround) {
                 if (this.isAggressive()) {
                     animationRunner = animationDispatcher::clientRun;
@@ -78,17 +75,17 @@ public class MarauderEntity extends Monster {
             }
             animationRunner.run();
         } else {
-//            if (this.tickCount < 280 && this.isAlive()) {
-//                if (this.getNavigation() instanceof AzureNavigation azureNavigation) {
-//                    azureNavigation.hardStop();
-//                    azureNavigation.stop();
-//                }
-//                this.setYBodyRot(0);
-//                this.setYHeadRot(0);
-//                this.getEyePosition(90);
-//                this.setXRot(0);
-//                this.setYRot(0);
-//            }
+            // if (this.tickCount < 280 && this.isAlive()) {
+            // if (this.getNavigation() instanceof AzureNavigation azureNavigation) {
+            // azureNavigation.hardStop();
+            // azureNavigation.stop();
+            // }
+            // this.setYBodyRot(0);
+            // this.setYHeadRot(0);
+            // this.getEyePosition(90);
+            // this.setXRot(0);
+            // this.setYRot(0);
+            // }
         }
     }
 

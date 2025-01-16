@@ -1,6 +1,5 @@
 package mod.azure.azexamples.mixins;
 
-import mod.azure.azexamples.items.netheritereplace.armor.NetheriteArmorAnimationDispatcher;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
@@ -12,6 +11,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import mod.azure.azexamples.items.netheritereplace.armor.NetheriteArmorAnimationDispatcher;
 
 @Mixin(ArmorItem.class)
 public abstract class NetheriteArmorMixin extends Item {
@@ -30,7 +31,7 @@ public abstract class NetheriteArmorMixin extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if (!level.isClientSide && entity instanceof Player player ) {
+        if (!level.isClientSide && entity instanceof Player player) {
             player.getArmorSlots().forEach(wornArmor -> {
                 if (wornArmor != null && wornArmor.is(Items.NETHERITE_CHESTPLATE)) {
                     dispatcher.serverIdleArmor(player, wornArmor);

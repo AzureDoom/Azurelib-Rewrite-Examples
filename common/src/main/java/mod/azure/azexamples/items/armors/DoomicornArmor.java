@@ -22,10 +22,10 @@ public class DoomicornArmor extends ArmorItem {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> swapWithEquipmentSlot(
-            @NotNull Item item,
-            @NotNull Level level,
-            @NotNull Player player,
-            @NotNull InteractionHand hand
+        @NotNull Item item,
+        @NotNull Level level,
+        @NotNull Player player,
+        @NotNull InteractionHand hand
     ) {
         InteractionResultHolder<ItemStack> result = super.swapWithEquipmentSlot(item, level, player, hand);
 

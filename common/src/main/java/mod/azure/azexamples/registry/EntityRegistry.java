@@ -14,11 +14,9 @@ import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.services.AzExampleServices;
 
 /**
- * The EntityRegistry class is responsible for registering custom entity
- * and block entity types to Minecraft's registry. It provides static fields
- * for accessing registered entities and block entities, as well as methods
- * for performing the registration process. This class ensures that entities
- * and block entities are properly set up within the mod.
+ * The EntityRegistry class is responsible for registering custom entity and block entity types to Minecraft's registry.
+ * It provides static fields for accessing registered entities and block entities, as well as methods for performing the
+ * registration process. This class ensures that entities and block entities are properly set up within the mod.
  */
 public class EntityRegistry {
 

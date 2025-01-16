@@ -1,17 +1,18 @@
 package mod.azure.azexamples.blocks;
 
-import mod.azure.azexamples.CommonMod;
-import mod.azure.azurelib.core2.animation.AzAnimatorConfig;
-import mod.azure.azurelib.core2.animation.controller.AzAnimationController;
-import mod.azure.azurelib.core2.animation.controller.AzAnimationControllerContainer;
-import mod.azure.azurelib.core2.animation.impl.AzItemAnimator;
+import mod.azure.azurelib.rewrite.animation.AzAnimatorConfig;
+import mod.azure.azurelib.rewrite.animation.controller.AzAnimationController;
+import mod.azure.azurelib.rewrite.animation.controller.AzAnimationControllerContainer;
+import mod.azure.azurelib.rewrite.animation.impl.AzItemAnimator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import mod.azure.azexamples.CommonMod;
+
 /**
- * The StargateBlockItemAnimator class is responsible for handling animations for the Stargate block item.
- * It extends the AzItemAnimator class and integrates animation capabilities defined by AzureLib.
+ * The StargateBlockItemAnimator class is responsible for handling animations for the Stargate block item. It extends
+ * the AzItemAnimator class and integrates animation capabilities defined by AzureLib.
  */
 public class StargateBlockItemAnimator extends AzItemAnimator {
 

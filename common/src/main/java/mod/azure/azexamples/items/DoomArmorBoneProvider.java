@@ -1,8 +1,8 @@
 package mod.azure.azexamples.items;
 
-import mod.azure.azurelib.core2.model.AzBakedModel;
-import mod.azure.azurelib.core2.model.AzBone;
-import mod.azure.azurelib.core2.render.armor.bone.AzDefaultArmorBoneProvider;
+import mod.azure.azurelib.rewrite.model.AzBakedModel;
+import mod.azure.azurelib.rewrite.model.AzBone;
+import mod.azure.azurelib.rewrite.render.armor.bone.AzDefaultArmorBoneProvider;
 
 public class DoomArmorBoneProvider extends AzDefaultArmorBoneProvider {
 

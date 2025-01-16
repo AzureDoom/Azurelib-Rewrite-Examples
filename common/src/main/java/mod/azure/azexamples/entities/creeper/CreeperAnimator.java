@@ -1,15 +1,16 @@
 package mod.azure.azexamples.entities.creeper;
 
-import mod.azure.azexamples.CommonMod;
-import mod.azure.azexamples.CommonStrings;
-import mod.azure.azurelib.core2.animation.AzAnimatorConfig;
-import mod.azure.azurelib.core2.animation.controller.AzAnimationController;
-import mod.azure.azurelib.core2.animation.controller.AzAnimationControllerContainer;
-import mod.azure.azurelib.core2.animation.impl.AzEntityAnimator;
+import mod.azure.azurelib.rewrite.animation.AzAnimatorConfig;
+import mod.azure.azurelib.rewrite.animation.controller.AzAnimationController;
+import mod.azure.azurelib.rewrite.animation.controller.AzAnimationControllerContainer;
+import mod.azure.azurelib.rewrite.animation.impl.AzEntityAnimator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.Creeper;
 import org.jetbrains.annotations.NotNull;
+
+import mod.azure.azexamples.CommonMod;
+import mod.azure.azexamples.CommonStrings;
 
 public class CreeperAnimator extends AzEntityAnimator<Creeper> {
 
@@ -43,12 +44,28 @@ public class CreeperAnimator extends AzEntityAnimator<Creeper> {
         var rightLeg = boneCache.getBakedModel().getBone("field_217144_h");
 
         if (leftArm.isPresent())
-            leftArm.get().setRotX(Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * 2.0F * animatable.walkAnimation.speed() * 0.5F);
+            leftArm.get()
+                .setRotX(
+                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * 2.0F
+                        * animatable.walkAnimation.speed() * 0.5F
+                );
         if (rightArm.isPresent())
-            rightArm.get().setRotX(Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * -2.0F * animatable.walkAnimation.speed() * 0.5F);
+            rightArm.get()
+                .setRotX(
+                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * -2.0F
+                        * animatable.walkAnimation.speed() * 0.5F
+                );
         if (leftLeg.isPresent())
-            leftLeg.get().setRotX(Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * 2.0F * animatable.walkAnimation.speed() * 0.5F);
+            leftLeg.get()
+                .setRotX(
+                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * 2.0F
+                        * animatable.walkAnimation.speed() * 0.5F
+                );
         if (rightLeg.isPresent())
-            rightLeg.get().setRotX(Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F) * 1.4F * animatable.walkAnimation.speed() * 0.5F);
+            rightLeg.get()
+                .setRotX(
+                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F) * 1.4F * animatable.walkAnimation
+                        .speed() * 0.5F
+                );
     }
 }
