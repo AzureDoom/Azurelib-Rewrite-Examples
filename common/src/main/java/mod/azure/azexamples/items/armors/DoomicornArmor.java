@@ -16,7 +16,7 @@ public class DoomicornArmor extends ArmorItem {
     private final DoomicornArmorAnimationDispatcher dispatcher;
 
     public DoomicornArmor(Type type) {
-        super(ArmorMaterials.NETHERITE, type, new Properties());
+        super(ArmorMaterials.NETHERITE, type, new Properties().stacksTo(1));
         this.dispatcher = new DoomicornArmorAnimationDispatcher();
     }
 
