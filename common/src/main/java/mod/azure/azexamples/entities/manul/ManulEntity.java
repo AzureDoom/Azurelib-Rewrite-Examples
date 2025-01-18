@@ -6,6 +6,9 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.level.Level;
 
+/**
+ * Credit to JayZX535 for request of this example.
+ */
 public class ManulEntity extends PathfinderMob {
 
     private final ManulAnimationDispatcher animationDispatcher;
