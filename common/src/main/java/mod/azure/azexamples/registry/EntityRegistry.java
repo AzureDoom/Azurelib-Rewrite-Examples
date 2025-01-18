@@ -1,5 +1,6 @@
 package mod.azure.azexamples.registry;
 
+import mod.azure.azexamples.entities.manul.ManulEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -36,6 +37,14 @@ public class EntityRegistry {
         MobCategory.MONSTER,
         1.5f,
         2.6f
+    );
+
+    public static final Supplier<EntityType<ManulEntity>> MANUL = registerEntity(
+            "manual",
+            ManulEntity::new,
+            MobCategory.CREATURE,
+            1.2f,
+            1.1f
     );
 
     public static final Supplier<EntityType<DoomHunterEntity>> DOOMHUNTER = registerEntity(

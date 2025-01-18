@@ -1,5 +1,6 @@
 package mod.azure.azexamples;
 
+import mod.azure.azexamples.entities.manul.ManulRenderer;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.rewrite.render.item.AzItemRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -47,6 +48,7 @@ public class FabricLibClientMod implements ClientModInitializer {
         );
         EntityRendererRegistry.register(EntityRegistry.DOOMHUNTER.get(), DoomHunterRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.MARAUDER.get(), MarauderRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.MANUL.get(), ManulRenderer::new);
         EntityRendererRegistry.register(EntityType.CREEPER, CreeperRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.STARGATE.get(), RenderType.translucent());
         BlockEntityRenderers.register(

@@ -3,6 +3,7 @@ package mod.azure.azexamples;
 import mod.azure.azurelib.rewrite.animation.cache.AzIdentityRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.Items;
 
@@ -21,6 +22,10 @@ public final class FabricLibMod implements ModInitializer {
         FabricDefaultAttributeRegistry.register(
             EntityRegistry.MARAUDER.get(),
             Monster.createMonsterAttributes()
+        );
+        FabricDefaultAttributeRegistry.register(
+                EntityRegistry.MANUL.get(),
+                Mob.createMobAttributes()
         );
         AzIdentityRegistry.register(
             ItemRegistry.PISTOL.get(),

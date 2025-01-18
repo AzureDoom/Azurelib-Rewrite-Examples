@@ -64,6 +64,16 @@ public class ItemRegistry {
         )
     );
 
+    public static final Supplier<SpawnEggItem> MANUL_SPAWN_EGG = registerItem(
+            "manul_spawn_egg",
+            AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+                    EntityRegistry.MANUL,
+                    0xc38160,
+                    0x3d362e,
+                    new Item.Properties()
+            )
+    );
+
     /**
      * Registers a new Item.
      *

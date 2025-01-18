@@ -1,5 +1,6 @@
 package mod.azure.azexamples;
 
+import mod.azure.azexamples.entities.manul.ManulRenderer;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.rewrite.render.item.AzItemRendererRegistry;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -55,6 +56,7 @@ public class NeoForgeClientMod {
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityRegistry.DOOMHUNTER.get(), DoomHunterRenderer::new);
         event.registerEntityRenderer(EntityRegistry.MARAUDER.get(), MarauderRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.MANUL.get(), ManulRenderer::new);
         event.registerBlockEntityRenderer(
             EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()

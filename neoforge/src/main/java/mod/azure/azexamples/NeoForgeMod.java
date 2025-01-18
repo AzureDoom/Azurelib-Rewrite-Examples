@@ -3,6 +3,7 @@ package mod.azure.azexamples;
 import mod.azure.azurelib.rewrite.animation.cache.AzIdentityRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -75,5 +76,6 @@ public final class NeoForgeMod {
     public void createEntityAttributes(final EntityAttributeCreationEvent event) {
         event.put(EntityRegistry.DOOMHUNTER.get(), Monster.createMonsterAttributes().build());
         event.put(EntityRegistry.MARAUDER.get(), Monster.createMonsterAttributes().build());
+        event.put(EntityRegistry.MANUL.get(), Mob.createMobAttributes().build());
     }
 }
