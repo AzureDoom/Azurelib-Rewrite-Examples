@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Credit to Immersed for the model and texture of this example.
+ * Credit to Immersed for the animations of this example.
  */
 public class ManulAnimator extends AzEntityAnimator<ManulEntity> {
 
