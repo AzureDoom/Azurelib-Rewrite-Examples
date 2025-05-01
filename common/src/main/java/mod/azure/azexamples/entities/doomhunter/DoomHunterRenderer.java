@@ -2,6 +2,7 @@ package mod.azure.azexamples.entities.doomhunter;
 
 import mod.azure.azurelib.rewrite.render.entity.AzEntityRenderer;
 import mod.azure.azurelib.rewrite.render.entity.AzEntityRendererConfig;
+import mod.azure.azurelib.rewrite.render.layer.AzAutoGlowingLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
@@ -17,6 +18,7 @@ public class DoomHunterRenderer extends AzEntityRenderer<DoomHunterEntity> {
         super(
             AzEntityRendererConfig.<DoomHunterEntity>builder(MODEL, TEXTURE)
                 .setAnimatorProvider(DoomHunterAnimator::new)
+                .addRenderLayer(new AzAutoGlowingLayer<>())
                 .build(),
             context
         );
