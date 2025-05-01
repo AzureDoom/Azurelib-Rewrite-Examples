@@ -1,6 +1,5 @@
 package mod.azure.azexamples.entities.marauder.ai;
 
-import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -8,6 +7,8 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
+
+import mod.azure.azexamples.entities.marauder.MarauderEntity;
 
 public class DelayedAttackGoal extends MeleeAttackGoal {
 
@@ -44,7 +45,8 @@ public class DelayedAttackGoal extends MeleeAttackGoal {
     @Override
     public boolean canContinueToUse() {
         if (mob instanceof MarauderEntity marauderEntity) {
-            return marauderEntity.getSpawnTicks() >= marauderEntity.MAX_SPAWN_ANIMATION_TICKS && super.canContinueToUse();
+            return marauderEntity.getSpawnTicks() >= marauderEntity.MAX_SPAWN_ANIMATION_TICKS
+                && super.canContinueToUse();
         }
         return super.canContinueToUse();
     }

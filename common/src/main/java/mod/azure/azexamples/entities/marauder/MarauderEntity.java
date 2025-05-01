@@ -23,10 +23,9 @@ import mod.azure.azexamples.entities.marauder.ai.DelayedAttackGoal;
 // TODO: Store spawn counter to save on leave/join
 public class MarauderEntity extends Monster {
 
-
     protected static final EntityDataAccessor<Float> SPAWN_TICKS = SynchedEntityData.defineId(
-            MarauderEntity.class,
-            EntityDataSerializers.FLOAT
+        MarauderEntity.class,
+        EntityDataSerializers.FLOAT
     );
 
     public int MAX_SPAWN_ANIMATION_TICKS = 290;
@@ -148,5 +147,5 @@ public class MarauderEntity extends Monster {
     }
 
     @Override
-    protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state) { /* DISABLES VANILLA WALK SOUND*/}
+    protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state) { /* DISABLES VANILLA WALK SOUND */}
 }
