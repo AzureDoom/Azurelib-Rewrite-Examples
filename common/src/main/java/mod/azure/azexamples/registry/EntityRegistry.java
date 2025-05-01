@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import java.util.function.Supplier;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
+import mod.azure.azexamples.entities.SilencedEntityTypeBuilder;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
@@ -89,8 +90,17 @@ public class EntityRegistry {
     ) {
         return AzExampleServices.COMMON_REGISTRY.registerEntity(
             entityName,
-            () -> EntityType.Builder.of(entity, mobCategory).sized(width, height).build(entityName)
+            () -> create(entity, mobCategory, width, height).buildWithoutDataFixerCheck()
         );
+    }
+
+    static <T extends Entity> SilencedEntityTypeBuilder create(
+        EntityType.EntityFactory<T> entity,
+        MobCategory mobCategory,
+        float width,
+        float height
+    ) {
+        return (SilencedEntityTypeBuilder) EntityType.Builder.of(entity, mobCategory).sized(width, height);
     }
 
     public static void initialize() {}
