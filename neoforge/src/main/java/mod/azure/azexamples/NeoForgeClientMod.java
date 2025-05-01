@@ -17,6 +17,7 @@ import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockRenderer;
 import mod.azure.azexamples.entities.creeper.CreeperRenderer;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
+import mod.azure.azexamples.entities.juravenator.JuravenatorRenderer;
 import mod.azure.azexamples.entities.manul.ManulRenderer;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
@@ -57,6 +58,7 @@ public class NeoForgeClientMod {
         event.registerEntityRenderer(EntityRegistry.DOOMHUNTER.get(), DoomHunterRenderer::new);
         event.registerEntityRenderer(EntityRegistry.MARAUDER.get(), MarauderRenderer::new);
         event.registerEntityRenderer(EntityRegistry.MANUL.get(), ManulRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.JURAVENATOR.get(), JuravenatorRenderer::new);
         event.registerBlockEntityRenderer(
             EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()

@@ -77,5 +77,6 @@ public final class NeoForgeMod {
         event.put(EntityRegistry.DOOMHUNTER.get(), Monster.createMonsterAttributes().build());
         event.put(EntityRegistry.MARAUDER.get(), Monster.createMonsterAttributes().build());
         event.put(EntityRegistry.MANUL.get(), Mob.createMobAttributes().build());
+        event.put(EntityRegistry.JURAVENATOR.get(), Mob.createMobAttributes().build());
     }
 }

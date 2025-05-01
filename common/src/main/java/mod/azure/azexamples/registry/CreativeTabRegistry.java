@@ -62,6 +62,7 @@ public class CreativeTabRegistry {
                     entries.accept(ItemRegistry.MARAUDER_SPAWN_EGG.get());
                     entries.accept(ItemRegistry.DOOMHUNTER_SPAWN_EGG.get());
                     entries.accept(ItemRegistry.MANUL_SPAWN_EGG.get());
+                    entries.accept(ItemRegistry.JURAVENATOR_SPAWN_EGG.get());
                 })
                 .build()
         );

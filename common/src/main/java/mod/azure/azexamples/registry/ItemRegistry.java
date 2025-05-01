@@ -73,6 +73,15 @@ public class ItemRegistry {
             new Item.Properties()
         )
     );
+
+    public static final Supplier<SpawnEggItem> JURAVENATOR_SPAWN_EGG = registerItem(
+        "juravenator_spawn_egg",
+        AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+            EntityRegistry.JURAVENATOR,
+            0xc09e58,
+            0x574028,
+            new Item.Properties()
+        )
     );
 
     /**

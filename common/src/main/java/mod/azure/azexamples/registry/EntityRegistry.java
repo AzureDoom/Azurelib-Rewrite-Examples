@@ -11,6 +11,7 @@ import java.util.function.Supplier;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.entities.SilencedEntityTypeBuilder;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
+import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.services.AzExampleServices;
@@ -51,6 +52,14 @@ public class EntityRegistry {
     public static final Supplier<EntityType<DoomHunterEntity>> DOOMHUNTER = registerEntity(
         "doomhunter",
         DoomHunterEntity::new,
+        MobCategory.MONSTER,
+        3.0f,
+        7.0f
+    );
+
+    public static final Supplier<EntityType<JuravenatorEntity>> JURAVENATOR = registerEntity(
+        "juravenator",
+        JuravenatorEntity::new,
         MobCategory.MONSTER,
         3.0f,
         7.0f

@@ -27,6 +27,9 @@ public final class FabricLibMod implements ModInitializer {
             EntityRegistry.MANUL.get(),
             Mob.createMobAttributes()
         );
+        FabricDefaultAttributeRegistry.register(
+            EntityRegistry.JURAVENATOR.get(),
+            Mob.createMobAttributes()
         );
         AzIdentityRegistry.register(
             ItemRegistry.PISTOL.get(),
