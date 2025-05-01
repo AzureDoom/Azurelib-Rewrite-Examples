@@ -13,14 +13,6 @@ public class DoomicornArmorRenderer extends AzArmorRenderer {
 
     private static final ResourceLocation TEXTURE = CommonMod.modResource("textures/item/doomicorn.png");
 
-    /**
-     * Constructs a new renderer for the Doomicorn Armor. <br>
-     * The configuration includes:
-     * <ul>
-     * <li>A {@code DoomicornArmorAnimator} for handling animations specific to the Doomicorn Armor.</li>
-     * <li>A {@code DoomicornArmorBoneProvider} to correctly map model bones for animation.</li>
-     * </ul>
-     */
     public DoomicornArmorRenderer() {
         super(
             AzArmorRendererConfig.builder(MODEL, TEXTURE)

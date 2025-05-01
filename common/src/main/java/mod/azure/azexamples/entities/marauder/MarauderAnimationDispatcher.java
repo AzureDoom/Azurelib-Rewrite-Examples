@@ -1,8 +1,9 @@
 package mod.azure.azexamples.entities.marauder;
 
-import mod.azure.azexamples.CommonStrings;
 import mod.azure.azurelib.rewrite.animation.dispatch.command.AzCommand;
 import mod.azure.azurelib.rewrite.animation.play_behavior.AzPlayBehaviors;
+
+import mod.azure.azexamples.CommonStrings;
 
 /**
  * The MarauderAnimationDispatcher class is responsible for managing and dispatching animation commands for entities,

@@ -1,6 +1,5 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.entities.manul.ManulRenderer;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.rewrite.render.item.AzItemRendererRegistry;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -18,6 +17,7 @@ import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockRenderer;
 import mod.azure.azexamples.entities.creeper.CreeperRenderer;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
+import mod.azure.azexamples.entities.manul.ManulRenderer;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;

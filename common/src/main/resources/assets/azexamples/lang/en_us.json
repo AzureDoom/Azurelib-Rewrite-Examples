@@ -1,9 +1,11 @@
 {
   "entity.azexamples.marauder": "Marauder",
   "entity.azexamples.doomhunter": "Doomhunter",
+  "entity.azexamples.manual": "Manual",
   "entity.azexamples.stargate_block_entity": "Stargate",
   "item.azexamples.marauder_spawn_egg": "Marauder Spawn Egg",
   "item.azexamples.doomhunter_spawn_egg": "Doomhunter Spawn Egg",
+  "item.azexamples.manual_spawn_egg": "Manual Spawn Egg",
   "item.azexamples.doomicorn_helmet": "Doomicorn Helmet",
   "item.azexamples.doomicorn_chestplate": "Doomicorn Chestplate",
   "item.azexamples.doomicorn_leggings": "Doomicorn Leggings",

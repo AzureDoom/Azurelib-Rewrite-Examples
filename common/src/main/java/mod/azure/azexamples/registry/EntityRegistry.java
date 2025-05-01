@@ -1,6 +1,5 @@
 package mod.azure.azexamples.registry;
 
-import mod.azure.azexamples.entities.manul.ManulEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -11,6 +10,7 @@ import java.util.function.Supplier;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
+import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.services.AzExampleServices;
 
@@ -40,11 +40,11 @@ public class EntityRegistry {
     );
 
     public static final Supplier<EntityType<ManulEntity>> MANUL = registerEntity(
-            "manual",
-            ManulEntity::new,
-            MobCategory.CREATURE,
-            1.2f,
-            1.1f
+        "manual",
+        ManulEntity::new,
+        MobCategory.CREATURE,
+        1.2f,
+        1.1f
     );
 
     public static final Supplier<EntityType<DoomHunterEntity>> DOOMHUNTER = registerEntity(

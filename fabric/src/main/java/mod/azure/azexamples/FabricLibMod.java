@@ -24,8 +24,9 @@ public final class FabricLibMod implements ModInitializer {
             Monster.createMonsterAttributes()
         );
         FabricDefaultAttributeRegistry.register(
-                EntityRegistry.MANUL.get(),
-                Mob.createMobAttributes()
+            EntityRegistry.MANUL.get(),
+            Mob.createMobAttributes()
+        );
         );
         AzIdentityRegistry.register(
             ItemRegistry.PISTOL.get(),
