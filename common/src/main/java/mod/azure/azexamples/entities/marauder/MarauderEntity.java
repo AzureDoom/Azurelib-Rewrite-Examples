@@ -1,8 +1,13 @@
 package mod.azure.azexamples.entities.marauder;
 
 import mod.azure.azurelib.common.api.common.ai.pathing.AzureNavigation;
+import mod.azure.azurelib.common.internal.common.AzureLib;
 import mod.azure.azurelib.rewrite.util.MoveAnalysis;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -13,9 +18,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-import mod.azure.azexamples.entities.marauder.ai.DelayedMeleeAttackGoal;
+import mod.azure.azexamples.entities.marauder.ai.DelayedAttackGoal;
 
+// TODO: Store spawn counter to save on leave/join
 public class MarauderEntity extends Monster {
+
+
+    protected static final EntityDataAccessor<Float> SPAWN_TICKS = SynchedEntityData.defineId(
+            MarauderEntity.class,
+            EntityDataSerializers.FLOAT
+    );
+
+    public int MAX_SPAWN_ANIMATION_TICKS = 290;
 
     /**
      * Handles the animation state transitions for the {@link MarauderEntity}. This dispatcher is responsible for
@@ -56,49 +70,83 @@ public class MarauderEntity extends Monster {
     public void tick() {
         super.tick();
         moveAnalysis.update();
-
-        if (this.level().isClientSide) {
-            var isMovingOnGround = moveAnalysis.isMovingHorizontally() && onGround();
-            Runnable animationRunner;
-            if (!this.isAlive()) {
-                animationRunner = animationDispatcher::clientDeath;
-                // } else if (this.tickCount < 270) {
-                // animationDispatcher.clientSpawn();
-            } else if (isMovingOnGround) {
-                if (this.isAggressive()) {
-                    animationRunner = animationDispatcher::clientRun;
-                } else {
-                    animationRunner = animationDispatcher::clientWalk;
-                }
-            } else {
-                animationRunner = animationDispatcher::clientIdle;
-            }
-            animationRunner.run();
-        } else {
-            // if (this.tickCount < 280 && this.isAlive()) {
-            // if (this.getNavigation() instanceof AzureNavigation azureNavigation) {
-            // azureNavigation.hardStop();
-            // azureNavigation.stop();
-            // }
-            // this.setYBodyRot(0);
-            // this.setYHeadRot(0);
-            // this.getEyePosition(90);
-            // this.setXRot(0);
-            // this.setYRot(0);
-            // }
+        if (!this.level().isClientSide && this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && this.isAlive()) {
+            this.setSpawnTicks(this.getSpawnTicks() + 1.0F);
+            AzureLib.LOGGER.warn("Spawn ticks: {}", this.getSpawnTicks());
+            this.navigation.stop();
+            this.setYBodyRot(0);
+            this.setYHeadRot(0);
+            this.getEyePosition(90);
+            this.setXRot(0);
+            this.setYRot(0);
+            this.setTarget(null);
         }
     }
 
-    /**
-     * TODO: Get longer Melee animations working
-     */
+    public void updateAnimations() {
+        var isMovingOnGround = moveAnalysis.isMovingHorizontally() && onGround();
+
+        if (this.isDeadOrDying()) {
+            animationDispatcher.clientDeath();
+            return;
+        }
+
+        if (this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS) {
+            animationDispatcher.clientSpawn();
+            return;
+        }
+
+        if (isMovingOnGround) {
+            if (this.isAggressive() && !this.swinging) {
+                animationDispatcher.clientRun();
+            } else {
+                animationDispatcher.clientWalk();
+            }
+            return;
+        }
+
+        if (!this.isAggressive()) {
+            animationDispatcher.clientIdle();
+        }
+    }
+
+    public void runAttackAnimations() {
+        animationDispatcher.serverMelee();
+    }
+
+    protected void setSpawnTicks(float spawnTicks) {
+        this.entityData.set(SPAWN_TICKS, spawnTicks);
+    }
+
+    public float getSpawnTicks() {
+        return this.entityData.get(SPAWN_TICKS);
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(SPAWN_TICKS, 0.0F);
+    }
+
+    @Override
+    public void addAdditionalSaveData(@NotNull CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putFloat("SpawnTicks", this.getSpawnTicks());
+    }
+
+    @Override
+    public void readAdditionalSaveData(@NotNull CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        this.setSpawnTicks(compound.getFloat("SpawnTicks"));
+    }
+
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(7, new RandomStrollGoal(this, 0.3F));
-        this.goalSelector.addGoal(2, new DelayedMeleeAttackGoal(this, 0.6F, true));
+        this.goalSelector.addGoal(2, new DelayedAttackGoal(this, 0.6F, true, 5, this::runAttackAnimations));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
     }
 
     @Override
-    protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state) {}
+    protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState state) { /* DISABLES VANILLA WALK SOUND*/}
 }

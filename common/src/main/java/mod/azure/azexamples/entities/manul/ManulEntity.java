@@ -11,11 +11,13 @@ import net.minecraft.world.level.Level;
  */
 public class ManulEntity extends PathfinderMob {
 
-    private final ManulAnimationDispatcher animationDispatcher;
+    protected final ManulAnimationDispatcher animationDispatcher;
+
+    private static final int MAX_ANIMATION_TICKS = 144;
 
     private final MoveAnalysis moveAnalysis;
 
-    private int animationTickCounter = 0;
+    protected int animationTickCounter = 0;
 
     public ManulEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
@@ -27,15 +29,18 @@ public class ManulEntity extends PathfinderMob {
     public void tick() {
         super.tick();
         this.moveAnalysis.update();
+    }
 
-        if (this.level().isClientSide) {
-            this.animationTickCounter++;
-            if (this.animationTickCounter >= 144) {
-                this.handleAnimations();
-            }
+    public void updateAnimations() {
+        animationTickCounter++;
+
+        if (animationTickCounter >= MAX_ANIMATION_TICKS) {
+            handleAnimations();
+            animationTickCounter = 0;
         }
-        if (this.tickCount < 2) {
-            this.handleIdleAnimations();
+
+        if (tickCount < 2) {
+            handleIdleAnimations();
         }
     }
 
@@ -73,10 +78,6 @@ public class ManulEntity extends PathfinderMob {
             animationDispatcher.sniffIdle();
         }
         this.animationTickCounter = 0;
-    }
-
-    public void setAnimation(Runnable animationAction) {
-        animationAction.run();
     }
 
     @Override

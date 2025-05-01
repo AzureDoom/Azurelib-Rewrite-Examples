@@ -40,7 +40,7 @@ public class EntityRegistry {
     );
 
     public static final Supplier<EntityType<ManulEntity>> MANUL = registerEntity(
-        "manual",
+        "manul",
         ManulEntity::new,
         MobCategory.CREATURE,
         1.2f,
