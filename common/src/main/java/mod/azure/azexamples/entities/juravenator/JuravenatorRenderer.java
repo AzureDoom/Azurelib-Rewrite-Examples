@@ -11,7 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import mod.azure.azexamples.CommonMod;
 
 /**
- * Credit to Collinvht of <a href="https://modrinth.com/mod/new-world-mod">New World</a> for the model/textures of this example.
+ * Credit to Collinvht of <a href="https://modrinth.com/mod/new-world-mod">New World</a> for the model/textures of this
+ * example.
  */
 public class JuravenatorRenderer extends AzEntityRenderer<JuravenatorEntity> {
 

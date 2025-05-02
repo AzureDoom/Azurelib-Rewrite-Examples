@@ -11,7 +11,8 @@ import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.CommonStrings;
 
 /**
- * Credit to Collinvht of <a href="https://modrinth.com/mod/new-world-mod">New World</a> for the animations of this example, as it is using pure Bedrock Animations!
+ * Credit to Collinvht of <a href="https://modrinth.com/mod/new-world-mod">New World</a> for the animations of this
+ * example, as it is using pure Bedrock Animations!
  */
 public class JuravenatorAnimator extends AzEntityAnimator<JuravenatorEntity> {
 
