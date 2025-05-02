@@ -1,5 +1,6 @@
 package mod.azure.azexamples.registry;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -77,7 +78,11 @@ public class EntityRegistry {
         String blockEntityName,
         Supplier<BlockEntityType<T>> blockEntity
     ) {
-        return AzExampleServices.COMMON_REGISTRY.registerBlockEntity(blockEntityName, blockEntity);
+        return AzExampleServices.COMMON_REGISTRY.register(
+            BuiltInRegistries.BLOCK_ENTITY_TYPE,
+            blockEntityName,
+            blockEntity
+        );
     }
 
     /**
@@ -97,7 +102,8 @@ public class EntityRegistry {
         float width,
         float height
     ) {
-        return AzExampleServices.COMMON_REGISTRY.registerEntity(
+        return AzExampleServices.COMMON_REGISTRY.register(
+            BuiltInRegistries.ENTITY_TYPE,
             entityName,
             () -> create(entity, mobCategory, width, height).buildWithoutDataFixerCheck()
         );

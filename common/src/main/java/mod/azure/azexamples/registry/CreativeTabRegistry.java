@@ -1,6 +1,7 @@
 package mod.azure.azexamples.registry;
 
 import mod.azure.azurelib.common.platform.Services;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -47,7 +48,8 @@ public class CreativeTabRegistry {
     private CreativeTabRegistry() {}
 
     public static final Supplier<CreativeModeTab> EXAMPLEMOD_TAB = AzExampleServices.COMMON_REGISTRY
-        .registerCreativeModeTab(
+        .register(
+            BuiltInRegistries.CREATIVE_MODE_TAB,
             "examplemod_items",
             () -> Services.COMMON_REGISTRY.newCreativeTabBuilder()
                 .title(Component.translatable(CommonStrings.CREATIVE_TAB))

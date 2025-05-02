@@ -1,7 +1,7 @@
 package mod.azure.azexamples;
 
 import mod.azure.azurelib.rewrite.animation.cache.AzIdentityRegistry;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Monster;
@@ -23,27 +23,27 @@ import mod.azure.azexamples.registry.ItemRegistry;
 public final class NeoForgeMod {
 
     public static DeferredRegister<BlockEntityType<?>> blockEntityTypeDeferredRegister = DeferredRegister.create(
-        Registries.BLOCK_ENTITY_TYPE,
+        BuiltInRegistries.BLOCK_ENTITY_TYPE,
         CommonStrings.MOD_ID
     );
 
     public static DeferredRegister<Block> blockDeferredRegister = DeferredRegister.create(
-        Registries.BLOCK,
+        BuiltInRegistries.BLOCK,
         CommonStrings.MOD_ID
     );
 
     public static DeferredRegister<EntityType<?>> entityTypeDeferredRegister = DeferredRegister.create(
-        Registries.ENTITY_TYPE,
+        BuiltInRegistries.ENTITY_TYPE,
         CommonStrings.MOD_ID
     );
 
     public static DeferredRegister<Item> itemDeferredRegister = DeferredRegister.create(
-        Registries.ITEM,
+        BuiltInRegistries.ITEM,
         CommonStrings.MOD_ID
     );
 
     public static DeferredRegister<CreativeModeTab> creativeModeTabDeferredRegister = DeferredRegister.create(
-        Registries.CREATIVE_MODE_TAB,
+        BuiltInRegistries.CREATIVE_MODE_TAB,
         CommonStrings.MOD_ID
     );
 

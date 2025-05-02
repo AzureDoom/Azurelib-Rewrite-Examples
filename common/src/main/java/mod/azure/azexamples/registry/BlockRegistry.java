@@ -1,5 +1,6 @@
 package mod.azure.azexamples.registry;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -40,7 +41,7 @@ public class BlockRegistry {
      * @return A supplier for the registered block.
      */
     static <T extends Block> Supplier<T> registerBlock(String blockName, Supplier<T> block) {
-        return AzExampleServices.COMMON_REGISTRY.registerBlock(blockName, block);
+        return AzExampleServices.COMMON_REGISTRY.register(BuiltInRegistries.BLOCK, blockName, block);
     }
 
     public static void initialize() {}

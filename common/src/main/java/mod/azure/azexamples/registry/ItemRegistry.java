@@ -1,5 +1,6 @@
 package mod.azure.azexamples.registry;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
@@ -93,6 +94,6 @@ public class ItemRegistry {
      * @return A supplier for the registered item.
      */
     static <T extends Item> Supplier<T> registerItem(String itemName, Supplier<T> item) {
-        return AzExampleServices.COMMON_REGISTRY.registerItem(itemName, item);
+        return AzExampleServices.COMMON_REGISTRY.register(BuiltInRegistries.ITEM, itemName, item);
     }
 }
