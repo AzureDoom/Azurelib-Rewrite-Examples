@@ -15,7 +15,7 @@ import mod.azure.azexamples.CommonStrings;
 public class CreeperAnimator extends AzEntityAnimator<Creeper> {
 
     private static final ResourceLocation ANIMATIONS = CommonMod.modResource(
-        "animations/entity/possessedengineer.animation.json"
+        "animations/entity/possessed_engineer.animation.json"
     );
 
     public CreeperAnimator() {
