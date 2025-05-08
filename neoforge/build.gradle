@@ -1,7 +1,6 @@
 plugins {
     id 'multiloader-loader'
     id 'net.neoforged.moddev' version "${neo_moddev}"
-    id 'me.modmuss50.mod-publish-plugin' version "${modmuss50_mod_publish_version}"
     id 'com.diffplug.spotless' version "7.0.0.BETA3"
 }
 
@@ -48,34 +47,4 @@ repositories {
 
 dependencies {
     implementation "mod.azure.azurelib:azurelib-neo-${minecraft_version}:${azurelib_version}"
-}
-
-if (file('key.properties').exists()) {
-    publishMods {
-        def releaseProp = new Properties()
-        File secretPropsFile = file("key.properties")
-        releaseProp.load(secretPropsFile.newInputStream())
-        file = jar.archiveFile
-        changelog = rootProject.file("changelog.md").text
-        type = STABLE
-        modLoaders.add("neoforge")
-
-        curseforge {
-            projectId = project.curseforgeID
-            projectSlug = project.projectSlug
-            accessToken = releaseProp.getProperty("curseKey")
-            minecraftVersions.add("${minecraft_version}")
-            requires {
-                slug = "azurelib"
-            }
-        }
-        modrinth {
-            projectId = project.modrinthID
-            accessToken = releaseProp.getProperty('modrinthKey')
-            minecraftVersions.add("${minecraft_version}")
-            requires {
-                slug = "azurelib"
-            }
-        }
-    }
 }
