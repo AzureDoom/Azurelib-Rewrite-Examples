@@ -36,7 +36,7 @@ public abstract class CreeperMixin {
     @Inject(method = "tick", at = @At("TAIL"), remap = false)
     public void azexample_Tick(CallbackInfo info) {
         var self = AzureLibUtil.<Creeper>self(this);
-        if (self.level().isClientSide) {
+        if (self.level.isClientSide) {
             Runnable animationRunner = animationDispatcher::clientIdle;
             animationRunner.run();
         }

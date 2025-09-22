@@ -13,8 +13,8 @@ public class PistolItem extends Item {
 
     private final PistolAnimationDispatcher dispatcher;
 
-    public PistolItem() {
-        super(new Properties());
+    public PistolItem(Properties properties) {
+        super(properties);
         this.dispatcher = new PistolAnimationDispatcher();
     }
 

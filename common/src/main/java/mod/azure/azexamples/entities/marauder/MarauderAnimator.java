@@ -39,8 +39,7 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
                         .setSoundKeyframeHandler(
                             event -> {
                                 if (event.getKeyframeData().getSound().equals("walk")) {
-                                    event.getAnimatable()
-                                        .level()
+                                    event.getAnimatable().level
                                         .playLocalSound(
                                             event.getAnimatable().getX(),
                                             event.getAnimatable().getY(),
@@ -53,8 +52,7 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
                                         );
                                 }
                                 if (event.getKeyframeData().getSound().equals("run")) {
-                                    event.getAnimatable()
-                                        .level()
+                                    event.getAnimatable().level
                                         .playLocalSound(
                                             event.getAnimatable().getX(),
                                             event.getAnimatable().getY(),
@@ -67,8 +65,7 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
                                         );
                                 }
                                 if (event.getKeyframeData().getSound().equals("portal")) {
-                                    event.getAnimatable()
-                                        .level()
+                                    event.getAnimatable().level
                                         .playLocalSound(
                                             event.getAnimatable().getX(),
                                             event.getAnimatable().getY(),
@@ -81,8 +78,7 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
                                         );
                                 }
                                 if (event.getKeyframeData().getSound().equals("axe")) {
-                                    event.getAnimatable()
-                                        .level()
+                                    event.getAnimatable().level
                                         .playLocalSound(
                                             event.getAnimatable().getX(),
                                             event.getAnimatable().getY(),

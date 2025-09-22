@@ -20,7 +20,6 @@ public final class ForgeMod {
         ExampleRegistry.blockDeferredRegister.register(modEventBus);
         ExampleRegistry.entityTypeDeferredRegister.register(modEventBus);
         ExampleRegistry.itemDeferredRegister.register(modEventBus);
-        ExampleRegistry.creativeModeTabDeferredRegister.register(modEventBus);
         modEventBus.addListener(this::createEntityAttributes);
         modEventBus.addListener(this::commonSetup);
     }

@@ -60,7 +60,7 @@ public class DelayedAttackGoal extends MeleeAttackGoal {
 
     @Override
     protected void checkAndPerformAttack(@NotNull LivingEntity target, double distToEnemySqr) {
-        if (!this.mob.level().isClientSide()) {
+        if (!this.mob.level.isClientSide()) {
             if (canPerformAttack(target)) {
                 if (delayBeforeAttack > 0) {
                     delayBeforeAttack--;
