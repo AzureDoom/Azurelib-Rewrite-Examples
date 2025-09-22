@@ -31,10 +31,10 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
 
                     @Override
                     public ItemStack itemStackForBone(AzBone bone, MarauderEntity animatable) {
-                        return switch (bone.getName()) {
-                            case LEFT_HAND -> animatable.getItemBySlot(EquipmentSlot.OFFHAND);
-                            default -> null;
-                        };
+                        if (bone.getName().equals(LEFT_HAND)) {
+                            return animatable.getItemBySlot(EquipmentSlot.OFFHAND);
+                        }
+                        return null;
                     }
 
                     @Override
@@ -43,10 +43,7 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
                         ItemStack stack,
                         MarauderEntity animatable
                     ) {
-                        return switch (bone.getName()) {
-                            case LEFT_HAND -> ItemDisplayContext.THIRD_PERSON_LEFT_HAND;
-                            default -> ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
-                        };
+                        return ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
                     }
 
                     @Override
