@@ -22,9 +22,6 @@ import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
 import mod.azure.azexamples.items.netheritereplace.NetheriteSwordRenderer;
 import mod.azure.azexamples.items.netheritereplace.armor.NetheriteArmorRenderer;
-import mod.azure.azexamples.registry.BlockRegistry;
-import mod.azure.azexamples.registry.EntityRegistry;
-import mod.azure.azexamples.registry.ItemRegistry;
 
 public class FabricLibClientMod implements ClientModInitializer {
 
@@ -38,23 +35,23 @@ public class FabricLibClientMod implements ClientModInitializer {
             Items.NETHERITE_LEGGINGS,
             Items.NETHERITE_BOOTS
         );
-        AzItemRendererRegistry.register(ItemRegistry.PISTOL.get(), PistolRenderer::new);
-        AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
+        AzItemRendererRegistry.register(ExampleRegistry.PISTOL, PistolRenderer::new);
+        AzItemRendererRegistry.register(ExampleRegistry.STARGATE_ITEM, StargateBlockItemRenderer::new);
         AzArmorRendererRegistry.register(
             DoomicornArmorRenderer::new,
-            ItemRegistry.DOOMICORN_HELMET.get(),
-            ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-            ItemRegistry.DOOMICORN_LEGGINGS.get(),
-            ItemRegistry.DOOMICORN_BOOTS.get()
+            ExampleRegistry.DOOMICORN_HELMET,
+            ExampleRegistry.DOOMICORN_CHESTPLATE,
+            ExampleRegistry.DOOMICORN_LEGGINGS,
+            ExampleRegistry.DOOMICORN_BOOTS
         );
-        EntityRendererRegistry.register(EntityRegistry.DOOMHUNTER.get(), DoomHunterRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.MARAUDER.get(), MarauderRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.MANUL.get(), ManulRenderer::new);
-        EntityRendererRegistry.register(EntityRegistry.JURAVENATOR.get(), JuravenatorRenderer::new);
+        EntityRendererRegistry.register(ExampleRegistry.DOOMHUNTER, DoomHunterRenderer::new);
+        EntityRendererRegistry.register(ExampleRegistry.MARAUDER, MarauderRenderer::new);
+        EntityRendererRegistry.register(ExampleRegistry.MANUL, ManulRenderer::new);
+        EntityRendererRegistry.register(ExampleRegistry.JURAVENATOR, JuravenatorRenderer::new);
         EntityRendererRegistry.register(EntityType.CREEPER, CreeperRenderer::new);
-        BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.STARGATE.get(), RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ExampleRegistry.STARGATE, RenderType.translucent());
         BlockEntityRenderers.register(
-            EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
+            ExampleRegistry.STARGATE_BLOCK_ENTITY,
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
         );
     }

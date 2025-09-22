@@ -1,5 +1,2 @@
 accessWidener	v1	named
-accessible class net/minecraft/world/entity/projectile/Projectile
 accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
-accessible field net/minecraft/world/entity/ai/goal/MeleeAttackGoal path Lnet/minecraft/world/level/pathfinder/Path;
-accessible field net/minecraft/world/entity/ai/goal/MeleeAttackGoal lastCanUseCheck J

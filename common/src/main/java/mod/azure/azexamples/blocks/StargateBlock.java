@@ -1,6 +1,5 @@
 package mod.azure.azexamples.blocks;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -12,19 +11,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
-import mod.azure.azexamples.registry.EntityRegistry;
+import mod.azure.azexamples.services.AzExampleServices;
 
 public class StargateBlock extends BaseEntityBlock {
 
-    public static final MapCodec<StargateBlock> CODEC = simpleCodec(StargateBlock::new);
-
     public StargateBlock(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
     }
 
     /**
@@ -37,7 +29,7 @@ public class StargateBlock extends BaseEntityBlock {
      */
     @Override
     public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return EntityRegistry.STARGATE_BLOCK_ENTITY.get().create(pos, state);
+        return AzExampleServices.COMMON_REGISTRY.stargateBlockEntity().create(pos, state);
     }
 
     /**
@@ -55,6 +47,10 @@ public class StargateBlock extends BaseEntityBlock {
         @NotNull BlockState state,
         @NotNull BlockEntityType<T> type
     ) {
-        return createTickerHelper(type, EntityRegistry.STARGATE_BLOCK_ENTITY.get(), StargateBlockEntity::tick);
+        return createTickerHelper(
+            type,
+            AzExampleServices.COMMON_REGISTRY.stargateBlockEntity(),
+            StargateBlockEntity::tick
+        );
     }
 }

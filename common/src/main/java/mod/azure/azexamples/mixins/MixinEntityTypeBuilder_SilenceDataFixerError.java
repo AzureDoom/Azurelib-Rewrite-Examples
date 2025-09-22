@@ -44,12 +44,6 @@ public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEnt
     private EntityDimensions dimensions;
 
     @Shadow
-    private float spawnDimensionsScale;
-
-    @Shadow
-    private EntityAttachments.Builder attachments;
-
-    @Shadow
     private FeatureFlagSet requiredFeatures;
 
     @Unique
@@ -64,8 +58,7 @@ public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEnt
             this.fireImmune,
             this.canSpawnFarFromPlayer,
             this.immuneTo,
-            this.dimensions.withAttachments(this.attachments),
-            this.spawnDimensionsScale,
+            this.dimensions,
             this.clientTrackingRange,
             this.updateInterval,
             this.requiredFeatures

@@ -7,11 +7,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockRenderer;
@@ -24,12 +24,9 @@ import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
 import mod.azure.azexamples.items.netheritereplace.NetheriteSwordRenderer;
 import mod.azure.azexamples.items.netheritereplace.armor.NetheriteArmorRenderer;
-import mod.azure.azexamples.registry.BlockRegistry;
-import mod.azure.azexamples.registry.EntityRegistry;
-import mod.azure.azexamples.registry.ItemRegistry;
 
-@EventBusSubscriber(modid = CommonStrings.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class NeoForgeClientMod {
+@Mod.EventBusSubscriber(modid = CommonStrings.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+public class ForgeClientMod {
 
     @SubscribeEvent
     public static void onClientSetup(final FMLClientSetupEvent event) {
@@ -41,26 +38,26 @@ public class NeoForgeClientMod {
             Items.NETHERITE_LEGGINGS,
             Items.NETHERITE_BOOTS
         );
-        AzItemRendererRegistry.register(ItemRegistry.PISTOL.get(), PistolRenderer::new);
-        AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
+        AzItemRendererRegistry.register(ExampleRegistry.PISTOL.get(), PistolRenderer::new);
+        AzItemRendererRegistry.register(ExampleRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
         AzArmorRendererRegistry.register(
             DoomicornArmorRenderer::new,
-            ItemRegistry.DOOMICORN_HELMET.get(),
-            ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-            ItemRegistry.DOOMICORN_LEGGINGS.get(),
-            ItemRegistry.DOOMICORN_BOOTS.get()
+            ExampleRegistry.DOOMICORN_HELMET.get(),
+            ExampleRegistry.DOOMICORN_CHESTPLATE.get(),
+            ExampleRegistry.DOOMICORN_LEGGINGS.get(),
+            ExampleRegistry.DOOMICORN_BOOTS.get()
         );
-        ItemBlockRenderTypes.setRenderLayer(BlockRegistry.STARGATE.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ExampleRegistry.STARGATE.get(), RenderType.translucent());
     }
 
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(EntityRegistry.DOOMHUNTER.get(), DoomHunterRenderer::new);
-        event.registerEntityRenderer(EntityRegistry.MARAUDER.get(), MarauderRenderer::new);
-        event.registerEntityRenderer(EntityRegistry.MANUL.get(), ManulRenderer::new);
-        event.registerEntityRenderer(EntityRegistry.JURAVENATOR.get(), JuravenatorRenderer::new);
+        event.registerEntityRenderer(ExampleRegistry.DOOMHUNTER.get(), DoomHunterRenderer::new);
+        event.registerEntityRenderer(ExampleRegistry.MARAUDER.get(), MarauderRenderer::new);
+        event.registerEntityRenderer(ExampleRegistry.MANUL.get(), ManulRenderer::new);
+        event.registerEntityRenderer(ExampleRegistry.JURAVENATOR.get(), JuravenatorRenderer::new);
         event.registerBlockEntityRenderer(
-            EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
+            ExampleRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
         );
         event.registerEntityRenderer(EntityType.CREEPER, CreeperRenderer::new);

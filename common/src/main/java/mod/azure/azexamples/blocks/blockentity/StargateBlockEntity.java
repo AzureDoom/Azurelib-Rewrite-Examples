@@ -5,14 +5,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import mod.azure.azexamples.registry.EntityRegistry;
+import mod.azure.azexamples.services.AzExampleServices;
 
 public class StargateBlockEntity extends BlockEntity {
 
     public final StargateBlockAnimationDispatcher animationDispatcher;
 
     public StargateBlockEntity(BlockPos pos, BlockState blockState) {
-        super(EntityRegistry.STARGATE_BLOCK_ENTITY.get(), pos, blockState);
+        super(AzExampleServices.COMMON_REGISTRY.stargateBlockEntity(), pos, blockState);
         this.animationDispatcher = new StargateBlockAnimationDispatcher(this);
     }
 

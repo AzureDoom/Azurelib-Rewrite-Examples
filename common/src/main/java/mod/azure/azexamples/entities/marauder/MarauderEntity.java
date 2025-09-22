@@ -1,6 +1,6 @@
 package mod.azure.azexamples.entities.marauder;
 
-import mod.azure.azurelib.common.api.common.ai.pathing.AzureNavigation;
+import mod.azure.azurelib.ai.pathing.AzureNavigation;
 import mod.azure.azurelib.rewrite.util.MoveAnalysis;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -121,9 +121,9 @@ public class MarauderEntity extends Monster {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(SPAWN_TICKS, 0.0F);
+    protected void defineSynchedData() {
+        this.entityData.define(SPAWN_TICKS, 0.0F);
+        super.defineSynchedData();
     }
 
     @Override

@@ -59,7 +59,7 @@ public class DelayedAttackGoal extends MeleeAttackGoal {
     }
 
     @Override
-    protected void checkAndPerformAttack(@NotNull LivingEntity target) {
+    protected void checkAndPerformAttack(@NotNull LivingEntity target, double distToEnemySqr) {
         if (!this.mob.level().isClientSide()) {
             if (canPerformAttack(target)) {
                 if (delayBeforeAttack > 0) {
@@ -81,5 +81,10 @@ public class DelayedAttackGoal extends MeleeAttackGoal {
                 this.triggeredAttackAnimation = false;
             }
         }
+    }
+
+    protected boolean canPerformAttack(LivingEntity entity) {
+        return this.isTimeToAttack() && this.mob.isWithinMeleeAttackRange(entity) && this.mob.getSensing()
+            .hasLineOfSight(entity);
     }
 }

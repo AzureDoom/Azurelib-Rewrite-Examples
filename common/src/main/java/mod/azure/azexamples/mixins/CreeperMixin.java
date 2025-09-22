@@ -1,6 +1,6 @@
 package mod.azure.azexamples.mixins;
 
-import mod.azure.azurelib.common.internal.common.util.AzureLibUtil;
+import mod.azure.azurelib.util.AzureLibUtil;
 import net.minecraft.world.entity.monster.Creeper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -33,7 +33,7 @@ public abstract class CreeperMixin {
         this.animationDispatcher = new CreeperAnimationDispatcher(self);
     }
 
-    @Inject(method = "tick", at = @At("TAIL"))
+    @Inject(method = "tick", at = @At("TAIL"), remap = false)
     public void azexample_Tick(CallbackInfo info) {
         var self = AzureLibUtil.<Creeper>self(this);
         if (self.level().isClientSide) {

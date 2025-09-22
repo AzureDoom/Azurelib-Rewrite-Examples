@@ -7,36 +7,34 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.Items;
 
-import mod.azure.azexamples.registry.EntityRegistry;
-import mod.azure.azexamples.registry.ItemRegistry;
-
 public final class FabricLibMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        CommonMod.initRegistries();
+        ExampleRegistry.initialize();
         FabricDefaultAttributeRegistry.register(
-            EntityRegistry.DOOMHUNTER.get(),
+            ExampleRegistry.DOOMHUNTER,
             Monster.createMonsterAttributes()
         );
         FabricDefaultAttributeRegistry.register(
-            EntityRegistry.MARAUDER.get(),
+            ExampleRegistry.MARAUDER,
             Monster.createMonsterAttributes()
         );
         FabricDefaultAttributeRegistry.register(
-            EntityRegistry.MANUL.get(),
+            ExampleRegistry.MANUL,
             Mob.createMobAttributes()
         );
         FabricDefaultAttributeRegistry.register(
-            EntityRegistry.JURAVENATOR.get(),
+            ExampleRegistry.JURAVENATOR,
             Mob.createMobAttributes()
         );
         AzIdentityRegistry.register(
-            ItemRegistry.PISTOL.get(),
-            ItemRegistry.DOOMICORN_HELMET.get(),
-            ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-            ItemRegistry.DOOMICORN_LEGGINGS.get(),
-            ItemRegistry.DOOMICORN_BOOTS.get(),
+            ExampleRegistry.PISTOL,
+	        ExampleRegistry.STARGATE_ITEM,
+            ExampleRegistry.DOOMICORN_HELMET,
+            ExampleRegistry.DOOMICORN_CHESTPLATE,
+            ExampleRegistry.DOOMICORN_LEGGINGS,
+            ExampleRegistry.DOOMICORN_BOOTS,
             Items.NETHERITE_SWORD,
             Items.NETHERITE_HELMET,
             Items.NETHERITE_CHESTPLATE,
