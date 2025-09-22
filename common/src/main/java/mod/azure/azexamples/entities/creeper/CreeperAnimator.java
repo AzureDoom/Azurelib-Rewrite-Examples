@@ -42,30 +42,32 @@ public class CreeperAnimator extends AzEntityAnimator<Creeper> {
         var rightArm = boneCache.getBakedModel().getBone("field_191224_h");
         var leftLeg = boneCache.getBakedModel().getBone("field_217143_g");
         var rightLeg = boneCache.getBakedModel().getBone("field_217144_h");
+        var animationSpeed = animatable.animationSpeedOld;
+        var animationPosition = animatable.animationPosition;
 
-        if (leftArm.isPresent())
+        if (leftArm.isPresent()) {
             leftArm.get()
                 .setRotX(
-                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * 2.0F
-                        * animatable.walkAnimation.speed() * 0.5F
+                    Mth.cos(animationPosition * 0.6662F + (float) Math.PI) * 2.0F * animationSpeed * 0.5F
                 );
-        if (rightArm.isPresent())
+        }
+        if (rightArm.isPresent()) {
             rightArm.get()
                 .setRotX(
-                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * -2.0F
-                        * animatable.walkAnimation.speed() * 0.5F
+                    Mth.cos(animationPosition * 0.6662F) * 2.0F * animationSpeed * 0.5F
                 );
-        if (leftLeg.isPresent())
+        }
+        if (leftLeg.isPresent()) {
             leftLeg.get()
                 .setRotX(
-                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * 2.0F
-                        * animatable.walkAnimation.speed() * 0.5F
+                    Mth.cos(animationPosition * 0.6662F) * 1.4F * animationSpeed * 0.5F
                 );
-        if (rightLeg.isPresent())
+        }
+        if (rightLeg.isPresent()) {
             rightLeg.get()
                 .setRotX(
-                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F) * 1.4F * animatable.walkAnimation
-                        .speed() * 0.5F
+                    Mth.cos(animationPosition * 0.6662F + (float) Math.PI) * 1.4F * animationSpeed * 0.5F
                 );
+        }
     }
 }

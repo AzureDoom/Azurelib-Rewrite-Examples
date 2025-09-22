@@ -43,6 +43,7 @@ public class MarauderEntity extends Monster {
         super(entityType, level);
         this.animationDispatcher = new MarauderAnimationDispatcher(this);
         this.moveAnalysis = new MoveAnalysis(this);
+        this.maxUpStep = 2.0F;
     }
 
     @Override
@@ -51,15 +52,10 @@ public class MarauderEntity extends Monster {
     }
 
     @Override
-    public float maxUpStep() {
-        return 2.0F;
-    }
-
-    @Override
     protected void tickDeath() {
         ++this.deathTime;
-        if (this.deathTime >= 80 && !this.level().isClientSide() && !this.isRemoved()) {
-            this.level().broadcastEntityEvent(this, (byte) 60);
+        if (this.deathTime >= 80 && !this.level.isClientSide() && !this.isRemoved()) {
+            this.level.broadcastEntityEvent(this, (byte) 60);
             this.remove(RemovalReason.KILLED);
         }
     }
@@ -69,7 +65,7 @@ public class MarauderEntity extends Monster {
         super.tick();
         moveAnalysis.update();
 
-        if (!this.level().isClientSide && this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && this.isAlive()) {
+        if (!this.level.isClientSide && this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && this.isAlive()) {
             this.setSpawnTicks(this.getSpawnTicks() + 1.0F);
             this.navigation.stop();
             this.setYBodyRot(0);
@@ -82,7 +78,7 @@ public class MarauderEntity extends Monster {
     }
 
     public void updateAnimations() {
-        var isMovingOnGround = moveAnalysis.isMovingHorizontally() && onGround();
+        var isMovingOnGround = moveAnalysis.isMovingHorizontally() && isOnGround();
 
         if (this.isDeadOrDying()) {
             animationDispatcher.clientDeath();

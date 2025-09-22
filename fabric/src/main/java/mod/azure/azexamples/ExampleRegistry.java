@@ -1,11 +1,11 @@
 package mod.azure.azexamples;
 
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 
 import mod.azure.azexamples.blocks.StargateBlock;
 import mod.azure.azexamples.blocks.StargateBlockItem;
@@ -31,39 +32,42 @@ public class ExampleRegistry {
 
     public static final Item PISTOL = registerItem(
         "pistol",
-        new PistolItem()
+        new PistolItem(new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB).stacksTo(1))
     );
 
     public static final Item DOOMICORN_HELMET = registerItem(
         "doomicorn_helmet",
-        new DoomicornArmor(ArmorItem.Type.HELMET)
+        new DoomicornArmor(EquipmentSlot.HEAD, ExampleRegistry.EXAMPLEMOD_TAB)
     );
 
     public static final Item DOOMICORN_CHESTPLATE = registerItem(
         "doomicorn_chestplate",
-        new DoomicornArmor(ArmorItem.Type.CHESTPLATE)
+        new DoomicornArmor(EquipmentSlot.CHEST, ExampleRegistry.EXAMPLEMOD_TAB)
     );
 
     public static final Item DOOMICORN_LEGGINGS = registerItem(
         "doomicorn_leggings",
-        new DoomicornArmor(ArmorItem.Type.LEGGINGS)
+        new DoomicornArmor(EquipmentSlot.LEGS, ExampleRegistry.EXAMPLEMOD_TAB)
     );
 
     public static final Item DOOMICORN_BOOTS = registerItem(
         "doomicorn_boots",
-        new DoomicornArmor(ArmorItem.Type.BOOTS)
+        new DoomicornArmor(EquipmentSlot.FEET, ExampleRegistry.EXAMPLEMOD_TAB)
     );
 
     public static final StargateBlock STARGATE = registerBlock(
         "stargate",
         new StargateBlock(
-            BlockBehaviour.Properties.of().sound(SoundType.DRIPSTONE_BLOCK).strength(5.0f, 8.0f).noOcclusion()
+            BlockBehaviour.Properties.of(Material.HEAVY_METAL)
+                .sound(SoundType.DRIPSTONE_BLOCK)
+                .strength(5.0f, 8.0f)
+                .noOcclusion()
         )
     );
 
     public static final BlockItem STARGATE_ITEM = registerItem(
         "stargate",
-        new StargateBlockItem(STARGATE)
+        new StargateBlockItem(STARGATE, ExampleRegistry.EXAMPLEMOD_TAB)
     );
 
     public static final BlockEntityType<StargateBlockEntity> STARGATE_BLOCK_ENTITY = registerBlockEntity(
@@ -156,11 +160,11 @@ public class ExampleRegistry {
     }
 
     public static <T extends Item> T registerItem(String name, T item) {
-        return Registry.register(BuiltInRegistries.ITEM, CommonMod.modResource(name), item);
+        return Registry.register(Registry.ITEM, CommonMod.modResource(name), item);
     }
 
     public static <T extends Block> T registerBlock(String blockName, T block) {
-        return Registry.register(BuiltInRegistries.BLOCK, blockName, block);
+        return Registry.register(Registry.BLOCK, blockName, block);
     }
 
     public static <T extends Entity> EntityType<T> registerEntity(
@@ -171,7 +175,7 @@ public class ExampleRegistry {
         float height
     ) {
         return Registry.register(
-            BuiltInRegistries.ENTITY_TYPE,
+            Registry.ENTITY_TYPE,
             CommonMod.modResource(entityName),
             create(entity, mobCategory, width, height).buildWithoutDataFixerCheck()
         );
@@ -182,34 +186,15 @@ public class ExampleRegistry {
         BlockEntityType<T> blockEntity
     ) {
         return Registry.register(
-            BuiltInRegistries.BLOCK_ENTITY_TYPE,
+            Registry.BLOCK_ENTITY_TYPE,
             CommonMod.modResource(blockEntityName),
             blockEntity
         );
     }
 
-    public static <T extends CreativeModeTab> T registerCreativeTab(String name, T creativeTab) {
-        return Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, name, creativeTab);
-    }
-
-    public static final CreativeModeTab EXAMPLEMOD_TAB = registerCreativeTab(
-        "examplemod_items",
-        FabricItemGroup.builder()
-            .title(Component.translatable(CommonStrings.CREATIVE_TAB))
-            .icon(() -> new ItemStack(ExampleRegistry.STARGATE_ITEM))
-            .displayItems((enabledFeatures, entries) -> {
-                entries.accept(ExampleRegistry.STARGATE_ITEM);
-                entries.accept(ExampleRegistry.PISTOL);
-                entries.accept(ExampleRegistry.DOOMICORN_HELMET);
-                entries.accept(ExampleRegistry.DOOMICORN_CHESTPLATE);
-                entries.accept(ExampleRegistry.DOOMICORN_LEGGINGS);
-                entries.accept(ExampleRegistry.DOOMICORN_BOOTS);
-                entries.accept(ExampleRegistry.MARAUDER_SPAWN_EGG);
-                entries.accept(ExampleRegistry.DOOMHUNTER_SPAWN_EGG);
-                entries.accept(ExampleRegistry.MANUL_SPAWN_EGG);
-                entries.accept(ExampleRegistry.JURAVENATOR_SPAWN_EGG);
-            })
-            .build()
+    public static final CreativeModeTab EXAMPLEMOD_TAB = FabricItemGroupBuilder.build(
+        new ResourceLocation(CommonStrings.MOD_ID, "examplemod_items"),
+        () -> new ItemStack(ExampleRegistry.STARGATE_ITEM)
     );
 
     public static void initialize() {}

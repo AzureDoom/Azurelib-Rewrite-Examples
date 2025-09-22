@@ -14,13 +14,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(CommonStrings.MOD_ID)
 public final class ForgeMod {
 
-    public ForgeMod(FMLJavaModLoadingContext loadingContext) {
-        IEventBus modEventBus = loadingContext.getModEventBus();
+    public ForgeMod() {
+		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ExampleRegistry.blockEntityTypeDeferredRegister.register(modEventBus);
         ExampleRegistry.blockDeferredRegister.register(modEventBus);
         ExampleRegistry.entityTypeDeferredRegister.register(modEventBus);
         ExampleRegistry.itemDeferredRegister.register(modEventBus);
-        ExampleRegistry.creativeModeTabDeferredRegister.register(modEventBus);
         modEventBus.addListener(this::createEntityAttributes);
         modEventBus.addListener(this::commonSetup);
     }

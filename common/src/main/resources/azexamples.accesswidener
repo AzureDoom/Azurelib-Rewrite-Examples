@@ -1,2 +1,7 @@
 accessWidener	v1	named
 accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
+accessible method net/minecraft/client/renderer/blockentity/BlockEntityRenderers register (Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/client/renderer/blockentity/BlockEntityRendererProvider;)V
+
+accessible field com/mojang/math/Vector3f x F
+accessible field com/mojang/math/Vector3f y F
+accessible field com/mojang/math/Vector3f z F
