@@ -28,6 +28,7 @@ public class CreeperRenderer extends AzEntityRenderer<Creeper> {
 
                     return contextPipeline;
                 })
+                .setShadowRadius(0.5F)
                 .build(),
             context
         );

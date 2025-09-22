@@ -30,7 +30,7 @@ public final class FabricLibMod implements ModInitializer {
         );
         AzIdentityRegistry.register(
             ExampleRegistry.PISTOL,
-	        ExampleRegistry.STARGATE_ITEM,
+            ExampleRegistry.STARGATE_ITEM,
             ExampleRegistry.DOOMICORN_HELMET,
             ExampleRegistry.DOOMICORN_CHESTPLATE,
             ExampleRegistry.DOOMICORN_LEGGINGS,

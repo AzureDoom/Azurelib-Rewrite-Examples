@@ -28,7 +28,7 @@ public final class ForgeMod {
     public void commonSetup(final FMLCommonSetupEvent event) {
         AzIdentityRegistry.register(
             ExampleRegistry.PISTOL.get(),
-			ExampleRegistry.STARGATE_ITEM.get(),
+            ExampleRegistry.STARGATE_ITEM.get(),
             ExampleRegistry.DOOMICORN_HELMET.get(),
             ExampleRegistry.DOOMICORN_CHESTPLATE.get(),
             ExampleRegistry.DOOMICORN_LEGGINGS.get(),

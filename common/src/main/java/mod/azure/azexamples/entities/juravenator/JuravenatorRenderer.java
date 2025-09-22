@@ -26,6 +26,7 @@ public class JuravenatorRenderer extends AzEntityRenderer<JuravenatorEntity> {
         super(
             AzEntityRendererConfig.<JuravenatorEntity>builder(MODEL, TEXTURE)
                 .setAnimatorProvider(JuravenatorAnimator::new)
+                .setShadowRadius(0.5F)
                 .build(),
             context
         );

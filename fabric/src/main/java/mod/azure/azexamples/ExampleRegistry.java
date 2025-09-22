@@ -106,45 +106,45 @@ public class ExampleRegistry {
         7.0f
     );
 
-	public static final SpawnEggItem MARAUDER_SPAWN_EGG = registerItem(
-		"marauder_spawn_egg",
-		new SpawnEggItem(
-			ExampleRegistry.MARAUDER,
-			0xe9e2ed,
-			0x574f44,
-			new Item.Properties()
-		)
-	);
+    public static final SpawnEggItem MARAUDER_SPAWN_EGG = registerItem(
+        "marauder_spawn_egg",
+        new SpawnEggItem(
+            ExampleRegistry.MARAUDER,
+            0xe9e2ed,
+            0x574f44,
+            new Item.Properties()
+        )
+    );
 
-	public static final SpawnEggItem DOOMHUNTER_SPAWN_EGG = registerItem(
-		"doomhunter_spawn_egg",
-		new SpawnEggItem(
-			ExampleRegistry.DOOMHUNTER,
-			0x5a575a,
-			0x86472e,
-			new Item.Properties()
-		)
-	);
+    public static final SpawnEggItem DOOMHUNTER_SPAWN_EGG = registerItem(
+        "doomhunter_spawn_egg",
+        new SpawnEggItem(
+            ExampleRegistry.DOOMHUNTER,
+            0x5a575a,
+            0x86472e,
+            new Item.Properties()
+        )
+    );
 
-	public static final SpawnEggItem MANUL_SPAWN_EGG = registerItem(
-		"manul_spawn_egg",
-		new SpawnEggItem(
-			ExampleRegistry.MANUL,
-			0xc38160,
-			0x3d362e,
-			new Item.Properties()
-		)
-	);
+    public static final SpawnEggItem MANUL_SPAWN_EGG = registerItem(
+        "manul_spawn_egg",
+        new SpawnEggItem(
+            ExampleRegistry.MANUL,
+            0xc38160,
+            0x3d362e,
+            new Item.Properties()
+        )
+    );
 
-	public static final SpawnEggItem JURAVENATOR_SPAWN_EGG = registerItem(
-		"juravenator_spawn_egg",
-		new SpawnEggItem(
-			ExampleRegistry.JURAVENATOR,
-			0xc09e58,
-			0x574028,
-			new Item.Properties()
-		)
-	);
+    public static final SpawnEggItem JURAVENATOR_SPAWN_EGG = registerItem(
+        "juravenator_spawn_egg",
+        new SpawnEggItem(
+            ExampleRegistry.JURAVENATOR,
+            0xc09e58,
+            0x574028,
+            new Item.Properties()
+        )
+    );
 
     static <T extends Entity> SilencedEntityTypeBuilder create(
         EntityType.EntityFactory<T> entity,

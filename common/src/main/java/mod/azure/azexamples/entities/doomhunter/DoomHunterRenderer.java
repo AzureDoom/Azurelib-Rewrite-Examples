@@ -22,6 +22,7 @@ public class DoomHunterRenderer extends AzEntityRenderer<DoomHunterEntity> {
             AzEntityRendererConfig.<DoomHunterEntity>builder(MODEL, TEXTURE)
                 .setAnimatorProvider(DoomHunterAnimator::new)
                 .addRenderLayer(new AzAutoGlowingLayer<>())
+                .setShadowRadius(3.0F)
                 .build(),
             context
         );
