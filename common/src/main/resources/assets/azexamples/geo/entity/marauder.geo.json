@@ -622,6 +622,25 @@
 					]
 				},
 				{
+					"name": "item_bone",
+					"parent": "left_elbow",
+					"pivot": [6.5, 26, 1],
+					"cubes": [
+						{
+							"origin": [5.5, 16.2, -1.1],
+							"size": [2, 2, 2],
+							"uv": {
+								"north": {"uv": [68, 71], "uv_size": [2, 2]},
+								"east": {"uv": [68, 71], "uv_size": [2, 2]},
+								"south": {"uv": [68, 71], "uv_size": [2, 2]},
+								"west": {"uv": [68, 71], "uv_size": [2, 2]},
+								"up": {"uv": [70, 73], "uv_size": [-2, -2]},
+								"down": {"uv": [70, 73], "uv_size": [-2, -2]}
+							}
+						}
+					]
+				},
+				{
 					"name": "hand_boomstick",
 					"parent": "left_elbow",
 					"pivot": [6.5, 20, -2],

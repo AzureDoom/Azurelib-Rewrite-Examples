@@ -1,7 +1,6 @@
 package mod.azure.azexamples.entities.marauder;
 
 import mod.azure.azurelib.common.api.common.ai.pathing.AzureNavigation;
-import mod.azure.azurelib.common.internal.common.AzureLib;
 import mod.azure.azurelib.rewrite.util.MoveAnalysis;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -69,9 +68,9 @@ public class MarauderEntity extends Monster {
     public void tick() {
         super.tick();
         moveAnalysis.update();
+
         if (!this.level().isClientSide && this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && this.isAlive()) {
             this.setSpawnTicks(this.getSpawnTicks() + 1.0F);
-            AzureLib.LOGGER.warn("Spawn ticks: {}", this.getSpawnTicks());
             this.navigation.stop();
             this.setYBodyRot(0);
             this.setYHeadRot(0);
