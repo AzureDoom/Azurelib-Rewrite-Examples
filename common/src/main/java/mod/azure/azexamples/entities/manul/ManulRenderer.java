@@ -23,6 +23,7 @@ public class ManulRenderer extends AzEntityRenderer<ManulEntity> {
         super(
             AzEntityRendererConfig.<ManulEntity>builder(MODEL, TEXTURE)
                 .setAnimatorProvider(ManulAnimator::new)
+                .setShadowRadius(0.5F)
                 .build(),
             context
         );

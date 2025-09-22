@@ -65,6 +65,7 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
                 })
                 .setAnimatorProvider(MarauderAnimator::new)
                 .setDeathMaxRotation(0F)
+                .setShadowRadius(0.5F)
                 .build(),
             context
         );
