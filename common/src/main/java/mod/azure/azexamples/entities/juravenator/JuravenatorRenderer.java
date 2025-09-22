@@ -1,12 +1,9 @@
 package mod.azure.azexamples.entities.juravenator;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.azure.azurelib.rewrite.render.entity.AzEntityRenderer;
 import mod.azure.azurelib.rewrite.render.entity.AzEntityRendererConfig;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
 
 import mod.azure.azexamples.CommonMod;
 
@@ -25,23 +22,15 @@ public class JuravenatorRenderer extends AzEntityRenderer<JuravenatorEntity> {
     ) {
         super(
             AzEntityRendererConfig.<JuravenatorEntity>builder(MODEL, TEXTURE)
+                .setRenderEntry(contextPipeline -> {
+                    contextPipeline.animatable().updateAnimations();
+
+                    return contextPipeline;
+                })
                 .setAnimatorProvider(JuravenatorAnimator::new)
                 .setShadowRadius(0.5F)
                 .build(),
             context
         );
-    }
-
-    @Override
-    public void render(
-        @NotNull JuravenatorEntity entity,
-        float entityYaw,
-        float partialTick,
-        @NotNull PoseStack poseStack,
-        @NotNull MultiBufferSource bufferSource,
-        int packedLight
-    ) {
-        entity.updateAnimations();
-        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 }

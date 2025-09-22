@@ -1,6 +1,5 @@
 package mod.azure.azexamples.entities.marauder;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import mod.azure.azurelib.rewrite.model.AzBone;
 import mod.azure.azurelib.rewrite.render.AzRendererPipelineContext;
@@ -8,13 +7,11 @@ import mod.azure.azurelib.rewrite.render.entity.AzEntityRenderer;
 import mod.azure.azurelib.rewrite.render.entity.AzEntityRendererConfig;
 import mod.azure.azurelib.rewrite.render.layer.AzAutoGlowingLayer;
 import mod.azure.azurelib.rewrite.render.layer.AzBlockAndItemLayer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import mod.azure.azexamples.CommonMod;
 
@@ -66,24 +63,16 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
                         super.renderItemForBone(context, bone, itemStack, animatable);
                     }
                 })
+                .setRenderEntry(contextPipeline -> {
+                    contextPipeline.animatable().updateAnimations();
+
+                    return contextPipeline;
+                })
                 .setAnimatorProvider(MarauderAnimator::new)
                 .setDeathMaxRotation(0F)
                 .setShadowRadius(0.5F)
                 .build(),
             context
         );
-    }
-
-    @Override
-    public void render(
-        @NotNull MarauderEntity entity,
-        float entityYaw,
-        float partialTick,
-        @NotNull PoseStack poseStack,
-        @NotNull MultiBufferSource bufferSource,
-        int packedLight
-    ) {
-        entity.updateAnimations();
-        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 }
