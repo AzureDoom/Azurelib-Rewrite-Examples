@@ -32,7 +32,7 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
                     @Override
                     public ItemStack itemStackForBone(AzBone bone, MarauderEntity animatable) {
                         if (bone.getName().equals(LEFT_HAND)) {
-                            return animatable.getItemBySlot(EquipmentSlot.OFFHAND);
+                            return animatable.getItemBySlot(EquipmentSlot.MAINHAND);
                         }
                         return null;
                     }
