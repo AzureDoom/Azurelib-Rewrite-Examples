@@ -60,11 +60,11 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
                         super.renderItemForBone(context, bone, itemStack, animatable);
                     }
                 })
-	            .setRenderEntry(contextPipeline -> {
-		            contextPipeline.animatable().updateAnimations();
+                .setRenderEntry(contextPipeline -> {
+                    contextPipeline.animatable().updateAnimations();
 
-		            return contextPipeline;
-	            })
+                    return contextPipeline;
+                })
                 .setAnimatorProvider(MarauderAnimator::new)
                 .setDeathMaxRotation(0F)
                 .setShadowRadius(0.5F)
