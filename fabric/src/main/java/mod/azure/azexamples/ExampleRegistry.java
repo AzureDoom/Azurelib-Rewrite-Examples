@@ -22,6 +22,7 @@ import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
 import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
+import mod.azure.azexamples.entities.marine.MarineEntity;
 import mod.azure.azexamples.items.PistolItem;
 import mod.azure.azexamples.items.armors.DoomicornArmor;
 
@@ -106,6 +107,14 @@ public class ExampleRegistry {
         7.0f
     );
 
+    public static final EntityType<MarineEntity> MARINE = registerEntity(
+        "marine",
+        MarineEntity::new,
+        MobCategory.WATER_CREATURE,
+        1.5f,
+        2.6f
+    );
+
     public static final SpawnEggItem MARAUDER_SPAWN_EGG = registerItem(
         "marauder_spawn_egg",
         new SpawnEggItem(
@@ -140,6 +149,16 @@ public class ExampleRegistry {
         "juravenator_spawn_egg",
         new SpawnEggItem(
             ExampleRegistry.JURAVENATOR,
+            0xc09e58,
+            0x574028,
+            new Item.Properties()
+        )
+    );
+
+    public static final SpawnEggItem MARINE_SPAWN_EGG = registerItem(
+        "marine_spawn_egg",
+        new SpawnEggItem(
+            ExampleRegistry.MARINE,
             0xc09e58,
             0x574028,
             new Item.Properties()
@@ -208,6 +227,7 @@ public class ExampleRegistry {
                 entries.accept(ExampleRegistry.DOOMHUNTER_SPAWN_EGG);
                 entries.accept(ExampleRegistry.MANUL_SPAWN_EGG);
                 entries.accept(ExampleRegistry.JURAVENATOR_SPAWN_EGG);
+                entries.accept(ExampleRegistry.MARINE_SPAWN_EGG);
             })
             .build()
     );

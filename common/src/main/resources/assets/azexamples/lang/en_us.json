@@ -3,11 +3,13 @@
   "entity.azexamples.doomhunter": "Doomhunter",
   "entity.azexamples.manul": "Manul",
   "entity.azexamples.juravenator": "Juravenator",
+  "entity.azexamples.marine": "Marine",
   "entity.azexamples.stargate_block_entity": "Stargate",
   "item.azexamples.marauder_spawn_egg": "Marauder Spawn Egg",
   "item.azexamples.doomhunter_spawn_egg": "Doomhunter Spawn Egg",
   "item.azexamples.manul_spawn_egg": "Manul Spawn Egg",
   "item.azexamples.juravenator_spawn_egg": "Juravenator Spawn Egg",
+  "item.azexamples.marine_spawn_egg": "Marine Spawn Egg",
   "item.azexamples.doomicorn_helmet": "Doomicorn Helmet",
   "item.azexamples.doomicorn_chestplate": "Doomicorn Chestplate",
   "item.azexamples.doomicorn_leggings": "Doomicorn Leggings",
@@ -15,5 +17,6 @@
   "item.azexamples.pistol": "Pistol",
   "item.azexamples.stargate": "Stargate",
   "block.azexamples.stargate": "Stargate",
+  "itemGroup.examplemod_items": "AzureLib Examples",
   "itemGroup.azexamples.examplemod_items": "AzureLib Examples"
 }

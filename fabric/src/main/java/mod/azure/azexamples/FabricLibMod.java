@@ -28,6 +28,10 @@ public final class FabricLibMod implements ModInitializer {
             ExampleRegistry.JURAVENATOR,
             Mob.createMobAttributes()
         );
+        FabricDefaultAttributeRegistry.register(
+            ExampleRegistry.MARINE,
+            Mob.createMobAttributes()
+        );
         AzIdentityRegistry.register(
             ExampleRegistry.PISTOL,
             ExampleRegistry.STARGATE_ITEM,
