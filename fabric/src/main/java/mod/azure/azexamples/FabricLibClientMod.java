@@ -1,6 +1,5 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.entities.marine.MarineRenderer;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.rewrite.render.item.AzItemRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -19,6 +18,7 @@ import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
 import mod.azure.azexamples.entities.juravenator.JuravenatorRenderer;
 import mod.azure.azexamples.entities.manul.ManulRenderer;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
+import mod.azure.azexamples.entities.marine.MarineRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
 import mod.azure.azexamples.items.netheritereplace.NetheriteSwordRenderer;
@@ -49,7 +49,7 @@ public class FabricLibClientMod implements ClientModInitializer {
         EntityRendererRegistry.register(ExampleRegistry.MARAUDER, MarauderRenderer::new);
         EntityRendererRegistry.register(ExampleRegistry.MANUL, ManulRenderer::new);
         EntityRendererRegistry.register(ExampleRegistry.JURAVENATOR, JuravenatorRenderer::new);
-	    EntityRendererRegistry.register(ExampleRegistry.MARINE, MarineRenderer::new);
+        EntityRendererRegistry.register(ExampleRegistry.MARINE, MarineRenderer::new);
         EntityRendererRegistry.register(EntityType.CREEPER, CreeperRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(ExampleRegistry.STARGATE, RenderType.translucent());
         BlockEntityRenderers.register(

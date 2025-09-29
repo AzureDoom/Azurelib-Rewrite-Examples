@@ -1,6 +1,5 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.entities.marine.MarineEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -25,6 +24,7 @@ import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
 import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
+import mod.azure.azexamples.entities.marine.MarineEntity;
 import mod.azure.azexamples.items.PistolItem;
 import mod.azure.azexamples.items.armors.DoomicornArmor;
 
@@ -115,15 +115,15 @@ public class ExampleRegistry {
         )
     );
 
-	public static final RegistryObject<SpawnEggItem> MARINE_SPAWN_EGG = itemDeferredRegister.register(
-		"marine_spawn_egg",
-		() -> new ForgeSpawnEggItem(
-			ExampleRegistry.MARINE,
-			0xc09e58,
-			0x574028,
-			new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
-		)
-	);
+    public static final RegistryObject<SpawnEggItem> MARINE_SPAWN_EGG = itemDeferredRegister.register(
+        "marine_spawn_egg",
+        () -> new ForgeSpawnEggItem(
+            ExampleRegistry.MARINE,
+            0xc09e58,
+            0x574028,
+            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+        )
+    );
 
     public static final RegistryObject<StargateBlock> STARGATE = blockDeferredRegister.register(
         "stargate",
@@ -179,10 +179,10 @@ public class ExampleRegistry {
         () -> create(JuravenatorEntity::new, MobCategory.MONSTER, 3.0f, 7.0f).buildWithoutDataFixerCheck()
     );
 
-	public static final RegistryObject<EntityType<MarineEntity>> MARINE = entityTypeDeferredRegister.register(
-		"marine",
-		() -> create(MarineEntity::new, MobCategory.WATER_CREATURE, 1.5f, 2.6f).buildWithoutDataFixerCheck()
-	);
+    public static final RegistryObject<EntityType<MarineEntity>> MARINE = entityTypeDeferredRegister.register(
+        "marine",
+        () -> create(MarineEntity::new, MobCategory.WATER_CREATURE, 1.5f, 2.6f).buildWithoutDataFixerCheck()
+    );
 
     public static final CreativeModeTab EXAMPLEMOD_TAB = (new CreativeModeTab("examplemod_items") {
 
