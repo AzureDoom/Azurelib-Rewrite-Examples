@@ -1,5 +1,6 @@
 package mod.azure.azexamples;
 
+import mod.azure.azexamples.entities.marine.MarineRenderer;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.rewrite.render.item.AzItemRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -48,6 +49,7 @@ public class FabricLibClientMod implements ClientModInitializer {
         EntityRendererRegistry.register(ExampleRegistry.MARAUDER, MarauderRenderer::new);
         EntityRendererRegistry.register(ExampleRegistry.MANUL, ManulRenderer::new);
         EntityRendererRegistry.register(ExampleRegistry.JURAVENATOR, JuravenatorRenderer::new);
+	    EntityRendererRegistry.register(ExampleRegistry.MARINE, MarineRenderer::new);
         EntityRendererRegistry.register(EntityType.CREEPER, CreeperRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(ExampleRegistry.STARGATE, RenderType.translucent());
         BlockEntityRenderers.register(

@@ -45,5 +45,6 @@ public final class ForgeMod {
         event.put(ExampleRegistry.MARAUDER.get(), Monster.createMonsterAttributes().build());
         event.put(ExampleRegistry.MANUL.get(), Mob.createMobAttributes().build());
         event.put(ExampleRegistry.JURAVENATOR.get(), Mob.createMobAttributes().build());
+	    event.put(ExampleRegistry.MARINE.get(), Mob.createMobAttributes().build());
     }
 }
