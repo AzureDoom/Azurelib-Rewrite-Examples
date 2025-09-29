@@ -31,6 +31,10 @@ public final class FabricLibMod implements ModInitializer {
             EntityRegistry.JURAVENATOR.get(),
             Mob.createMobAttributes()
         );
+        FabricDefaultAttributeRegistry.register(
+            EntityRegistry.MARINE.get(),
+            Mob.createMobAttributes()
+        );
         AzIdentityRegistry.register(
             ItemRegistry.PISTOL.get(),
             ItemRegistry.DOOMICORN_HELMET.get(),

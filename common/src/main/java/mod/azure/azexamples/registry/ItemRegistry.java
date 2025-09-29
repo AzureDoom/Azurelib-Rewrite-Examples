@@ -85,6 +85,16 @@ public class ItemRegistry {
         )
     );
 
+    public static final Supplier<SpawnEggItem> MARINE_SPAWN_EGG = registerItem(
+        "marine_spawn_egg",
+        AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+            EntityRegistry.MARINE,
+            0xc09e58,
+            0x574028,
+            new Item.Properties()
+        )
+    );
+
     /**
      * Registers a new Item.
      *

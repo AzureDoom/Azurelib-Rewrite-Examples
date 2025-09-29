@@ -18,6 +18,7 @@ import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
 import mod.azure.azexamples.entities.juravenator.JuravenatorRenderer;
 import mod.azure.azexamples.entities.manul.ManulRenderer;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
+import mod.azure.azexamples.entities.marine.MarineRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
 import mod.azure.azexamples.items.netheritereplace.NetheriteSwordRenderer;
@@ -51,6 +52,7 @@ public class FabricLibClientMod implements ClientModInitializer {
         EntityRendererRegistry.register(EntityRegistry.MARAUDER.get(), MarauderRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.MANUL.get(), ManulRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.JURAVENATOR.get(), JuravenatorRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.MARINE.get(), MarineRenderer::new);
         EntityRendererRegistry.register(EntityType.CREEPER, CreeperRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.STARGATE.get(), RenderType.translucent());
         BlockEntityRenderers.register(

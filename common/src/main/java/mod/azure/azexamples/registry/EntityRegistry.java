@@ -15,6 +15,7 @@ import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
 import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
+import mod.azure.azexamples.entities.marine.MarineEntity;
 import mod.azure.azexamples.services.AzExampleServices;
 
 /**
@@ -64,6 +65,14 @@ public class EntityRegistry {
         MobCategory.MONSTER,
         3.0f,
         7.0f
+    );
+
+    public static final Supplier<EntityType<MarineEntity>> MARINE = registerEntity(
+        "marine",
+        MarineEntity::new,
+        MobCategory.MONSTER,
+        0.6f,
+        1.8f
     );
 
     /**
