@@ -15,7 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public final class ForgeMod {
 
     public ForgeMod() {
-		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ExampleRegistry.blockEntityTypeDeferredRegister.register(modEventBus);
         ExampleRegistry.blockDeferredRegister.register(modEventBus);
         ExampleRegistry.entityTypeDeferredRegister.register(modEventBus);
@@ -45,5 +45,6 @@ public final class ForgeMod {
         event.put(ExampleRegistry.MARAUDER.get(), Monster.createMonsterAttributes().build());
         event.put(ExampleRegistry.MANUL.get(), Mob.createMobAttributes().build());
         event.put(ExampleRegistry.JURAVENATOR.get(), Mob.createMobAttributes().build());
+		event.put(ExampleRegistry.MARINE.get(), Mob.createMobAttributes().build());
     }
 }
