@@ -2,7 +2,9 @@ package mod.azure.azexamples.items.armors;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
@@ -18,6 +20,23 @@ public class DoomicornArmor extends ArmorItem {
     public DoomicornArmor(Type type) {
         super(ArmorMaterials.NETHERITE, type, new Properties().stacksTo(1));
         this.dispatcher = new DoomicornArmorAnimationDispatcher();
+    }
+
+    @Override
+    public void inventoryTick(
+        @NotNull ItemStack stack,
+        @NotNull Level level,
+        @NotNull Entity entity,
+        int slotId,
+        boolean isSelected
+    ) {
+        if (!level.isClientSide && entity instanceof LivingEntity livingEntity) {
+            livingEntity.getArmorSlots().forEach(wornArmor -> {
+                if (wornArmor != null && wornArmor.is(this)) {
+                    dispatcher.serverIdle(livingEntity, wornArmor);
+                }
+            });
+        }
     }
 
     @Override

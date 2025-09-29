@@ -13,7 +13,16 @@ public class DoomicornArmorAnimationDispatcher {
         CommonStrings.EQUIP_ANIMATION_NAME
     );
 
+    private static final AzCommand IDLE = AzCommand.create(
+        CommonStrings.BASE_CONTROLLER,
+        CommonStrings.IDLE_ANIMATION_NAME
+    );
+
     public void serverEquipHelmet(Entity entity, ItemStack itemStack) {
         EQUIP.sendForItem(entity, itemStack);
+    }
+
+    public void serverIdle(Entity entity, ItemStack itemStack) {
+        IDLE.sendForItem(entity, itemStack);
     }
 }
