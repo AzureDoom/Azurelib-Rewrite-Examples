@@ -27,7 +27,7 @@ public class DoomicornArmor extends ArmorItem {
         if (!level.isClientSide && entity instanceof Player player) {
             player.getArmorSlots().forEach(wornArmor -> {
                 if (wornArmor != null && wornArmor.is(this)) {
-                    dispatcher.serverEquipHelmet(player, wornArmor);
+                    dispatcher.serverIdle(player, wornArmor);
                 }
             });
         }

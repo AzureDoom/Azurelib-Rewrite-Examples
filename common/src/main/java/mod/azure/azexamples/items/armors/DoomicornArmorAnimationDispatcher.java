@@ -8,12 +8,12 @@ import mod.azure.azexamples.CommonStrings;
 
 public class DoomicornArmorAnimationDispatcher {
 
-    private static final AzCommand EQUIP = AzCommand.create(
+    private static final AzCommand IDLE = AzCommand.create(
         CommonStrings.BASE_CONTROLLER,
-        CommonStrings.EQUIP_ANIMATION_NAME
+        CommonStrings.IDLE_ANIMATION_NAME
     );
 
-    public void serverEquipHelmet(Entity entity, ItemStack itemStack) {
-        EQUIP.sendForItem(entity, itemStack);
+    public void serverIdle(Entity entity, ItemStack itemStack) {
+        IDLE.sendForItem(entity, itemStack);
     }
 }
