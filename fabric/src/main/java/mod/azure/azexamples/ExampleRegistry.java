@@ -1,6 +1,5 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.entities.marine.MarineEntity;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -24,6 +23,7 @@ import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
 import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
+import mod.azure.azexamples.entities.marine.MarineEntity;
 import mod.azure.azexamples.items.PistolItem;
 import mod.azure.azexamples.items.armors.DoomicornArmor;
 
@@ -111,7 +111,7 @@ public class ExampleRegistry {
         7.0f
     );
 
-	public static final EntityType<MarineEntity> MARINE = registerEntity(
+    public static final EntityType<MarineEntity> MARINE = registerEntity(
         "marine",
         MarineEntity::new,
         MobCategory.WATER_CREATURE,
@@ -159,15 +159,15 @@ public class ExampleRegistry {
         )
     );
 
-	public static final SpawnEggItem MARINE_SPAWN_EGG = registerItem(
-		"marine_spawn_egg",
-		new SpawnEggItem(
-			ExampleRegistry.MARINE,
-			0xc09e58,
-			0x574028,
-			new Item.Properties()
-		)
-	);
+    public static final SpawnEggItem MARINE_SPAWN_EGG = registerItem(
+        "marine_spawn_egg",
+        new SpawnEggItem(
+            ExampleRegistry.MARINE,
+            0xc09e58,
+            0x574028,
+            new Item.Properties()
+        )
+    );
 
     static <T extends Entity> SilencedEntityTypeBuilder create(
         EntityType.EntityFactory<T> entity,

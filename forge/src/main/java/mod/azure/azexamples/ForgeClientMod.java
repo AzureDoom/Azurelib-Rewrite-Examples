@@ -1,6 +1,5 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.entities.marine.MarineRenderer;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.rewrite.render.item.AzItemRendererRegistry;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -21,6 +20,7 @@ import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
 import mod.azure.azexamples.entities.juravenator.JuravenatorRenderer;
 import mod.azure.azexamples.entities.manul.ManulRenderer;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
+import mod.azure.azexamples.entities.marine.MarineRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
 import mod.azure.azexamples.items.netheritereplace.NetheriteSwordRenderer;
@@ -57,7 +57,7 @@ public class ForgeClientMod {
         event.registerEntityRenderer(ExampleRegistry.MARAUDER.get(), MarauderRenderer::new);
         event.registerEntityRenderer(ExampleRegistry.MANUL.get(), ManulRenderer::new);
         event.registerEntityRenderer(ExampleRegistry.JURAVENATOR.get(), JuravenatorRenderer::new);
-		event.registerEntityRenderer(ExampleRegistry.MARINE.get(), MarineRenderer::new);
+        event.registerEntityRenderer(ExampleRegistry.MARINE.get(), MarineRenderer::new);
         event.registerBlockEntityRenderer(
             ExampleRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
