@@ -2,6 +2,7 @@ package mod.azure.azexamples.items.netheritereplace.armor;
 
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRenderer;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererConfig;
+import mod.azure.azurelib.rewrite.render.layer.AzAutoGlowingLayer;
 import net.minecraft.resources.ResourceLocation;
 
 import mod.azure.azexamples.CommonMod;
@@ -26,6 +27,7 @@ public class NetheriteArmorRenderer extends AzArmorRenderer {
             AzArmorRendererConfig.builder(MODEL, TEXTURE)
                 .setAnimatorProvider(NetheriteArmorAnimator::new)
                 .setBoneProvider(new DoomArmorBoneProvider())
+                .addRenderLayer(new AzAutoGlowingLayer<>())
                 .build()
         );
     }
