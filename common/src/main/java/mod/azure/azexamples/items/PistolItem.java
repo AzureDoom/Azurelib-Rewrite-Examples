@@ -41,4 +41,9 @@ public class PistolItem extends Item {
         user.startUsingItem(hand);
         return InteractionResultHolder.consume(itemStack);
     }
+
+    @Override
+    public int getUseDuration(@NotNull ItemStack stack, @NotNull LivingEntity entity) {
+        return 72000;
+    }
 }
