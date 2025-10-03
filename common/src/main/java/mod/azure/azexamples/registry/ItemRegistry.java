@@ -95,6 +95,16 @@ public class ItemRegistry {
         )
     );
 
+    public static final Supplier<SpawnEggItem> GREMLIN_SPAWN_EGG = registerItem(
+        "gremlin_spawn_egg",
+        AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+            EntityRegistry.GREMLIN,
+            0x424242,
+            0x606060,
+            new Item.Properties()
+        )
+    );
+
     /**
      * Registers a new Item.
      *

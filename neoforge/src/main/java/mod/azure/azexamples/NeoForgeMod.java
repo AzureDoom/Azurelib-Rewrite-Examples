@@ -59,5 +59,6 @@ public final class NeoForgeMod {
         event.put(EntityRegistry.MANUL.get(), Mob.createMobAttributes().build());
         event.put(EntityRegistry.JURAVENATOR.get(), Mob.createMobAttributes().build());
         event.put(EntityRegistry.MARINE.get(), Mob.createMobAttributes().build());
+        event.put(EntityRegistry.GREMLIN.get(), Mob.createMobAttributes().build());
     }
 }

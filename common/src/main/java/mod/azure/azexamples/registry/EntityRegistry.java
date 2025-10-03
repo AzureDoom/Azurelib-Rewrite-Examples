@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.entities.SilencedEntityTypeBuilder;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
+import mod.azure.azexamples.entities.gremlin.GremlinEntity;
 import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
@@ -70,6 +71,14 @@ public class EntityRegistry {
     public static final Supplier<EntityType<MarineEntity>> MARINE = registerEntity(
         "marine",
         MarineEntity::new,
+        MobCategory.MONSTER,
+        0.6f,
+        1.8f
+    );
+
+    public static final Supplier<EntityType<GremlinEntity>> GREMLIN = registerEntity(
+        "gremlin",
+        GremlinEntity::new,
         MobCategory.MONSTER,
         0.6f,
         1.8f

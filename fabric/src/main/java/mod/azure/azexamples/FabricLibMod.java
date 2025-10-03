@@ -32,5 +32,9 @@ public final class FabricLibMod implements ModInitializer {
             EntityRegistry.MARINE.get(),
             Mob.createMobAttributes()
         );
+        FabricDefaultAttributeRegistry.register(
+            EntityRegistry.GREMLIN.get(),
+            Mob.createMobAttributes()
+        );
     }
 }
