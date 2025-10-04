@@ -2,9 +2,7 @@ package mod.azure.azexamples;
 
 import net.minecraft.resources.ResourceLocation;
 
-import mod.azure.azexamples.registry.BlockRegistry;
-import mod.azure.azexamples.registry.CreativeTabRegistry;
-import mod.azure.azexamples.registry.EntityRegistry;
+import mod.azure.azexamples.registry.*;
 
 public class CommonMod {
 
@@ -23,5 +21,7 @@ public class CommonMod {
         BlockRegistry.initialize();
         EntityRegistry.initialize();
         CreativeTabRegistry.initialize();
+        SoundRegistry.initialize();
+        ItemRegistry.initialize();
     }
 }

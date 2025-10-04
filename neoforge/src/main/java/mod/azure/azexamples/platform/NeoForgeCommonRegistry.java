@@ -2,6 +2,7 @@ package mod.azure.azexamples.platform;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.CreativeModeTab;
@@ -44,6 +45,11 @@ public class NeoForgeCommonRegistry implements CommonRegistry {
             return (Supplier<T>) NeoForgeMod.entityTypeDeferredRegister.register(
                 registryName,
                 (Supplier<EntityType<?>>) supplier
+            );
+        } else if (registry == BuiltInRegistries.SOUND_EVENT) {
+            return (Supplier<T>) NeoForgeMod.soundEventDeferredRegister.register(
+                registryName,
+                (Supplier<SoundEvent>) supplier
             );
         }
 

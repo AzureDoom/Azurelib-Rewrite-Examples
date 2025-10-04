@@ -57,6 +57,7 @@ public class CreativeTabRegistry {
                 .displayItems((enabledFeatures, entries) -> {
                     entries.accept(BlockRegistry.STARGATE_ITEM.get());
                     entries.accept(ItemRegistry.PISTOL.get());
+                    entries.accept(ItemRegistry.PEACEMAKER.get());
                     entries.accept(ItemRegistry.DOOMICORN_HELMET.get());
                     entries.accept(ItemRegistry.DOOMICORN_CHESTPLATE.get());
                     entries.accept(ItemRegistry.DOOMICORN_LEGGINGS.get());

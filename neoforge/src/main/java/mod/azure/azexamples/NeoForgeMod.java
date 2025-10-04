@@ -1,6 +1,7 @@
 package mod.azure.azexamples;
 
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Monster;
@@ -43,6 +44,11 @@ public final class NeoForgeMod {
         CommonStrings.MOD_ID
     );
 
+    public static DeferredRegister<SoundEvent> soundEventDeferredRegister = DeferredRegister.create(
+        BuiltInRegistries.SOUND_EVENT,
+        CommonStrings.MOD_ID
+    );
+
     public NeoForgeMod(IEventBus modEventBus) {
         CommonMod.initRegistries();
         blockEntityTypeDeferredRegister.register(modEventBus);
@@ -50,6 +56,7 @@ public final class NeoForgeMod {
         entityTypeDeferredRegister.register(modEventBus);
         itemDeferredRegister.register(modEventBus);
         creativeModeTabDeferredRegister.register(modEventBus);
+        soundEventDeferredRegister.register(modEventBus);
         modEventBus.addListener(this::createEntityAttributes);
     }
 

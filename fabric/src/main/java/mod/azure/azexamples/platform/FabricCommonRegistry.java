@@ -17,7 +17,7 @@ import mod.azure.azexamples.services.CommonRegistry;
  * The FabricCommonRegistry class provides an implementation of the CommonRegistry interface specifically designed for
  * the Fabric platform. It facilitates the registration of various Minecraft modding constructs such as blocks, items,
  * entities, block entities, and creative tabs. This class provides a centralized approach to managing registrations,
- * ensuring compatibility and reducing redundancy by leveraging the Fabric API's mechanisms for modded object
+ * ensuring compatibility, and reducing redundancy by leveraging the Fabric API's mechanisms for modded object
  * registration. Methods include registering game objects like blocks, entities, items, and block entities as well as
  * creating other utilities for modding, such as spawn eggs and creative mode tabs.
  */

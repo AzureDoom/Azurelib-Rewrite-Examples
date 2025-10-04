@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 
 import mod.azure.azexamples.items.PistolItem;
 import mod.azure.azexamples.items.armors.DoomicornArmor;
+import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
 import mod.azure.azexamples.services.AzExampleServices;
 
 /**
@@ -23,6 +24,11 @@ public class ItemRegistry {
     public static final Supplier<Item> PISTOL = registerItem(
         "pistol",
         PistolItem::new
+    );
+
+    public static final Supplier<Item> PEACEMAKER = registerItem(
+        "peacemaker",
+        GunWithArmItem::new
     );
 
     public static final Supplier<Item> DOOMICORN_HELMET = registerItem(
@@ -116,4 +122,6 @@ public class ItemRegistry {
     static <T extends Item> Supplier<T> registerItem(String itemName, Supplier<T> item) {
         return AzExampleServices.COMMON_REGISTRY.register(BuiltInRegistries.ITEM, itemName, item);
     }
+
+    public static void initialize() {}
 }

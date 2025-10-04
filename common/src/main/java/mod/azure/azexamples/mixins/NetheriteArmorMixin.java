@@ -25,7 +25,7 @@ public abstract class NetheriteArmorMixin extends Item {
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    public void azexample_Init(CallbackInfo info) {
+    public void azexamples$init(CallbackInfo info) {
         this.dispatcher = new NetheriteArmorAnimationDispatcher();
     }
 
