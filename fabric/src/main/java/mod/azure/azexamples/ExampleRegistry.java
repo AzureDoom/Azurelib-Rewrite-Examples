@@ -19,6 +19,7 @@ import mod.azure.azexamples.blocks.StargateBlockItem;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.entities.SilencedEntityTypeBuilder;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
+import mod.azure.azexamples.entities.gremlin.GremlinEntity;
 import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
@@ -110,9 +111,17 @@ public class ExampleRegistry {
     public static final EntityType<MarineEntity> MARINE = registerEntity(
         "marine",
         MarineEntity::new,
-        MobCategory.WATER_CREATURE,
+        MobCategory.MONSTER,
         1.5f,
         2.6f
+    );
+
+    public static final EntityType<GremlinEntity> GREMLIN = registerEntity(
+        "gremlin",
+        GremlinEntity::new,
+        MobCategory.MONSTER,
+        0.6f,
+        1.8f
     );
 
     public static final SpawnEggItem MARAUDER_SPAWN_EGG = registerItem(
@@ -161,6 +170,16 @@ public class ExampleRegistry {
             ExampleRegistry.MARINE,
             0xc09e58,
             0x574028,
+            new Item.Properties()
+        )
+    );
+
+    public static final SpawnEggItem GREMLIN_SPAWN_EGG = registerItem(
+        "gremlin_spawn_egg",
+        new SpawnEggItem(
+            ExampleRegistry.GREMLIN,
+            0x424242,
+            0x606060,
             new Item.Properties()
         )
     );
@@ -228,6 +247,7 @@ public class ExampleRegistry {
                 entries.accept(ExampleRegistry.MANUL_SPAWN_EGG);
                 entries.accept(ExampleRegistry.JURAVENATOR_SPAWN_EGG);
                 entries.accept(ExampleRegistry.MARINE_SPAWN_EGG);
+				entries.accept(ExampleRegistry.GREMLIN_SPAWN_EGG);
             })
             .build()
     );

@@ -20,6 +20,7 @@ import mod.azure.azexamples.blocks.StargateBlockItem;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.entities.SilencedEntityTypeBuilder;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
+import mod.azure.azexamples.entities.gremlin.GremlinEntity;
 import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
@@ -129,6 +130,16 @@ public class ExampleRegistry {
         )
     );
 
+    public static final RegistryObject<SpawnEggItem> GREMLIN_SPAWN_EGG = itemDeferredRegister.register(
+        "gremlin_spawn_egg",
+        () -> new ForgeSpawnEggItem(
+            ExampleRegistry.GREMLIN,
+            0x424242,
+            0x606060,
+            new Item.Properties()
+        )
+    );
+
     public static final RegistryObject<StargateBlock> STARGATE = blockDeferredRegister.register(
         "stargate",
         () -> new StargateBlock(
@@ -185,6 +196,11 @@ public class ExampleRegistry {
         () -> create(MarineEntity::new, MobCategory.WATER_CREATURE, 1.5f, 2.6f).buildWithoutDataFixerCheck()
     );
 
+    public static final RegistryObject<EntityType<GremlinEntity>> GREMLIN = entityTypeDeferredRegister.register(
+        "gremlin",
+        () -> create(GremlinEntity::new, MobCategory.MISC, 0.6f, 1.8f).buildWithoutDataFixerCheck()
+    );
+
     public static final RegistryObject<CreativeModeTab> EXAMPLEMOD_TAB = creativeModeTabDeferredRegister.register(
         "example",
         () -> CreativeModeTab.builder()
@@ -201,6 +217,8 @@ public class ExampleRegistry {
                 entries.accept(ExampleRegistry.DOOMHUNTER_SPAWN_EGG.get());
                 entries.accept(ExampleRegistry.MANUL_SPAWN_EGG.get());
                 entries.accept(ExampleRegistry.JURAVENATOR_SPAWN_EGG.get());
+                entries.accept(ExampleRegistry.MARINE_SPAWN_EGG.get());
+                entries.accept(ExampleRegistry.GREMLIN_SPAWN_EGG.get());
             })
             .build()
     );
