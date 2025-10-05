@@ -1,5 +1,6 @@
 package mod.azure.azexamples;
 
+import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.rewrite.render.item.AzItemRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -38,6 +39,7 @@ public class FabricLibClientMod implements ClientModInitializer {
             Items.NETHERITE_BOOTS
         );
         AzItemRendererRegistry.register(ExampleRegistry.PISTOL, PistolRenderer::new);
+		AzItemRendererRegistry.register(ExampleRegistry.PEACEMAKER, GunWithArmRenderer::new);
         AzItemRendererRegistry.register(ExampleRegistry.STARGATE_ITEM, StargateBlockItemRenderer::new);
         AzArmorRendererRegistry.register(
             DoomicornArmorRenderer::new,

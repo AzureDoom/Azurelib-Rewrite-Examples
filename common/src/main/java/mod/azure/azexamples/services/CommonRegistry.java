@@ -1,8 +1,11 @@
 package mod.azure.azexamples.services;
 
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.item.CreativeModeTab;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
+import java.util.function.Supplier;
 
 /**
  * The CommonRegistry interface provides a set of methods for registering various types of objects and creating specific
@@ -12,4 +15,8 @@ import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 public interface CommonRegistry {
 
     BlockEntityType<StargateBlockEntity> stargateBlockEntity();
+
+	SoundEvent firingSound();
+
+	CreativeModeTab getCreativeTab();
 }

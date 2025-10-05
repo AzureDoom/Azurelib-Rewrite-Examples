@@ -1,5 +1,6 @@
 package mod.azure.azexamples;
 
+import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
 import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.rewrite.render.item.AzItemRendererRegistry;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -41,6 +42,7 @@ public class ForgeClientMod {
             Items.NETHERITE_BOOTS
         );
         AzItemRendererRegistry.register(ExampleRegistry.PISTOL.get(), PistolRenderer::new);
+	    AzItemRendererRegistry.register(ExampleRegistry.PEACEMAKER.get(), GunWithArmRenderer::new);
         AzItemRendererRegistry.register(ExampleRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
         AzArmorRendererRegistry.register(
             DoomicornArmorRenderer::new,

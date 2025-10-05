@@ -1,8 +1,10 @@
 package mod.azure.azexamples;
 
+import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -34,27 +36,32 @@ public class ExampleRegistry {
 
     public static final Item PISTOL = registerItem(
         "pistol",
-        new PistolItem(new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB).stacksTo(1))
+        new PistolItem()
     );
+
+	public static final Item PEACEMAKER = registerItem(
+		"peacemaker",
+		new GunWithArmItem()
+	);
 
     public static final Item DOOMICORN_HELMET = registerItem(
         "doomicorn_helmet",
-        new DoomicornArmor(EquipmentSlot.HEAD, ExampleRegistry.EXAMPLEMOD_TAB)
+        new DoomicornArmor(EquipmentSlot.HEAD)
     );
 
     public static final Item DOOMICORN_CHESTPLATE = registerItem(
         "doomicorn_chestplate",
-        new DoomicornArmor(EquipmentSlot.CHEST, ExampleRegistry.EXAMPLEMOD_TAB)
+        new DoomicornArmor(EquipmentSlot.CHEST)
     );
 
     public static final Item DOOMICORN_LEGGINGS = registerItem(
         "doomicorn_leggings",
-        new DoomicornArmor(EquipmentSlot.LEGS, ExampleRegistry.EXAMPLEMOD_TAB)
+        new DoomicornArmor(EquipmentSlot.LEGS)
     );
 
     public static final Item DOOMICORN_BOOTS = registerItem(
         "doomicorn_boots",
-        new DoomicornArmor(EquipmentSlot.FEET, ExampleRegistry.EXAMPLEMOD_TAB)
+        new DoomicornArmor(EquipmentSlot.FEET)
     );
 
     public static final StargateBlock STARGATE = registerBlock(
@@ -69,7 +76,7 @@ public class ExampleRegistry {
 
     public static final BlockItem STARGATE_ITEM = registerItem(
         "stargate",
-        new StargateBlockItem(STARGATE, ExampleRegistry.EXAMPLEMOD_TAB)
+        new StargateBlockItem(STARGATE)
     );
 
     public static final BlockEntityType<StargateBlockEntity> STARGATE_BLOCK_ENTITY = registerBlockEntity(
@@ -134,7 +141,7 @@ public class ExampleRegistry {
             ExampleRegistry.MARAUDER,
             0xe9e2ed,
             0x574f44,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(FabricLibMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -144,7 +151,7 @@ public class ExampleRegistry {
             ExampleRegistry.DOOMHUNTER,
             0x5a575a,
             0x86472e,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(FabricLibMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -154,7 +161,7 @@ public class ExampleRegistry {
             ExampleRegistry.MANUL,
             0xc38160,
             0x3d362e,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(FabricLibMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -164,7 +171,7 @@ public class ExampleRegistry {
             ExampleRegistry.JURAVENATOR,
             0xc09e58,
             0x574028,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(FabricLibMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -174,7 +181,7 @@ public class ExampleRegistry {
             ExampleRegistry.MARINE,
             0xc09e58,
             0x574028,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(FabricLibMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -184,9 +191,11 @@ public class ExampleRegistry {
             ExampleRegistry.GREMLIN,
             0x424242,
             0x606060,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(FabricLibMod.EXAMPLEMOD_TAB)
         )
     );
+
+	public static final SoundEvent SHOOT_GUN = registerSound("vigilance_fire");
 
     static <T extends Entity> SilencedEntityTypeBuilder create(
         EntityType.EntityFactory<T> entity,
@@ -196,6 +205,10 @@ public class ExampleRegistry {
     ) {
         return (SilencedEntityTypeBuilder) EntityType.Builder.of(entity, mobCategory).sized(width, height);
     }
+
+	public static SoundEvent registerSound(String name) {
+		return Registry.register(Registry.SOUND_EVENT, CommonMod.modResource(name), new SoundEvent(CommonMod.modResource(name)));
+	}
 
     public static <T extends Item> T registerItem(String name, T item) {
         return Registry.register(Registry.ITEM, CommonMod.modResource(name), item);
@@ -229,11 +242,6 @@ public class ExampleRegistry {
             blockEntity
         );
     }
-
-    public static final CreativeModeTab EXAMPLEMOD_TAB = FabricItemGroupBuilder.build(
-        new ResourceLocation(CommonStrings.MOD_ID, "examplemod_items"),
-        () -> new ItemStack(ExampleRegistry.STARGATE_ITEM)
-    );
 
     public static void initialize() {}
 }

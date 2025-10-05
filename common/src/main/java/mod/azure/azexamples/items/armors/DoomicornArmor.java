@@ -7,12 +7,18 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import mod.azure.azexamples.services.AzExampleServices;
+
 public class DoomicornArmor extends ArmorItem {
 
     private final DoomicornArmorAnimationDispatcher dispatcher;
 
-    public DoomicornArmor(EquipmentSlot equipmentSlot, CreativeModeTab group) {
-        super(ArmorMaterials.NETHERITE, equipmentSlot, new Properties().stacksTo(1).tab(group));
+    public DoomicornArmor(EquipmentSlot equipmentSlot) {
+        super(
+            ArmorMaterials.NETHERITE,
+            equipmentSlot,
+            new Properties().stacksTo(1).tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab())
+        );
         this.dispatcher = new DoomicornArmorAnimationDispatcher();
     }
 

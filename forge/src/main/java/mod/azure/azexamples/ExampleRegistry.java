@@ -1,5 +1,7 @@
 package mod.azure.azexamples;
 
+import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -51,29 +53,44 @@ public class ExampleRegistry {
         CommonStrings.MOD_ID
     );
 
+	public static DeferredRegister<SoundEvent> soundDefferredRegister = DeferredRegister.create(
+		ForgeRegistries.SOUND_EVENTS,
+		CommonStrings.MOD_ID
+	);
+
+	public static final RegistryObject<SoundEvent> SHOOT_GUN = soundDefferredRegister.register(
+		"vigilance_fire",
+		() -> new SoundEvent(CommonMod.modResource("vigilance_fire"))
+	);
+
     public static final RegistryObject<Item> PISTOL = itemDeferredRegister.register(
         "pistol",
-        () -> new PistolItem(new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB).stacksTo(1))
+	    PistolItem::new
     );
+
+	public static final RegistryObject<Item> PEACEMAKER = itemDeferredRegister.register(
+		"peacemaker",
+		GunWithArmItem::new
+	);
 
     public static final RegistryObject<Item> DOOMICORN_HELMET = itemDeferredRegister.register(
         "doomicorn_helmet",
-        () -> new DoomicornArmor(EquipmentSlot.HEAD, ExampleRegistry.EXAMPLEMOD_TAB)
+        () -> new DoomicornArmor(EquipmentSlot.HEAD)
     );
 
     public static final RegistryObject<Item> DOOMICORN_CHESTPLATE = itemDeferredRegister.register(
         "doomicorn_chestplate",
-        () -> new DoomicornArmor(EquipmentSlot.CHEST, ExampleRegistry.EXAMPLEMOD_TAB)
+        () -> new DoomicornArmor(EquipmentSlot.CHEST)
     );
 
     public static final RegistryObject<Item> DOOMICORN_LEGGINGS = itemDeferredRegister.register(
         "doomicorn_leggings",
-        () -> new DoomicornArmor(EquipmentSlot.LEGS, ExampleRegistry.EXAMPLEMOD_TAB)
+        () -> new DoomicornArmor(EquipmentSlot.LEGS)
     );
 
     public static final RegistryObject<Item> DOOMICORN_BOOTS = itemDeferredRegister.register(
         "doomicorn_boots",
-        () -> new DoomicornArmor(EquipmentSlot.FEET, ExampleRegistry.EXAMPLEMOD_TAB)
+        () -> new DoomicornArmor(EquipmentSlot.FEET)
     );
 
     public static final RegistryObject<SpawnEggItem> MARAUDER_SPAWN_EGG = itemDeferredRegister.register(
@@ -82,7 +99,7 @@ public class ExampleRegistry {
             ExampleRegistry.MARAUDER,
             0xe9e2ed,
             0x574f44,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(ForgeMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -92,7 +109,7 @@ public class ExampleRegistry {
             ExampleRegistry.DOOMHUNTER,
             0x5a575a,
             0x86472e,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(ForgeMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -102,7 +119,7 @@ public class ExampleRegistry {
             ExampleRegistry.MANUL,
             0xc38160,
             0x3d362e,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(ForgeMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -112,7 +129,7 @@ public class ExampleRegistry {
             ExampleRegistry.JURAVENATOR,
             0xc09e58,
             0x574028,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(ForgeMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -122,7 +139,7 @@ public class ExampleRegistry {
             ExampleRegistry.MARINE,
             0xc09e58,
             0x574028,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(ForgeMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -132,7 +149,7 @@ public class ExampleRegistry {
             ExampleRegistry.GREMLIN,
             0x424242,
             0x606060,
-            new Item.Properties().tab(ExampleRegistry.EXAMPLEMOD_TAB)
+            new Item.Properties().tab(ForgeMod.EXAMPLEMOD_TAB)
         )
     );
 
@@ -148,7 +165,7 @@ public class ExampleRegistry {
 
     public static final RegistryObject<BlockItem> STARGATE_ITEM = itemDeferredRegister.register(
         "stargate",
-        () -> new StargateBlockItem(STARGATE.get(), ExampleRegistry.EXAMPLEMOD_TAB)
+        () -> new StargateBlockItem(STARGATE.get())
     );
 
     public static final RegistryObject<BlockEntityType<StargateBlockEntity>> STARGATE_BLOCK_ENTITY =
@@ -199,14 +216,6 @@ public class ExampleRegistry {
         "gremlin",
         () -> create(GremlinEntity::new, MobCategory.MISC, 0.6f, 1.8f).buildWithoutDataFixerCheck()
     );
-
-    public static final CreativeModeTab EXAMPLEMOD_TAB = (new CreativeModeTab("examplemod_items") {
-
-        @Override
-        public @NotNull ItemStack makeIcon() {
-            return new ItemStack(ExampleRegistry.STARGATE_ITEM.get());
-        }
-    });
 
     static <T extends Entity> SilencedEntityTypeBuilder create(
         EntityType.EntityFactory<T> entity,
