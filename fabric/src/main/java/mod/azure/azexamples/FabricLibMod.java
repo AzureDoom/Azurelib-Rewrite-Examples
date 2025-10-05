@@ -5,33 +5,35 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Monster;
 
+import mod.azure.azexamples.registry.EntityRegistry;
+
 public final class FabricLibMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        ExampleRegistry.initialize();
+        CommonMod.initRegistries();
         FabricDefaultAttributeRegistry.register(
-            ExampleRegistry.DOOMHUNTER,
+            EntityRegistry.DOOMHUNTER.get(),
             Monster.createMonsterAttributes()
         );
         FabricDefaultAttributeRegistry.register(
-            ExampleRegistry.MARAUDER,
+            EntityRegistry.MARAUDER.get(),
             Monster.createMonsterAttributes()
         );
         FabricDefaultAttributeRegistry.register(
-            ExampleRegistry.MANUL,
+            EntityRegistry.MANUL.get(),
             Mob.createMobAttributes()
         );
         FabricDefaultAttributeRegistry.register(
-            ExampleRegistry.JURAVENATOR,
+            EntityRegistry.JURAVENATOR.get(),
             Mob.createMobAttributes()
         );
         FabricDefaultAttributeRegistry.register(
-            ExampleRegistry.MARINE,
+            EntityRegistry.MARINE.get(),
             Mob.createMobAttributes()
         );
         FabricDefaultAttributeRegistry.register(
-            ExampleRegistry.GREMLIN,
+            EntityRegistry.GREMLIN.get(),
             Mob.createMobAttributes()
         );
     }

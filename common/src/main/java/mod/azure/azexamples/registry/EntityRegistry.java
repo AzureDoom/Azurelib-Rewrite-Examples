@@ -1,0 +1,140 @@
+package mod.azure.azexamples.registry;
+
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+
+import java.util.function.Supplier;
+
+import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
+import mod.azure.azexamples.entities.SilencedEntityTypeBuilder;
+import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
+import mod.azure.azexamples.entities.gremlin.GremlinEntity;
+import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
+import mod.azure.azexamples.entities.manul.ManulEntity;
+import mod.azure.azexamples.entities.marauder.MarauderEntity;
+import mod.azure.azexamples.entities.marine.MarineEntity;
+import mod.azure.azexamples.services.AzExampleServices;
+
+/**
+ * The EntityRegistry class is responsible for registering custom entity and block entity types to Minecraft's registry.
+ * It provides static fields for accessing registered entities and block entities, as well as methods for performing the
+ * registration process. This class ensures that entities and block entities are properly set up within the mod.
+ */
+public class EntityRegistry {
+
+    private EntityRegistry() {}
+
+    public static final Supplier<BlockEntityType<StargateBlockEntity>> STARGATE_BLOCK_ENTITY = registerBlockEntity(
+        "stargate_block_entity",
+        () -> BlockEntityType.Builder.of(
+            StargateBlockEntity::new,
+            BlockRegistry.STARGATE.get()
+        ).build(null)
+    );
+
+    public static final Supplier<EntityType<MarauderEntity>> MARAUDER = registerEntity(
+        "marauder",
+        MarauderEntity::new,
+        MobCategory.MONSTER,
+        1.5f,
+        2.6f
+    );
+
+    public static final Supplier<EntityType<ManulEntity>> MANUL = registerEntity(
+        "manul",
+        ManulEntity::new,
+        MobCategory.CREATURE,
+        1.2f,
+        1.1f
+    );
+
+    public static final Supplier<EntityType<DoomHunterEntity>> DOOMHUNTER = registerEntity(
+        "doomhunter",
+        DoomHunterEntity::new,
+        MobCategory.MONSTER,
+        3.0f,
+        7.0f
+    );
+
+    public static final Supplier<EntityType<JuravenatorEntity>> JURAVENATOR = registerEntity(
+        "juravenator",
+        JuravenatorEntity::new,
+        MobCategory.MONSTER,
+        3.0f,
+        7.0f
+    );
+
+    public static final Supplier<EntityType<MarineEntity>> MARINE = registerEntity(
+        "marine",
+        MarineEntity::new,
+        MobCategory.MONSTER,
+        0.6f,
+        1.8f
+    );
+
+    public static final Supplier<EntityType<GremlinEntity>> GREMLIN = registerEntity(
+        "gremlin",
+        GremlinEntity::new,
+        MobCategory.MONSTER,
+        0.6f,
+        1.8f
+    );
+
+    /**
+     * Registers a new Block Entity.
+     *
+     * @param blockEntityName The name of the Block Entity.
+     * @param blockEntity     A supplier for the block entity type.
+     * @param <T>             The type of the block entity.
+     * @return A supplier for the registered block entity type.
+     */
+    static <T extends BlockEntity> Supplier<BlockEntityType<T>> registerBlockEntity(
+        String blockEntityName,
+        Supplier<BlockEntityType<T>> blockEntity
+    ) {
+        return AzExampleServices.COMMON_REGISTRY.register(
+            BuiltInRegistries.BLOCK_ENTITY_TYPE,
+            blockEntityName,
+            blockEntity
+        );
+    }
+
+    /**
+     * Registers a new entity type.
+     *
+     * @param entityName The name of the entity.
+     * @param entity     The factory method for creating instances of the entity.
+     * @param width      The width of the entity.
+     * @param height     The height of the entity.
+     * @param <T>        The type of the entity.
+     * @return A supplier for the registered entity type.
+     */
+    static <T extends Entity> Supplier<EntityType<T>> registerEntity(
+        String entityName,
+        EntityType.EntityFactory<T> entity,
+        MobCategory mobCategory,
+        float width,
+        float height
+    ) {
+        return AzExampleServices.COMMON_REGISTRY.register(
+            BuiltInRegistries.ENTITY_TYPE,
+            entityName,
+            () -> create(entity, mobCategory, width, height).buildWithoutDataFixerCheck()
+        );
+    }
+
+    static <T extends Entity> SilencedEntityTypeBuilder create(
+        EntityType.EntityFactory<T> entity,
+        MobCategory mobCategory,
+        float width,
+        float height
+    ) {
+        return (SilencedEntityTypeBuilder) EntityType.Builder.of(entity, mobCategory).sized(width, height);
+    }
+
+    public static void initialize() {}
+}
