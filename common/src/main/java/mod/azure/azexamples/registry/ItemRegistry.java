@@ -1,0 +1,127 @@
+package mod.azure.azexamples.registry;
+
+import net.minecraft.core.Registry;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
+
+import java.util.function.Supplier;
+
+import mod.azure.azexamples.items.PistolItem;
+import mod.azure.azexamples.items.armors.DoomicornArmor;
+import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
+import mod.azure.azexamples.services.AzExampleServices;
+
+/**
+ * The ItemRegistry class is responsible for managing the registration of items within the mod. It contains predefined
+ * static fields for various item types and provides a utility method to register custom items to the game's registry.
+ * This class is intended to centralize and simplify item registration.
+ */
+public class ItemRegistry {
+
+    private ItemRegistry() {}
+
+    public static final Supplier<Item> PISTOL = registerItem(
+        "pistol",
+        PistolItem::new
+    );
+
+    public static final Supplier<Item> PEACEMAKER = registerItem(
+        "peacemaker",
+        GunWithArmItem::new
+    );
+
+    public static final Supplier<Item> DOOMICORN_HELMET = registerItem(
+        "doomicorn_helmet",
+        () -> new DoomicornArmor(EquipmentSlot.HEAD)
+    );
+
+    public static final Supplier<Item> DOOMICORN_CHESTPLATE = registerItem(
+        "doomicorn_chestplate",
+        () -> new DoomicornArmor(EquipmentSlot.CHEST)
+    );
+
+    public static final Supplier<Item> DOOMICORN_LEGGINGS = registerItem(
+        "doomicorn_leggings",
+        () -> new DoomicornArmor(EquipmentSlot.LEGS)
+    );
+
+    public static final Supplier<Item> DOOMICORN_BOOTS = registerItem(
+        "doomicorn_boots",
+        () -> new DoomicornArmor(EquipmentSlot.FEET)
+    );
+
+    public static final Supplier<SpawnEggItem> MARAUDER_SPAWN_EGG = registerItem(
+        "marauder_spawn_egg",
+        AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+            EntityRegistry.MARAUDER,
+            0xe9e2ed,
+            0x574f44,
+            new Item.Properties().tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab())
+        )
+    );
+
+    public static final Supplier<SpawnEggItem> DOOMHUNTER_SPAWN_EGG = registerItem(
+        "doomhunter_spawn_egg",
+        AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+            EntityRegistry.DOOMHUNTER,
+            0x5a575a,
+            0x86472e,
+            new Item.Properties().tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab())
+        )
+    );
+
+    public static final Supplier<SpawnEggItem> MANUL_SPAWN_EGG = registerItem(
+        "manul_spawn_egg",
+        AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+            EntityRegistry.MANUL,
+            0xc38160,
+            0x3d362e,
+            new Item.Properties().tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab())
+        )
+    );
+
+    public static final Supplier<SpawnEggItem> JURAVENATOR_SPAWN_EGG = registerItem(
+        "juravenator_spawn_egg",
+        AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+            EntityRegistry.JURAVENATOR,
+            0xc09e58,
+            0x574028,
+            new Item.Properties().tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab())
+        )
+    );
+
+    public static final Supplier<SpawnEggItem> MARINE_SPAWN_EGG = registerItem(
+        "marine_spawn_egg",
+        AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+            EntityRegistry.MARINE,
+            0xc09e58,
+            0x574028,
+            new Item.Properties().tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab())
+        )
+    );
+
+    public static final Supplier<SpawnEggItem> GREMLIN_SPAWN_EGG = registerItem(
+        "gremlin_spawn_egg",
+        AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+            EntityRegistry.GREMLIN,
+            0x424242,
+            0x606060,
+            new Item.Properties().tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab())
+        )
+    );
+
+    /**
+     * Registers a new Item.
+     *
+     * @param itemName The name of the item.
+     * @param item     A supplier for the item.
+     * @param <T>      The type of the item.
+     * @return A supplier for the registered item.
+     */
+    static <T extends Item> Supplier<T> registerItem(String itemName, Supplier<T> item) {
+        return AzExampleServices.COMMON_REGISTRY.register(Registry.ITEM, itemName, item);
+    }
+
+    public static void initialize() {}
+}

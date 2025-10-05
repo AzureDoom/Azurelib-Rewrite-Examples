@@ -19,6 +19,7 @@
   "item.azexamples.pistol": "Pistol",
   "item.azexamples.stargate": "Stargate",
   "block.azexamples.stargate": "Stargate",
+  "item.azexamples.peacemaker": "Peacemaker",
   "itemGroup.examplemod_items": "AzureLib Examples",
   "itemGroup.azexamples.examplemod_items": "AzureLib Examples"
 }

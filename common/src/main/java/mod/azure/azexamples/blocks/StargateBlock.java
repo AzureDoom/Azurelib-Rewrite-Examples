@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
-import mod.azure.azexamples.services.AzExampleServices;
+import mod.azure.azexamples.registry.EntityRegistry;
 
 public class StargateBlock extends BaseEntityBlock {
 
@@ -29,7 +29,7 @@ public class StargateBlock extends BaseEntityBlock {
      */
     @Override
     public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return AzExampleServices.COMMON_REGISTRY.stargateBlockEntity().create(pos, state);
+        return EntityRegistry.STARGATE_BLOCK_ENTITY.get().create(pos, state);
     }
 
     /**
@@ -49,7 +49,7 @@ public class StargateBlock extends BaseEntityBlock {
     ) {
         return createTickerHelper(
             type,
-            AzExampleServices.COMMON_REGISTRY.stargateBlockEntity(),
+            EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             StargateBlockEntity::tick
         );
     }

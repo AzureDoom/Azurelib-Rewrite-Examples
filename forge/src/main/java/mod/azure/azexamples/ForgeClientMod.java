@@ -24,8 +24,12 @@ import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.entities.marine.MarineRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
+import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
 import mod.azure.azexamples.items.netheritereplace.NetheriteSwordRenderer;
 import mod.azure.azexamples.items.netheritereplace.armor.NetheriteArmorRenderer;
+import mod.azure.azexamples.registry.BlockRegistry;
+import mod.azure.azexamples.registry.EntityRegistry;
+import mod.azure.azexamples.registry.ItemRegistry;
 
 @Mod.EventBusSubscriber(modid = CommonStrings.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ForgeClientMod {
@@ -40,28 +44,29 @@ public class ForgeClientMod {
             Items.NETHERITE_LEGGINGS,
             Items.NETHERITE_BOOTS
         );
-        AzItemRendererRegistry.register(ExampleRegistry.PISTOL.get(), PistolRenderer::new);
-        AzItemRendererRegistry.register(ExampleRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
+        AzItemRendererRegistry.register(ItemRegistry.PISTOL.get(), PistolRenderer::new);
+        AzItemRendererRegistry.register(ItemRegistry.PEACEMAKER.get(), GunWithArmRenderer::new);
+        AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
         AzArmorRendererRegistry.register(
             DoomicornArmorRenderer::new,
-            ExampleRegistry.DOOMICORN_HELMET.get(),
-            ExampleRegistry.DOOMICORN_CHESTPLATE.get(),
-            ExampleRegistry.DOOMICORN_LEGGINGS.get(),
-            ExampleRegistry.DOOMICORN_BOOTS.get()
+            ItemRegistry.DOOMICORN_HELMET.get(),
+            ItemRegistry.DOOMICORN_CHESTPLATE.get(),
+            ItemRegistry.DOOMICORN_LEGGINGS.get(),
+            ItemRegistry.DOOMICORN_BOOTS.get()
         );
-        ItemBlockRenderTypes.setRenderLayer(ExampleRegistry.STARGATE.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(BlockRegistry.STARGATE.get(), RenderType.translucent());
     }
 
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ExampleRegistry.DOOMHUNTER.get(), DoomHunterRenderer::new);
-        event.registerEntityRenderer(ExampleRegistry.MARAUDER.get(), MarauderRenderer::new);
-        event.registerEntityRenderer(ExampleRegistry.MANUL.get(), ManulRenderer::new);
-        event.registerEntityRenderer(ExampleRegistry.JURAVENATOR.get(), JuravenatorRenderer::new);
-        event.registerEntityRenderer(ExampleRegistry.MARINE.get(), MarineRenderer::new);
-        event.registerEntityRenderer(ExampleRegistry.GREMLIN.get(), GremlinRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.DOOMHUNTER.get(), DoomHunterRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.MARAUDER.get(), MarauderRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.MANUL.get(), ManulRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.JURAVENATOR.get(), JuravenatorRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.MARINE.get(), MarineRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.GREMLIN.get(), GremlinRenderer::new);
         event.registerBlockEntityRenderer(
-            ExampleRegistry.STARGATE_BLOCK_ENTITY.get(),
+            EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
         );
         event.registerEntityRenderer(EntityType.CREEPER, CreeperRenderer::new);

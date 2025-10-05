@@ -9,12 +9,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import mod.azure.azexamples.services.AzExampleServices;
+
 public class PistolItem extends Item {
 
     private final PistolAnimationDispatcher dispatcher;
 
-    public PistolItem(Properties properties) {
-        super(properties);
+    public PistolItem() {
+        super(new Properties().stacksTo(1).tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab()));
         this.dispatcher = new PistolAnimationDispatcher();
     }
 
