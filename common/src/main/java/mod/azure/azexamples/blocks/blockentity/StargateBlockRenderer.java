@@ -1,7 +1,7 @@
 package mod.azure.azexamples.blocks.blockentity;
 
-import mod.azure.azurelib.rewrite.render.block.AzBlockEntityRenderer;
-import mod.azure.azurelib.rewrite.render.block.AzBlockEntityRendererConfig;
+import mod.azure.azurelib.render.block.AzBlockEntityRenderer;
+import mod.azure.azurelib.render.block.AzBlockEntityRendererConfig;
 import net.minecraft.resources.ResourceLocation;
 
 import mod.azure.azexamples.CommonMod;

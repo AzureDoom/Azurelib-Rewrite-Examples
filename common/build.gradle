@@ -4,11 +4,6 @@ plugins {
     id 'com.diffplug.spotless'
 }
 
-mixin {
-    add(sourceSets.main, "${mod_id}.mixins.refmap.json")
-    config("${mod_id}.mixins.json")
-}
-
 legacyForge {
     mcpVersion = minecraft_version
     def at = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -23,7 +18,6 @@ legacyForge {
 
 dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 	compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
     annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.3.5'
     modImplementation "mod.azure.azurelib:azurelib-common-${minecraft_version}:${azurelib_version}"

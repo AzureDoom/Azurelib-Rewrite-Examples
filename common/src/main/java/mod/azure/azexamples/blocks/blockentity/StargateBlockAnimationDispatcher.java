@@ -1,6 +1,6 @@
 package mod.azure.azexamples.blocks.blockentity;
 
-import mod.azure.azurelib.rewrite.animation.dispatch.command.AzCommand;
+import mod.azure.azurelib.animation.dispatch.command.AzCommand;
 
 import mod.azure.azexamples.CommonStrings;
 

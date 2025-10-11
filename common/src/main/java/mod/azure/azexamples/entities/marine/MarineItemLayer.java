@@ -1,14 +1,16 @@
 package mod.azure.azexamples.entities.marine;
 
 import com.mojang.math.Axis;
-import mod.azure.azurelib.rewrite.model.AzBone;
-import mod.azure.azurelib.rewrite.render.AzRendererPipelineContext;
-import mod.azure.azurelib.rewrite.render.layer.AzBlockAndItemLayer;
+import mod.azure.azurelib.model.AzBone;
+import mod.azure.azurelib.render.AzRendererPipelineContext;
+import mod.azure.azurelib.render.layer.AzBlockAndItemLayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-public class MarineItemLayer extends AzBlockAndItemLayer<MarineEntity> {
+import java.util.UUID;
+
+public class MarineItemLayer extends AzBlockAndItemLayer<UUID, MarineEntity> {
 
     private static final String LEFT_HAND = "leftHand_Item";
 
@@ -34,7 +36,7 @@ public class MarineItemLayer extends AzBlockAndItemLayer<MarineEntity> {
 
     @Override
     protected void renderItemForBone(
-        AzRendererPipelineContext<MarineEntity> context,
+        AzRendererPipelineContext<UUID, MarineEntity> context,
         AzBone bone,
         ItemStack itemStack,
         MarineEntity animatable

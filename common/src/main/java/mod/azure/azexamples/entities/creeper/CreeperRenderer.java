@@ -1,14 +1,16 @@
 package mod.azure.azexamples.entities.creeper;
 
-import mod.azure.azurelib.rewrite.render.AzRendererPipelineContext;
-import mod.azure.azurelib.rewrite.render.entity.AzEntityRenderer;
-import mod.azure.azurelib.rewrite.render.entity.AzEntityRendererConfig;
-import mod.azure.azurelib.rewrite.render.layer.AzAutoGlowingLayer;
+import mod.azure.azurelib.render.AzRendererPipelineContext;
+import mod.azure.azurelib.render.entity.AzEntityRenderer;
+import mod.azure.azurelib.render.entity.AzEntityRendererConfig;
+import mod.azure.azurelib.render.layer.AzAutoGlowingLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.Creeper;
+
+import java.util.UUID;
 
 import mod.azure.azexamples.CommonMod;
 
@@ -34,7 +36,7 @@ public class CreeperRenderer extends AzEntityRenderer<Creeper> {
         );
     }
 
-    private static void doSwellOverlay(AzRendererPipelineContext<Creeper> contextPipeline) {
+    private static void doSwellOverlay(AzRendererPipelineContext<UUID, Creeper> contextPipeline) {
         var entity = contextPipeline.animatable();
         var partialTick = contextPipeline.partialTick();
         var swellFactor = entity.getSwelling(partialTick);
