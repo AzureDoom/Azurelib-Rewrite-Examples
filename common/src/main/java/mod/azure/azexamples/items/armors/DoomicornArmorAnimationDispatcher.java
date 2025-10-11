@@ -1,6 +1,6 @@
 package mod.azure.azexamples.items.armors;
 
-import mod.azure.azurelib.rewrite.animation.dispatch.command.AzCommand;
+import mod.azure.azurelib.common.animation.dispatch.command.AzCommand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 

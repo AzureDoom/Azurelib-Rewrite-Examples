@@ -1,6 +1,5 @@
 package mod.azure.azexamples.mixins;
 
-import mod.azure.azurelib.common.internal.common.AzureLib;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

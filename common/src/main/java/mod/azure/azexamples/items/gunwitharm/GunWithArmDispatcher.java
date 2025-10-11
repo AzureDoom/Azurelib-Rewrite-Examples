@@ -1,7 +1,7 @@
 package mod.azure.azexamples.items.gunwitharm;
 
-import mod.azure.azurelib.rewrite.animation.dispatch.command.AzCommand;
-import mod.azure.azurelib.rewrite.animation.play_behavior.AzPlayBehaviors;
+import mod.azure.azurelib.common.animation.dispatch.command.AzCommand;
+import mod.azure.azurelib.common.animation.play_behavior.AzPlayBehaviors;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 
@@ -15,17 +15,17 @@ public class GunWithArmDispatcher {
         AzPlayBehaviors.PLAY_ONCE
     );
 
-    private static final AzCommand IDLE_COMMAND = AzCommand.create(
+    private static final AzCommand THIRD_PERSON_FIRING_COMMAND = AzCommand.create(
         CommonStrings.BASE_CONTROLLER,
-        "aim",
-        AzPlayBehaviors.LOOP
+        "firing",
+        AzPlayBehaviors.PLAY_ONCE
     );
 
     public void serverFire(Entity entity, ItemStack itemStack) {
         FIRING_COMMAND.sendForItem(entity, itemStack);
     }
 
-    public void sendIdle(Entity entity, ItemStack itemStack) {
-        IDLE_COMMAND.sendForItem(entity, itemStack);
+    public void clientThirdPersonFire(Entity entity, ItemStack itemStack) {
+        THIRD_PERSON_FIRING_COMMAND.sendForItem(entity, itemStack);
     }
 }

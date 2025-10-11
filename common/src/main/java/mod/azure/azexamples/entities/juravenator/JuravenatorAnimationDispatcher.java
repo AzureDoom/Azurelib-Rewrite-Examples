@@ -1,9 +1,8 @@
 package mod.azure.azexamples.entities.juravenator;
 
-import mod.azure.azurelib.rewrite.animation.dispatch.command.AzCommand;
-import mod.azure.azurelib.rewrite.animation.play_behavior.AzPlayBehaviors;
-
 import mod.azure.azexamples.CommonStrings;
+import mod.azure.azurelib.common.animation.dispatch.command.AzCommand;
+import mod.azure.azurelib.common.animation.play_behavior.AzPlayBehaviors;
 
 public class JuravenatorAnimationDispatcher {
 

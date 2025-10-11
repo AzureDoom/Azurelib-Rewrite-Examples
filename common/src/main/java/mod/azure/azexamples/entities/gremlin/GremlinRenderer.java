@@ -1,7 +1,8 @@
 package mod.azure.azexamples.entities.gremlin;
 
-import mod.azure.azurelib.rewrite.render.entity.AzEntityRenderer;
-import mod.azure.azurelib.rewrite.render.entity.AzEntityRendererConfig;
+import mod.azure.azurelib.common.render.entity.AzEntityRenderer;
+import mod.azure.azurelib.common.render.entity.AzEntityRendererConfig;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
@@ -29,6 +30,9 @@ public class GremlinRenderer extends AzEntityRenderer<GremlinEntity> {
                 .setBoneTextureOverrideProvider(
                     bone -> "bipedCape".equals(bone.getName()) ? EXTRA_TEX : TEXTURE
                 )
+	            .setBoneRenderTypeOverrideProvider(
+					bone -> "bipedCape".equals(bone.getName()) ? RenderType.entityCutout(EXTRA_TEX) : RenderType.entityCutoutNoCull(TEXTURE)
+	            )
                 .setShadowRadius(0.5F)
                 .build(),
             context

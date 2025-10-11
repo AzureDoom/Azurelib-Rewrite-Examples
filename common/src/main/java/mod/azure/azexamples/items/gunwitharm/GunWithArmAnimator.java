@@ -1,11 +1,11 @@
 package mod.azure.azexamples.items.gunwitharm;
 
-import mod.azure.azurelib.common.api.client.helper.ClientUtils;
-import mod.azure.azurelib.rewrite.animation.AzAnimatorConfig;
-import mod.azure.azurelib.rewrite.animation.controller.AzAnimationController;
-import mod.azure.azurelib.rewrite.animation.controller.AzAnimationControllerContainer;
-import mod.azure.azurelib.rewrite.animation.controller.keyframe.AzKeyframeCallbacks;
-import mod.azure.azurelib.rewrite.animation.impl.AzItemAnimator;
+import mod.azure.azurelib.common.animation.AzAnimatorConfig;
+import mod.azure.azurelib.common.animation.controller.AzAnimationController;
+import mod.azure.azurelib.common.animation.controller.AzAnimationControllerContainer;
+import mod.azure.azurelib.common.animation.controller.keyframe.AzKeyframeCallbacks;
+import mod.azure.azurelib.common.animation.impl.AzItemAnimator;
+import mod.azure.azurelib.common.util.client.ClientUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +29,7 @@ public class GunWithArmAnimator extends AzItemAnimator {
     public void registerControllers(AzAnimationControllerContainer<ItemStack> animationControllerContainer) {
         animationControllerContainer.add(
             AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER)
-                .setTransitionLength(1)
+                .setTransitionLength(2)
                 .setKeyframeCallbacks(
                     AzKeyframeCallbacks.<ItemStack>builder()
                         .setSoundKeyframeHandler(
