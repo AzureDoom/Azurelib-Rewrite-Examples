@@ -1,13 +1,15 @@
 package mod.azure.azexamples.items.gunwitharm;
 
+import mod.azure.azexamples.registry.SoundRegistry;
 import mod.azure.azexamples.services.AzExampleServices;
-import mod.azure.azurelib.rewrite.animation.AzAnimatorConfig;
-import mod.azure.azurelib.rewrite.animation.controller.AzAnimationController;
-import mod.azure.azurelib.rewrite.animation.controller.AzAnimationControllerContainer;
-import mod.azure.azurelib.rewrite.animation.controller.keyframe.AzKeyframeCallbacks;
-import mod.azure.azurelib.rewrite.animation.impl.AzItemAnimator;
-import mod.azure.azurelib.util.ClientUtils;
+import mod.azure.azurelib.animation.AzAnimatorConfig;
+import mod.azure.azurelib.animation.controller.AzAnimationController;
+import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
+import mod.azure.azurelib.animation.controller.keyframe.AzKeyframeCallbacks;
+import mod.azure.azurelib.animation.impl.AzItemAnimator;
+import mod.azure.azurelib.util.client.ClientUtils;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +42,7 @@ public class GunWithArmAnimator extends AzItemAnimator {
                                         .playSound(
                                             player,
                                             player.blockPosition(),
-	                                        AzExampleServices.COMMON_REGISTRY.firingSound(),
+	                                        SoundRegistry.SHOOT_GUN.get(),
                                             SoundSource.PLAYERS,
                                             1.0F,
                                             1.0F

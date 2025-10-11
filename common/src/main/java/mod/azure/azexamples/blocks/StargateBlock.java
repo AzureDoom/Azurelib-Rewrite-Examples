@@ -1,5 +1,6 @@
 package mod.azure.azexamples.blocks;
 
+import mod.azure.azexamples.registry.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -29,7 +30,7 @@ public class StargateBlock extends BaseEntityBlock {
      */
     @Override
     public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return AzExampleServices.COMMON_REGISTRY.stargateBlockEntity().create(pos, state);
+        return EntityRegistry.STARGATE_BLOCK_ENTITY.get().create(pos, state);
     }
 
     /**
@@ -49,7 +50,7 @@ public class StargateBlock extends BaseEntityBlock {
     ) {
         return createTickerHelper(
             type,
-            AzExampleServices.COMMON_REGISTRY.stargateBlockEntity(),
+            EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             StargateBlockEntity::tick
         );
     }

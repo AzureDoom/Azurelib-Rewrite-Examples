@@ -1,24 +1,47 @@
 package mod.azure.azexamples.platform;
 
-import mod.azure.azexamples.ExampleRegistry;
-import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import mod.azure.azexamples.CommonMod;
+import net.minecraft.core.Registry;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.CreativeModeTab;
 
 import mod.azure.azexamples.FabricLibMod;
 import mod.azure.azexamples.services.CommonRegistry;
 
+import java.util.function.Supplier;
+
 public class FabricCommonRegistry implements CommonRegistry {
 
-    @Override
-    public BlockEntityType<StargateBlockEntity> stargateBlockEntity() {
-        return ExampleRegistry.STARGATE_BLOCK_ENTITY;
-    }
+	private static <T, R extends Registry<? super T>> Supplier<T> registerSupplier(
+		R registry,
+		String id,
+		Supplier<T> object
+	) {
+		final T registeredObject = Registry.register(
+			(Registry<T>) registry,
+			CommonMod.modResource(id),
+			object.get()
+		);
+
+		return () -> registeredObject;
+	}
 
 	@Override
-	public SoundEvent firingSound() {
-		return ExampleRegistry.SHOOT_GUN;
+	public <T> Supplier<T> register(Registry<? super T> registry, String registryName, Supplier<? extends T> supplier) {
+		return (Supplier<T>) registerSupplier(registry, registryName, supplier);
+	}
+
+	@Override
+	public <E extends Mob> Supplier<SpawnEggItem> makeSpawnEggFor(
+		Supplier<EntityType<E>> entityType,
+		int primaryEggColour,
+		int secondaryEggColour,
+		Item.Properties itemProperties
+	) {
+		return () -> new SpawnEggItem(entityType.get(), primaryEggColour, secondaryEggColour, itemProperties);
 	}
 
 	@Override

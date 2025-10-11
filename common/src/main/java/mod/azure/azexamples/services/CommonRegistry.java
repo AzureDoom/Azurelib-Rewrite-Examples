@@ -1,6 +1,11 @@
 package mod.azure.azexamples.services;
 
+import net.minecraft.core.Registry;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.item.CreativeModeTab;
 
@@ -14,9 +19,18 @@ import java.util.function.Supplier;
  */
 public interface CommonRegistry {
 
-    BlockEntityType<StargateBlockEntity> stargateBlockEntity();
+	<T> Supplier<T> register(
+		Registry<? super T> registry,
+		String registryName,
+		Supplier<? extends T> supplier
+	);
 
-	SoundEvent firingSound();
+	<E extends Mob> Supplier<SpawnEggItem> makeSpawnEggFor(
+		Supplier<EntityType<E>> entityType,
+		int primaryEggColour,
+		int secondaryEggColour,
+		Item.Properties itemProperties
+	);
 
 	CreativeModeTab getCreativeTab();
 }

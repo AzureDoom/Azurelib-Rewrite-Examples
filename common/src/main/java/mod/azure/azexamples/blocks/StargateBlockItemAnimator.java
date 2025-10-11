@@ -1,9 +1,9 @@
 package mod.azure.azexamples.blocks;
 
-import mod.azure.azurelib.rewrite.animation.AzAnimatorConfig;
-import mod.azure.azurelib.rewrite.animation.controller.AzAnimationController;
-import mod.azure.azurelib.rewrite.animation.controller.AzAnimationControllerContainer;
-import mod.azure.azurelib.rewrite.animation.impl.AzItemAnimator;
+import mod.azure.azurelib.animation.AzAnimatorConfig;
+import mod.azure.azurelib.animation.controller.AzAnimationController;
+import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
+import mod.azure.azurelib.animation.impl.AzItemAnimator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;

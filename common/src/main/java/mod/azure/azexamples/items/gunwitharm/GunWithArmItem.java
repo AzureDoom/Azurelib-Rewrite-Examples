@@ -1,9 +1,8 @@
 package mod.azure.azexamples.items.gunwitharm;
 
-import mod.azure.azurelib.util.ClientUtils;
+import mod.azure.azurelib.util.client.ClientUtils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -20,24 +19,6 @@ public class GunWithArmItem extends Item {
     public GunWithArmItem() {
         super(new Properties().stacksTo(1).tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab()));
         this.dispatcher = new GunWithArmDispatcher();
-    }
-
-    @Override
-    public void inventoryTick(
-        @NotNull ItemStack stack,
-        Level level,
-        @NotNull Entity entity,
-        int slotId,
-        boolean isSelected
-    ) {
-        if (
-            !level.isClientSide() && stack.is(this) && entity instanceof LivingEntity livingEntity &&
-                !livingEntity.isUsingItem() && livingEntity instanceof Player player &&
-                !player.getCooldowns().isOnCooldown(stack.getItem())
-        ) {
-            dispatcher.sendIdle(entity, stack);
-        }
-        super.inventoryTick(stack, level, entity, slotId, isSelected);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package mod.azure.azexamples.items.gunwitharm;
 
-import mod.azure.azurelib.rewrite.render.item.AzItemRenderer;
-import mod.azure.azurelib.rewrite.render.item.AzItemRendererConfig;
+import mod.azure.azurelib.render.item.AzItemRenderer;
+import mod.azure.azurelib.render.item.AzItemRendererConfig;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.resources.ResourceLocation;
 
