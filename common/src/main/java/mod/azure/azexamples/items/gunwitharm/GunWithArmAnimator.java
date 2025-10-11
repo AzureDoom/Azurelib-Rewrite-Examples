@@ -1,11 +1,11 @@
 package mod.azure.azexamples.items.gunwitharm;
 
-import mod.azure.azurelib.rewrite.animation.AzAnimatorConfig;
-import mod.azure.azurelib.rewrite.animation.controller.AzAnimationController;
-import mod.azure.azurelib.rewrite.animation.controller.AzAnimationControllerContainer;
-import mod.azure.azurelib.rewrite.animation.controller.keyframe.AzKeyframeCallbacks;
-import mod.azure.azurelib.rewrite.animation.impl.AzItemAnimator;
-import mod.azure.azurelib.util.ClientUtils;
+import mod.azure.azurelib.animation.AzAnimatorConfig;
+import mod.azure.azurelib.animation.controller.AzAnimationController;
+import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
+import mod.azure.azurelib.animation.controller.keyframe.AzKeyframeCallbacks;
+import mod.azure.azurelib.animation.impl.AzItemAnimator;
+import mod.azure.azurelib.util.client.ClientUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;

@@ -1,12 +1,12 @@
 package mod.azure.azexamples.entities.marauder;
 
 import com.mojang.math.Vector3f;
-import mod.azure.azurelib.rewrite.model.AzBone;
-import mod.azure.azurelib.rewrite.render.AzRendererPipelineContext;
-import mod.azure.azurelib.rewrite.render.entity.AzEntityRenderer;
-import mod.azure.azurelib.rewrite.render.entity.AzEntityRendererConfig;
-import mod.azure.azurelib.rewrite.render.layer.AzAutoGlowingLayer;
-import mod.azure.azurelib.rewrite.render.layer.AzBlockAndItemLayer;
+import mod.azure.azurelib.model.AzBone;
+import mod.azure.azurelib.render.AzRendererPipelineContext;
+import mod.azure.azurelib.render.entity.AzEntityRenderer;
+import mod.azure.azurelib.render.entity.AzEntityRendererConfig;
+import mod.azure.azurelib.render.layer.AzAutoGlowingLayer;
+import mod.azure.azurelib.render.layer.AzBlockAndItemLayer;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +14,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 
 import mod.azure.azexamples.CommonMod;
+
+import java.util.UUID;
 
 public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
 
@@ -48,7 +50,7 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
 
                     @Override
                     protected void renderItemForBone(
-                        AzRendererPipelineContext<MarauderEntity> context,
+                        AzRendererPipelineContext<UUID, MarauderEntity> context,
                         AzBone bone,
                         ItemStack itemStack,
                         MarauderEntity animatable

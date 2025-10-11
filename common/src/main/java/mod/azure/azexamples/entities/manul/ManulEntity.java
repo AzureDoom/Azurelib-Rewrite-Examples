@@ -1,6 +1,6 @@
 package mod.azure.azexamples.entities.manul;
 
-import mod.azure.azurelib.rewrite.util.MoveAnalysis;
+import mod.azure.azurelib.util.MoveAnalysis;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;

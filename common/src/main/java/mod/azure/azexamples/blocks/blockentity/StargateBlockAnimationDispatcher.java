@@ -1,8 +1,7 @@
 package mod.azure.azexamples.blocks.blockentity;
 
-import mod.azure.azurelib.rewrite.animation.dispatch.command.AzCommand;
-
 import mod.azure.azexamples.CommonStrings;
+import mod.azure.azurelib.animation.dispatch.command.AzCommand;
 
 /**
  * The StargateBlockAnimationDispatcher class is responsible for managing and triggering animation commands for block
