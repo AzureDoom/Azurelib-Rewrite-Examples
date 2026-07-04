@@ -12,6 +12,7 @@ public final class FabricLibMod implements ModInitializer {
     @Override
     public void onInitialize() {
         CommonMod.initRegistries();
+        // TODO: The call to 'register' always fails, according to its method contracts?
         FabricDefaultAttributeRegistry.register(
             EntityRegistry.DOOMHUNTER.get(),
             Monster.createMonsterAttributes()

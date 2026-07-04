@@ -1,11 +1,6 @@
 package mod.azure.azexamples.blocks.blockentity;
 
-import mod.azure.azurelib.rewrite.animation.AzAnimatorConfig;
-import mod.azure.azurelib.rewrite.animation.controller.AzAnimationController;
-import mod.azure.azurelib.rewrite.animation.controller.AzAnimationControllerContainer;
-import mod.azure.azurelib.rewrite.animation.impl.AzBlockAnimator;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.resources.Identifier;
 
 import mod.azure.azexamples.CommonMod;
 
@@ -14,26 +9,27 @@ import mod.azure.azexamples.CommonMod;
  * defines specific animations and registers them with the animation controller system, enabling dynamic and interactive
  * visual effects based on the block entity's state.
  */
-public class StargateBlockEntityAnimator extends AzBlockAnimator<StargateBlockEntity> {
+public class StargateBlockEntityAnimator { // extends AzBlockAnimator<StargateBlockEntity> {
 
-    private static final ResourceLocation ANIMATIONS = CommonMod.modResource(
+    private static final Identifier ANIMATIONS = CommonMod.modResource(
         "animations/block/stargate.animation.json"
     );
 
     protected StargateBlockEntityAnimator() {
-        super(AzAnimatorConfig.defaultConfig());
+        // super(AzAnimatorConfig.defaultConfig());
     }
 
-    @Override
-    public void registerControllers(AzAnimationControllerContainer<StargateBlockEntity> animationControllerContainer) {
-        animationControllerContainer.add(
-            AzAnimationController.builder(this, "base_controller")
-                .build()
-        );
-    }
-
-    @Override
-    public @NotNull ResourceLocation getAnimationLocation(StargateBlockEntity animatable) {
-        return ANIMATIONS;
-    }
+    // @Override
+    // public void registerControllers(AzAnimationControllerContainer<StargateBlockEntity> animationControllerContainer)
+    // {
+    // animationControllerContainer.add(
+    // AzAnimationController.builder(this, "base_controller")
+    // .build()
+    // );
+    // }
+    //
+    // @Override
+    // public @NotNull Identifier getAnimationLocation(StargateBlockEntity animatable) {
+    // return ANIMATIONS;
+    // }
 }

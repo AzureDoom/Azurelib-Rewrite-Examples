@@ -1,11 +1,9 @@
 package mod.azure.azexamples.mixins;
 
-import mod.azure.azurelib.common.internal.common.AzureLib;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SwordItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -13,19 +11,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import mod.azure.azexamples.items.netheritereplace.NetheriteSwordAnimationDespatcher;
 
-@Mixin(SwordItem.class)
-public abstract class NetheriteSwordMixin extends Item {
+@Mixin(Item.class)
+public abstract class NetheriteSwordMixin {
 
     private NetheriteSwordAnimationDespatcher dispatcher;
 
     private boolean isPlayingAnimation = false;
 
     private long lastAnimationTime = 0;
-
-    public NetheriteSwordMixin(Properties properties) {
-        super(properties);
-        this.dispatcher = new NetheriteSwordAnimationDespatcher();
-    }
 
     @Inject(method = "<init>", at = @At("TAIL"))
     public void azexamples$init(CallbackInfo info) {

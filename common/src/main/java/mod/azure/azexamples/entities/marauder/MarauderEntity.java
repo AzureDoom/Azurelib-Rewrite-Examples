@@ -1,20 +1,18 @@
 package mod.azure.azexamples.entities.marauder;
 
-import mod.azure.azurelib.common.api.common.ai.pathing.AzureNavigation;
-import mod.azure.azurelib.rewrite.util.MoveAnalysis;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.villager.AbstractVillager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 
 import mod.azure.azexamples.entities.marauder.ai.DelayedAttackGoal;
@@ -37,17 +35,12 @@ public class MarauderEntity extends Monster {
      */
     public final MarauderAnimationDispatcher animationDispatcher;
 
-    private final MoveAnalysis moveAnalysis;
+    // private final MoveAnalysis moveAnalysis;
 
     public MarauderEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
         this.animationDispatcher = new MarauderAnimationDispatcher(this);
-        this.moveAnalysis = new MoveAnalysis(this);
-    }
-
-    @Override
-    protected @NotNull PathNavigation createNavigation(@NotNull Level level) {
-        return new AzureNavigation(this, level);
+        // this.moveAnalysis = new MoveAnalysis(this);
     }
 
     @Override
@@ -67,9 +60,9 @@ public class MarauderEntity extends Monster {
     @Override
     public void tick() {
         super.tick();
-        moveAnalysis.update();
+        // moveAnalysis.update();
 
-        if (!this.level().isClientSide && this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && this.isAlive()) {
+        if (!this.level().isClientSide() && this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && this.isAlive()) {
             this.setSpawnTicks(this.getSpawnTicks() + 1.0F);
             this.navigation.stop();
             this.setYBodyRot(0);
@@ -82,7 +75,7 @@ public class MarauderEntity extends Monster {
     }
 
     public void updateAnimations() {
-        var isMovingOnGround = moveAnalysis.isMovingHorizontally() && onGround();
+        // var isMovingOnGround = moveAnalysis.isMovingHorizontally() && onGround();
 
         if (this.isDeadOrDying()) {
             animationDispatcher.clientDeath();
@@ -94,14 +87,14 @@ public class MarauderEntity extends Monster {
             return;
         }
 
-        if (isMovingOnGround) {
-            if (this.isAggressive() && !this.swinging) {
-                animationDispatcher.clientRun();
-            } else {
-                animationDispatcher.clientWalk();
-            }
-            return;
-        }
+        // if (isMovingOnGround) {
+        // if (this.isAggressive() && !this.swinging) {
+        // animationDispatcher.clientRun();
+        // } else {
+        // animationDispatcher.clientWalk();
+        // }
+        // return;
+        // }
 
         if (!this.isAggressive()) {
             animationDispatcher.clientIdle();
@@ -127,15 +120,15 @@ public class MarauderEntity extends Monster {
     }
 
     @Override
-    public void addAdditionalSaveData(@NotNull CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putFloat("SpawnTicks", this.getSpawnTicks());
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putFloat("SpawnTicks", this.getSpawnTicks());
     }
 
     @Override
-    public void readAdditionalSaveData(@NotNull CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.setSpawnTicks(compound.getFloat("SpawnTicks"));
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.setSpawnTicks(input.getFloatOr("SpawnTicks", 0));
     }
 
     @Override

@@ -1,6 +1,5 @@
 package mod.azure.azexamples.mixins;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.phys.HitResult;
@@ -29,14 +28,15 @@ public class MinecraftMixin {
         }
     }
 
-    @ModifyExpressionValue(
-        method = "startUseItem", at = @At(
-            value = "INVOKE", target = "Lnet/minecraft/world/InteractionResult;shouldSwing()Z"
-        )
-    )
-    private boolean azexamples$dontSwingGun(boolean original) {
-        return original && !(this.player.getUseItem().getItem() instanceof GunWithArmItem);
-    }
+    // TODO: Find 26.2 replacement
+    // @ModifyExpressionValue(
+    // method = "startUseItem", at = @At(
+    // value = "INVOKE", target = "Lnet/minecraft/world/InteractionResult;shouldSwing()Z"
+    // )
+    // )
+    // private boolean azexamples$dontSwingGun(boolean original) {
+    // return original && !(this.player.getUseItem().getItem() instanceof GunWithArmItem);
+    // }
 
     @Inject(
         method = "startAttack", at = @At(

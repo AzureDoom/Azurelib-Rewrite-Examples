@@ -51,12 +51,18 @@ public final class NeoForgeMod {
 
     public NeoForgeMod(IEventBus modEventBus) {
         CommonMod.initRegistries();
-        blockEntityTypeDeferredRegister.register(modEventBus);
-        blockDeferredRegister.register(modEventBus);
-        entityTypeDeferredRegister.register(modEventBus);
-        itemDeferredRegister.register(modEventBus);
-        creativeModeTabDeferredRegister.register(modEventBus);
-        soundEventDeferredRegister.register(modEventBus);
+        if (blockEntityTypeDeferredRegister != null)
+            blockEntityTypeDeferredRegister.register(modEventBus);
+        if (blockDeferredRegister != null)
+            blockDeferredRegister.register(modEventBus);
+        if (entityTypeDeferredRegister != null)
+            entityTypeDeferredRegister.register(modEventBus);
+        if (itemDeferredRegister != null)
+            itemDeferredRegister.register(modEventBus);
+        if (creativeModeTabDeferredRegister != null)
+            creativeModeTabDeferredRegister.register(modEventBus);
+        if (soundEventDeferredRegister != null)
+            soundEventDeferredRegister.register(modEventBus);
         modEventBus.addListener(this::createEntityAttributes);
     }
 

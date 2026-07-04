@@ -1,6 +1,5 @@
 package mod.azure.azexamples.platform;
 
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -21,6 +20,7 @@ import mod.azure.azexamples.services.CommonRegistry;
  * registration. Methods include registering game objects like blocks, entities, items, and block entities as well as
  * creating other utilities for modding, such as spawn eggs and creative mode tabs.
  */
+@SuppressWarnings("unchecked")
 public class FabricCommonRegistry implements CommonRegistry {
 
     private static <T, R extends Registry<? super T>> Supplier<T> registerSupplier(
@@ -49,11 +49,12 @@ public class FabricCommonRegistry implements CommonRegistry {
         int secondaryEggColour,
         Item.Properties itemProperties
     ) {
-        return () -> new SpawnEggItem(entityType.get(), primaryEggColour, secondaryEggColour, itemProperties);
+        return () -> new SpawnEggItem(itemProperties);
     }
 
     @Override
     public CreativeModeTab.Builder newCreativeTabBuilder() {
-        return FabricItemGroup.builder();
+        // TODO: Fix for 26.2
+        return null;
     }
 }

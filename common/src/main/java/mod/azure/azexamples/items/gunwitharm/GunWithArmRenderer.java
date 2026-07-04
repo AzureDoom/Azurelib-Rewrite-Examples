@@ -18,7 +18,9 @@ public class GunWithArmRenderer extends AzItemRenderer {
             AzItemRendererConfig.builder(MODEL, TEXTURE)
                 .setAnimatorProvider(GunWithArmAnimator::new)
                 .disableAnimationInContexts(ItemDisplayContext.GUI)
-	            .setShouldAnimateInContext(context -> context != ItemDisplayContext.GUI && context != ItemDisplayContext.FIXED) // Custom animation logic with predicate
+                .setShouldAnimateInContext(
+                    context -> context != ItemDisplayContext.GUI && context != ItemDisplayContext.FIXED
+                ) // Custom animation logic with predicate
                 .build()
         );
     }

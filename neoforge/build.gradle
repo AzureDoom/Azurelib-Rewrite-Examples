@@ -1,30 +1,29 @@
 plugins {
     id 'multiloader-loader'
-    id 'net.neoforged.moddev' version "${neo_moddev}"
-    id 'com.diffplug.spotless' version "7.0.0.BETA3"
+    id 'net.neoforged.moddev'
+    id 'com.diffplug.spotless'
 }
 
 neoForge {
     version = "${neo_version}"
-    accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
-
-    parchment {
-        minecraftVersion = "${parchment_minecraft}"
-        mappingsVersion = "${parchment_version}"
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
     }
 
     runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})"
+        }
         client {
             client()
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            gameDirectory = this.mkdir(this.file('runs/client'))
         }
         server {
             server()
-            programArgument '--nogui'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
-        configureEach {
-            logLevel = org.slf4j.event.Level.DEBUG
+            this.file('runs/server').createParentDirectories()
+            gameDirectory = this.mkdir(this.file('runs/server'))
         }
     }
 
@@ -37,14 +36,6 @@ neoForge {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-repositories {
-    maven { url 'https://libs.azuredoom.com:4443/mods' }
-    maven { url "https://minecraft.curseforge.com/api/maven/" }
-    maven { url "https://cfa2.cursemaven.com" }
-    maven { url 'https://api.modrinth.com/maven' }
-    mavenCentral()
-}
-
 dependencies {
-    implementation "mod.azure.azurelib:azurelib-neo-${minecraft_version}:${azurelib_version}"
+    //implementation "mod.azure.azurelib:azurelib-neo-${minecraft_version}:${azurelib_version}"
 }

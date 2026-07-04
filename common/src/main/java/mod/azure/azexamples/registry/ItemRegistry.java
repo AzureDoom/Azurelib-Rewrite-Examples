@@ -1,9 +1,9 @@
 package mod.azure.azexamples.registry;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import java.util.function.Supplier;
 
@@ -17,6 +17,7 @@ import mod.azure.azexamples.services.AzExampleServices;
  * static fields for various item types and provides a utility method to register custom items to the game's registry.
  * This class is intended to centralize and simplify item registration.
  */
+@SuppressWarnings("unused")
 public class ItemRegistry {
 
     private ItemRegistry() {}
@@ -33,22 +34,22 @@ public class ItemRegistry {
 
     public static final Supplier<Item> DOOMICORN_HELMET = registerItem(
         "doomicorn_helmet",
-        () -> new DoomicornArmor(ArmorItem.Type.HELMET)
+        () -> new DoomicornArmor(ArmorType.HELMET)
     );
 
     public static final Supplier<Item> DOOMICORN_CHESTPLATE = registerItem(
         "doomicorn_chestplate",
-        () -> new DoomicornArmor(ArmorItem.Type.CHESTPLATE)
+        () -> new DoomicornArmor(ArmorType.CHESTPLATE)
     );
 
     public static final Supplier<Item> DOOMICORN_LEGGINGS = registerItem(
         "doomicorn_leggings",
-        () -> new DoomicornArmor(ArmorItem.Type.LEGGINGS)
+        () -> new DoomicornArmor(ArmorType.LEGGINGS)
     );
 
     public static final Supplier<Item> DOOMICORN_BOOTS = registerItem(
         "doomicorn_boots",
-        () -> new DoomicornArmor(ArmorItem.Type.BOOTS)
+        () -> new DoomicornArmor(ArmorType.BOOTS)
     );
 
     public static final Supplier<SpawnEggItem> MARAUDER_SPAWN_EGG = registerItem(

@@ -1,26 +1,33 @@
 package mod.azure.azexamples.mixins;
 
-import com.google.common.collect.ImmutableSet;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+
+import java.util.Optional;
 
 import mod.azure.azexamples.entities.SilencedEntityTypeBuilder;
 
 @Mixin(EntityType.Builder.class)
 public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEntityTypeBuilder {
 
+    @Final
     @Shadow
     private EntityType.EntityFactory<Entity> factory;
 
+    @Final
     @Shadow
     private MobCategory category;
 
     @Shadow
-    private ImmutableSet<Block> immuneTo;
+    private TagKey<Block> immuneTo;
 
     @Shadow
     private boolean serialize;
@@ -52,9 +59,19 @@ public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEnt
     @Shadow
     private FeatureFlagSet requiredFeatures;
 
+    @Shadow
+    private boolean allowedInPeaceful;
+
+    @Final
+    @Shadow
+    private String descriptionId;
+
+    @Shadow
+    private Optional<ResourceKey<LootTable>> lootTable;
+
     @Unique
-    @Override
     @SuppressWarnings("unchecked")
+    @Override
     public <T extends Entity> EntityType<T> buildWithoutDataFixerCheck() {
         return new EntityType<>(
             (EntityType.EntityFactory<T>) this.factory,
@@ -68,7 +85,10 @@ public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEnt
             this.spawnDimensionsScale,
             this.clientTrackingRange,
             this.updateInterval,
-            this.requiredFeatures
+            this.descriptionId,
+            this.lootTable,
+            this.requiredFeatures,
+            this.allowedInPeaceful
         );
     }
 }

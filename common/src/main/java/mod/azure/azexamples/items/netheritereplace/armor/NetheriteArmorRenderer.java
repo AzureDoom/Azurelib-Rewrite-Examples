@@ -1,18 +1,14 @@
 package mod.azure.azexamples.items.netheritereplace.armor;
 
-import mod.azure.azurelib.rewrite.render.armor.AzArmorRenderer;
-import mod.azure.azurelib.rewrite.render.armor.AzArmorRendererConfig;
-import mod.azure.azurelib.rewrite.render.layer.AzAutoGlowingLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import mod.azure.azexamples.CommonMod;
-import mod.azure.azexamples.items.DoomArmorBoneProvider;
 
-public class NetheriteArmorRenderer extends AzArmorRenderer {
+public class NetheriteArmorRenderer { // extends AzArmorRenderer {
 
-    private static final ResourceLocation MODEL = CommonMod.modResource("geo/item/cultist_armor.geo.json");
+    private static final Identifier MODEL = CommonMod.modResource("geo/item/cultist_armor.geo.json");
 
-    private static final ResourceLocation TEXTURE = CommonMod.modResource("textures/item/cultist_armor.png");
+    private static final Identifier TEXTURE = CommonMod.modResource("textures/item/cultist_armor.png");
 
     /**
      * Constructs a new renderer for the Doomicorn Armor. <br>
@@ -23,12 +19,12 @@ public class NetheriteArmorRenderer extends AzArmorRenderer {
      * </ul>
      */
     public NetheriteArmorRenderer() {
-        super(
-            AzArmorRendererConfig.builder(MODEL, TEXTURE)
-                .setAnimatorProvider(NetheriteArmorAnimator::new)
-                .setBoneProvider(new DoomArmorBoneProvider())
-                .addRenderLayer(new AzAutoGlowingLayer<>())
-                .build()
-        );
+        // super(
+        // AzArmorRendererConfig.builder(MODEL, TEXTURE)
+        // .setAnimatorProvider(NetheriteArmorAnimator::new)
+        // .setBoneProvider(new DoomArmorBoneProvider())
+        // .addRenderLayer(new AzAutoGlowingLayer<>())
+        // .build()
+        // );
     }
 }

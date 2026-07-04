@@ -10,7 +10,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 
 import java.util.function.Supplier;
 
@@ -23,6 +22,7 @@ import mod.azure.azexamples.services.CommonRegistry;
  * This implementation leverages the NeoForgeMod's deferred registers to manage the creation and registration of these
  * objects.
  */
+@SuppressWarnings("unchecked")
 public class NeoForgeCommonRegistry implements CommonRegistry {
 
     @Override
@@ -65,7 +65,7 @@ public class NeoForgeCommonRegistry implements CommonRegistry {
         int secondaryEggColour,
         Item.Properties itemProperties
     ) {
-        return () -> new DeferredSpawnEggItem(entityType, primaryEggColour, secondaryEggColour, itemProperties);
+        return () -> new SpawnEggItem(itemProperties);
     }
 
     @Override

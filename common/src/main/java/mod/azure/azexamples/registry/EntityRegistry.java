@@ -7,6 +7,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import java.util.Set;
 import java.util.function.Supplier;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
@@ -30,10 +31,10 @@ public class EntityRegistry {
 
     public static final Supplier<BlockEntityType<StargateBlockEntity>> STARGATE_BLOCK_ENTITY = registerBlockEntity(
         "stargate_block_entity",
-        () -> BlockEntityType.Builder.of(
+        () -> new BlockEntityType<>(
             StargateBlockEntity::new,
-            BlockRegistry.STARGATE.get()
-        ).build(null)
+            Set.of(BlockRegistry.STARGATE.get())
+        )
     );
 
     public static final Supplier<EntityType<MarauderEntity>> MARAUDER = registerEntity(

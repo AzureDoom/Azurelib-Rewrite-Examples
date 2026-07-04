@@ -32,14 +32,14 @@ public class GunWithArmItem extends Item {
         int slotId,
         boolean isSelected
     ) {
-	    if (
-		    !level.isClientSide() && stack.is(this) && entity instanceof LivingEntity livingEntity &&
-			    !livingEntity.isUsingItem() && livingEntity instanceof Player player &&
-			    !player.getCooldowns().isOnCooldown(stack.getItem())
-	    ) {
-		    dispatcher.sendIdle(entity, stack);
-	    }
-	    super.inventoryTick(stack, level, entity, slotId, isSelected);
+        if (
+            !level.isClientSide() && stack.is(this) && entity instanceof LivingEntity livingEntity &&
+                !livingEntity.isUsingItem() && livingEntity instanceof Player player &&
+                !player.getCooldowns().isOnCooldown(stack.getItem())
+        ) {
+            dispatcher.sendIdle(entity, stack);
+        }
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
     }
 
     @Override

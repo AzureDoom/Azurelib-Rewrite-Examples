@@ -1,6 +1,5 @@
 package mod.azure.azexamples.entities.manul;
 
-import mod.azure.azurelib.rewrite.util.MoveAnalysis;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
@@ -15,20 +14,20 @@ public class ManulEntity extends PathfinderMob {
 
     private static final int MAX_ANIMATION_TICKS = 144;
 
-    private final MoveAnalysis moveAnalysis;
+    // private final MoveAnalysis moveAnalysis;
 
     protected int animationTickCounter = 0;
 
     public ManulEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
         this.animationDispatcher = new ManulAnimationDispatcher(this);
-        this.moveAnalysis = new MoveAnalysis(this);
+        // this.moveAnalysis = new MoveAnalysis(this);
     }
 
     @Override
     public void tick() {
         super.tick();
-        this.moveAnalysis.update();
+        // this.moveAnalysis.update();
     }
 
     public void updateAnimations() {
@@ -45,11 +44,11 @@ public class ManulEntity extends PathfinderMob {
     }
 
     protected void handleAnimations() {
-        if (this.moveAnalysis.isMoving()) {
-            this.handleMovementAnimations();
-        } else {
-            this.handleIdleAnimations();
-        }
+        // if (this.moveAnalysis.isMoving()) {
+        // this.handleMovementAnimations();
+        // } else {
+        // this.handleIdleAnimations();
+        // }
     }
 
     protected void handleMovementAnimations() {

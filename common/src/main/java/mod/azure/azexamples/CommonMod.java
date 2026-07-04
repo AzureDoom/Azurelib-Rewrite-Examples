@@ -1,6 +1,6 @@
 package mod.azure.azexamples;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import mod.azure.azexamples.registry.*;
 
@@ -8,8 +8,8 @@ public class CommonMod {
 
     private CommonMod() {}
 
-    public static ResourceLocation modResource(String name) {
-        return ResourceLocation.fromNamespaceAndPath(CommonStrings.MOD_ID, name);
+    public static Identifier modResource(String name) {
+        return Identifier.fromNamespaceAndPath(CommonStrings.MOD_ID, name);
     }
 
     /**

@@ -1,5 +1,6 @@
 package mod.azure.azexamples.entities.marauder.ai;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -72,7 +73,7 @@ public class DelayedAttackGoal extends MeleeAttackGoal {
                 } else {
                     resetAttackCooldown();
                     mob.swing(InteractionHand.MAIN_HAND);
-                    mob.doHurtTarget(target);
+                    mob.doHurtTarget((ServerLevel) target.level(), target);
 
                     this.triggeredAttackAnimation = false;
                 }
