@@ -2,16 +2,22 @@ package mod.azure.azexamples.platform;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 import mod.azure.azexamples.NeoForgeMod;
 import mod.azure.azexamples.services.CommonRegistry;
@@ -59,17 +65,60 @@ public class NeoForgeCommonRegistry implements CommonRegistry {
     }
 
     @Override
-    public <E extends Mob> Supplier<SpawnEggItem> makeSpawnEggFor(
-        Supplier<EntityType<E>> entityType,
-        int primaryEggColour,
-        int secondaryEggColour,
-        Item.Properties itemProperties
+    public <T extends Block> Supplier<T> registerBlock(
+        String registryName,
+        Function<BlockBehaviour.Properties, T> factory,
+        BlockBehaviour.Properties properties
     ) {
-        return () -> new SpawnEggItem(itemProperties);
+        return NeoForgeMod.blockDeferredRegister.register(
+            registryName,
+            name -> factory.apply(
+                properties.setId(
+                    ResourceKey.create(
+                        Registries.BLOCK,
+                        name
+                    )
+                )
+            )
+        );
     }
 
     @Override
-    public CreativeModeTab.Builder newCreativeTabBuilder() {
-        return CreativeModeTab.builder();
+    public <T extends Item> Supplier<T> registerItem(
+        String registryName,
+        Function<Item.Properties, T> factory,
+        UnaryOperator<Item.Properties> properties
+    ) {
+        return NeoForgeMod.itemDeferredRegister.registerItem(
+            registryName,
+            factory,
+            properties
+        );
+    }
+
+    @Override
+    public <E extends Mob> Supplier<SpawnEggItem> registerSpawnEgg(
+        String registryName,
+        Supplier<EntityType<E>> entityType
+    ) {
+        return NeoForgeMod.itemDeferredRegister.registerItem(
+            registryName,
+            properties -> new SpawnEggItem(
+                properties.spawnEgg(entityType.get())
+            )
+        );
+    }
+
+    @Override
+    @SafeVarargs
+    public final CreativeModeTab.Builder newCreativeTabBuilder(
+        Supplier<? extends ItemLike>... items
+    ) {
+        return CreativeModeTab.builder()
+            .displayItems((_, output) -> {
+                for (var item : items) {
+                    output.accept(item.get());
+                }
+            });
     }
 }

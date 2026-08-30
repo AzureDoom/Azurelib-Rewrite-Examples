@@ -8,13 +8,7 @@
   "mixins": [
     "MixinEntityTypeBuilder_SilenceDataFixerError",
     "NetheriteArmorMixin",
-    "NetheriteSwordMixin",
-    "PlayerMixin",
-    "VillagerMixin"
+    "NetheriteSwordMixin"
   ],
-  "client": [
-    "HeldItemRendererMixin",
-    "GameRendererMixin",
-    "MinecraftMixin"
-  ]
+  "client": []
 }

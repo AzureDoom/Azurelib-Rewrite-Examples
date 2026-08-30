@@ -1,5 +1,10 @@
 package mod.azure.azexamples.entities.doomhunter;
 
+import mod.azure.azurelib.animation.dispatch.command.AzCommand;
+import mod.azure.azurelib.animation.play_behavior.AzPlayBehaviors;
+
+import mod.azure.azexamples.CommonStrings;
+
 /**
  * The DoomHunterAnimationDispatcher class is responsible for managing and sending animation commands for the Doom
  * Hunter entity. It acts as a utility to dispatch specific animation actions, such as playing the idle animation, to
@@ -10,8 +15,8 @@ package mod.azure.azexamples.entities.doomhunter;
  */
 public class DoomHunterAnimationDispatcher {
 
-    // private final AzCommand IDLE_COMMAND = AzCommand
-    // .create(CommonStrings.BASE_CONTROLLER, CommonStrings.IDLE_ANIMATION_NAME, AzPlayBehaviors.LOOP);
+    private final AzCommand IDLE_COMMAND = AzCommand
+        .create(CommonStrings.BASE_CONTROLLER, CommonStrings.IDLE_ANIMATION_NAME, AzPlayBehaviors.LOOP);
 
     private final DoomHunterEntity doomHunter;
 
@@ -20,6 +25,6 @@ public class DoomHunterAnimationDispatcher {
     }
 
     public void clientIdle() {
-        // IDLE_COMMAND.sendForEntity(doomHunter);
+        IDLE_COMMAND.sendForEntity(doomHunter);
     }
 }

@@ -1,5 +1,6 @@
 package mod.azure.azexamples.entities.manul;
 
+import mod.azure.azurelib.util.MoveAnalysis;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
@@ -14,20 +15,20 @@ public class ManulEntity extends PathfinderMob {
 
     private static final int MAX_ANIMATION_TICKS = 144;
 
-    // private final MoveAnalysis moveAnalysis;
+    private final MoveAnalysis moveAnalysis;
 
     protected int animationTickCounter = 0;
 
     public ManulEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
         this.animationDispatcher = new ManulAnimationDispatcher(this);
-        // this.moveAnalysis = new MoveAnalysis(this);
+        this.moveAnalysis = new MoveAnalysis(this);
     }
 
     @Override
     public void tick() {
         super.tick();
-        // this.moveAnalysis.update();
+        this.moveAnalysis.update();
     }
 
     public void updateAnimations() {
@@ -44,36 +45,34 @@ public class ManulEntity extends PathfinderMob {
     }
 
     protected void handleAnimations() {
-        // if (this.moveAnalysis.isMoving()) {
-        // this.handleMovementAnimations();
-        // } else {
-        // this.handleIdleAnimations();
-        // }
+        if (this.moveAnalysis.isMoving()) {
+            this.handleMovementAnimations();
+        } else {
+            this.handleIdleAnimations();
+        }
     }
 
     protected void handleMovementAnimations() {
-        var randomValue = Math.random(); // Generate a random value between 0 and 1
+        var randomValue = Math.random();
 
         if (randomValue < 0.2) {
-            animationDispatcher.mainWalk(); // 20% chance
+            animationDispatcher.mainWalk();
         } else if (randomValue < 0.4) {
-            animationDispatcher.sniffWalk(); // 20% chance
+            animationDispatcher.sniffWalk();
         } else if (randomValue < 0.6) {
-            animationDispatcher.lookRightWalk(); // 20% chance
+            animationDispatcher.lookRightWalk();
         } else if (randomValue < 0.8) {
-            animationDispatcher.lookLeftWalk(); // 20% chance
+            animationDispatcher.lookLeftWalk();
         } else {
-            animationDispatcher.bounceWalk(); // 20% chance
+            animationDispatcher.bounceWalk();
         }
         this.animationTickCounter = 0;
     }
 
     protected void handleIdleAnimations() {
         if (Math.random() < 0.75) {
-            // 75% chance to play mainIdle
             animationDispatcher.mainIdle();
         } else {
-            // 25% chance to play sniffIdle
             animationDispatcher.sniffIdle();
         }
         this.animationTickCounter = 0;

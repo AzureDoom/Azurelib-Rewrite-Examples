@@ -1,18 +1,19 @@
 package mod.azure.azexamples;
 
+import mod.azure.azurelib.animation.cache.AzIdentityRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Monster;
 
 import mod.azure.azexamples.registry.EntityRegistry;
+import mod.azure.azexamples.registry.ItemRegistry;
 
 public final class FabricLibMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
         CommonMod.initRegistries();
-        // TODO: The call to 'register' always fails, according to its method contracts?
         FabricDefaultAttributeRegistry.register(
             EntityRegistry.DOOMHUNTER.get(),
             Monster.createMonsterAttributes()
@@ -37,5 +38,6 @@ public final class FabricLibMod implements ModInitializer {
             EntityRegistry.GREMLIN.get(),
             Mob.createMobAttributes()
         );
+        AzIdentityRegistry.register(ItemRegistry.PISTOL.get());
     }
 }

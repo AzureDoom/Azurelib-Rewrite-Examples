@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "azexamples:item/stargate",
+    "model": {
+      "type": "azurelib:azurelib"
+    }
+  }
+}

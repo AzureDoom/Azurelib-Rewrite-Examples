@@ -1,10 +1,12 @@
 package mod.azure.azexamples.blocks;
 
+import mod.azure.azurelib.render.item.AzItemRenderer;
+import mod.azure.azurelib.render.item.AzItemRendererConfig;
 import net.minecraft.resources.Identifier;
 
 import mod.azure.azexamples.CommonMod;
 
-public class StargateBlockItemRenderer { // extends AzItemRenderer {
+public class StargateBlockItemRenderer extends AzItemRenderer {
 
     private static final Identifier MODEL = CommonMod.modResource("geo/block/stargate.geo.json");
 
@@ -19,8 +21,8 @@ public class StargateBlockItemRenderer { // extends AzItemRenderer {
      * {@code AzItemRendererConfig} is used to configure the renderer with the associated model, texture, and animator.
      */
     public StargateBlockItemRenderer() {
-        // super(
-        // AzItemRendererConfig.builder(MODEL, TEXTURE).setAnimatorProvider(StargateBlockItemAnimator::new).build()
-        // );
+        super(
+            AzItemRendererConfig.builder(MODEL, TEXTURE).setAnimatorProvider(StargateBlockItemAnimator::new).build()
+        );
     }
 }

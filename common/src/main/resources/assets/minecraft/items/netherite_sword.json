@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "minecraft:item/netherite_sword",
+    "model": {
+      "type": "azurelib:azurelib"
+    }
+  }
+}

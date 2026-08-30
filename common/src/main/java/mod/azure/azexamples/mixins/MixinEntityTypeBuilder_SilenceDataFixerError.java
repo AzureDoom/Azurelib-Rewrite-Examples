@@ -1,5 +1,6 @@
 package mod.azure.azexamples.mixins;
 
+import net.minecraft.resources.DependantName;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
@@ -20,7 +21,7 @@ public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEnt
 
     @Final
     @Shadow
-    private EntityType.EntityFactory<Entity> factory;
+    private EntityType.EntityFactory<?> factory;
 
     @Final
     @Shadow
@@ -60,19 +61,21 @@ public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEnt
     private FeatureFlagSet requiredFeatures;
 
     @Shadow
-    private boolean allowedInPeaceful;
+    private DependantName<EntityType<?>, Optional<ResourceKey<LootTable>>> lootTable;
 
     @Final
     @Shadow
-    private String descriptionId;
+    private DependantName<EntityType<?>, String> descriptionId;
 
     @Shadow
-    private Optional<ResourceKey<LootTable>> lootTable;
+    private boolean allowedInPeaceful;
 
     @Unique
-    @SuppressWarnings("unchecked")
     @Override
-    public <T extends Entity> EntityType<T> buildWithoutDataFixerCheck() {
+    @SuppressWarnings({ "unchecked" })
+    public <T extends Entity> EntityType<T> buildWithoutDataFixerCheck(
+        ResourceKey<EntityType<?>> name
+    ) {
         return new EntityType<>(
             (EntityType.EntityFactory<T>) this.factory,
             this.category,
@@ -85,8 +88,8 @@ public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEnt
             this.spawnDimensionsScale,
             this.clientTrackingRange,
             this.updateInterval,
-            this.descriptionId,
-            this.lootTable,
+            this.descriptionId.get(name),
+            this.lootTable.get(name),
             this.requiredFeatures,
             this.allowedInPeaceful
         );

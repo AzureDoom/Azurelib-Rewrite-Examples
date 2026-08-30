@@ -7,8 +7,8 @@ public class StargateBlockItem extends BlockItem {
 
     private final StargateBlockItemAnimator dispatcher;
 
-    public StargateBlockItem(Block block) {
-        super(block, new Properties());
+    public StargateBlockItem(Block block, Properties properties) {
+        super(block, properties);
         this.dispatcher = new StargateBlockItemAnimator();
     }
 }

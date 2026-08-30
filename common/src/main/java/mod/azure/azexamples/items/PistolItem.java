@@ -1,5 +1,6 @@
 package mod.azure.azexamples.items;
 
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -14,8 +15,8 @@ public class PistolItem extends Item {
 
     private final PistolAnimationDispatcher dispatcher;
 
-    public PistolItem() {
-        super(new Properties());
+    public PistolItem(Properties properties) {
+        super(properties);
         this.dispatcher = new PistolAnimationDispatcher();
     }
 
@@ -40,5 +41,16 @@ public class PistolItem extends Item {
     @Override
     public int getUseDuration(@NotNull ItemStack stack, @NotNull LivingEntity entity) {
         return 72000;
+    }
+
+    @Override
+    public @NonNull InteractionResult use(
+        @NonNull Level level,
+        Player player,
+        @NonNull InteractionHand hand
+    ) {
+        player.startUsingItem(hand);
+
+        return InteractionResult.CONSUME;
     }
 }

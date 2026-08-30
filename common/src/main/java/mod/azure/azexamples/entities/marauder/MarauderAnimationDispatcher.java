@@ -1,5 +1,10 @@
 package mod.azure.azexamples.entities.marauder;
 
+import mod.azure.azurelib.animation.dispatch.command.AzCommand;
+import mod.azure.azurelib.animation.play_behavior.AzPlayBehaviors;
+
+import mod.azure.azexamples.CommonStrings;
+
 /**
  * The MarauderAnimationDispatcher class is responsible for managing and dispatching animation commands for entities,
  * specifically tailored for the Marauder entity. It uses predefined animation commands to sync animations with specific
@@ -9,41 +14,41 @@ package mod.azure.azexamples.entities.marauder;
  */
 public class MarauderAnimationDispatcher {
 
-    // private final AzCommand deathCommand = AzCommand.create(
-    // CommonStrings.BASE_CONTROLLER,
-    // CommonStrings.DEATH_ANIMATION_NAME,
-    // AzPlayBehaviors.HOLD_ON_LAST_FRAME
-    // );
-    //
-    // private final AzCommand idleCommand = AzCommand.create(
-    // CommonStrings.BASE_CONTROLLER,
-    // CommonStrings.IDLE_ANIMATION_NAME,
-    // AzPlayBehaviors.LOOP
-    // );
-    //
-    // private final AzCommand walkCommand = AzCommand.create(
-    // CommonStrings.BASE_CONTROLLER,
-    // CommonStrings.WALK_ANIMATION_NAME,
-    // AzPlayBehaviors.LOOP
-    // );
-    //
-    // private final AzCommand runCommand = AzCommand.create(
-    // CommonStrings.BASE_CONTROLLER,
-    // CommonStrings.RUN_ANIMATION_NAME,
-    // AzPlayBehaviors.LOOP
-    // );
-    //
-    // private final AzCommand meleeCommand = AzCommand.create(
-    // CommonStrings.BASE_CONTROLLER,
-    // CommonStrings.MELEE_ANIMATION_NAME,
-    // AzPlayBehaviors.PLAY_ONCE
-    // );
-    //
-    // private final AzCommand spawnCommand = AzCommand.create(
-    // CommonStrings.BASE_CONTROLLER,
-    // CommonStrings.SPAWN_ANIMATION_NAME,
-    // AzPlayBehaviors.PLAY_ONCE
-    // );
+    private final AzCommand deathCommand = AzCommand.create(
+        CommonStrings.BASE_CONTROLLER,
+        CommonStrings.DEATH_ANIMATION_NAME,
+        AzPlayBehaviors.HOLD_ON_LAST_FRAME
+    );
+
+    private final AzCommand idleCommand = AzCommand.create(
+        CommonStrings.BASE_CONTROLLER,
+        CommonStrings.IDLE_ANIMATION_NAME,
+        AzPlayBehaviors.LOOP
+    );
+
+    private final AzCommand walkCommand = AzCommand.create(
+        CommonStrings.BASE_CONTROLLER,
+        CommonStrings.WALK_ANIMATION_NAME,
+        AzPlayBehaviors.LOOP
+    );
+
+    private final AzCommand runCommand = AzCommand.create(
+        CommonStrings.BASE_CONTROLLER,
+        CommonStrings.RUN_ANIMATION_NAME,
+        AzPlayBehaviors.LOOP
+    );
+
+    private final AzCommand meleeCommand = AzCommand.create(
+        CommonStrings.BASE_CONTROLLER,
+        CommonStrings.MELEE_ANIMATION_NAME,
+        AzPlayBehaviors.PLAY_ONCE
+    );
+
+    private final AzCommand spawnCommand = AzCommand.create(
+        CommonStrings.BASE_CONTROLLER,
+        CommonStrings.SPAWN_ANIMATION_NAME,
+        AzPlayBehaviors.PLAY_ONCE
+    );
 
     private final MarauderEntity marauder;
 
@@ -52,26 +57,26 @@ public class MarauderAnimationDispatcher {
     }
 
     public void clientIdle() {
-        // idleCommand.sendForEntity(marauder);
+        idleCommand.sendForEntity(marauder);
     }
 
     public void clientWalk() {
-        // walkCommand.sendForEntity(marauder);
+        walkCommand.sendForEntity(marauder);
     }
 
     public void clientRun() {
-        // runCommand.sendForEntity(marauder);
+        runCommand.sendForEntity(marauder);
     }
 
     public void serverMelee() {
-        // meleeCommand.sendForEntity(marauder);
+        meleeCommand.sendForEntity(marauder);
     }
 
     public void clientDeath() {
-        // deathCommand.sendForEntity(marauder);
+        deathCommand.sendForEntity(marauder);
     }
 
     public void clientSpawn() {
-        // spawnCommand.sendForEntity(marauder);
+        spawnCommand.sendForEntity(marauder);
     }
 }

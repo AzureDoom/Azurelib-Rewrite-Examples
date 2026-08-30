@@ -5,6 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -16,8 +17,10 @@ public abstract class NetheriteSwordMixin {
 
     private NetheriteSwordAnimationDespatcher dispatcher;
 
+    @Unique
     private boolean isPlayingAnimation = false;
 
+    @Unique
     private long lastAnimationTime = 0;
 
     @Inject(method = "<init>", at = @At("TAIL"))

@@ -1,8 +1,17 @@
 package mod.azure.azexamples.entities.marauder;
 
+import mod.azure.azurelib.animation.AzAnimatorConfig;
+import mod.azure.azurelib.animation.controller.AzAnimationController;
+import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
+import mod.azure.azurelib.animation.controller.keyframe.AzKeyframeCallbacks;
+import mod.azure.azurelib.animation.impl.AzEntityAnimator;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import org.jetbrains.annotations.NotNull;
 
 import mod.azure.azexamples.CommonMod;
+import mod.azure.azexamples.CommonStrings;
 
 /**
  * The {@code MarauderAnimator} class is responsible for controlling the animations of a {@link MarauderEntity}. It
@@ -10,91 +19,91 @@ import mod.azure.azexamples.CommonMod;
  * and binds these animations to the corresponding keyframe events. This class extends the {@code AzEntityAnimator}
  * framework, providing an implementation specific to the {@code MarauderEntity}.
  */
-public class MarauderAnimator { // extends AzEntityAnimator<MarauderEntity> {
+public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
 
     private static final Identifier ANIMATIONS = CommonMod.modResource(
         "animations/entity/marauder.animation.json"
     );
 
     public MarauderAnimator() {
-        // super(AzAnimatorConfig.defaultConfig());
+        super(AzAnimatorConfig.defaultConfig());
     }
 
-    // @Override
-    // public void registerControllers(AzAnimationControllerContainer<MarauderEntity> animationControllerContainer) {
-    // animationControllerContainer.add(
-    // AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER)
-    // .setTransitionLength(0)
-    // .setKeyframeCallbacks(
-    // AzKeyframeCallbacks.<MarauderEntity>builder()
-    // .setSoundKeyframeHandler(
-    // event -> {
-    // if (event.getKeyframeData().getSound().equals("walk")) {
-    // event.getAnimatable()
-    // .level()
-    // .playLocalSound(
-    // event.getAnimatable().getX(),
-    // event.getAnimatable().getY(),
-    // event.getAnimatable().getZ(),
-    // SoundEvents.METAL_STEP,
-    // SoundSource.HOSTILE,
-    // 1.00F,
-    // 1.0F,
-    // true
-    // );
-    // }
-    // if (event.getKeyframeData().getSound().equals("run")) {
-    // event.getAnimatable()
-    // .level()
-    // .playLocalSound(
-    // event.getAnimatable().getX(),
-    // event.getAnimatable().getY(),
-    // event.getAnimatable().getZ(),
-    // SoundEvents.SKELETON_STEP,
-    // SoundSource.HOSTILE,
-    // 1.00F,
-    // 1.0F,
-    // true
-    // );
-    // }
-    // if (event.getKeyframeData().getSound().equals("portal")) {
-    // event.getAnimatable()
-    // .level()
-    // .playLocalSound(
-    // event.getAnimatable().getX(),
-    // event.getAnimatable().getY(),
-    // event.getAnimatable().getZ(),
-    // SoundEvents.PORTAL_AMBIENT,
-    // SoundSource.HOSTILE,
-    // 0.20F,
-    // 1.0F,
-    // true
-    // );
-    // }
-    // if (event.getKeyframeData().getSound().equals("axe")) {
-    // event.getAnimatable()
-    // .level()
-    // .playLocalSound(
-    // event.getAnimatable().getX(),
-    // event.getAnimatable().getY(),
-    // event.getAnimatable().getZ(),
-    // SoundEvents.ENDER_EYE_LAUNCH,
-    // SoundSource.HOSTILE,
-    // 1.00F,
-    // 1.0F,
-    // true
-    // );
-    // }
-    // }
-    // )
-    // .build()
-    // )
-    // .build()
-    // );
-    // }
-    //
-    // @Override
-    // public @NotNull Identifier getAnimationLocation(MarauderEntity drone) {
-    // return ANIMATIONS;
-    // }
+    @Override
+    public void registerControllers(AzAnimationControllerContainer<MarauderEntity> animationControllerContainer) {
+        animationControllerContainer.add(
+            AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER)
+                .setTransitionLength(0)
+                .setKeyframeCallbacks(
+                    AzKeyframeCallbacks.<MarauderEntity>builder()
+                        .setSoundKeyframeHandler(
+                            event -> {
+                                if (event.getKeyframeData().getSound().equals("walk")) {
+                                    event.getAnimatable()
+                                        .level()
+                                        .playLocalSound(
+                                            event.getAnimatable().getX(),
+                                            event.getAnimatable().getY(),
+                                            event.getAnimatable().getZ(),
+                                            SoundEvents.METAL_STEP,
+                                            SoundSource.HOSTILE,
+                                            1.00F,
+                                            1.0F,
+                                            true
+                                        );
+                                }
+                                if (event.getKeyframeData().getSound().equals("run")) {
+                                    event.getAnimatable()
+                                        .level()
+                                        .playLocalSound(
+                                            event.getAnimatable().getX(),
+                                            event.getAnimatable().getY(),
+                                            event.getAnimatable().getZ(),
+                                            SoundEvents.SKELETON_STEP,
+                                            SoundSource.HOSTILE,
+                                            1.00F,
+                                            1.0F,
+                                            true
+                                        );
+                                }
+                                if (event.getKeyframeData().getSound().equals("portal")) {
+                                    event.getAnimatable()
+                                        .level()
+                                        .playLocalSound(
+                                            event.getAnimatable().getX(),
+                                            event.getAnimatable().getY(),
+                                            event.getAnimatable().getZ(),
+                                            SoundEvents.PORTAL_AMBIENT,
+                                            SoundSource.HOSTILE,
+                                            0.20F,
+                                            1.0F,
+                                            true
+                                        );
+                                }
+                                if (event.getKeyframeData().getSound().equals("axe")) {
+                                    event.getAnimatable()
+                                        .level()
+                                        .playLocalSound(
+                                            event.getAnimatable().getX(),
+                                            event.getAnimatable().getY(),
+                                            event.getAnimatable().getZ(),
+                                            SoundEvents.ENDER_EYE_LAUNCH,
+                                            SoundSource.HOSTILE,
+                                            1.00F,
+                                            1.0F,
+                                            true
+                                        );
+                                }
+                            }
+                        )
+                        .build()
+                )
+                .build()
+        );
+    }
+
+    @Override
+    public @NotNull Identifier getAnimationLocation(MarauderEntity drone) {
+        return ANIMATIONS;
+    }
 }

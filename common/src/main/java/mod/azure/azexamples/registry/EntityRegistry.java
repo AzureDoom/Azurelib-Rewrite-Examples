@@ -1,6 +1,8 @@
 package mod.azure.azexamples.registry;
 
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -10,6 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import java.util.Set;
 import java.util.function.Supplier;
 
+import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.entities.SilencedEntityTypeBuilder;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
@@ -121,10 +124,14 @@ public class EntityRegistry {
         float width,
         float height
     ) {
+        ResourceKey<EntityType<?>> key = ResourceKey.create(
+            Registries.ENTITY_TYPE,
+            CommonMod.modResource(entityName)
+        );
         return AzExampleServices.COMMON_REGISTRY.register(
             BuiltInRegistries.ENTITY_TYPE,
             entityName,
-            () -> create(entity, mobCategory, width, height).buildWithoutDataFixerCheck()
+            () -> create(entity, mobCategory, width, height).buildWithoutDataFixerCheck(key)
         );
     }
 
