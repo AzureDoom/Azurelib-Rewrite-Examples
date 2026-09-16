@@ -72,7 +72,7 @@ public class DelayedAttackGoal extends MeleeAttackGoal {
                     }
                 } else {
                     resetAttackCooldown();
-                    mob.swing(InteractionHand.MAIN_HAND);
+                    mob.swingForAttack(InteractionHand.MAIN_HAND);
                     mob.doHurtTarget((ServerLevel) target.level(), target);
 
                     this.triggeredAttackAnimation = false;

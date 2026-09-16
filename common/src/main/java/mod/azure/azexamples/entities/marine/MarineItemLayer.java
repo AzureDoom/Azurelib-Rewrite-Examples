@@ -41,9 +41,9 @@ public class MarineItemLayer extends AzBlockAndItemLayer<UUID, MarineEntity> {
         ItemStack itemStack,
         MarineEntity animatable
     ) {
-        context.poseStack().mulPose(Axis.XP.rotationDegrees(270));
-        context.poseStack().mulPose(Axis.YP.rotationDegrees(0));
-        context.poseStack().mulPose(Axis.ZP.rotationDegrees(0f));
+        context.poseStack().rotate(Axis.XP.rotationDegrees(270));
+        context.poseStack().rotate(Axis.YP.rotationDegrees(0));
+        context.poseStack().rotate(Axis.ZP.rotationDegrees(0f));
         context.poseStack().translate(0.0D, 0.1D, -0.1D);
         super.renderItemForBone(context, bone, itemStack, animatable);
     }
