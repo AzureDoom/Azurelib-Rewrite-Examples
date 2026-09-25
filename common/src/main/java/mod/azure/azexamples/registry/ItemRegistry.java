@@ -21,6 +21,8 @@ public class ItemRegistry {
 
     private ItemRegistry() {}
 
+    public static final Supplier<Item> TEST = registerItem("test", () -> new Item(new Item.Properties()));
+
     public static final Supplier<Item> PISTOL = registerItem(
         "pistol",
         PistolItem::new

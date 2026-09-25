@@ -30,9 +30,11 @@ public class GremlinRenderer extends AzEntityRenderer<GremlinEntity> {
                 .setBoneTextureOverrideProvider(
                     bone -> "bipedCape".equals(bone.getName()) ? EXTRA_TEX : TEXTURE
                 )
-	            .setBoneRenderTypeOverrideProvider(
-					bone -> "bipedCape".equals(bone.getName()) ? RenderType.entityCutout(EXTRA_TEX) : RenderType.entityCutoutNoCull(TEXTURE)
-	            )
+                .setBoneRenderTypeOverrideProvider(
+                    bone -> "bipedCape".equals(bone.getName())
+                        ? RenderType.entityTranslucent(EXTRA_TEX)
+                        : RenderType.entityCutout(TEXTURE)
+                )
                 .setShadowRadius(0.5F)
                 .build(),
             context

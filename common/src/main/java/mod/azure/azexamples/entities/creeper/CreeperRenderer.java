@@ -10,9 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.Creeper;
 
-import mod.azure.azexamples.CommonMod;
-
 import java.util.UUID;
+
+import mod.azure.azexamples.CommonMod;
 
 public class CreeperRenderer extends AzEntityRenderer<Creeper> {
 

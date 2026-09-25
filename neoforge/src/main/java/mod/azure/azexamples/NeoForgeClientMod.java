@@ -23,6 +23,7 @@ import mod.azure.azexamples.entities.manul.ManulRenderer;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.entities.marine.MarineRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
+import mod.azure.azexamples.items.TestRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
 import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
 import mod.azure.azexamples.items.netheritereplace.NetheriteSwordRenderer;
@@ -44,6 +45,7 @@ public class NeoForgeClientMod {
             Items.NETHERITE_LEGGINGS,
             Items.NETHERITE_BOOTS
         );
+        AzItemRendererRegistry.register(ItemRegistry.TEST.get(), TestRenderer::new);
         AzItemRendererRegistry.register(ItemRegistry.PISTOL.get(), PistolRenderer::new);
         AzItemRendererRegistry.register(ItemRegistry.PEACEMAKER.get(), GunWithArmRenderer::new);
         AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);

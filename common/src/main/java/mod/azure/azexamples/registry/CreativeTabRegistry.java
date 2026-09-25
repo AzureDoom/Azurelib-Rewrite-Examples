@@ -53,7 +53,7 @@ public class CreativeTabRegistry {
             "examplemod_items",
             () -> Services.COMMON_REGISTRY.newCreativeTabBuilder()
                 .title(Component.translatable(CommonStrings.CREATIVE_TAB))
-                .icon(() -> new ItemStack(BlockRegistry.STARGATE_ITEM.get()))
+                .icon(() -> new ItemStack(ItemRegistry.PISTOL.get()))
                 .displayItems((enabledFeatures, entries) -> {
                     entries.accept(BlockRegistry.STARGATE_ITEM.get());
                     entries.accept(ItemRegistry.PISTOL.get());
@@ -68,6 +68,7 @@ public class CreativeTabRegistry {
                     entries.accept(ItemRegistry.JURAVENATOR_SPAWN_EGG.get());
                     entries.accept(ItemRegistry.MARINE_SPAWN_EGG.get());
                     entries.accept(ItemRegistry.GREMLIN_SPAWN_EGG.get());
+                    // entries.accept(ItemRegistry.TEST.get());
                 })
                 .build()
         );

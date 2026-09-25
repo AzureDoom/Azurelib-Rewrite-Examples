@@ -13,9 +13,9 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-import mod.azure.azexamples.CommonMod;
-
 import java.util.UUID;
+
+import mod.azure.azexamples.CommonMod;
 
 public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
 
@@ -48,15 +48,20 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
                         return ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
                     }
 
-	                @Override
-	                protected void renderItemForBone(AzRendererPipelineContext<UUID, MarauderEntity> context, AzBone bone, ItemStack itemStack, MarauderEntity animatable) {
-		                context.poseStack().mulPose(Axis.XP.rotationDegrees(270));
-		                context.poseStack().mulPose(Axis.YP.rotationDegrees(0));
-		                context.poseStack().mulPose(Axis.ZP.rotationDegrees(0f));
-		                context.poseStack().translate(0.0D, 0.1D, -0.5D);
-						super.renderItemForBone(context, bone, itemStack, animatable);
-	                }
-				})
+                    @Override
+                    protected void renderItemForBone(
+                        AzRendererPipelineContext<UUID, MarauderEntity> context,
+                        AzBone bone,
+                        ItemStack itemStack,
+                        MarauderEntity animatable
+                    ) {
+                        context.poseStack().mulPose(Axis.XP.rotationDegrees(270));
+                        context.poseStack().mulPose(Axis.YP.rotationDegrees(0));
+                        context.poseStack().mulPose(Axis.ZP.rotationDegrees(0f));
+                        context.poseStack().translate(0.0D, 0.1D, -0.5D);
+                        super.renderItemForBone(context, bone, itemStack, animatable);
+                    }
+                })
                 .setRenderEntry(contextPipeline -> {
                     contextPipeline.animatable().updateAnimations();
 

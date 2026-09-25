@@ -1,4 +1,4 @@
-package mod.azure.azexamples.entities.creeper;
+package mod.azure.azexamples.entities.marine;
 
 import mod.azure.azurelib.common.animation.AzAnimatorConfig;
 import mod.azure.azurelib.common.animation.controller.AzAnimationController;
@@ -6,42 +6,41 @@ import mod.azure.azurelib.common.animation.controller.AzAnimationControllerConta
 import mod.azure.azurelib.common.animation.impl.AzEntityAnimator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.monster.Creeper;
 import org.jetbrains.annotations.NotNull;
 
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.CommonStrings;
 
-public class CreeperAnimator extends AzEntityAnimator<Creeper> {
+public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
 
     private static final ResourceLocation ANIMATIONS = CommonMod.modResource(
         "animations/entity/possessed_engineer.animation.json"
     );
 
-    public CreeperAnimator() {
+    public MarineAnimator() {
         super(AzAnimatorConfig.defaultConfig());
     }
 
     @Override
-    public void registerControllers(AzAnimationControllerContainer<Creeper> animationControllerContainer) {
+    public void registerControllers(AzAnimationControllerContainer<MarineEntity> animationControllerContainer) {
         animationControllerContainer.add(
             AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).build()
         );
     }
 
     @Override
-    public @NotNull ResourceLocation getAnimationLocation(Creeper drone) {
+    public @NotNull ResourceLocation getAnimationLocation(MarineEntity drone) {
         return ANIMATIONS;
     }
 
     @Override
-    public void setCustomAnimations(Creeper animatable, float partialTicks) {
+    public void setCustomAnimations(MarineEntity animatable, float partialTicks) {
         super.setCustomAnimations(animatable, partialTicks);
         var boneCache = this.context().boneCache();
-        var leftArm = boneCache.getBakedModel().getBone("field_191223_g");
-        var rightArm = boneCache.getBakedModel().getBone("field_191224_h");
-        var leftLeg = boneCache.getBakedModel().getBone("field_217143_g");
-        var rightLeg = boneCache.getBakedModel().getBone("field_217144_h");
+        var leftArm = boneCache.getBakedModel().getBone("gLeftArm");
+        var rightArm = boneCache.getBakedModel().getBone("gRightArm");
+        var leftLeg = boneCache.getBakedModel().getBone("gLeftLeg");
+        var rightLeg = boneCache.getBakedModel().getBone("gRightLeg");
 
         leftArm.ifPresent(
             azBone -> azBone

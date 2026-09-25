@@ -4,6 +4,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -37,5 +38,10 @@ public class MarineEntity extends Monster {
         setItemSlot(slot, new ItemStack(stack.getItem(), 1));
 
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(7, new RandomStrollGoal(this, 0.3F));
     }
 }
