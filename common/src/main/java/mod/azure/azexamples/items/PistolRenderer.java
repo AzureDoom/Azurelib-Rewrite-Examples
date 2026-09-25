@@ -14,7 +14,7 @@ public class PistolRenderer extends AzItemRenderer {
 
     public PistolRenderer() {
         super(
-            AzItemRendererConfig.builder(itemStack -> MODEL, itemStack -> TEXTURE)
+            AzItemRendererConfig.builder(MODEL, TEXTURE)
                 .setAnimatorProvider(PistolAnimator::new)
                 .build()
         );

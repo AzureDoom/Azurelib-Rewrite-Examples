@@ -19,7 +19,7 @@ import mod.azure.azexamples.CommonMod;
 
 public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
 
-    private static final ResourceLocation MODEL = CommonMod.modResource("geo/entity/marauder.geo.json");
+    private static final ResourceLocation MODEL = CommonMod.modResource("geo/entity/marauder2.geo.json");
 
     private static final ResourceLocation TEXTURE = CommonMod.modResource("textures/entity/marauder.png");
 

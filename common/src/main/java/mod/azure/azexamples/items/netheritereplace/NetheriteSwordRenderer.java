@@ -15,7 +15,7 @@ public class NetheriteSwordRenderer extends AzItemRenderer {
 
     public NetheriteSwordRenderer() {
         super(
-            AzItemRendererConfig.builder(itemStack -> MODEL, itemStack -> TEXTURE)
+            AzItemRendererConfig.builder(MODEL, TEXTURE)
                 .addRenderLayer(new AzAutoGlowingLayer<>())
                 .build()
         );

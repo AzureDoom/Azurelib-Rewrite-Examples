@@ -36,6 +36,15 @@ repositories {
         name = 'Parchment'
         url = 'https://maven.parchmentmc.org'
     }
+    maven {
+        url = 'https://www.cursemaven.com'
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        url = "https://maven.jcraft-eoe.com/releases/"
+    }
 }
 
 dependencies {

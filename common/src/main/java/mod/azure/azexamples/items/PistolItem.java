@@ -26,7 +26,7 @@ public class PistolItem extends Item {
         int remainingUseDuration
     ) {
         super.onUseTick(level, livingEntity, stack, remainingUseDuration);
-        if (livingEntity instanceof Player player && !level.isClientSide()) {
+        if (livingEntity instanceof Player player && level.isClientSide()) {
             dispatcher.serverFire(player, stack);
         }
     }
