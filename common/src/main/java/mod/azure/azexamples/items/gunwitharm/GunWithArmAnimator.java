@@ -1,7 +1,5 @@
 package mod.azure.azexamples.items.gunwitharm;
 
-import mod.azure.azexamples.registry.SoundRegistry;
-import mod.azure.azexamples.services.AzExampleServices;
 import mod.azure.azurelib.animation.AzAnimatorConfig;
 import mod.azure.azurelib.animation.controller.AzAnimationController;
 import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
@@ -9,13 +7,13 @@ import mod.azure.azurelib.animation.controller.keyframe.AzKeyframeCallbacks;
 import mod.azure.azurelib.animation.impl.AzItemAnimator;
 import mod.azure.azurelib.util.client.ClientUtils;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.CommonStrings;
+import mod.azure.azexamples.registry.SoundRegistry;
 
 public class GunWithArmAnimator extends AzItemAnimator {
 
@@ -42,7 +40,7 @@ public class GunWithArmAnimator extends AzItemAnimator {
                                         .playSound(
                                             player,
                                             player.blockPosition(),
-	                                        SoundRegistry.SHOOT_GUN.get(),
+                                            SoundRegistry.SHOOT_GUN.get(),
                                             SoundSource.PLAYERS,
                                             1.0F,
                                             1.0F

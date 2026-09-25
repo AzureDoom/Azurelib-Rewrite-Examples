@@ -1,8 +1,5 @@
 package mod.azure.azexamples.registry;
 
-import mod.azure.azexamples.blocks.StargateBlock;
-import mod.azure.azexamples.blocks.StargateBlockItem;
-import mod.azure.azexamples.services.AzExampleServices;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -11,6 +8,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
 import java.util.function.Supplier;
+
+import mod.azure.azexamples.blocks.StargateBlock;
+import mod.azure.azexamples.blocks.StargateBlockItem;
+import mod.azure.azexamples.services.AzExampleServices;
 
 /**
  * A registry class for managing the initialization and registration of custom blocks and their associated items in the

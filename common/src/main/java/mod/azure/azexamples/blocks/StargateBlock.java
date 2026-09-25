@@ -1,6 +1,5 @@
 package mod.azure.azexamples.blocks;
 
-import mod.azure.azexamples.registry.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -12,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
-import mod.azure.azexamples.services.AzExampleServices;
+import mod.azure.azexamples.registry.EntityRegistry;
 
 public class StargateBlock extends BaseEntityBlock {
 

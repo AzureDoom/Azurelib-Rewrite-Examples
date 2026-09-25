@@ -1,15 +1,16 @@
 package mod.azure.azexamples.registry;
 
-import mod.azure.azexamples.items.PistolItem;
-import mod.azure.azexamples.items.armors.DoomicornArmor;
-import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
-import mod.azure.azexamples.services.AzExampleServices;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.function.Supplier;
+
+import mod.azure.azexamples.items.PistolItem;
+import mod.azure.azexamples.items.armors.DoomicornArmor;
+import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
+import mod.azure.azexamples.services.AzExampleServices;
 
 /**
  * The ItemRegistry class is responsible for managing the registration of items within the mod. It contains predefined

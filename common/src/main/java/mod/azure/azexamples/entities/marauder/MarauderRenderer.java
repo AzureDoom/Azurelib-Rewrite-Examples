@@ -13,9 +13,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 
-import mod.azure.azexamples.CommonMod;
-
 import java.util.UUID;
+
+import mod.azure.azexamples.CommonMod;
 
 public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
 

@@ -1,9 +1,5 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
-import mod.azure.azexamples.registry.BlockRegistry;
-import mod.azure.azexamples.registry.EntityRegistry;
-import mod.azure.azexamples.registry.ItemRegistry;
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -26,8 +22,12 @@ import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.entities.marine.MarineRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
+import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
 import mod.azure.azexamples.items.netheritereplace.NetheriteSwordRenderer;
 import mod.azure.azexamples.items.netheritereplace.armor.NetheriteArmorRenderer;
+import mod.azure.azexamples.registry.BlockRegistry;
+import mod.azure.azexamples.registry.EntityRegistry;
+import mod.azure.azexamples.registry.ItemRegistry;
 
 public class FabricLibClientMod implements ClientModInitializer {
 
@@ -42,14 +42,14 @@ public class FabricLibClientMod implements ClientModInitializer {
             Items.NETHERITE_BOOTS
         );
         AzItemRendererRegistry.register(ItemRegistry.PISTOL.get(), PistolRenderer::new);
-		AzItemRendererRegistry.register(ItemRegistry.PEACEMAKER.get(), GunWithArmRenderer::new);
+        AzItemRendererRegistry.register(ItemRegistry.PEACEMAKER.get(), GunWithArmRenderer::new);
         AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
         AzArmorRendererRegistry.register(
             DoomicornArmorRenderer::new,
-	        ItemRegistry.DOOMICORN_HELMET.get(),
-	        ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-	        ItemRegistry.DOOMICORN_LEGGINGS.get(),
-	        ItemRegistry.DOOMICORN_BOOTS.get()
+            ItemRegistry.DOOMICORN_HELMET.get(),
+            ItemRegistry.DOOMICORN_CHESTPLATE.get(),
+            ItemRegistry.DOOMICORN_LEGGINGS.get(),
+            ItemRegistry.DOOMICORN_BOOTS.get()
         );
         EntityRendererRegistry.register(EntityRegistry.DOOMHUNTER.get(), DoomHunterRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.MARAUDER.get(), MarauderRenderer::new);
@@ -60,7 +60,7 @@ public class FabricLibClientMod implements ClientModInitializer {
         EntityRendererRegistry.register(EntityType.CREEPER, CreeperRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.STARGATE.get(), RenderType.translucent());
         BlockEntityRenderers.register(
-	        EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
+            EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
         );
     }

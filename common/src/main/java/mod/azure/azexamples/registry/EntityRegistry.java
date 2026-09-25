@@ -1,5 +1,14 @@
 package mod.azure.azexamples.registry;
 
+import net.minecraft.core.Registry;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+
+import java.util.function.Supplier;
+
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.entities.SilencedEntityTypeBuilder;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
@@ -9,14 +18,6 @@ import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marine.MarineEntity;
 import mod.azure.azexamples.services.AzExampleServices;
-import net.minecraft.core.Registry;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-
-import java.util.function.Supplier;
 
 /**
  * The EntityRegistry class is responsible for registering custom entity and block entity types to Minecraft's registry.

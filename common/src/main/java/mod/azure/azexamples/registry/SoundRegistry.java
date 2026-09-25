@@ -1,11 +1,12 @@
 package mod.azure.azexamples.registry;
 
-import mod.azure.azexamples.CommonMod;
-import mod.azure.azexamples.services.AzExampleServices;
 import net.minecraft.core.Registry;
 import net.minecraft.sounds.SoundEvent;
 
 import java.util.function.Supplier;
+
+import mod.azure.azexamples.CommonMod;
+import mod.azure.azexamples.services.AzExampleServices;
 
 public class SoundRegistry {
 
