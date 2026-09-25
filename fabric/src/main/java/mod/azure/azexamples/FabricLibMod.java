@@ -1,6 +1,5 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.registry.ItemRegistry;
 import mod.azure.azurelib.animation.cache.AzIdentityRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -10,10 +9,11 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import mod.azure.azexamples.registry.BlockRegistry;
 import mod.azure.azexamples.registry.EntityRegistry;
-import net.minecraft.world.item.Items;
+import mod.azure.azexamples.registry.ItemRegistry;
 
 public final class FabricLibMod implements ModInitializer {
 
@@ -25,19 +25,19 @@ public final class FabricLibMod implements ModInitializer {
     @Override
     public void onInitialize() {
         CommonMod.initRegistries();
-	    AzIdentityRegistry.register(
-		    ItemRegistry.PEACEMAKER.get(),
-		    ItemRegistry.PISTOL.get(),
-		    ItemRegistry.DOOMICORN_HELMET.get(),
-		    ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-		    ItemRegistry.DOOMICORN_LEGGINGS.get(),
-		    ItemRegistry.DOOMICORN_BOOTS.get(),
-		    Items.NETHERITE_SWORD,
-		    Items.NETHERITE_HELMET,
-		    Items.NETHERITE_CHESTPLATE,
-		    Items.NETHERITE_LEGGINGS,
-		    Items.NETHERITE_BOOTS
-	    );
+        AzIdentityRegistry.register(
+            ItemRegistry.PEACEMAKER.get(),
+            ItemRegistry.PISTOL.get(),
+            ItemRegistry.DOOMICORN_HELMET.get(),
+            ItemRegistry.DOOMICORN_CHESTPLATE.get(),
+            ItemRegistry.DOOMICORN_LEGGINGS.get(),
+            ItemRegistry.DOOMICORN_BOOTS.get(),
+            Items.NETHERITE_SWORD,
+            Items.NETHERITE_HELMET,
+            Items.NETHERITE_CHESTPLATE,
+            Items.NETHERITE_LEGGINGS,
+            Items.NETHERITE_BOOTS
+        );
         FabricDefaultAttributeRegistry.register(
             EntityRegistry.DOOMHUNTER.get(),
             Monster.createMonsterAttributes()

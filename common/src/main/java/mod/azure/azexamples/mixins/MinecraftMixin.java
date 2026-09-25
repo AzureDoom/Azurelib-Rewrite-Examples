@@ -1,7 +1,6 @@
 package mod.azure.azexamples.mixins;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.phys.HitResult;
@@ -11,6 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {

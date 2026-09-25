@@ -1,8 +1,9 @@
 package mod.azure.azexamples.entities.manul;
 
-import mod.azure.azexamples.CommonStrings;
 import mod.azure.azurelib.animation.dispatch.command.AzCommand;
 import mod.azure.azurelib.animation.play_behavior.AzPlayBehaviors;
+
+import mod.azure.azexamples.CommonStrings;
 
 public class ManulAnimationDispatcher extends ManulAnimator {
 
