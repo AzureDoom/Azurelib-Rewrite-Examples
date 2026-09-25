@@ -1,9 +1,5 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
-import mod.azure.azexamples.registry.BlockRegistry;
-import mod.azure.azexamples.registry.EntityRegistry;
-import mod.azure.azexamples.registry.ItemRegistry;
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -28,32 +24,38 @@ import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.entities.marine.MarineRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
+import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
 import mod.azure.azexamples.items.netheritereplace.NetheriteSwordRenderer;
 import mod.azure.azexamples.items.netheritereplace.armor.NetheriteArmorRenderer;
+import mod.azure.azexamples.registry.BlockRegistry;
+import mod.azure.azexamples.registry.EntityRegistry;
+import mod.azure.azexamples.registry.ItemRegistry;
 
 @Mod.EventBusSubscriber(modid = CommonStrings.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ForgeClientMod {
 
     @SubscribeEvent
     public static void onClientSetup(final FMLClientSetupEvent event) {
-        AzItemRendererRegistry.register(Items.NETHERITE_SWORD, NetheriteSwordRenderer::new);
-        AzArmorRendererRegistry.register(
-            NetheriteArmorRenderer::new,
-            Items.NETHERITE_HELMET,
-            Items.NETHERITE_CHESTPLATE,
-            Items.NETHERITE_LEGGINGS,
-            Items.NETHERITE_BOOTS
-        );
-        AzItemRendererRegistry.register(ItemRegistry.PISTOL.get(), PistolRenderer::new);
-	    AzItemRendererRegistry.register(ItemRegistry.PEACEMAKER.get(), GunWithArmRenderer::new);
-        AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
-        AzArmorRendererRegistry.register(
-            DoomicornArmorRenderer::new,
-	        ItemRegistry.DOOMICORN_HELMET.get(),
-	        ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-	        ItemRegistry.DOOMICORN_LEGGINGS.get(),
-	        ItemRegistry.DOOMICORN_BOOTS.get()
-        );
+        event.enqueueWork(() -> {
+            AzItemRendererRegistry.register(Items.NETHERITE_SWORD, NetheriteSwordRenderer::new);
+            AzArmorRendererRegistry.register(
+                NetheriteArmorRenderer::new,
+                Items.NETHERITE_HELMET,
+                Items.NETHERITE_CHESTPLATE,
+                Items.NETHERITE_LEGGINGS,
+                Items.NETHERITE_BOOTS
+            );
+            AzItemRendererRegistry.register(ItemRegistry.PISTOL.get(), PistolRenderer::new);
+            AzItemRendererRegistry.register(ItemRegistry.PEACEMAKER.get(), GunWithArmRenderer::new);
+            AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
+            AzArmorRendererRegistry.register(
+                DoomicornArmorRenderer::new,
+                ItemRegistry.DOOMICORN_HELMET.get(),
+                ItemRegistry.DOOMICORN_CHESTPLATE.get(),
+                ItemRegistry.DOOMICORN_LEGGINGS.get(),
+                ItemRegistry.DOOMICORN_BOOTS.get()
+            );
+        });
         ItemBlockRenderTypes.setRenderLayer(BlockRegistry.STARGATE.get(), RenderType.translucent());
     }
 
@@ -66,7 +68,7 @@ public class ForgeClientMod {
         event.registerEntityRenderer(EntityRegistry.MARINE.get(), MarineRenderer::new);
         event.registerEntityRenderer(EntityRegistry.GREMLIN.get(), GremlinRenderer::new);
         event.registerBlockEntityRenderer(
-	        EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
+            EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
         );
         event.registerEntityRenderer(EntityType.CREEPER, CreeperRenderer::new);

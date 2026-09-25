@@ -1,8 +1,5 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.registry.BlockRegistry;
-import mod.azure.azexamples.registry.EntityRegistry;
-import mod.azure.azexamples.registry.ItemRegistry;
 import mod.azure.azurelib.animation.cache.AzIdentityRegistry;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -23,70 +20,76 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
+import mod.azure.azexamples.registry.BlockRegistry;
+import mod.azure.azexamples.registry.EntityRegistry;
+import mod.azure.azexamples.registry.ItemRegistry;
+
 @Mod.EventBusSubscriber
 @Mod(CommonStrings.MOD_ID)
 public final class ForgeMod {
 
-	public static DeferredRegister<BlockEntityType<?>> blockEntityTypeDeferredRegister = DeferredRegister.create(
-		ForgeRegistries.BLOCK_ENTITIES,
-		CommonStrings.MOD_ID
-	);
+    public static DeferredRegister<BlockEntityType<?>> blockEntityTypeDeferredRegister = DeferredRegister.create(
+        ForgeRegistries.BLOCK_ENTITIES,
+        CommonStrings.MOD_ID
+    );
 
-	public static DeferredRegister<Block> blockDeferredRegister = DeferredRegister.create(
-		ForgeRegistries.BLOCKS,
-		CommonStrings.MOD_ID
-	);
+    public static DeferredRegister<Block> blockDeferredRegister = DeferredRegister.create(
+        ForgeRegistries.BLOCKS,
+        CommonStrings.MOD_ID
+    );
 
-	public static DeferredRegister<EntityType<?>> entityTypeDeferredRegister = DeferredRegister.create(
-		ForgeRegistries.ENTITIES,
-		CommonStrings.MOD_ID
-	);
+    public static DeferredRegister<EntityType<?>> entityTypeDeferredRegister = DeferredRegister.create(
+        ForgeRegistries.ENTITIES,
+        CommonStrings.MOD_ID
+    );
 
-	public static DeferredRegister<Item> itemDeferredRegister = DeferredRegister.create(
-		ForgeRegistries.ITEMS,
-		CommonStrings.MOD_ID
-	);
+    public static DeferredRegister<Item> itemDeferredRegister = DeferredRegister.create(
+        ForgeRegistries.ITEMS,
+        CommonStrings.MOD_ID
+    );
 
-	public static DeferredRegister<SoundEvent> soundEventDeferredRegister = DeferredRegister.create(
-		ForgeRegistries.SOUND_EVENTS,
-		CommonStrings.MOD_ID
-	);
+    public static DeferredRegister<SoundEvent> soundEventDeferredRegister = DeferredRegister.create(
+        ForgeRegistries.SOUND_EVENTS,
+        CommonStrings.MOD_ID
+    );
 
-	public static final CreativeModeTab EXAMPLEMOD_TAB = (new CreativeModeTab("examplemod_items") {
+    public static final CreativeModeTab EXAMPLEMOD_TAB = (new CreativeModeTab("examplemod_items") {
 
-		@Override
-		public @NotNull ItemStack makeIcon() {
-			return new ItemStack(BlockRegistry.STARGATE_ITEM.get());
-		}
-	});
+        @Override
+        public @NotNull ItemStack makeIcon() {
+            return new ItemStack(BlockRegistry.STARGATE_ITEM.get());
+        }
+    });
 
     public ForgeMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-	    CommonMod.initRegistries();
+        CommonMod.initRegistries();
         blockEntityTypeDeferredRegister.register(modEventBus);
         blockDeferredRegister.register(modEventBus);
         entityTypeDeferredRegister.register(modEventBus);
         itemDeferredRegister.register(modEventBus);
-	    soundEventDeferredRegister.register(modEventBus);
-		modEventBus.addListener(this::init);
+        soundEventDeferredRegister.register(modEventBus);
+        modEventBus.addListener(this::init);
         modEventBus.addListener(this::createEntityAttributes);
     }
 
-	public void init(final FMLCommonSetupEvent event) {
-		AzIdentityRegistry.register(
-			ItemRegistry.PEACEMAKER.get(),
-			ItemRegistry.PISTOL.get(),
-			ItemRegistry.DOOMICORN_HELMET.get(),
-			ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-			ItemRegistry.DOOMICORN_LEGGINGS.get(),
-			ItemRegistry.DOOMICORN_BOOTS.get(),
-			Items.NETHERITE_SWORD,
-			Items.NETHERITE_HELMET,
-			Items.NETHERITE_CHESTPLATE,
-			Items.NETHERITE_LEGGINGS,
-			Items.NETHERITE_BOOTS
-		);
-	}
+    public void init(final FMLCommonSetupEvent event) {
+        event.enqueueWork(
+            () -> AzIdentityRegistry.register(
+                ItemRegistry.PEACEMAKER.get(),
+                ItemRegistry.PISTOL.get(),
+                ItemRegistry.DOOMICORN_HELMET.get(),
+                ItemRegistry.DOOMICORN_CHESTPLATE.get(),
+                ItemRegistry.DOOMICORN_LEGGINGS.get(),
+                ItemRegistry.DOOMICORN_BOOTS.get(),
+                Items.NETHERITE_SWORD,
+                Items.NETHERITE_HELMET,
+                Items.NETHERITE_CHESTPLATE,
+                Items.NETHERITE_LEGGINGS,
+                Items.NETHERITE_BOOTS
+            )
+        );
+    }
 
     public void createEntityAttributes(final EntityAttributeCreationEvent event) {
         event.put(EntityRegistry.DOOMHUNTER.get(), Monster.createMonsterAttributes().build());
