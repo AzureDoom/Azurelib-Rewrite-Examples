@@ -37,25 +37,27 @@ public class NeoForgeClientMod {
 
     @SubscribeEvent
     public static void onClientSetup(final FMLClientSetupEvent event) {
-        AzItemRendererRegistry.register(Items.NETHERITE_SWORD, NetheriteSwordRenderer::new);
-        AzArmorRendererRegistry.register(
-            NetheriteArmorRenderer::new,
-            Items.NETHERITE_HELMET,
-            Items.NETHERITE_CHESTPLATE,
-            Items.NETHERITE_LEGGINGS,
-            Items.NETHERITE_BOOTS
-        );
-        AzItemRendererRegistry.register(ItemRegistry.TEST.get(), TestRenderer::new);
-        AzItemRendererRegistry.register(ItemRegistry.PISTOL.get(), PistolRenderer::new);
-        AzItemRendererRegistry.register(ItemRegistry.PEACEMAKER.get(), GunWithArmRenderer::new);
-        AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
-        AzArmorRendererRegistry.register(
-            DoomicornArmorRenderer::new,
-            ItemRegistry.DOOMICORN_HELMET.get(),
-            ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-            ItemRegistry.DOOMICORN_LEGGINGS.get(),
-            ItemRegistry.DOOMICORN_BOOTS.get()
-        );
+        event.enqueueWork(() -> {
+            AzItemRendererRegistry.register(Items.NETHERITE_SWORD, NetheriteSwordRenderer::new);
+            AzArmorRendererRegistry.register(
+                NetheriteArmorRenderer::new,
+                Items.NETHERITE_HELMET,
+                Items.NETHERITE_CHESTPLATE,
+                Items.NETHERITE_LEGGINGS,
+                Items.NETHERITE_BOOTS
+            );
+            AzItemRendererRegistry.register(ItemRegistry.TEST.get(), TestRenderer::new);
+            AzItemRendererRegistry.register(ItemRegistry.PISTOL.get(), PistolRenderer::new);
+            AzItemRendererRegistry.register(ItemRegistry.PEACEMAKER.get(), GunWithArmRenderer::new);
+            AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
+            AzArmorRendererRegistry.register(
+                DoomicornArmorRenderer::new,
+                ItemRegistry.DOOMICORN_HELMET.get(),
+                ItemRegistry.DOOMICORN_CHESTPLATE.get(),
+                ItemRegistry.DOOMICORN_LEGGINGS.get(),
+                ItemRegistry.DOOMICORN_BOOTS.get()
+            );
+        });
         ItemBlockRenderTypes.setRenderLayer(BlockRegistry.STARGATE.get(), RenderType.translucent());
     }
 

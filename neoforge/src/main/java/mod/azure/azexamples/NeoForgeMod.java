@@ -66,19 +66,21 @@ public final class NeoForgeMod {
     }
 
     public void init(final FMLCommonSetupEvent event) {
-        AzIdentityRegistry.register(
-            ItemRegistry.PEACEMAKER.get(),
-            ItemRegistry.TEST.get(),
-            ItemRegistry.PISTOL.get(),
-            ItemRegistry.DOOMICORN_HELMET.get(),
-            ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-            ItemRegistry.DOOMICORN_LEGGINGS.get(),
-            ItemRegistry.DOOMICORN_BOOTS.get(),
-            Items.NETHERITE_SWORD,
-            Items.NETHERITE_HELMET,
-            Items.NETHERITE_CHESTPLATE,
-            Items.NETHERITE_LEGGINGS,
-            Items.NETHERITE_BOOTS
+        event.enqueueWork(
+            () -> AzIdentityRegistry.register(
+                ItemRegistry.PEACEMAKER.get(),
+                ItemRegistry.TEST.get(),
+                ItemRegistry.PISTOL.get(),
+                ItemRegistry.DOOMICORN_HELMET.get(),
+                ItemRegistry.DOOMICORN_CHESTPLATE.get(),
+                ItemRegistry.DOOMICORN_LEGGINGS.get(),
+                ItemRegistry.DOOMICORN_BOOTS.get(),
+                Items.NETHERITE_SWORD,
+                Items.NETHERITE_HELMET,
+                Items.NETHERITE_CHESTPLATE,
+                Items.NETHERITE_LEGGINGS,
+                Items.NETHERITE_BOOTS
+            )
         );
     }
 
