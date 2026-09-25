@@ -1,6 +1,5 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.registry.ItemRegistry;
 import mod.azure.azurelib.animation.cache.AzIdentityRegistry;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -23,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import mod.azure.azexamples.registry.BlockRegistry;
 import mod.azure.azexamples.registry.EntityRegistry;
+import mod.azure.azexamples.registry.ItemRegistry;
 
 @Mod.EventBusSubscriber
 @Mod(CommonStrings.MOD_ID)
@@ -69,25 +69,27 @@ public final class ForgeMod {
         entityTypeDeferredRegister.register(modEventBus);
         itemDeferredRegister.register(modEventBus);
         soundEventDeferredRegister.register(modEventBus);
-		modEventBus.addListener(this::init);
+        modEventBus.addListener(this::init);
         modEventBus.addListener(this::createEntityAttributes);
     }
 
-	public void init(final FMLCommonSetupEvent event) {
-		AzIdentityRegistry.register(
-			ItemRegistry.PEACEMAKER.get(),
-			ItemRegistry.PISTOL.get(),
-			ItemRegistry.DOOMICORN_HELMET.get(),
-			ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-			ItemRegistry.DOOMICORN_LEGGINGS.get(),
-			ItemRegistry.DOOMICORN_BOOTS.get(),
-			Items.NETHERITE_SWORD,
-			Items.NETHERITE_HELMET,
-			Items.NETHERITE_CHESTPLATE,
-			Items.NETHERITE_LEGGINGS,
-			Items.NETHERITE_BOOTS
-		);
-	}
+    public void init(final FMLCommonSetupEvent event) {
+        event.enqueueWork(
+            () -> AzIdentityRegistry.register(
+                ItemRegistry.PEACEMAKER.get(),
+                ItemRegistry.PISTOL.get(),
+                ItemRegistry.DOOMICORN_HELMET.get(),
+                ItemRegistry.DOOMICORN_CHESTPLATE.get(),
+                ItemRegistry.DOOMICORN_LEGGINGS.get(),
+                ItemRegistry.DOOMICORN_BOOTS.get(),
+                Items.NETHERITE_SWORD,
+                Items.NETHERITE_HELMET,
+                Items.NETHERITE_CHESTPLATE,
+                Items.NETHERITE_LEGGINGS,
+                Items.NETHERITE_BOOTS
+            )
+        );
+    }
 
     public void createEntityAttributes(final EntityAttributeCreationEvent event) {
         event.put(EntityRegistry.DOOMHUNTER.get(), Monster.createMonsterAttributes().build());
