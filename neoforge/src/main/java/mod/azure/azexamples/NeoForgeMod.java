@@ -66,7 +66,8 @@ public final class NeoForgeMod {
     }
 
     public void registerAzIdentity(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> AzIdentityRegistry.register(
+        event.enqueueWork(
+            () -> AzIdentityRegistry.register(
                 ItemRegistry.PISTOL.get(),
                 ItemRegistry.DOOMICORN_HELMET.get(),
                 ItemRegistry.DOOMICORN_CHESTPLATE.get(),
@@ -77,7 +78,8 @@ public final class NeoForgeMod {
                 Items.NETHERITE_CHESTPLATE,
                 Items.NETHERITE_LEGGINGS,
                 Items.NETHERITE_BOOTS
-        ));
+            )
+        );
     }
 
     public void createEntityAttributes(final EntityAttributeCreationEvent event) {

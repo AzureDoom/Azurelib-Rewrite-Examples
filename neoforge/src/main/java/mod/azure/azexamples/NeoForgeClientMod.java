@@ -36,20 +36,20 @@ public class NeoForgeClientMod {
         event.enqueueWork(() -> {
             AzItemRendererRegistry.register(Items.NETHERITE_SWORD, NetheriteSwordRenderer::new);
             AzArmorRendererRegistry.register(
-                    NetheriteArmorRenderer::new,
-                    Items.NETHERITE_HELMET,
-                    Items.NETHERITE_CHESTPLATE,
-                    Items.NETHERITE_LEGGINGS,
-                    Items.NETHERITE_BOOTS
+                NetheriteArmorRenderer::new,
+                Items.NETHERITE_HELMET,
+                Items.NETHERITE_CHESTPLATE,
+                Items.NETHERITE_LEGGINGS,
+                Items.NETHERITE_BOOTS
             );
             AzItemRendererRegistry.register(ItemRegistry.PISTOL.get(), PistolRenderer::new);
             AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM.get(), StargateBlockItemRenderer::new);
             AzArmorRendererRegistry.register(
-                    DoomicornArmorRenderer::new,
-                    ItemRegistry.DOOMICORN_HELMET.get(),
-                    ItemRegistry.DOOMICORN_CHESTPLATE.get(),
-                    ItemRegistry.DOOMICORN_LEGGINGS.get(),
-                    ItemRegistry.DOOMICORN_BOOTS.get()
+                DoomicornArmorRenderer::new,
+                ItemRegistry.DOOMICORN_HELMET.get(),
+                ItemRegistry.DOOMICORN_CHESTPLATE.get(),
+                ItemRegistry.DOOMICORN_LEGGINGS.get(),
+                ItemRegistry.DOOMICORN_BOOTS.get()
             );
         });
     }
