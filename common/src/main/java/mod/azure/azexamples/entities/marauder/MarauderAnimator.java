@@ -33,7 +33,7 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
     public void registerControllers(AzAnimationControllerContainer<MarauderEntity> animationControllerContainer) {
         animationControllerContainer.add(
             AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER)
-                .setTransitionLength(0)
+                .setTransitionLength(5)
                 .setKeyframeCallbacks(
                     AzKeyframeCallbacks.<MarauderEntity>builder()
                         .setSoundKeyframeHandler(
