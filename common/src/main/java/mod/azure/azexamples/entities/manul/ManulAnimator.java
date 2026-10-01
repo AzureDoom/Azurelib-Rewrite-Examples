@@ -26,7 +26,7 @@ public class ManulAnimator extends AzEntityAnimator<ManulEntity> {
     @Override
     public void registerControllers(AzAnimationControllerContainer<ManulEntity> animationControllerContainer) {
         animationControllerContainer.add(
-            AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).build()
+            AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).setTransitionLength(5).build()
         );
     }
 

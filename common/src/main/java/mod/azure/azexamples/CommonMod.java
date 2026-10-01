@@ -1,5 +1,6 @@
 package mod.azure.azexamples;
 
+import mod.azure.azexamples.entities.manul.ManulAnimationDispatcher;
 import net.minecraft.resources.ResourceLocation;
 
 import mod.azure.azexamples.registry.*;
@@ -23,5 +24,6 @@ public class CommonMod {
         CreativeTabRegistry.initialize();
         SoundRegistry.initialize();
         ItemRegistry.initialize();
+        ManulAnimationDispatcher.init();
     }
 }
