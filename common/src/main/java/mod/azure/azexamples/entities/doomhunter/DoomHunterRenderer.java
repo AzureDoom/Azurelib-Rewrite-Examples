@@ -21,6 +21,7 @@ public class DoomHunterRenderer extends AzEntityRenderer<DoomHunterEntity> {
                     if (!contextPipeline.animatable().isAggressive()) {
                         contextPipeline.animatable().animationDispatcher.clientIdle();
                     }
+                    contextPipeline.animatable().updateAnimations();
 
                     return contextPipeline;
                 })
