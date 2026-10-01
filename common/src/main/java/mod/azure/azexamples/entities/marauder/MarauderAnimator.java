@@ -4,7 +4,6 @@ import mod.azure.azurelib.common.animation.AzAnimatorConfig;
 import mod.azure.azurelib.common.animation.controller.AzAnimationController;
 import mod.azure.azurelib.common.animation.controller.AzAnimationControllerContainer;
 import mod.azure.azurelib.common.animation.controller.keyframe.AzKeyframeCallbacks;
-import mod.azure.azurelib.common.animation.easing.AzEasingTypes;
 import mod.azure.azurelib.common.animation.impl.AzEntityAnimator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -34,8 +33,7 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
     public void registerControllers(AzAnimationControllerContainer<MarauderEntity> animationControllerContainer) {
         animationControllerContainer.add(
             AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER)
-                .setTransitionLength(0)
-                .setEasingType(AzEasingTypes.CATMULLROM)
+                .setTransitionLength(5)
                 .setKeyframeCallbacks(
                     AzKeyframeCallbacks.<MarauderEntity>builder()
                         .setSoundKeyframeHandler(

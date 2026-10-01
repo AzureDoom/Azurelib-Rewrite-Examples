@@ -1,6 +1,7 @@
 package mod.azure.azexamples.entities.marauder;
 
 import mod.azure.azurelib.common.animation.dispatch.command.AzCommand;
+import mod.azure.azurelib.common.animation.dispatch.command.sequence.AzSequence;
 import mod.azure.azurelib.common.animation.play_behavior.AzPlayBehaviors;
 
 import mod.azure.azexamples.CommonStrings;
@@ -38,16 +39,24 @@ public class MarauderAnimationDispatcher {
         AzPlayBehaviors.LOOP
     );
 
+    AzSequence attackSequence = AzSequence.create()
+        .then(CommonStrings.RUN_ANIMATION_NAME, AzPlayBehaviors.PLAY_ONCE)
+        .then(CommonStrings.MELEE_ANIMATION_NAME, AzPlayBehaviors.PLAY_ONCE)
+        .then("idle", AzPlayBehaviors.LOOP);
+
     private final AzCommand meleeCommand = AzCommand.create(
         CommonStrings.BASE_CONTROLLER,
-        CommonStrings.MELEE_ANIMATION_NAME,
-        AzPlayBehaviors.PLAY_ONCE
+        attackSequence
     );
+
+    private static final AzSequence spawnSequence = AzSequence.builder()
+        .play(CommonStrings.SPAWN_ANIMATION_NAME)
+        .then(CommonStrings.IDLE_ANIMATION_NAME, AzPlayBehaviors.LOOP)
+        .build();
 
     private final AzCommand spawnCommand = AzCommand.create(
         CommonStrings.BASE_CONTROLLER,
-        CommonStrings.SPAWN_ANIMATION_NAME,
-        AzPlayBehaviors.PLAY_ONCE
+        spawnSequence
     );
 
     private final MarauderEntity marauder;
