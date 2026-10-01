@@ -24,6 +24,7 @@ public class DoomHunterRenderer extends AzEntityRenderer<DoomHunterEntity> {
                         contextPipeline.animatable(),
                         contextPipeline.partialTick()
                     );
+                    contextPipeline.animatable().updateAnimations();
 
                     return contextPipeline;
                 })

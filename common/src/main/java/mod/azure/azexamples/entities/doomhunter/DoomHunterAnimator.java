@@ -3,6 +3,7 @@ package mod.azure.azexamples.entities.doomhunter;
 import mod.azure.azurelib.common.animation.AzAnimatorConfig;
 import mod.azure.azurelib.common.animation.controller.AzAnimationController;
 import mod.azure.azurelib.common.animation.controller.AzAnimationControllerContainer;
+import mod.azure.azurelib.common.animation.controller.AzBlendMode;
 import mod.azure.azurelib.common.animation.impl.AzEntityAnimator;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +28,11 @@ public class DoomHunterAnimator extends AzEntityAnimator<DoomHunterEntity> {
     @Override
     public void registerControllers(AzAnimationControllerContainer<DoomHunterEntity> animationControllerContainer) {
         animationControllerContainer.add(
-            AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).setTransitionLength(10).build()
+            AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).setTransitionLength(10).build(),
+            AzAnimationController.builder(this, CommonStrings.ATTACK_CONTROLLER)
+                .setBlendMode(AzBlendMode.ADDITIVE)
+                .setWeight(0.6)
+                .build()
         );
     }
 
