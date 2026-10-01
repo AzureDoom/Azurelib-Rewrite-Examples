@@ -2,6 +2,7 @@ package mod.azure.azexamples;
 
 import net.minecraft.resources.ResourceLocation;
 
+import mod.azure.azexamples.entities.manul.ManulAnimationDispatcher;
 import mod.azure.azexamples.registry.BlockRegistry;
 import mod.azure.azexamples.registry.EntityRegistry;
 import mod.azure.azexamples.registry.ItemRegistry;
@@ -25,5 +26,6 @@ public class CommonMod {
         EntityRegistry.initialize();
         SoundRegistry.initialize();
         ItemRegistry.initialize();
+        ManulAnimationDispatcher.init();
     }
 }
