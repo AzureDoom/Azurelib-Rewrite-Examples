@@ -30,46 +30,41 @@ public class CreeperAnimator extends AzEntityAnimator<Creeper> {
     }
 
     @Override
-    public @NotNull ResourceLocation getAnimationLocation(Creeper drone) {
+    public @NotNull ResourceLocation getAnimationLocation(Creeper creeper) {
         return ANIMATIONS;
     }
 
+    /**
+     * Swings the arms and legs like a player's while walking. Each limb is set from its default pose rather than added
+     * to its current rotation, so it works whether the animation also moves the limbs, and never drifts.
+     */
     @Override
-    public void setCustomAnimations(Creeper animatable, float partialTicks) {
-        super.setCustomAnimations(animatable, partialTicks);
-        var boneCache = this.context().boneCache();
-        var leftArm = boneCache.getBakedModel().getBone("field_191223_g");
-        var rightArm = boneCache.getBakedModel().getBone("field_191224_h");
-        var leftLeg = boneCache.getBakedModel().getBone("field_217143_g");
-        var rightLeg = boneCache.getBakedModel().getBone("field_217144_h");
+    public void setCustomAnimations(Creeper creeper, float partialTicks) {
+        super.setCustomAnimations(creeper, partialTicks);
 
-        leftArm.ifPresent(
-            azBone -> azBone
-                .setRotX(
-                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * 2.0F
-                        * animatable.walkAnimation.speed() * 0.5F
-                )
-        );
-        rightArm.ifPresent(
-            azBone -> azBone
-                .setRotX(
-                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * -2.0F
-                        * animatable.walkAnimation.speed() * 0.5F
-                )
-        );
-        leftLeg.ifPresent(
-            azBone -> azBone
-                .setRotX(
-                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F + 3.1415927F) * 2.0F
-                        * animatable.walkAnimation.speed() * 0.5F
-                )
-        );
-        rightLeg.ifPresent(
-            azBone -> azBone
-                .setRotX(
-                    Mth.cos(animatable.walkAnimation.position(partialTicks) * 0.6662F) * 1.4F * animatable.walkAnimation
-                        .speed() * 0.5F
-                )
-        );
+        var model = this.context().boneCache().getBakedModel();
+
+        float walkPosition = creeper.walkAnimation.position(partialTicks) * 0.6662F;
+        float walkSpeed = creeper.walkAnimation.speed(partialTicks);
+
+        float armSwing = Mth.cos(walkPosition) * walkSpeed;
+        float legSwing = Mth.cos(walkPosition) * 1.4F * walkSpeed;
+
+        var rightArm = model.getBoneOrNull("field_191224_h");
+        var leftArm = model.getBoneOrNull("field_191223_g");
+        var rightLeg = model.getBoneOrNull("field_217144_h");
+        var leftLeg = model.getBoneOrNull("field_217143_g");
+
+        if (rightArm != null)
+            rightArm.setRotX(rightArm.getInitialAzSnapshot().getRotX() - armSwing);
+
+        if (leftArm != null)
+            leftArm.setRotX(leftArm.getInitialAzSnapshot().getRotX() + armSwing);
+
+        if (rightLeg != null)
+            rightLeg.setRotX(rightLeg.getInitialAzSnapshot().getRotX() + legSwing);
+
+        if (leftLeg != null)
+            leftLeg.setRotX(leftLeg.getInitialAzSnapshot().getRotX() - legSwing);
     }
 }
