@@ -8,24 +8,24 @@ import mod.azure.azexamples.CommonStrings;
 public class ManulAnimationDispatcher extends ManulAnimator {
 
     /**
-     * Picks a new idle each time the current one finishes, using the real animation length. 75% / 25%, same odds as
-     * the old timer version.
+     * Picks a new idle each time the current one finishes, using the real animation length. 75% / 25%, same odds as the
+     * old timer version.
      */
     public static final AzWeightedPoolBehavior IDLE_POOL = AzWeightedPoolBehavior.builder("azexamples:manul_idle")
-            .add("Idle", 3)
-            .add("Idle_sniff", 1)
-            .build();
+        .add("Idle", 3)
+        .add("Idle_sniff", 1)
+        .build();
 
     /**
      * Picks a new walk variant each time the current one finishes. Equal weights, 20% each.
      */
     public static final AzWeightedPoolBehavior WALK_POOL = AzWeightedPoolBehavior.builder("azexamples:manul_walk")
-            .add("Walk", 1)
-            .addNoRepeat("Walk_Sniff", 1)
-            .add("Walk_Look_Right", 1)
-            .add("Walk_Look_Left", 1)
-            .add("Walk_Bounce", 1)
-            .build();
+        .add("Walk", 1)
+        .addNoRepeat("Walk_Sniff", 1)
+        .add("Walk_Look_Right", 1)
+        .add("Walk_Look_Left", 1)
+        .add("Walk_Bounce", 1)
+        .build();
 
     private final ManulEntity manulEntity;
 

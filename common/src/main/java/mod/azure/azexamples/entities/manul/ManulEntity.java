@@ -54,8 +54,8 @@ public class ManulEntity extends PathfinderMob {
     }
 
     /**
-     * Safe to call every tick. Only switches pools when the debounced state changes; the pool picks each variant
-     * itself when the current animation ends.
+     * Safe to call every tick. Only switches pools when the debounced state changes; the pool picks each variant itself
+     * when the current animation ends.
      */
     public void updateAnimations() {
         animationDispatcher.play(walking);
