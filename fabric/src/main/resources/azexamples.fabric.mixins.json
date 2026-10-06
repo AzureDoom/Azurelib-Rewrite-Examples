@@ -1,14 +1,21 @@
 {
   "required": true,
   "package": "mod.azure.azexamples.mixins",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_25",
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
     "MixinEntityTypeBuilder_SilenceDataFixerError",
+    "MixinEntityTypeBuilder_SilenceDataFixerError",
     "NetheriteArmorMixin",
-    "NetheriteSwordMixin"
+    "NetheriteSwordMixin",
+    "PlayerMixin",
+    "VillagerMixin"
   ],
-  "client": []
+  "client": [
+    "HeldItemRendererMixin",
+    "GameRendererMixin",
+    "MinecraftMixin"
+  ]
 }

@@ -54,6 +54,7 @@ public class CreativeTabRegistry {
                 .newCreativeTabBuilder(
                     BlockRegistry.STARGATE_ITEM,
                     ItemRegistry.PISTOL,
+                        ItemRegistry.PEACEMAKER,
                     ItemRegistry.DOOMICORN_HELMET,
                     ItemRegistry.DOOMICORN_CHESTPLATE,
                     ItemRegistry.DOOMICORN_LEGGINGS,
