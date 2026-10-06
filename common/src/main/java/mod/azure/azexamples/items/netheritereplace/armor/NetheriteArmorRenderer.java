@@ -14,14 +14,6 @@ public class NetheriteArmorRenderer extends AzArmorRenderer {
 
     private static final Identifier TEXTURE = CommonMod.modResource("textures/item/cultist_armor.png");
 
-    /**
-     * Constructs a new renderer for the Doomicorn Armor. <br>
-     * The configuration includes:
-     * <ul>
-     * <li>A {@code DoomicornArmorAnimator} for handling animations specific to the Doomicorn Armor.</li>
-     * <li>A {@code DoomicornArmorBoneProvider} to correctly map model bones for animation.</li>
-     * </ul>
-     */
     public NetheriteArmorRenderer() {
         super(
             AzArmorRendererConfig.builder(MODEL, TEXTURE)
