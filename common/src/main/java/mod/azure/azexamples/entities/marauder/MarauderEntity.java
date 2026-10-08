@@ -90,7 +90,7 @@ public class MarauderEntity extends Monster {
         }
 
         if (isMovingOnGround) {
-            if (this.isAggressive() && !this.isSwinging()) {
+            if (this.isAggressive() && !this.swinging) {
                 animationDispatcher.clientRun();
             } else {
                 animationDispatcher.clientWalk();

@@ -1,5 +1,6 @@
 package mod.azure.azexamples.blocks;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -17,8 +18,15 @@ import mod.azure.azexamples.registry.EntityRegistry;
 
 public class StargateBlock extends BaseEntityBlock {
 
+    public static final MapCodec<StargateBlock> CODEC = simpleCodec(StargateBlock::new);
+
     public StargateBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected @NonNull MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     /**

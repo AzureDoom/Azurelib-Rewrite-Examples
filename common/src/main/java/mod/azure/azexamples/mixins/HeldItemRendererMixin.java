@@ -1,8 +1,9 @@
 package mod.azure.azexamples.mixins;
 
-import net.minecraft.client.player.FirstPersonHandsAndItems;
-import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.world.item.ItemStack;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,8 +15,12 @@ import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
 /**
  * Stops the vanilla drop-down animation when firing.
  */
-@Mixin(FirstPersonHandsAndItems.class)
+@Mixin(ItemInHandRenderer.class)
 public class HeldItemRendererMixin {
+
+    @Shadow
+    @Final
+    private Minecraft minecraft;
 
     @Shadow
     private float mainHandHeight;
@@ -36,7 +41,12 @@ public class HeldItemRendererMixin {
     private ItemStack offHandItem;
 
     @Inject(method = "tick", at = @At("TAIL"))
-    private void azexamples$cancelAnimation(LocalPlayer player, CallbackInfo ci) {
+    private void azexamples$cancelAnimation(CallbackInfo ci) {
+        var player = this.minecraft.player;
+        if (player == null) {
+            return;
+        }
+
         var mainHandStack = player.getMainHandItem();
         var offHandStack = player.getOffhandItem();
 

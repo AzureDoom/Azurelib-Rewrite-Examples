@@ -75,16 +75,18 @@ public class GameRendererMixin {
             0.0F
         );
 
-        poseStack.rotateDegrees(
-            Axis.ZP,
-            Mth.sin(walkDistance * (float) Math.PI) * bob * 3.0F
+        poseStack.mulPose(
+            Axis.ZP.rotationDegrees(
+                Mth.sin(walkDistance * (float) Math.PI) * bob * 3.0F
+            )
         );
 
-        poseStack.rotateDegrees(
-            Axis.XP,
-            Math.abs(
-                Mth.cos(walkDistance * (float) Math.PI - 0.2F) * bob
-            ) * 5.0F
+        poseStack.mulPose(
+            Axis.XP.rotationDegrees(
+                Math.abs(
+                    Mth.cos(walkDistance * (float) Math.PI - 0.2F) * bob
+                ) * 5.0F
+            )
         );
     }
 }

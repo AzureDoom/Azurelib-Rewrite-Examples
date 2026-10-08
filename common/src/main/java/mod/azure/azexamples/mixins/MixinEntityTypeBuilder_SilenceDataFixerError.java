@@ -1,8 +1,8 @@
 package mod.azure.azexamples.mixins;
 
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.resources.DependantName;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.block.Block;
@@ -28,7 +28,7 @@ public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEnt
     private MobCategory category;
 
     @Shadow
-    private TagKey<Block> immuneTo;
+    private ImmutableSet<Block> immuneTo;
 
     @Shadow
     private boolean serialize;
@@ -70,9 +70,6 @@ public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEnt
     @Shadow
     private boolean allowedInPeaceful;
 
-    @Shadow
-    private boolean trackDeltas;
-
     @Unique
     @Override
     @SuppressWarnings({ "unchecked" })
@@ -94,8 +91,7 @@ public class MixinEntityTypeBuilder_SilenceDataFixerError implements SilencedEnt
             this.descriptionId.get(name),
             this.lootTable.get(name),
             this.requiredFeatures,
-            this.allowedInPeaceful,
-            this.trackDeltas
+            this.allowedInPeaceful
         );
     }
 }

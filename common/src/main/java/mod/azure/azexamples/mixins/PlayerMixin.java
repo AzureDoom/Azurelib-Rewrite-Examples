@@ -4,9 +4,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.level.Level;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 
 import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
@@ -19,15 +18,8 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     @Override
-    public boolean swing(
-        @NonNull InteractionHand hand,
-        @NonNull SwingAnimation animation,
-        boolean sendToSwingingEntity
-    ) {
-        if (this.getItemInHand(hand).getItem() instanceof GunWithArmItem) {
-            return false;
-        }
-
-        return super.swing(hand, animation, sendToSwingingEntity);
+    public void swing(@NotNull InteractionHand hand) {
+        if (!(this.getUseItem().getItem() instanceof GunWithArmItem))
+            super.swing(hand);
     }
 }

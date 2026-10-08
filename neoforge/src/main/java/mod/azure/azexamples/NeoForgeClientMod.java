@@ -3,7 +3,7 @@ package mod.azure.azexamples;
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -68,6 +68,6 @@ public class NeoForgeClientMod {
             EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
         );
-        event.registerEntityRenderer(EntityTypes.CREEPER, CreeperRenderer::new);
+        event.registerEntityRenderer(EntityType.CREEPER, CreeperRenderer::new);
     }
 }

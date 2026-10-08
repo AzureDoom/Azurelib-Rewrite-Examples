@@ -128,7 +128,7 @@ public class GunWithArmItem extends Item {
             hitResult.getType() == HitResult.Type.ENTITY && ((EntityHitResult) hitResult)
                 .getEntity() instanceof LivingEntity livingEntity
         ) {
-            livingEntity.setInvulnerableTime(0);
+            livingEntity.invulnerableTime = 0;
             if (level instanceof ServerLevel serverLevel)
                 livingEntity.hurtServer(serverLevel, level.damageSources().playerAttack(player), 5F);
         }

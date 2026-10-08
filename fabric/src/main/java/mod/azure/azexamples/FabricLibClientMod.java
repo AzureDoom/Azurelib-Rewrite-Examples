@@ -6,7 +6,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 
 import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
@@ -55,7 +55,7 @@ public class FabricLibClientMod implements ClientModInitializer {
         EntityRenderers.register(EntityRegistry.JURAVENATOR.get(), JuravenatorRenderer::new);
         EntityRenderers.register(EntityRegistry.MARINE.get(), MarineRenderer::new);
         EntityRenderers.register(EntityRegistry.GREMLIN.get(), GremlinRenderer::new);
-        EntityRenderers.register(EntityTypes.CREEPER, CreeperRenderer::new);
+        EntityRenderers.register(EntityType.CREEPER, CreeperRenderer::new);
         BlockEntityRenderers.register(
             EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
