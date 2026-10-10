@@ -1,0 +1,14 @@
+entity.azexamples.marauder.name=Marauder
+entity.azexamples.doomhunter.name=Doomhunter
+entity.azexamples.manul.name=Manul
+entity.azexamples.juravenator.name=Juravenator
+entity.azexamples.marine.name=Marine
+entity.azexamples.gremlin.name=Gremlin
+item.azexamples.doomicorn_helmet.name=Doomicorn Helmet
+item.azexamples.doomicorn_chestplate.name=Doomicorn Chestplate
+item.azexamples.doomicorn_leggings.name=Doomicorn Leggings
+item.azexamples.doomicorn_boots.name=Doomicorn Boots
+item.azexamples.pistol.name=Pistol
+item.azexamples.peacemaker.name=Peacemaker
+tile.azexamples.stargate.name=Stargate
+itemGroup.azexamples.examplemod_items=AzureLib Examples
