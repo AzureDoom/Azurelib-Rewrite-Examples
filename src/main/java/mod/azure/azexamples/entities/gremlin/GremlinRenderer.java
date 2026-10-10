@@ -1,6 +1,5 @@
 package mod.azure.azexamples.entities.gremlin;
 
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
 import mod.azure.azurelib.render.entity.AzEntityRenderer;
@@ -16,15 +15,14 @@ public class GremlinRenderer extends AzEntityRenderer<GremlinEntity> {
 
     private static final ResourceLocation EXTRA_TEX = CommonMod.modResource("textures/entity/gremlin_cape.png");
 
-    public GremlinRenderer(RenderManager renderManager) {
+    public GremlinRenderer() {
         super(
             AzEntityRendererConfig.<GremlinEntity>builder(MODEL, TEXTURE)
                 .setBoneTextureOverrideProvider(
                     bone -> "bipedCape".equals(bone.getName()) ? EXTRA_TEX : null
                 )
                 .setShadowRadius(0.5F)
-                .build(),
-            renderManager
+                .build()
         );
     }
 }

@@ -1,18 +1,11 @@
 package mod.azure.azexamples.entities.marauder;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
 
 import mod.azure.azurelib.util.MoveAnalysis;
 
@@ -20,10 +13,10 @@ import mod.azure.azexamples.entities.marauder.ai.DelayedAttackAI;
 
 public class MarauderEntity extends EntityMob {
 
-    protected static final DataParameter<Float> SPAWN_TICKS = EntityDataManager.createKey(
-        MarauderEntity.class,
-        DataSerializers.FLOAT
-    );
+    /** DataWatcher slots. */
+    private static final int SPAWN_TICKS = 20;
+
+    private static final int AGGRESSIVE = 21;
 
     public int MAX_SPAWN_ANIMATION_TICKS = 290;
 
@@ -37,12 +30,22 @@ public class MarauderEntity extends EntityMob {
         this.animationDispatcher = new MarauderAnimationDispatcher(this);
         this.moveAnalysis = new MoveAnalysis(this);
         this.stepHeight = 2.0F;
+        this.tasks.addTask(7, new EntityAIWander(this, 0.3D));
+        this.tasks.addTask(2, new DelayedAttackAI(this, 0.6D, 5, this::runAttackAnimations));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
+    }
+
+    /** 1.7.10 mobs only run their task list when this returns true. */
+    @Override
+    protected boolean isAIEnabled() {
+        return true;
     }
 
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(SPAWN_TICKS, 0.0F);
+        this.dataWatcher.addObject(SPAWN_TICKS, 0.0F);
+        this.dataWatcher.addObject(AGGRESSIVE, (byte) 0);
     }
 
     /**
@@ -52,8 +55,8 @@ public class MarauderEntity extends EntityMob {
     protected void onDeathUpdate() {
         ++this.deathTime;
 
-        if (this.deathTime >= 80 && !this.world.isRemote && !this.isDead) {
-            this.world.setEntityState(this, (byte) 20);
+        if (this.deathTime >= 80 && !this.worldObj.isRemote && !this.isDead) {
+            this.worldObj.setEntityState(this, (byte) 20);
             this.setDead();
         }
     }
@@ -63,9 +66,15 @@ public class MarauderEntity extends EntityMob {
         super.onUpdate();
         moveAnalysis.update();
 
-        if (!this.world.isRemote && this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && this.isEntityAlive()) {
+        if (this.worldObj.isRemote) {
+            return;
+        }
+
+        this.dataWatcher.updateObject(AGGRESSIVE, (byte) (this.getAttackTarget() != null ? 1 : 0));
+
+        if (this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && this.isEntityAlive()) {
             this.setSpawnTicks(this.getSpawnTicks() + 1.0F);
-            this.getNavigator().clearPath();
+            this.getNavigator().clearPathEntity();
             this.renderYawOffset = 0;
             this.rotationYawHead = 0;
             this.rotationPitch = 0;
@@ -75,10 +84,10 @@ public class MarauderEntity extends EntityMob {
     }
 
     /**
-     * 1.12.2 has no {@code Mob#isAggressive}; having a target is the closest equivalent.
+     * The attack target only exists on the server in 1.7.10, so it is synced to the client through the data watcher.
      */
     public boolean isAggressive() {
-        return this.getAttackTarget() != null;
+        return this.dataWatcher.getWatchableObjectByte(AGGRESSIVE) != 0;
     }
 
     public void updateAnimations() {
@@ -113,32 +122,22 @@ public class MarauderEntity extends EntityMob {
     }
 
     protected void setSpawnTicks(float spawnTicks) {
-        this.dataManager.set(SPAWN_TICKS, spawnTicks);
+        this.dataWatcher.updateObject(SPAWN_TICKS, spawnTicks);
     }
 
     public float getSpawnTicks() {
-        return this.dataManager.get(SPAWN_TICKS);
+        return this.dataWatcher.getWatchableObjectFloat(SPAWN_TICKS);
     }
 
     @Override
-    public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
+    public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setFloat("SpawnTicks", this.getSpawnTicks());
     }
 
     @Override
-    public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+    public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.setSpawnTicks(compound.getFloat("SpawnTicks"));
     }
-
-    @Override
-    protected void initEntityAI() {
-        this.tasks.addTask(7, new EntityAIWander(this, 0.3D));
-        this.tasks.addTask(2, new DelayedAttackAI(this, 0.6D, true, 5, this::runAttackAnimations));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, true));
-    }
-
-    @Override
-    protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block block) { /* DISABLES VANILLA WALK SOUND */}
 }

@@ -1,6 +1,5 @@
 package mod.azure.azexamples.entities.marine;
 
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
 import mod.azure.azurelib.render.entity.AzEntityRenderer;
@@ -14,14 +13,13 @@ public class MarineRenderer extends AzEntityRenderer<MarineEntity> {
 
     private static final ResourceLocation TEXTURE = CommonMod.modResource("textures/entity/marine.png");
 
-    public MarineRenderer(RenderManager renderManager) {
+    public MarineRenderer() {
         super(
             AzEntityRendererConfig.<MarineEntity>builder(MODEL, TEXTURE)
                 .addRenderLayer(new MarineArmorLayer())
                 .addRenderLayer(new MarineItemLayer())
                 .setShadowRadius(0.5F)
-                .build(),
-            renderManager
+                .build()
         );
     }
 }

@@ -3,7 +3,6 @@ package mod.azure.azexamples.items.gunwitharm;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 
 import javax.annotation.Nonnull;
 
@@ -16,7 +15,6 @@ import mod.azure.azurelib.util.client.ClientUtils;
 
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.CommonStrings;
-import mod.azure.azexamples.registry.SoundRegistry;
 
 public class GunWithArmAnimator extends AzItemAnimator {
 
@@ -40,13 +38,14 @@ public class GunWithArmAnimator extends AzItemAnimator {
                                 EntityPlayer player = ClientUtils.getClientPlayer();
 
                                 if (player != null && event.getKeyframeData().getSound().matches("firing"))
-                                    player.world.playSound(
-                                        player,
-                                        player.getPosition(),
-                                        SoundRegistry.SHOOT_GUN,
-                                        SoundCategory.PLAYERS,
+                                    player.worldObj.playSound(
+                                        player.posX,
+                                        player.posY,
+                                        player.posZ,
+                                        CommonStrings.MOD_ID + ":vigilance_fire",
                                         1.0F,
-                                        1.0F
+                                        1.0F,
+                                        false
                                     );
                             }
                         )

@@ -5,6 +5,9 @@ import net.minecraft.world.World;
 
 public class DoomHunterEntity extends EntityMob {
 
+    /** DataWatcher slot for the synced "has an attack target" flag. */
+    private static final int AGGRESSIVE = 20;
+
     protected final DoomHunterAnimationDispatcher animationDispatcher;
 
     public DoomHunterEntity(World world) {
@@ -13,11 +16,26 @@ public class DoomHunterEntity extends EntityMob {
         this.animationDispatcher = new DoomHunterAnimationDispatcher(this);
     }
 
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(AGGRESSIVE, (byte) 0);
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+
+        if (!this.worldObj.isRemote) {
+            this.dataWatcher.updateObject(AGGRESSIVE, (byte) (this.getEntityToAttack() != null ? 1 : 0));
+        }
+    }
+
     /**
-     * 1.12.2 has no {@code Mob#isAggressive}; having a target is the closest equivalent.
+     * The attack target only exists on the server in 1.7.10, so it is synced to the client through the data watcher.
      */
     public boolean isAggressive() {
-        return this.getAttackTarget() != null;
+        return this.dataWatcher.getWatchableObjectByte(AGGRESSIVE) != 0;
     }
 
     public void updateAnimations() {

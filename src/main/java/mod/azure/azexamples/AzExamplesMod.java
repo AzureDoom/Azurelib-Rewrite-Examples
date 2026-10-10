@@ -1,9 +1,9 @@
 package mod.azure.azexamples;
 
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import mod.azure.azexamples.proxy.CommonProxy;
 
@@ -11,10 +11,13 @@ import mod.azure.azexamples.proxy.CommonProxy;
     modid = CommonStrings.MOD_ID,
     name = CommonStrings.MOD_NAME,
     useMetadata = true,
-    acceptedMinecraftVersions = "[1.12.2]",
+    acceptedMinecraftVersions = "[1.7.10]",
     dependencies = "required-after:azurelib"
 )
 public final class AzExamplesMod {
+
+    @Mod.Instance(CommonStrings.MOD_ID)
+    public static AzExamplesMod instance;
 
     @SidedProxy(
         clientSide = "mod.azure.azexamples.proxy.ClientProxy",
@@ -24,6 +27,7 @@ public final class AzExamplesMod {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        CommonMod.preInit();
         proxy.preInit();
     }
 

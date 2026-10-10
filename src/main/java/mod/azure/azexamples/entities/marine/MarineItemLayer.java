@@ -1,14 +1,14 @@
 package mod.azure.azexamples.entities.marine;
 
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
 import java.util.UUID;
 
 import mod.azure.azurelib.model.AzBone;
 import mod.azure.azurelib.render.AzRendererPipelineContext;
+import mod.azure.azurelib.render.item.AzItemDisplayContext;
 import mod.azure.azurelib.render.layer.AzBlockAndItemLayer;
+import mod.azure.azurelib.util.AzEquipmentSlot;
 import mod.azure.azurelib.util.math.Vector3f;
 
 public class MarineItemLayer extends AzBlockAndItemLayer<UUID, MarineEntity> {
@@ -21,21 +21,21 @@ public class MarineItemLayer extends AzBlockAndItemLayer<UUID, MarineEntity> {
     public ItemStack itemStackForBone(AzBone bone, MarineEntity animatable) {
         switch (bone.getName()) {
             case RIGHT_HAND:
-                return animatable.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
+                return AzEquipmentSlot.MAINHAND.getStack(animatable);
             case LEFT_HAND:
-                return animatable.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
+                return AzEquipmentSlot.OFFHAND.getStack(animatable);
             default:
                 return null;
         }
     }
 
     @Override
-    protected ItemCameraTransforms.TransformType getTransformTypeForStack(
+    protected AzItemDisplayContext getTransformTypeForStack(
         AzBone bone,
         ItemStack stack,
         MarineEntity animatable
     ) {
-        return ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND;
+        return AzItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
     }
 
     @Override

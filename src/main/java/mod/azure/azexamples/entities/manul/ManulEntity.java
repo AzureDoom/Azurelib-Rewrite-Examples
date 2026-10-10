@@ -20,6 +20,13 @@ public class ManulEntity extends EntityCreature {
         super(world);
         this.setSize(1.2F, 1.1F);
         this.animationDispatcher = new ManulAnimationDispatcher(this);
+        this.tasks.addTask(7, new EntityAIWander(this, 0.3D));
+    }
+
+    /** 1.7.10 mobs only run their task list when this returns true. */
+    @Override
+    protected boolean isAIEnabled() {
+        return true;
     }
 
     @Override
@@ -46,10 +53,5 @@ public class ManulEntity extends EntityCreature {
 
     public void updateAnimations() {
         animationDispatcher.play(walking);
-    }
-
-    @Override
-    protected void initEntityAI() {
-        this.tasks.addTask(7, new EntityAIWander(this, 0.3D));
     }
 }

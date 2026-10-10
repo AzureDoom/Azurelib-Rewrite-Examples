@@ -1,8 +1,5 @@
 package mod.azure.azexamples.entities.marauder;
 
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -12,8 +9,10 @@ import mod.azure.azurelib.model.AzBone;
 import mod.azure.azurelib.render.AzRendererPipelineContext;
 import mod.azure.azurelib.render.entity.AzEntityRenderer;
 import mod.azure.azurelib.render.entity.AzEntityRendererConfig;
+import mod.azure.azurelib.render.item.AzItemDisplayContext;
 import mod.azure.azurelib.render.layer.AzAutoGlowingLayer;
 import mod.azure.azurelib.render.layer.AzBlockAndItemLayer;
+import mod.azure.azurelib.util.AzEquipmentSlot;
 import mod.azure.azurelib.util.math.Vector3f;
 
 import mod.azure.azexamples.CommonMod;
@@ -26,7 +25,7 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
 
     private static final String LEFT_HAND = "item_bone";
 
-    public MarauderRenderer(RenderManager renderManager) {
+    public MarauderRenderer() {
         super(
             AzEntityRendererConfig.<MarauderEntity>builder(MODEL, TEXTURE)
                 .addRenderLayer(new AzAutoGlowingLayer<>())
@@ -35,19 +34,19 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
                     @Override
                     public ItemStack itemStackForBone(AzBone bone, MarauderEntity animatable) {
                         if (bone.getName().equals(LEFT_HAND)) {
-                            return animatable.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
+                            return AzEquipmentSlot.MAINHAND.getStack(animatable);
                         }
 
                         return null;
                     }
 
                     @Override
-                    protected ItemCameraTransforms.TransformType getTransformTypeForStack(
+                    protected AzItemDisplayContext getTransformTypeForStack(
                         AzBone bone,
                         ItemStack stack,
                         MarauderEntity animatable
                     ) {
-                        return ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND;
+                        return AzItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
                     }
 
                     @Override
@@ -71,8 +70,7 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
                 .setAnimatorProvider(MarauderAnimator::new)
                 .setDeathMaxRotation(0F)
                 .setShadowRadius(0.5F)
-                .build(),
-            renderManager
+                .build()
         );
     }
 }

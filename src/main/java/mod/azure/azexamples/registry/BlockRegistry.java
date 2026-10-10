@@ -1,15 +1,29 @@
 package mod.azure.azexamples.registry;
 
-import net.minecraft.item.ItemBlock;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 
+import mod.azure.azexamples.CommonStrings;
 import mod.azure.azexamples.blocks.StargateBlock;
 import mod.azure.azexamples.blocks.StargateBlockItem;
+import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 
 public final class BlockRegistry {
 
-    public static final StargateBlock STARGATE = RegistryHelper.block(new StargateBlock(), "stargate");
-
-    public static final ItemBlock STARGATE_ITEM = RegistryHelper.item(new StargateBlockItem(STARGATE), "stargate");
+    public static final StargateBlock STARGATE = new StargateBlock();
 
     private BlockRegistry() {}
+
+    public static void register() {
+        STARGATE.setUnlocalizedName(CommonStrings.MOD_ID + ".stargate");
+        STARGATE.setTextureName(CommonStrings.MOD_ID + ":stargate");
+        STARGATE.setCreativeTab(AzExamplesTab.TAB);
+        GameRegistry.registerBlock(STARGATE, StargateBlockItem.class, "stargate");
+        GameRegistry.registerTileEntity(StargateBlockEntity.class, CommonStrings.MOD_ID + ":stargate_block_entity");
+    }
+
+    /** The stargate's {@link StargateBlockItem}, created by Forge when the block is registered. */
+    public static Item stargateItem() {
+        return Item.getItemFromBlock(STARGATE);
+    }
 }

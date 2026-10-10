@@ -9,8 +9,8 @@ import mod.azure.azurelib.render.layer.AzAutoGlowingLayer;
 import mod.azure.azexamples.CommonMod;
 
 /**
- * Replaces the vanilla diamond sword's look (1.12.2 has no netherite). The vanilla item model is overridden by
- * {@code assets/minecraft/models/item/diamond_sword.json}, which uses {@code builtin/entity}.
+ * Replaces the vanilla diamond sword's look (1.7.10 has no netherite). Its display transforms are read from
+ * {@code assets/minecraft/models/item/diamond_sword.json}.
  */
 public class DiamondSwordRenderer extends AzItemRenderer {
 

@@ -1,6 +1,5 @@
 package mod.azure.azexamples.entities.juravenator;
 
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
 import mod.azure.azurelib.render.entity.AzEntityRenderer;
@@ -14,7 +13,7 @@ public class JuravenatorRenderer extends AzEntityRenderer<JuravenatorEntity> {
 
     private static final ResourceLocation TEXTURE = CommonMod.modResource("textures/entity/juravenator.png");
 
-    public JuravenatorRenderer(RenderManager renderManager) {
+    public JuravenatorRenderer() {
         super(
             AzEntityRendererConfig.<JuravenatorEntity>builder(MODEL, TEXTURE)
                 .setRenderEntry(contextPipeline -> {
@@ -23,8 +22,7 @@ public class JuravenatorRenderer extends AzEntityRenderer<JuravenatorEntity> {
                 })
                 .setAnimatorProvider(JuravenatorAnimator::new)
                 .setShadowRadius(0.5F)
-                .build(),
-            renderManager
+                .build()
         );
     }
 }

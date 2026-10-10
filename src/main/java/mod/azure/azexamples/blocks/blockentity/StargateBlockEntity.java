@@ -1,12 +1,11 @@
 package mod.azure.azexamples.blocks.blockentity;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 
 /**
- * 1.12.2 tile entities tick through {@link ITickable} instead of a block-provided ticker.
+ * 1.7.10 tile entities tick through {@link #updateEntity()}.
  */
-public class StargateBlockEntity extends TileEntity implements ITickable {
+public class StargateBlockEntity extends TileEntity {
 
     public final StargateBlockAnimationDispatcher animationDispatcher;
 
@@ -15,8 +14,8 @@ public class StargateBlockEntity extends TileEntity implements ITickable {
     }
 
     @Override
-    public void update() {
-        if (this.world != null && this.world.isRemote) {
+    public void updateEntity() {
+        if (this.worldObj != null && this.worldObj.isRemote) {
             this.animationDispatcher.serverSpin();
         }
     }

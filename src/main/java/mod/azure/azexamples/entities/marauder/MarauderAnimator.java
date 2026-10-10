@@ -1,9 +1,6 @@
 package mod.azure.azexamples.entities.marauder;
 
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 
 import javax.annotation.Nonnull;
 
@@ -39,19 +36,19 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
                                 MarauderEntity marauder = event.getAnimatable();
 
                                 if (sound.equals("walk")) {
-                                    playLocal(marauder, SoundEvents.BLOCK_METAL_STEP, 1.0F);
+                                    playLocal(marauder, "step.stone", 1.0F);
                                 }
 
                                 if (sound.equals("run")) {
-                                    playLocal(marauder, SoundEvents.ENTITY_SKELETON_STEP, 1.0F);
+                                    playLocal(marauder, "mob.skeleton.step", 1.0F);
                                 }
 
                                 if (sound.equals("portal")) {
-                                    playLocal(marauder, SoundEvents.BLOCK_PORTAL_AMBIENT, 0.2F);
+                                    playLocal(marauder, "portal.portal", 0.2F);
                                 }
 
                                 if (sound.equals("axe")) {
-                                    playLocal(marauder, SoundEvents.ENTITY_ENDEREYE_LAUNCH, 1.0F);
+                                    playLocal(marauder, "random.bow", 1.0F);
                                 }
                             }
                         )
@@ -61,13 +58,12 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
         );
     }
 
-    private static void playLocal(MarauderEntity marauder, SoundEvent sound, float volume) {
-        marauder.world.playSound(
+    private static void playLocal(MarauderEntity marauder, String sound, float volume) {
+        marauder.worldObj.playSound(
             marauder.posX,
             marauder.posY,
             marauder.posZ,
             sound,
-            SoundCategory.HOSTILE,
             volume,
             1.0F,
             true

@@ -1,6 +1,5 @@
 package mod.azure.azexamples.entities.creeper;
 
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.ResourceLocation;
 
@@ -21,7 +20,7 @@ public class CreeperRenderer extends AzEntityRenderer<EntityCreeper> {
 
     private static final ResourceLocation TEXTURE = CommonMod.modResource("textures/entity/possessed_engineer.png");
 
-    public CreeperRenderer(RenderManager renderManager) {
+    public CreeperRenderer() {
         super(
             AzEntityRendererConfig.<EntityCreeper>builder(MODEL, TEXTURE)
                 .setAnimatorProvider(CreeperAnimator::new)
@@ -31,8 +30,7 @@ public class CreeperRenderer extends AzEntityRenderer<EntityCreeper> {
                     return contextPipeline;
                 })
                 .setShadowRadius(0.5F)
-                .build(),
-            renderManager
+                .build()
         );
     }
 

@@ -4,18 +4,23 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-
-import mod.azure.azurelib.util.client.ClientUtils;
+import java.util.Map;
+import java.util.UUID;
+import java.util.WeakHashMap;
 
 public class GunWithArmItem extends Item {
 
+    private static final int FIRE_COOLDOWN_TICKS = 5;
+
     final GunWithArmDispatcher dispatcher;
+
+    /**
+     * 1.7.10 has no item cooldown tracker, so the next allowed shot is kept per player (and per side, since the client
+     * and server each run this item's logic).
+     */
+    private final Map<World, Map<UUID, Long>> nextShot = new WeakHashMap<>();
 
     public GunWithArmItem() {
         this.setMaxStackSize(1);
@@ -23,42 +28,41 @@ public class GunWithArmItem extends Item {
     }
 
     @Override
-    public void onUsingTick(ItemStack stack, EntityLivingBase livingEntity, int remainingUseDuration) {
-        if (livingEntity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) livingEntity;
+    public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+        Map<UUID, Long> shots = nextShot.computeIfAbsent(player.worldObj, world -> new java.util.HashMap<>());
+        long now = player.worldObj.getTotalWorldTime();
+        Long allowedAt = shots.get(player.getUniqueID());
 
-            if (!player.getCooldownTracker().hasCooldown(stack.getItem())) {
-                fire(player.world, player, stack);
-            }
+        if (allowedAt == null || now >= allowedAt) {
+            shots.put(player.getUniqueID(), now + FIRE_COOLDOWN_TICKS);
+            fire(player.worldObj, player, stack);
         }
 
-        super.onUsingTick(stack, livingEntity, remainingUseDuration);
+        super.onUsingTick(stack, player, count);
     }
 
     @Override
-    @Nonnull
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World world, EntityPlayer user, @Nonnull EnumHand hand) {
-        ItemStack itemStack = user.getHeldItem(hand);
-        user.setActiveHand(hand);
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemStack);
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+        return stack;
     }
 
     @Override
-    public int getMaxItemUseDuration(@Nonnull ItemStack stack) {
+    public int getMaxItemUseDuration(ItemStack stack) {
         return 72000;
     }
 
-    private void fire(@Nonnull World world, @Nonnull EntityPlayer player, ItemStack itemStack) {
+    private void fire(World world, EntityPlayer player, ItemStack itemStack) {
         dispatcher.serverFire(player, itemStack);
-        player.getCooldownTracker().setCooldown(itemStack.getItem(), 5);
 
         if (world.isRemote) {
-            ClientUtils.getClientPlayer().turn(getRecoilX(player) * 5, -getRecoilY() * 5);
+            // Entity#setAngles is the client's mouse-look turn (yaw, pitch), used here for recoil.
+            player.setAngles(getRecoilX(player) * 5, -getRecoilY() * 5);
         }
     }
 
     public static float getRecoilX(EntityPlayer player) {
-        float baseRecoilX = player.world.rand.nextBoolean() ? 1f : -1f;
+        float baseRecoilX = player.worldObj.rand.nextBoolean() ? 1f : -1f;
         return baseRecoilX / 2;
     }
 
@@ -67,9 +71,14 @@ public class GunWithArmItem extends Item {
     }
 
     /**
-     * True if the entity is currently using (holding right click with) a gun. Used by the client mixins.
+     * True if the entity is a player currently using (holding right click with) a gun. Used by the client mixins.
      */
     public static boolean isUsingGun(EntityLivingBase entity) {
-        return entity != null && entity.getActiveItemStack().getItem() instanceof GunWithArmItem;
+        if (!(entity instanceof EntityPlayer)) {
+            return false;
+        }
+
+        ItemStack inUse = ((EntityPlayer) entity).getItemInUse();
+        return inUse != null && inUse.getItem() instanceof GunWithArmItem;
     }
 }

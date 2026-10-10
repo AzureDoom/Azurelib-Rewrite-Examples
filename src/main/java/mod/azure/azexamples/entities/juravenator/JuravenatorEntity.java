@@ -17,6 +17,13 @@ public class JuravenatorEntity extends EntityMob {
         this.setSize(3.0F, 7.0F);
         this.moveAnalysis = new MoveAnalysis(this);
         this.animationDispatcher = new JuravenatorAnimationDispatcher(this);
+        this.tasks.addTask(0, new EntityAIWander(this, 0.7D));
+    }
+
+    /** 1.7.10 mobs only run their task list when this returns true. */
+    @Override
+    protected boolean isAIEnabled() {
+        return true;
     }
 
     @Override
@@ -32,10 +39,5 @@ public class JuravenatorEntity extends EntityMob {
         }
 
         this.animationDispatcher.clientIdle();
-    }
-
-    @Override
-    protected void initEntityAI() {
-        this.tasks.addTask(0, new EntityAIWander(this, 0.7D));
     }
 }

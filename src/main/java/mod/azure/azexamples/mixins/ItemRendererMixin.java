@@ -1,10 +1,8 @@
 package mod.azure.azexamples.mixins;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,62 +11,40 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
 
+/**
+ * Stops the "re-equip" dip of the held gun whenever its NBT changes (AzureLib's item IDs and animation commands touch
+ * the stack).
+ */
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
 
     @Shadow
-    @Final
     private Minecraft mc;
 
     @Shadow
-    private ItemStack itemStackMainHand;
+    private ItemStack itemToRender;
 
     @Shadow
-    private ItemStack itemStackOffHand;
+    private float equippedProgress;
 
     @Shadow
-    private float equippedProgressMainHand;
-
-    @Shadow
-    private float prevEquippedProgressMainHand;
-
-    @Shadow
-    private float equippedProgressOffHand;
-
-    @Shadow
-    private float prevEquippedProgressOffHand;
+    private float prevEquippedProgress;
 
     @Inject(method = "updateEquippedItem", at = @At("TAIL"))
     private void azexamples$cancelAnimation(CallbackInfo ci) {
-        EntityPlayerSP player = this.mc.player;
-
-        if (player == null) {
+        if (this.mc.thePlayer == null) {
             return;
         }
 
-        ItemStack mainHand = player.getHeldItemMainhand();
-        ItemStack offHand = player.getHeldItemOffhand();
+        ItemStack held = this.mc.thePlayer.inventory.getCurrentItem();
 
         if (
-            this.itemStackMainHand.getItem() instanceof GunWithArmItem && ItemStack.areItemsEqual(
-                this.itemStackMainHand,
-                mainHand
-            )
+            held != null && this.itemToRender != null && held.getItem() instanceof GunWithArmItem && held
+                .getItem() == this.itemToRender.getItem()
         ) {
-            this.equippedProgressMainHand = 1.0F;
-            this.prevEquippedProgressMainHand = 1.0F;
-            this.itemStackMainHand = mainHand;
-        }
-
-        if (
-            this.itemStackOffHand.getItem() instanceof GunWithArmItem && ItemStack.areItemsEqual(
-                this.itemStackOffHand,
-                offHand
-            )
-        ) {
-            this.equippedProgressOffHand = 1.0F;
-            this.prevEquippedProgressOffHand = 1.0F;
-            this.itemStackOffHand = offHand;
+            this.equippedProgress = 1.0F;
+            this.prevEquippedProgress = 1.0F;
+            this.itemToRender = held;
         }
     }
 }

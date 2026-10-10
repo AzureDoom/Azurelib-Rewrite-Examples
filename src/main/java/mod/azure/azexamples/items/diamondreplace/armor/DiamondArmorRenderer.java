@@ -10,7 +10,7 @@ import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.items.DoomArmorBoneProvider;
 
 /**
- * Replaces the vanilla diamond armor's look (1.12.2 has no netherite).
+ * Replaces the vanilla diamond armor's look (1.7.10 has no netherite).
  */
 public class DiamondArmorRenderer extends AzArmorRenderer {
 

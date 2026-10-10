@@ -1,9 +1,9 @@
 package mod.azure.azexamples.proxy;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.Items;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
@@ -35,31 +35,32 @@ import mod.azure.azexamples.registry.ItemRegistry;
 public class ClientProxy extends CommonProxy {
 
     @Override
-    public void preInit() {
-        RenderingRegistry.registerEntityRenderingHandler(DoomHunterEntity.class, DoomHunterRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(MarauderEntity.class, MarauderRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ManulEntity.class, ManulRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(JuravenatorEntity.class, JuravenatorRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(MarineEntity.class, MarineRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(GremlinEntity.class, GremlinRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityCreeper.class, CreeperRenderer::new);
-    }
-
-    @Override
     public void init() {
+        // 1.7.10 renderers are instances; Minecraft gives them the RenderManager when they're registered.
+        RenderingRegistry.registerEntityRenderingHandler(DoomHunterEntity.class, new DoomHunterRenderer());
+        RenderingRegistry.registerEntityRenderingHandler(MarauderEntity.class, new MarauderRenderer());
+        RenderingRegistry.registerEntityRenderingHandler(ManulEntity.class, new ManulRenderer());
+        RenderingRegistry.registerEntityRenderingHandler(JuravenatorEntity.class, new JuravenatorRenderer());
+        RenderingRegistry.registerEntityRenderingHandler(MarineEntity.class, new MarineRenderer());
+        RenderingRegistry.registerEntityRenderingHandler(GremlinEntity.class, new GremlinRenderer());
+        // Replaces the vanilla creeper renderer, showing AzureLib driving a vanilla entity.
+        RenderingRegistry.registerEntityRenderingHandler(EntityCreeper.class, new CreeperRenderer());
+
         ClientRegistry.bindTileEntitySpecialRenderer(StargateBlockEntity.class, new StargateBlockRenderer());
 
-        AzItemRendererRegistry.register(Items.DIAMOND_SWORD, DiamondSwordRenderer::new);
-        AzArmorRendererRegistry.register(
-            DiamondArmorRenderer::new,
-            Items.DIAMOND_HELMET,
-            Items.DIAMOND_CHESTPLATE,
-            Items.DIAMOND_LEGGINGS,
-            Items.DIAMOND_BOOTS
-        );
+        // These also register Forge IItemRenderers for the items.
+        AzItemRendererRegistry.register(Items.diamond_sword, DiamondSwordRenderer::new);
         AzItemRendererRegistry.register(ItemRegistry.PISTOL, PistolRenderer::new);
         AzItemRendererRegistry.register(ItemRegistry.PEACEMAKER, GunWithArmRenderer::new);
-        AzItemRendererRegistry.register(BlockRegistry.STARGATE_ITEM, StargateBlockItemRenderer::new);
+        AzItemRendererRegistry.register(BlockRegistry.stargateItem(), StargateBlockItemRenderer::new);
+
+        AzArmorRendererRegistry.register(
+            DiamondArmorRenderer::new,
+            Items.diamond_helmet,
+            Items.diamond_chestplate,
+            Items.diamond_leggings,
+            Items.diamond_boots
+        );
         AzArmorRendererRegistry.register(
             DoomicornArmorRenderer::new,
             ItemRegistry.DOOMICORN_HELMET,

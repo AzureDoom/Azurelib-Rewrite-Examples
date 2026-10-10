@@ -1,8 +1,8 @@
 package mod.azure.azexamples.items.gunwitharm;
 
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.util.ResourceLocation;
 
+import mod.azure.azurelib.render.item.AzItemDisplayContext;
 import mod.azure.azurelib.render.item.AzItemRenderer;
 import mod.azure.azurelib.render.item.AzItemRendererConfig;
 
@@ -18,10 +18,10 @@ public class GunWithArmRenderer extends AzItemRenderer {
         super(
             AzItemRendererConfig.builder(MODEL, TEXTURE)
                 .setAnimatorProvider(GunWithArmAnimator::new)
-                .disableAnimationInContexts(ItemCameraTransforms.TransformType.GUI)
+                .disableAnimationInContexts(AzItemDisplayContext.GUI)
                 .setShouldAnimateInContext(
-                    context -> context != ItemCameraTransforms.TransformType.GUI
-                        && context != ItemCameraTransforms.TransformType.FIXED
+                    context -> context != AzItemDisplayContext.GUI
+                        && context != AzItemDisplayContext.FIXED
                 ) // Custom animation logic with predicate
                 .build()
         );

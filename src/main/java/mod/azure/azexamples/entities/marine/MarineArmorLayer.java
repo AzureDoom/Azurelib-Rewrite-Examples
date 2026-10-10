@@ -2,7 +2,6 @@ package mod.azure.azexamples.entities.marine;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
 import java.util.UUID;
@@ -11,6 +10,7 @@ import javax.annotation.Nonnull;
 import mod.azure.azurelib.model.AzBone;
 import mod.azure.azurelib.render.AzRendererPipelineContext;
 import mod.azure.azurelib.render.layer.AzArmorLayer;
+import mod.azure.azurelib.util.AzEquipmentSlot;
 
 public class MarineArmorLayer extends AzArmorLayer<MarineEntity> {
 
@@ -51,7 +51,7 @@ public class MarineArmorLayer extends AzArmorLayer<MarineEntity> {
     }
 
     @Override
-    protected @Nonnull EntityEquipmentSlot getEquipmentSlotForBone(
+    protected @Nonnull AzEquipmentSlot getEquipmentSlotForBone(
         AzRendererPipelineContext<UUID, MarineEntity> context,
         AzBone bone,
         ItemStack stack
@@ -61,18 +61,18 @@ public class MarineArmorLayer extends AzArmorLayer<MarineEntity> {
         switch (bone.getName()) {
             case LEFT_BOOT:
             case RIGHT_BOOT:
-                return EntityEquipmentSlot.FEET;
+                return AzEquipmentSlot.FEET;
             case LEFT_ARMOR_LEG:
             case RIGHT_ARMOR_LEG:
-                return EntityEquipmentSlot.LEGS;
+                return AzEquipmentSlot.LEGS;
             case RIGHT_SLEEVE:
-                return !animatable.isLeftHanded() ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND;
+                return !animatable.isLeftHanded() ? AzEquipmentSlot.MAINHAND : AzEquipmentSlot.OFFHAND;
             case LEFT_SLEEVE:
-                return animatable.isLeftHanded() ? EntityEquipmentSlot.OFFHAND : EntityEquipmentSlot.MAINHAND;
+                return animatable.isLeftHanded() ? AzEquipmentSlot.OFFHAND : AzEquipmentSlot.MAINHAND;
             case CHESTPLATE:
-                return EntityEquipmentSlot.CHEST;
+                return AzEquipmentSlot.CHEST;
             case HELMET:
-                return EntityEquipmentSlot.HEAD;
+                return AzEquipmentSlot.HEAD;
             default:
                 return super.getEquipmentSlotForBone(context, bone, stack);
         }

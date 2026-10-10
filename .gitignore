@@ -1,6 +1,31 @@
-.gradle/
-build/
-run/
-out/
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
 *.iml
-.idea/
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+*.patch
+
+# Files from Forge MDK
+forge*changelog.txt
+selector.ts
+selector.ts
+/logs/
+/SECRET.txt
+/mods/
