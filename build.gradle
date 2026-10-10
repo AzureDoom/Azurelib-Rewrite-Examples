@@ -99,6 +99,10 @@ processResources {
 }
 
 jar {
+    // copyResourcesToClasses (needed for the dev runs) puts the processed resources into the classes folder too,
+    // so the jar sees every resource twice. Both copies are identical; keep one.
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
     from(rootProject.file('LICENSE')) {
         rename { "${it}_${mod_name}" }
     }
