@@ -16,10 +16,10 @@ import mod.azure.azexamples.CommonStrings;
 public class DoomHunterAnimationDispatcher {
 
     private final AzCommand idleCommand = AzCommand
-            .create(CommonStrings.BASE_CONTROLLER, CommonStrings.IDLE_ANIMATION_NAME, AzPlayBehaviors.LOOP);
+        .create(CommonStrings.BASE_CONTROLLER, CommonStrings.IDLE_ANIMATION_NAME, AzPlayBehaviors.LOOP);
 
     private final AzCommand flamethrowerCommand = AzCommand
-            .create(CommonStrings.ATTACK_CONTROLLER, "flamethrower", AzPlayBehaviors.LOOP);
+        .create(CommonStrings.ATTACK_CONTROLLER, "flamethrower", AzPlayBehaviors.LOOP);
 
     private final DoomHunterEntity doomHunter;
 
