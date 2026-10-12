@@ -83,7 +83,9 @@ public class GunWithArmItem extends Item {
      * @param hitResult The result of the hit detection, used to determine if and what entity was hit.
      */
     private void fire(@NotNull Level level, @NotNull Player player, ItemStack itemStack, HitResult hitResult) {
-        damageEntity(level, player, hitResult);
+        if (!level.isClientSide()) {
+            damageEntity(level, player, hitResult);
+        }
         dispatcher.serverFire(player, itemStack);
         player.getCooldowns().addCooldown(itemStack.getItem(), 5);
         if (level.isClientSide()) {
