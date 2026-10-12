@@ -18,11 +18,12 @@ public class GunWithArmRenderer extends AzItemRenderer {
         super(
             AzItemRendererConfig.builder(MODEL, TEXTURE)
                 .setAnimatorProvider(GunWithArmAnimator::new)
+                .useSeparateFirstPersonAnimator()
                 .disableAnimationInContexts(ItemCameraTransforms.TransformType.GUI)
                 .setShouldAnimateInContext(
                     context -> context != ItemCameraTransforms.TransformType.GUI
                         && context != ItemCameraTransforms.TransformType.FIXED
-                ) // Custom animation logic with predicate
+                )
                 .build()
         );
     }
