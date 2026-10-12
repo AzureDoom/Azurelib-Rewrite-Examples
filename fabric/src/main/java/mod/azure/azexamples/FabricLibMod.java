@@ -18,7 +18,6 @@ public final class FabricLibMod implements ModInitializer {
         AzIdentityRegistry.register(
             ItemRegistry.PEACEMAKER.get(),
             ItemRegistry.PISTOL.get(),
-            ItemRegistry.TEST.get(),
             ItemRegistry.DOOMICORN_HELMET.get(),
             ItemRegistry.DOOMICORN_CHESTPLATE.get(),
             ItemRegistry.DOOMICORN_LEGGINGS.get(),
