@@ -11,7 +11,7 @@ public final class AzExamplesTab {
 
         @Override
         public Item getTabIconItem() {
-            return ItemRegistry.PISTOL;
+            return BlockRegistry.stargateItem();
         }
     };
 
