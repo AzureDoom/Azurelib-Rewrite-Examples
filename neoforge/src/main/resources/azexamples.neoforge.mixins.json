@@ -8,7 +8,6 @@
   },
   "mixins": [
     "MixinEntityTypeBuilder_SilenceDataFixerError",
-    "MixinEntityTypeBuilder_SilenceDataFixerError",
     "NetheriteArmorMixin",
     "NetheriteSwordMixin",
     "PlayerMixin",
