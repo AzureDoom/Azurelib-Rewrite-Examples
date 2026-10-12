@@ -12,4 +12,9 @@ public class DoomHunterEntity extends Monster {
         super(entityType, level);
         this.animationDispatcher = new DoomHunterAnimationDispatcher(this);
     }
+
+    public void updateAnimations() {
+        animationDispatcher.clientIdle();
+        animationDispatcher.clientFlamethrower();
+    }
 }

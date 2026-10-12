@@ -8,6 +8,8 @@ public record CommonStrings() {
 
     public static final String BASE_CONTROLLER = "base_controller";
 
+    public static final String ATTACK_CONTROLLER = "attack_controller";
+
     public static final String IDLE_ANIMATION_NAME = "idle";
 
     public static final String WALK_ANIMATION_NAME = "walk";
