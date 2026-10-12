@@ -22,10 +22,7 @@ public class GunWithArmDispatcher {
     );
 
     public void serverFire(Entity entity, ItemStack itemStack) {
-        FIRING_COMMAND.sendForItem(entity, itemStack);
-    }
-
-    public void clientThirdPersonFire(Entity entity, ItemStack itemStack) {
-        THIRD_PERSON_FIRING_COMMAND.sendForItem(entity, itemStack);
+        FIRING_COMMAND.sendForItemFirstPerson(entity, itemStack);
+        THIRD_PERSON_FIRING_COMMAND.sendForItemThirdPerson(entity, itemStack);
     }
 }
