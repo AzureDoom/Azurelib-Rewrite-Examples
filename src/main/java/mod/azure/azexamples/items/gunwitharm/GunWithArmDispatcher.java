@@ -16,17 +16,14 @@ public class GunWithArmDispatcher {
         AzPlayBehaviors.PLAY_ONCE
     );
 
-    private static final AzCommand IDLE_COMMAND = AzCommand.create(
+    private static final AzCommand THIRD_PERSON_FIRING_COMMAND = AzCommand.create(
         CommonStrings.BASE_CONTROLLER,
-        "aim",
-        AzPlayBehaviors.LOOP
+        "firing",
+        AzPlayBehaviors.PLAY_ONCE
     );
 
     public void serverFire(Entity entity, ItemStack itemStack) {
-        FIRING_COMMAND.sendForItem(entity, itemStack);
-    }
-
-    public void sendIdle(Entity entity, ItemStack itemStack) {
-        IDLE_COMMAND.sendForItem(entity, itemStack);
+        FIRING_COMMAND.sendForItemFirstPerson(entity, itemStack);
+        THIRD_PERSON_FIRING_COMMAND.sendForItemThirdPerson(entity, itemStack);
     }
 }
