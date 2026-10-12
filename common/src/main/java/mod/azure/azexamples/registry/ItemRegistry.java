@@ -11,6 +11,7 @@ import java.util.function.UnaryOperator;
 
 import mod.azure.azexamples.items.PistolItem;
 import mod.azure.azexamples.items.armors.DoomicornArmor;
+import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
 import mod.azure.azexamples.services.AzExampleServices;
 
 /**
@@ -27,6 +28,12 @@ public class ItemRegistry {
         "pistol",
         PistolItem::new,
         properties -> properties
+    );
+
+    public static final Supplier<Item> PEACEMAKER = registerItem(
+        "peacemaker",
+        GunWithArmItem::new,
+        properties -> properties.stacksTo(1)
     );
 
     public static final Supplier<Item> DOOMICORN_HELMET = registerItem(
