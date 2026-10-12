@@ -31,7 +31,9 @@ public class MarineItemLayer extends AzBlockAndItemLayer<UUID, MarineEntity> {
         ItemStack stack,
         MarineEntity animatable
     ) {
-        return ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND;
+        return LEFT_HAND.equals(bone.getName())
+            ? ItemTransforms.TransformType.THIRD_PERSON_LEFT_HAND
+            : ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND;
     }
 
     @Override
