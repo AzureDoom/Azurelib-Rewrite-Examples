@@ -69,7 +69,6 @@ public final class NeoForgeMod {
         event.enqueueWork(
             () -> AzIdentityRegistry.register(
                 ItemRegistry.PEACEMAKER.get(),
-                ItemRegistry.TEST.get(),
                 ItemRegistry.PISTOL.get(),
                 ItemRegistry.DOOMICORN_HELMET.get(),
                 ItemRegistry.DOOMICORN_CHESTPLATE.get(),
