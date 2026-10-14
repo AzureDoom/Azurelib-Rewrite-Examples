@@ -1,10 +1,9 @@
 package mod.azure.azexamples.entities.doomhunter;
 
-import net.minecraft.util.ResourceLocation;
-
 import mod.azure.azurelib.render.entity.AzEntityRenderer;
 import mod.azure.azurelib.render.entity.AzEntityRendererConfig;
 import mod.azure.azurelib.render.layer.AzAutoGlowingLayer;
+import mod.azure.azurelib.util.ResourceLocation;
 
 import mod.azure.azexamples.CommonMod;
 

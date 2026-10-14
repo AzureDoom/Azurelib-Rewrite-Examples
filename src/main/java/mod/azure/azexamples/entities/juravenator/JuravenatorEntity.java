@@ -1,12 +1,10 @@
 package mod.azure.azexamples.entities.juravenator;
 
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.monster.EntityMob;
+import mod.azure.azurelib.util.MoveAnalysis;
+import net.minecraft.entity.mob.MonsterEntity;
 import net.minecraft.world.World;
 
-import mod.azure.azurelib.util.MoveAnalysis;
-
-public class JuravenatorEntity extends EntityMob {
+public class JuravenatorEntity extends MonsterEntity {
 
     private final MoveAnalysis moveAnalysis;
 
@@ -14,21 +12,14 @@ public class JuravenatorEntity extends EntityMob {
 
     public JuravenatorEntity(World world) {
         super(world);
-        this.setSize(3.0F, 7.0F);
+        this.setBoundingBoxSpacing(3.0F, 7.0F);
         this.moveAnalysis = new MoveAnalysis(this);
         this.animationDispatcher = new JuravenatorAnimationDispatcher(this);
-        this.tasks.addTask(0, new EntityAIWander(this, 0.7D));
-    }
-
-    /** 1.7.10 mobs only run their task list when this returns true. */
-    @Override
-    protected boolean isAIEnabled() {
-        return true;
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
+    public void tick() {
+        super.tick();
         moveAnalysis.update();
     }
 

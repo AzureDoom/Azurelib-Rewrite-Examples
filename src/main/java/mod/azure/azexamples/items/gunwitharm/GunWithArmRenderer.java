@@ -1,10 +1,9 @@
 package mod.azure.azexamples.items.gunwitharm;
 
-import net.minecraft.util.ResourceLocation;
-
 import mod.azure.azurelib.render.item.AzItemDisplayContext;
 import mod.azure.azurelib.render.item.AzItemRenderer;
 import mod.azure.azurelib.render.item.AzItemRendererConfig;
+import mod.azure.azurelib.util.ResourceLocation;
 
 import mod.azure.azexamples.CommonMod;
 

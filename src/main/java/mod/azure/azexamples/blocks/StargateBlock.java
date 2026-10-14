@@ -1,41 +1,45 @@
 package mod.azure.azexamples.blocks;
 
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import net.modificationstation.stationapi.api.template.block.BlockTemplate;
+import net.modificationstation.stationapi.api.util.Identifier;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
+import mod.azure.azexamples.registry.ItemRegistry;
 
-public class StargateBlock extends BlockContainer {
+public class StargateBlock extends BlockWithEntity {
 
-    public StargateBlock() {
-        super(Material.iron);
-        this.setStepSound(soundTypeMetal);
+    public StargateBlock(Identifier identifier) {
+        super(BlockTemplate.getNextId(), Material.METAL);
+        BlockTemplate.onConstructor(this, identifier);
         this.setHardness(5.0F);
         this.setResistance(8.0F);
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int meta) {
+    protected BlockEntity createBlockEntity() {
         return new StargateBlockEntity();
     }
 
-    /**
-     * -1 means the block itself draws nothing; only the tile entity renderer does.
-     */
+    @Override
+    public int getDroppedItemId(int meta, java.util.Random random) {
+        return ItemRegistry.STARGATE.id;
+    }
+
     @Override
     public int getRenderType() {
         return -1;
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isOpaque() {
         return false;
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
+    public boolean isFullCube() {
         return false;
     }
 }

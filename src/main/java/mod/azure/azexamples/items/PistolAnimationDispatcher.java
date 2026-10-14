@@ -1,10 +1,9 @@
 package mod.azure.azexamples.items;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
-
 import mod.azure.azurelib.animation.dispatch.command.AzCommand;
 import mod.azure.azurelib.animation.play_behavior.AzPlayBehaviors;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 
 import mod.azure.azexamples.CommonStrings;
 

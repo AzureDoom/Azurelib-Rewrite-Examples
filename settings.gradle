@@ -1,1 +1,10 @@
-rootProject.name = "AzureLib Rewrite Examples 1.7.10"
+pluginManagement {
+    repositories {
+        maven { url = 'https://maven.fabricmc.net/' }
+        maven { url = 'https://maven.glass-launcher.net/babric' }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'AzureLib-Examples-b1.7.3'

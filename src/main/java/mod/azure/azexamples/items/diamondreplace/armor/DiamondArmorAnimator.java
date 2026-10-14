@@ -1,13 +1,12 @@
 package mod.azure.azexamples.items.diamondreplace.armor;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
-import javax.annotation.Nonnull;
-
 import mod.azure.azurelib.animation.controller.AzAnimationController;
 import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
 import mod.azure.azurelib.animation.impl.AzItemAnimator;
+import mod.azure.azurelib.util.ResourceLocation;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.CommonStrings;

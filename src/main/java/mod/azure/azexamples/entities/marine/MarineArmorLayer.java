@@ -1,16 +1,15 @@
 package mod.azure.azexamples.entities.marine;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.item.ItemStack;
-
-import java.util.UUID;
-import javax.annotation.Nonnull;
-
 import mod.azure.azurelib.model.AzBone;
 import mod.azure.azurelib.render.AzRendererPipelineContext;
 import mod.azure.azurelib.render.layer.AzArmorLayer;
 import mod.azure.azurelib.util.AzEquipmentSlot;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.item.ItemStack;
+
+import java.util.UUID;
+import javax.annotation.Nonnull;
 
 public class MarineArmorLayer extends AzArmorLayer<MarineEntity> {
 
@@ -79,26 +78,26 @@ public class MarineArmorLayer extends AzArmorLayer<MarineEntity> {
     }
 
     @Override
-    protected @Nonnull ModelRenderer getModelPartForBone(
+    protected @Nonnull ModelPart getModelPartForBone(
         AzRendererPipelineContext<UUID, MarineEntity> context,
         AzBone bone,
-        ModelBiped baseModel
+        BipedEntityModel baseModel
     ) {
         switch (bone.getName()) {
             case HELMET:
-                return baseModel.bipedHead;
+                return baseModel.head;
             case CHESTPLATE:
-                return baseModel.bipedBody;
+                return baseModel.body;
             case LEFT_BOOT:
             case LEFT_ARMOR_LEG:
-                return baseModel.bipedLeftLeg;
+                return baseModel.leftLeg;
             case RIGHT_BOOT:
             case RIGHT_ARMOR_LEG:
-                return baseModel.bipedRightLeg;
+                return baseModel.rightLeg;
             case RIGHT_SLEEVE:
-                return baseModel.bipedRightArm;
+                return baseModel.rightArm;
             case LEFT_SLEEVE:
-                return baseModel.bipedLeftArm;
+                return baseModel.leftArm;
             default:
                 return super.getModelPartForBone(context, bone, baseModel);
         }

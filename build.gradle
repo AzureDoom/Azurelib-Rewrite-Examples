@@ -1,185 +1,76 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url = 'https://maven.minecraftforge.net/' }
-    }
-    dependencies {
-        classpath 'com.anatawa12.forge:ForgeGradle:1.2-1.1.1'
-    }
-}
-
 plugins {
-    id 'eclipse'
     id 'idea'
-    id 'maven-publish'
-    // Spotless 5.17.x is the last line that runs on a Java 8 Gradle JVM (6.x needs Java 11+).
-    id 'com.diffplug.spotless' version '5.17.1'
+    id 'fabric-loom' version '1.17.20'
+    id 'babric-loom-extension' version '1.17.4'
+    id 'com.diffplug.spotless' version "8.8.0"
 }
 
-apply plugin: 'forge'
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+base {
+    archivesName = "${mod_id}-stationapi-${minecraft_version}"
+}
 
 version = mod_version
-group = mod_group_id
-archivesBaseName = "${mod_id}-forge-${mc_version}"
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
-minecraft {
-    version = "${mc_version}-${forge_version}"
-    runDir = 'run'
-    mappings = "${mappings_channel}_${mappings_version}"
-
-    if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
-        accessTransformer file('src/main/resources/META-INF/accesstransformer.cfg')
-    }
-}
+group = maven_group
 
 repositories {
-    mavenCentral()
+    mavenLocal()
+    maven { url = 'https://maven.glass-launcher.net/snapshots/' }
+    maven { url = 'https://maven.glass-launcher.net/releases/' }
+    maven { url = 'https://maven.glass-launcher.net/babric' }
+    maven { url = 'https://maven.azuredoom.com/mods' }
     maven { url = 'https://maven.minecraftforge.net/' }
-    maven { url = 'https://jitpack.io' }
-    maven {
-        name = 'AzureDoom'
-        url = 'https://maven.azuredoom.com/mods'
-        content { includeGroup 'mod.azure.azurelib' }
-    }
-
-    maven {
-        name = 'Cursemaven'
-        url = 'https://www.cursemaven.com/'
-        content {
-            includeGroup 'curse.maven'
+    maven { url = 'https://jitpack.io/' }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
         }
     }
+    mavenCentral()
 }
 
 dependencies {
-    // @Nullable / @Nonnull; annotations only, nothing needed at runtime.
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings "net.glasslauncher:biny:${yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${loader_version}"
+
+    modImplementation "net.modificationstation:StationAPI:${stationapi_version}"
+    modImplementation "mod.azure.azurelib:azurelib-stationapi-${minecraft_version}:${azurelib_version}"
+    modLocalRuntime "net.glasslauncher.mods:AlwaysMoreItems:${alwaysmoreitems_version}"
+    modLocalRuntime "maven.modrinth:MTea0HEh:reBNQY2O"
+    modLocalRuntime "maven.modrinth:ros9lAuk:tk9tDFz1"
+    modLocalRuntime "maven.modrinth:zq6BznqT:H4DNrOdq"
+    modLocalRuntime "maven.modrinth:rFeWTq4G:JkTIrrTV"
+
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
+    implementation 'org.slf4j:slf4j-api:1.8.0-beta4'
+    implementation 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.1'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
-
-    // AzureLib's deobfuscated "dev" jar for the dev environment. Players install the normal AzureLib jar (and UniMixins).
-    implementation("mod.azure.azurelib:azurelib-forge-${mc_version}:${azurelib_version}:dev") {
-        transitive = false
-    }
-
-    implementation(
-            "com.github.LegacyModdingMC.UniMixins:unimixins-all-1.7.10:${unimixins_version}:dev"
-    ) {
-        transitive = false
-    }
-
-    annotationProcessor(
-            "com.github.LegacyModdingMC.UniMixins:unimixins-all-1.7.10:${unimixins_version}:dev"
-    ) {
-        transitive = false
-    }
 }
 
-def mixinSrg = file("${buildDir}/tmp/compileJava/${mod_id}.mixins.srg")
-def mixinRefmap = file("${buildDir}/tmp/compileJava/${mod_id}.refmap.json")
-
-spotless {
-    java {
-        // Pinned: newer Eclipse JDT formatter versions need Java 11+ to run.
-        eclipse('4.13.0').configFile("$rootDir/eclipse-formatter.xml")
-        endWithNewline()
-        importOrder('', 'java', 'mod.azure.azurelib', 'mod.azure.azexamples', '\\#')
-        indentWithSpaces(4)
-        removeUnusedImports()
-        trimTrailingWhitespace()
-    }
-}
-
-compileJava {
-    dependsOn 'genSrgs'
-    dependsOn 'spotlessApply'
-
-    outputs.file mixinSrg
-    outputs.file mixinRefmap
-
-    doFirst {
-        mixinSrg.parentFile.mkdirs()
-        mixinSrg.text = ''
-
-        options.compilerArgs += [
-                "-AreobfSrgFile=${tasks.reobf.srg}",
-                "-AoutSrgFile=${mixinSrg}",
-                "-AoutRefMapFile=${mixinRefmap}",
-                '-AdefaultObfuscationEnv=searge'
-        ]
-    }
-}
-
-reobf {
-    addExtraSrgFile mixinSrg
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+configurations.configureEach {
+    exclude group: 'babric'
 }
 
 processResources {
-    def replaceProperties = [
-            mc_version: mc_version,
-            forge_version: forge_version,
-            mod_id: mod_id,
-            mod_name: mod_name,
-            mod_license: mod_license,
-            mod_version: mod_version,
-            mod_authors: mod_authors,
-            mod_description: mod_description,
-            pack_format_number: pack_format_number,
-            version: project.version,
-            mcversion: mc_version
-    ]
-
-    inputs.properties replaceProperties
-
-    filesMatching(['mcmod.info', 'pack.mcmeta']) {
-        expand replaceProperties + [project: project]
-    }
-
-    filesMatching('META-INF/accesstransformer.cfg') {
-        name = "${mod_id}_at.cfg"
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') {
+        expand version: project.version
     }
 }
 
-jar {
-    dependsOn compileJava
-
-    from mixinRefmap
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-    manifest {
-        attributes(
-                'FMLCorePlugin': 'mod.azure.azexamples.coremod.AzExamplesLoadingPlugin',
-                'FMLCorePluginContainsFMLMod': 'true',
-                'Specification-Title': mod_id,
-                'Specification-Vendor': mod_authors,
-                'Specification-Version': '1',
-                'Implementation-Title': project.name,
-                'Implementation-Version': project.version,
-                'Implementation-Vendor': mod_authors
-        )
-    }
-}
-
-tasks.matching {
-    it.name == 'runClient' || it.name == 'runServer'
-}.all {
-    args '--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker'
-    // Mod jars on the dev classpath aren't scanned for mixin configs, so load AzureLib's and ours explicitly.
-    args '--mixin', 'azurelib.mixins.json', '--mixin', "${mod_id}.mixins.json"
-
-    systemProperty 'mixin.env.remapRefMap', 'true'
-
-    doFirst {
-        systemProperty(
-                'mixin.env.refMapRemappingFile',
-                tasks.genSrgs.srgToMcp.absolutePath
-        )
-    }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
 
 idea {
@@ -187,4 +78,19 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+
+spotless {
+    java {
+        eclipse().configFile("$rootDir/eclipse-formatter.xml")
+        endWithNewline()
+        importOrder("", "java", group.toString(), "\\#")
+        leadingTabsToSpaces(4)
+        removeUnusedImports()
+        trimTrailingWhitespace()
+    }
+}
+
+tasks.named('compileJava', JavaCompile) {
+    dependsOn("spotlessApply")
 }

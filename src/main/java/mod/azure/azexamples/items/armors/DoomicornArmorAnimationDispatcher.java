@@ -1,9 +1,8 @@
 package mod.azure.azexamples.items.armors;
 
+import mod.azure.azurelib.animation.dispatch.command.AzCommand;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-
-import mod.azure.azurelib.animation.dispatch.command.AzCommand;
 
 import mod.azure.azexamples.CommonStrings;
 

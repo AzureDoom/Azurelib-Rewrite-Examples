@@ -1,18 +1,12 @@
 {
   "required": true,
-  "package": "mod.azure.azexamples.mixins",
-  "compatibilityLevel": "JAVA_8",
-  "refmap": "azexamples.refmap.json",
-  "mixins": [
-    "EntityLivingBaseMixin",
-    "EntityVillagerMixin"
-  ],
-  "client": [
-    "EntityRendererMixin",
-    "ItemRendererMixin",
-    "MinecraftMixin"
-  ],
   "minVersion": "0.8",
+  "package": "mod.azure.azexamples.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "EntityAccessor_DataTracker",
+    "PlayerEntityMixin_ArmorTick"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

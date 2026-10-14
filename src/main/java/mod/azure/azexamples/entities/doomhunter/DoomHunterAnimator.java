@@ -1,14 +1,13 @@
 package mod.azure.azexamples.entities.doomhunter;
 
-import net.minecraft.util.ResourceLocation;
-
-import javax.annotation.Nonnull;
-
 import mod.azure.azurelib.animation.AzAnimatorConfig;
 import mod.azure.azurelib.animation.controller.AzAnimationController;
 import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
 import mod.azure.azurelib.animation.controller.AzBlendMode;
 import mod.azure.azurelib.animation.impl.AzEntityAnimator;
+import mod.azure.azurelib.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
 
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.CommonStrings;

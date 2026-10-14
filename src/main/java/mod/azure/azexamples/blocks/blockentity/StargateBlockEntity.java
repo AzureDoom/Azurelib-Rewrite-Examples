@@ -1,11 +1,12 @@
 package mod.azure.azexamples.blocks.blockentity;
 
-import net.minecraft.tileentity.TileEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.entity.BlockEntity;
 
-/**
- * 1.7.10 tile entities tick through {@link #updateEntity()}.
- */
-public class StargateBlockEntity extends TileEntity {
+public class StargateBlockEntity extends BlockEntity {
+
+    private static final boolean CLIENT = FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT;
 
     public final StargateBlockAnimationDispatcher animationDispatcher;
 
@@ -14,8 +15,8 @@ public class StargateBlockEntity extends TileEntity {
     }
 
     @Override
-    public void updateEntity() {
-        if (this.worldObj != null && this.worldObj.isRemote) {
+    public void tick() {
+        if (CLIENT && this.world != null) {
             this.animationDispatcher.serverSpin();
         }
     }

@@ -1,13 +1,12 @@
 package mod.azure.azexamples.blocks.blockentity;
 
-import net.minecraft.util.ResourceLocation;
-
-import javax.annotation.Nonnull;
-
 import mod.azure.azurelib.animation.AzAnimatorConfig;
 import mod.azure.azurelib.animation.controller.AzAnimationController;
 import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
 import mod.azure.azurelib.animation.impl.AzBlockAnimator;
+import mod.azure.azurelib.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
 
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.CommonStrings;

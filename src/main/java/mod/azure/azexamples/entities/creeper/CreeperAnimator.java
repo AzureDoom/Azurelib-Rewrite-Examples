@@ -1,22 +1,22 @@
 package mod.azure.azexamples.entities.creeper;
 
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.util.ResourceLocation;
-
-import javax.annotation.Nonnull;
-
 import mod.azure.azurelib.animation.AzAnimatorConfig;
 import mod.azure.azurelib.animation.controller.AzAnimationController;
 import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
 import mod.azure.azurelib.animation.impl.AzEntityAnimator;
 import mod.azure.azurelib.model.AzBakedModel;
 import mod.azure.azurelib.model.AzBone;
+import mod.azure.azurelib.platform.mc.Mc;
+import mod.azure.azurelib.util.ResourceLocation;
 import mod.azure.azurelib.util.math.Mth;
+import net.minecraft.entity.mob.CreeperEntity;
+
+import javax.annotation.Nonnull;
 
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.CommonStrings;
 
-public class CreeperAnimator extends AzEntityAnimator<EntityCreeper> {
+public class CreeperAnimator extends AzEntityAnimator<CreeperEntity> {
 
     private static final ResourceLocation ANIMATIONS = CommonMod.modResource(
         "animations/entity/possessed_engineer.animation.json"
@@ -27,23 +27,23 @@ public class CreeperAnimator extends AzEntityAnimator<EntityCreeper> {
     }
 
     @Override
-    public void registerControllers(AzAnimationControllerContainer<EntityCreeper> animationControllerContainer) {
+    public void registerControllers(AzAnimationControllerContainer<CreeperEntity> animationControllerContainer) {
         animationControllerContainer.add(
             AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).build()
         );
     }
 
     @Override
-    public @Nonnull ResourceLocation getAnimationLocation(EntityCreeper creeper) {
+    public @Nonnull ResourceLocation getAnimationLocation(CreeperEntity creeper) {
         return ANIMATIONS;
     }
 
     @Override
-    public void setCustomAnimations(EntityCreeper creeper, float partialTicks) {
+    public void setCustomAnimations(CreeperEntity creeper, float partialTicks) {
         super.setCustomAnimations(creeper, partialTicks);
         AzBakedModel model = this.context().boneCache().getBakedModel();
-        float walkPosition = (creeper.limbSwing - creeper.limbSwingAmount * (1.0F - partialTicks)) * 0.6662F;
-        float walkSpeed = Mth.lerp(partialTicks, creeper.prevLimbSwingAmount, creeper.limbSwingAmount);
+        float walkPosition = (Mc.limbSwing(creeper) - Mc.limbSwingAmount(creeper) * (1.0F - partialTicks)) * 0.6662F;
+        float walkSpeed = Mth.lerp(partialTicks, Mc.prevLimbSwingAmount(creeper), Mc.limbSwingAmount(creeper));
         float armSwing = Mth.cos(walkPosition) * walkSpeed;
         float legSwing = Mth.cos(walkPosition) * 1.4F * walkSpeed;
         AzBone rightArm = model.getBoneOrNull("field_191224_h");

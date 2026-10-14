@@ -1,22 +1,21 @@
 package mod.azure.azexamples.entities.marauder;
 
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.nbt.NBTTagCompound;
+import mod.azure.azurelib.platform.mc.Mc;
+import mod.azure.azurelib.util.MoveAnalysis;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.mob.MonsterEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 
-import mod.azure.azurelib.util.MoveAnalysis;
+import mod.azure.azexamples.platform.ExMc;
 
-import mod.azure.azexamples.entities.marauder.ai.DelayedAttackAI;
+public class MarauderEntity extends MonsterEntity {
 
-public class MarauderEntity extends EntityMob {
-
-    /** DataWatcher slots. */
     private static final int SPAWN_TICKS = 20;
 
     private static final int AGGRESSIVE = 21;
+
+    private static final int ATTACK_DELAY_TICKS = 5;
 
     public int MAX_SPAWN_ANIMATION_TICKS = 290;
 
@@ -24,76 +23,93 @@ public class MarauderEntity extends EntityMob {
 
     private final MoveAnalysis moveAnalysis;
 
+    private int attackCooldown;
+
+    private int delayBeforeAttack = ATTACK_DELAY_TICKS;
+
+    private boolean triggeredAttackAnimation;
+
     public MarauderEntity(World world) {
         super(world);
-        this.setSize(1.5F, 2.6F);
+        this.setBoundingBoxSpacing(1.5F, 2.6F);
         this.animationDispatcher = new MarauderAnimationDispatcher(this);
         this.moveAnalysis = new MoveAnalysis(this);
-        this.stepHeight = 2.0F;
-        this.tasks.addTask(7, new EntityAIWander(this, 0.3D));
-        this.tasks.addTask(2, new DelayedAttackAI(this, 0.6D, 5, this::runAttackAnimations));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
-    }
-
-    /** 1.7.10 mobs only run their task list when this returns true. */
-    @Override
-    protected boolean isAIEnabled() {
-        return true;
     }
 
     @Override
-    protected void entityInit() {
-        super.entityInit();
-        this.dataWatcher.addObject(SPAWN_TICKS, 0.0F);
-        this.dataWatcher.addObject(AGGRESSIVE, (byte) 0);
-    }
-
-    /**
-     * Keeps the body around for the 80-tick death animation before removing it.
-     */
-    @Override
-    protected void onDeathUpdate() {
-        ++this.deathTime;
-
-        if (this.deathTime >= 80 && !this.worldObj.isRemote && !this.isDead) {
-            this.worldObj.setEntityState(this, (byte) 20);
-            this.setDead();
-        }
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.dataTracker.startTracking(SPAWN_TICKS, 0);
+        this.dataTracker.startTracking(AGGRESSIVE, (byte) 0);
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
+    public void tick() {
+        super.tick();
         moveAnalysis.update();
 
-        if (this.worldObj.isRemote) {
+        if (Mc.isClientSide(this.world)) {
             return;
         }
 
-        this.dataWatcher.updateObject(AGGRESSIVE, (byte) (this.getAttackTarget() != null ? 1 : 0));
+        if (this.attackCooldown > 0) {
+            this.attackCooldown--;
+        }
 
-        if (this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && this.isEntityAlive()) {
-            this.setSpawnTicks(this.getSpawnTicks() + 1.0F);
-            this.getNavigator().clearPathEntity();
-            this.renderYawOffset = 0;
-            this.rotationYawHead = 0;
-            this.rotationPitch = 0;
-            this.rotationYaw = 0;
-            this.setAttackTarget(null);
+        this.dataTracker.set(AGGRESSIVE, (byte) (this.target != null ? 1 : 0));
+
+        if (this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && Mc.isAlive(this)) {
+            this.setSpawnTicks(this.getSpawnTicks() + 1);
+            this.target = null;
+            this.velocityX = 0;
+            this.velocityZ = 0;
+            this.bodyYaw = 0;
+            this.pitch = 0;
+            this.yaw = 0;
         }
     }
 
-    /**
-     * The attack target only exists on the server in 1.7.10, so it is synced to the client through the data watcher.
-     */
+    @Override
+    protected void attack(Entity target, float distance) {
+        if (this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS) {
+            return;
+        }
+
+        double reach = Mc.width(this) * 2.0F + Mc.width(target);
+        if (distance > reach) {
+            this.delayBeforeAttack = ATTACK_DELAY_TICKS;
+            this.triggeredAttackAnimation = false;
+            return;
+        }
+
+        if (this.attackCooldown > 0) {
+            return;
+        }
+
+        if (!this.triggeredAttackAnimation) {
+            runAttackAnimations();
+            this.triggeredAttackAnimation = true;
+        }
+
+        if (this.delayBeforeAttack > 0) {
+            this.delayBeforeAttack--;
+            return;
+        }
+
+        this.attackCooldown = 20;
+        ExMc.damage(target, this, 6);
+        this.triggeredAttackAnimation = false;
+        this.delayBeforeAttack = ATTACK_DELAY_TICKS;
+    }
+
     public boolean isAggressive() {
-        return this.dataWatcher.getWatchableObjectByte(AGGRESSIVE) != 0;
+        return this.dataTracker.getByte(AGGRESSIVE) != 0;
     }
 
     public void updateAnimations() {
-        boolean isMovingOnGround = moveAnalysis.isMovingHorizontally() && this.onGround;
+        boolean isMovingOnGround = moveAnalysis.isMovingHorizontally() && Mc.onGround(this);
 
-        if (this.getHealth() <= 0) {
+        if (Mc.health(this) <= 0) {
             animationDispatcher.clientDeath();
             return;
         }
@@ -104,7 +120,7 @@ public class MarauderEntity extends EntityMob {
         }
 
         if (isMovingOnGround) {
-            if (this.isAggressive() && !this.isSwingInProgress) {
+            if (this.isAggressive()) {
                 animationDispatcher.clientRun();
             } else {
                 animationDispatcher.clientWalk();
@@ -121,23 +137,23 @@ public class MarauderEntity extends EntityMob {
         animationDispatcher.serverMelee();
     }
 
-    protected void setSpawnTicks(float spawnTicks) {
-        this.dataWatcher.updateObject(SPAWN_TICKS, spawnTicks);
+    protected void setSpawnTicks(int spawnTicks) {
+        this.dataTracker.set(SPAWN_TICKS, spawnTicks);
     }
 
-    public float getSpawnTicks() {
-        return this.dataWatcher.getWatchableObjectFloat(SPAWN_TICKS);
-    }
-
-    @Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
-        compound.setFloat("SpawnTicks", this.getSpawnTicks());
+    public int getSpawnTicks() {
+        return this.dataTracker.getInt(SPAWN_TICKS);
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
-        this.setSpawnTicks(compound.getFloat("SpawnTicks"));
+    public void writeNbt(NbtCompound compound) {
+        super.writeNbt(compound);
+        compound.putInt("SpawnTicks", this.getSpawnTicks());
+    }
+
+    @Override
+    public void readNbt(NbtCompound compound) {
+        super.readNbt(compound);
+        this.setSpawnTicks(compound.getInt("SpawnTicks"));
     }
 }

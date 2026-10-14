@@ -1,10 +1,10 @@
 package mod.azure.azexamples.entities.manul;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIWander;
+import mod.azure.azurelib.platform.mc.Mc;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.world.World;
 
-public class ManulEntity extends EntityCreature {
+public class ManulEntity extends AnimalEntity {
 
     private static final int STATE_SWITCH_TICKS = 5;
 
@@ -18,26 +18,19 @@ public class ManulEntity extends EntityCreature {
 
     public ManulEntity(World world) {
         super(world);
-        this.setSize(1.2F, 1.1F);
+        this.setBoundingBoxSpacing(1.2F, 1.1F);
         this.animationDispatcher = new ManulAnimationDispatcher(this);
-        this.tasks.addTask(7, new EntityAIWander(this, 0.3D));
-    }
-
-    /** 1.7.10 mobs only run their task list when this returns true. */
-    @Override
-    protected boolean isAIEnabled() {
-        return true;
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
+    public void tick() {
+        super.tick();
         updateMovementState();
     }
 
     private void updateMovementState() {
-        double dx = this.posX - this.prevPosX;
-        double dz = this.posZ - this.prevPosZ;
+        double dx = Mc.x(this) - Mc.prevX(this);
+        double dz = Mc.z(this) - Mc.prevZ(this);
         boolean movingNow = dx * dx + dz * dz > MOVING_THRESHOLD_SQR;
 
         if (movingNow == walking) {

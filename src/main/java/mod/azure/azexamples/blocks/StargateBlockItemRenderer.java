@@ -1,9 +1,8 @@
 package mod.azure.azexamples.blocks;
 
-import net.minecraft.util.ResourceLocation;
-
 import mod.azure.azurelib.render.item.AzItemRenderer;
 import mod.azure.azurelib.render.item.AzItemRendererConfig;
+import mod.azure.azurelib.util.ResourceLocation;
 
 import mod.azure.azexamples.CommonMod;
 
@@ -15,7 +14,9 @@ public class StargateBlockItemRenderer extends AzItemRenderer {
 
     public StargateBlockItemRenderer() {
         super(
-            AzItemRendererConfig.builder(MODEL, TEXTURE).setAnimatorProvider(StargateBlockItemAnimator::new).build()
+            AzItemRendererConfig.builder(MODEL, TEXTURE)
+                .setAnimatorProvider(StargateBlockItemAnimator::new)
+                .build()
         );
     }
 }

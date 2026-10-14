@@ -1,10 +1,5 @@
 package mod.azure.azexamples.entities.marauder;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
-import java.util.UUID;
-
 import mod.azure.azurelib.model.AzBone;
 import mod.azure.azurelib.render.AzRendererPipelineContext;
 import mod.azure.azurelib.render.entity.AzEntityRenderer;
@@ -13,7 +8,11 @@ import mod.azure.azurelib.render.item.AzItemDisplayContext;
 import mod.azure.azurelib.render.layer.AzAutoGlowingLayer;
 import mod.azure.azurelib.render.layer.AzBlockAndItemLayer;
 import mod.azure.azurelib.util.AzEquipmentSlot;
+import mod.azure.azurelib.util.ResourceLocation;
 import mod.azure.azurelib.util.math.Vector3f;
+import net.minecraft.item.ItemStack;
+
+import java.util.UUID;
 
 import mod.azure.azexamples.CommonMod;
 

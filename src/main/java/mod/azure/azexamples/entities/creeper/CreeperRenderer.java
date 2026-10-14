@@ -1,20 +1,20 @@
 package mod.azure.azexamples.entities.creeper;
 
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.util.ResourceLocation;
-
-import java.util.UUID;
-
+import mod.azure.azurelib.platform.mc.Mc;
 import mod.azure.azurelib.render.AzRendererPipelineContext;
 import mod.azure.azurelib.render.entity.AzEntityRenderer;
 import mod.azure.azurelib.render.entity.AzEntityRendererConfig;
 import mod.azure.azurelib.render.layer.AzAutoGlowingLayer;
 import mod.azure.azurelib.render.vertex.OverlayTexture;
+import mod.azure.azurelib.util.ResourceLocation;
 import mod.azure.azurelib.util.math.Mth;
+import net.minecraft.entity.mob.CreeperEntity;
+
+import java.util.UUID;
 
 import mod.azure.azexamples.CommonMod;
 
-public class CreeperRenderer extends AzEntityRenderer<EntityCreeper> {
+public class CreeperRenderer extends AzEntityRenderer<CreeperEntity> {
 
     private static final ResourceLocation MODEL = CommonMod.modResource("geo/entity/possessed_engineer.geo.json");
 
@@ -22,7 +22,7 @@ public class CreeperRenderer extends AzEntityRenderer<EntityCreeper> {
 
     public CreeperRenderer() {
         super(
-            AzEntityRendererConfig.<EntityCreeper>builder(MODEL, TEXTURE)
+            AzEntityRendererConfig.<CreeperEntity>builder(MODEL, TEXTURE)
                 .setAnimatorProvider(CreeperAnimator::new)
                 .addRenderLayer(new AzAutoGlowingLayer<>())
                 .setPrerenderEntry(contextPipeline -> {
@@ -34,24 +34,24 @@ public class CreeperRenderer extends AzEntityRenderer<EntityCreeper> {
         );
     }
 
-    private static void doSwellOverlay(AzRendererPipelineContext<UUID, EntityCreeper> contextPipeline) {
-        EntityCreeper entity = contextPipeline.animatable();
+    private static void doSwellOverlay(AzRendererPipelineContext<UUID, CreeperEntity> contextPipeline) {
+        CreeperEntity entity = contextPipeline.animatable();
         float partialTick = contextPipeline.partialTick();
-        float swellFactor = entity.getCreeperFlashIntensity(partialTick);
-        float swellMod = 1 + Mth.sin(swellFactor * 100f) * swellFactor * 0.01f;
-        swellFactor = (float) Math.pow(Mth.clamp(swellFactor, 0f, 1f), 3);
-        float horizontalSwell = (1 + swellFactor * 0.4f) * swellMod;
-        float verticalSwell = (1 + swellFactor * 0.1f) / swellMod;
-        boolean isSwellFactorEvenlyScaled = (swellFactor * 10) % 2 == 0;
-        float normalizedSwellFactor = Mth.clamp(swellFactor, 0.5F, 1);
-        boolean isEntityHurtOrDead = entity.hurtTime > 0 || entity.deathTime > 0;
+        float swelling = CreeperFuseTracker.swelling(entity, partialTick);
+
+        float wobble = 1 + Mth.sin(swelling * 100f) * swelling * 0.01f;
+        float grow = (float) Math.pow(Mth.clamp(swelling, 0f, 1f), 3);
+        float horizontalSwell = (1 + grow * 0.4f) * wobble;
+        float verticalSwell = (1 + grow * 0.1f) / wobble;
+        contextPipeline.poseStack().scale(horizontalSwell, verticalSwell, horizontalSwell);
+
+        float whiteFlash = swelling <= 0 || (int) (swelling * 10.0F) % 2 == 0
+            ? 0
+            : Mth.clamp(swelling, 0.5F, 1.0F);
+        boolean isEntityHurtOrDead = Mc.hurtTime(entity) > 0 || Mc.deathTime(entity) > 0;
 
         contextPipeline.setPackedOverlay(
-            OverlayTexture.pack(
-                OverlayTexture.u(isSwellFactorEvenlyScaled ? 0 : normalizedSwellFactor),
-                OverlayTexture.v(isEntityHurtOrDead)
-            )
+            OverlayTexture.pack(OverlayTexture.u(whiteFlash), OverlayTexture.v(isEntityHurtOrDead))
         );
-        contextPipeline.poseStack().scale(horizontalSwell, verticalSwell, horizontalSwell);
     }
 }

@@ -1,17 +1,17 @@
 package mod.azure.azexamples.entities.marauder;
 
-import net.minecraft.util.ResourceLocation;
-
-import javax.annotation.Nonnull;
-
 import mod.azure.azurelib.animation.AzAnimatorConfig;
 import mod.azure.azurelib.animation.controller.AzAnimationController;
 import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
 import mod.azure.azurelib.animation.controller.keyframe.AzKeyframeCallbacks;
 import mod.azure.azurelib.animation.impl.AzEntityAnimator;
+import mod.azure.azurelib.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
 
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.CommonStrings;
+import mod.azure.azexamples.platform.ExMc;
 
 public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
 
@@ -40,7 +40,7 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
                                 }
 
                                 if (sound.equals("run")) {
-                                    playLocal(marauder, "mob.skeleton.step", 1.0F);
+                                    playLocal(marauder, "step.stone" /* Beta has no skeleton step sound */, 1.0F);
                                 }
 
                                 if (sound.equals("portal")) {
@@ -59,15 +59,7 @@ public class MarauderAnimator extends AzEntityAnimator<MarauderEntity> {
     }
 
     private static void playLocal(MarauderEntity marauder, String sound, float volume) {
-        marauder.worldObj.playSound(
-            marauder.posX,
-            marauder.posY,
-            marauder.posZ,
-            sound,
-            volume,
-            1.0F,
-            true
-        );
+        ExMc.playSound(marauder, sound, volume, 1.0F);
     }
 
     @Override

@@ -1,9 +1,8 @@
 package mod.azure.azexamples.items.armors;
 
-import net.minecraft.util.ResourceLocation;
-
 import mod.azure.azurelib.render.armor.AzArmorRenderer;
 import mod.azure.azurelib.render.armor.AzArmorRendererConfig;
+import mod.azure.azurelib.util.ResourceLocation;
 
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.items.DoomArmorBoneProvider;

@@ -1,15 +1,16 @@
 package mod.azure.azexamples.entities.marine;
 
-import net.minecraft.item.ItemStack;
-
-import java.util.UUID;
-
 import mod.azure.azurelib.model.AzBone;
+import mod.azure.azurelib.platform.mc.Mc;
 import mod.azure.azurelib.render.AzRendererPipelineContext;
 import mod.azure.azurelib.render.item.AzItemDisplayContext;
+import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import mod.azure.azurelib.render.layer.AzBlockAndItemLayer;
 import mod.azure.azurelib.util.AzEquipmentSlot;
 import mod.azure.azurelib.util.math.Vector3f;
+import net.minecraft.item.ItemStack;
+
+import java.util.UUID;
 
 public class MarineItemLayer extends AzBlockAndItemLayer<UUID, MarineEntity> {
 
@@ -47,10 +48,10 @@ public class MarineItemLayer extends AzBlockAndItemLayer<UUID, MarineEntity> {
         ItemStack itemStack,
         MarineEntity animatable
     ) {
-        context.poseStack().mulPose(Vector3f.XP.rotationDegrees(270));
-        context.poseStack().mulPose(Vector3f.YP.rotationDegrees(0));
-        context.poseStack().mulPose(Vector3f.ZP.rotationDegrees(0f));
-        context.poseStack().translate(0.0D, 0.1D, -0.1D);
+        if (AzItemRendererRegistry.getOrNull(Mc.item(itemStack)) != null) {
+            context.poseStack().mulPose(Vector3f.XP.rotationDegrees(270));
+            context.poseStack().translate(0.0D, 0.1D, -0.1D);
+        }
         super.renderItemForBone(context, bone, itemStack, animatable);
     }
 }
