@@ -7,7 +7,7 @@ import mod.azure.azurelib.animation.controller.keyframe.AzKeyframeCallbacks;
 import mod.azure.azurelib.animation.impl.AzItemAnimator;
 import mod.azure.azurelib.util.ResourceLocation;
 import mod.azure.azurelib.util.client.ClientUtils;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.mob.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -37,8 +37,9 @@ public class GunWithArmAnimator extends AzItemAnimator {
                             event -> {
                                 PlayerEntity player = ClientUtils.getClientPlayer();
 
-                                if (player != null && event.getKeyframeData().getSound().matches("firing"))
-                                    ExMc.playSound(player, CommonStrings.MOD_ID + ":vigilance_fire", 1.0F, 1.0F);
+                                if (player != null && event.getKeyframeData().getSound().matches("firing")) {
+                                    ExMc.playSound(player, ExMc.VIGILANCE_FIRE, 1.0F, 1.0F);
+                                }
                             }
                         )
                         .build()

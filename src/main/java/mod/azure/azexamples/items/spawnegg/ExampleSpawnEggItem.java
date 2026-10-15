@@ -2,12 +2,10 @@ package mod.azure.azexamples.items.spawnegg;
 
 import mod.azure.azurelib.platform.mc.Mc;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.mob.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.modificationstation.stationapi.api.template.item.ItemTemplate;
-import net.modificationstation.stationapi.api.util.Identifier;
 
 import mod.azure.azexamples.platform.ExMc;
 
@@ -27,19 +25,20 @@ public class ExampleSpawnEggItem extends Item {
 
     private final Class<? extends Entity> entityType;
 
-    public ExampleSpawnEggItem(Identifier identifier, Class<? extends Entity> entityType) {
-        super(ItemTemplate.getNextId());
-        ItemTemplate.onConstructor(this, identifier);
+    public ExampleSpawnEggItem(int id, Class<? extends Entity> entityType) {
+        super(id);
         this.entityType = entityType;
     }
 
+    // MCP: Item.getIconFromDamage
     @Override
-    public int getTextureId(int damage) {
+    public int getSprite(int damage) {
         return ExMc.eggTextureId();
     }
 
+    // MCP: Item.onItemUse
     @Override
-    public boolean useOnBlock(ItemStack stack, PlayerEntity player, World world, int x, int y, int z, int side) {
+    public boolean useOn(ItemStack stack, PlayerEntity player, World world, int x, int y, int z, int side) {
         if (Mc.isClientSide(world)) {
             return true;
         }

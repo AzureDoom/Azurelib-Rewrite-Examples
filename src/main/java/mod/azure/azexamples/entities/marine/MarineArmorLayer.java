@@ -1,11 +1,12 @@
 package mod.azure.azexamples.entities.marine;
 
 import mod.azure.azurelib.model.AzBone;
+import mod.azure.azurelib.platform.mc.McClient;
 import mod.azure.azurelib.render.AzRendererPipelineContext;
 import mod.azure.azurelib.render.layer.AzArmorLayer;
 import mod.azure.azurelib.util.AzEquipmentSlot;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.model.ModelPart;
+import net.minecraft.client.render.model.entity.HumanoidModel;
 import net.minecraft.item.ItemStack;
 
 import java.util.UUID;
@@ -81,23 +82,23 @@ public class MarineArmorLayer extends AzArmorLayer<MarineEntity> {
     protected @Nonnull ModelPart getModelPartForBone(
         AzRendererPipelineContext<UUID, MarineEntity> context,
         AzBone bone,
-        BipedEntityModel baseModel
+        HumanoidModel baseModel
     ) {
         switch (bone.getName()) {
             case HELMET:
-                return baseModel.head;
+                return McClient.bipedHead(baseModel);
             case CHESTPLATE:
-                return baseModel.body;
+                return McClient.bipedBody(baseModel);
             case LEFT_BOOT:
             case LEFT_ARMOR_LEG:
-                return baseModel.leftLeg;
+                return McClient.bipedLeftLeg(baseModel);
             case RIGHT_BOOT:
             case RIGHT_ARMOR_LEG:
-                return baseModel.rightLeg;
+                return McClient.bipedRightLeg(baseModel);
             case RIGHT_SLEEVE:
-                return baseModel.rightArm;
+                return McClient.bipedRightArm(baseModel);
             case LEFT_SLEEVE:
-                return baseModel.leftArm;
+                return McClient.bipedLeftArm(baseModel);
             default:
                 return super.getModelPartForBone(context, bone, baseModel);
         }

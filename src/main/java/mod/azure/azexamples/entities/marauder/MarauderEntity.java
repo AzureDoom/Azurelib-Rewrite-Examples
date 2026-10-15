@@ -3,13 +3,13 @@ package mod.azure.azexamples.entities.marauder;
 import mod.azure.azurelib.platform.mc.Mc;
 import mod.azure.azurelib.util.MoveAnalysis;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.mob.MonsterEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 
 import mod.azure.azexamples.platform.ExMc;
 
-public class MarauderEntity extends MonsterEntity {
+public class MarauderEntity extends MobEntity {
 
     private static final int SPAWN_TICKS = 20;
 
@@ -31,16 +31,16 @@ public class MarauderEntity extends MonsterEntity {
 
     public MarauderEntity(World world) {
         super(world);
-        this.setBoundingBoxSpacing(1.5F, 2.6F);
+        this.setSize(1.5F, 2.6F);
         this.animationDispatcher = new MarauderAnimationDispatcher(this);
         this.moveAnalysis = new MoveAnalysis(this);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(SPAWN_TICKS, 0);
-        this.dataTracker.startTracking(AGGRESSIVE, (byte) 0);
+    protected void registerSyncedData() {
+        super.registerSyncedData();
+        this.syncedData.register(SPAWN_TICKS, 0);
+        this.syncedData.register(AGGRESSIVE, (byte) 0);
     }
 
     @Override
@@ -56,11 +56,11 @@ public class MarauderEntity extends MonsterEntity {
             this.attackCooldown--;
         }
 
-        this.dataTracker.set(AGGRESSIVE, (byte) (this.target != null ? 1 : 0));
+        // this.syncedData.update(AGGRESSIVE, (byte) (this.walkTarget != null ? 1 : 0));
 
         if (this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS && Mc.isAlive(this)) {
             this.setSpawnTicks(this.getSpawnTicks() + 1);
-            this.target = null;
+            // this.walkTarget = null;
             this.velocityX = 0;
             this.velocityZ = 0;
             this.bodyYaw = 0;
@@ -69,8 +69,8 @@ public class MarauderEntity extends MonsterEntity {
         }
     }
 
-    @Override
-    protected void attack(Entity target, float distance) {
+    // @Override
+    protected void targetInSight(Entity target, float distance) {
         if (this.getSpawnTicks() < MAX_SPAWN_ANIMATION_TICKS) {
             return;
         }
@@ -103,7 +103,7 @@ public class MarauderEntity extends MonsterEntity {
     }
 
     public boolean isAggressive() {
-        return this.dataTracker.getByte(AGGRESSIVE) != 0;
+        return this.syncedData.getByte(AGGRESSIVE) != 0;
     }
 
     public void updateAnimations() {
@@ -138,17 +138,18 @@ public class MarauderEntity extends MonsterEntity {
     }
 
     protected void setSpawnTicks(int spawnTicks) {
-        this.dataTracker.set(SPAWN_TICKS, spawnTicks);
+        this.syncedData.update(SPAWN_TICKS, spawnTicks);
     }
 
     public int getSpawnTicks() {
-        return this.dataTracker.getInt(SPAWN_TICKS);
+        return this.syncedData.getInt(SPAWN_TICKS);
     }
 
     @Override
-    public void writeNbt(NbtCompound compound) {
+    public boolean writeNbt(NbtCompound compound) {
         super.writeNbt(compound);
         compound.putInt("SpawnTicks", this.getSpawnTicks());
+        return true;
     }
 
     @Override

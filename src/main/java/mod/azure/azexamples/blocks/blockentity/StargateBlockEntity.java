@@ -14,9 +14,10 @@ public class StargateBlockEntity extends BlockEntity {
         this.animationDispatcher = new StargateBlockAnimationDispatcher(this);
     }
 
+    // MCP: TileEntity.updateEntity
     @Override
     public void tick() {
-        if (CLIENT && this.world != null) {
+        if (CLIENT && mod.azure.azurelib.platform.mc.Mc.world(this) != null) {
             this.animationDispatcher.serverSpin();
         }
     }

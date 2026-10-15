@@ -1,30 +1,27 @@
 plugins {
     id 'idea'
-    id 'fabric-loom' version '1.17.20'
-    id 'babric-loom-extension' version '1.17.4'
+    id 'net.fabricmc.fabric-loom-remap' version '1.18.4'
+    id 'ploceus' version '1.18.1'
     id 'com.diffplug.spotless' version "8.8.0"
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
 base {
-    archivesName = "${mod_id}-stationapi-${minecraft_version}"
+    archivesName = "${mod_id}-ornithe-${minecraft_version}"
 }
 
 version = mod_version
 group = maven_group
 
+ploceus {
+    setIntermediaryGeneration(2)
+}
+
 repositories {
     mavenLocal()
-    maven { url = 'https://maven.glass-launcher.net/snapshots/' }
-    maven { url = 'https://maven.glass-launcher.net/releases/' }
-    maven { url = 'https://maven.glass-launcher.net/babric' }
-    maven { url = 'https://maven.azuredoom.com/mods' }
-    maven { url = 'https://maven.minecraftforge.net/' }
-    maven { url = 'https://jitpack.io/' }
+    maven {
+        name = 'AzureDoom Mods'
+        url = 'https://maven.azuredoom.com/mods'
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -41,25 +38,24 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings "net.glasslauncher:biny:${yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${loader_version}"
 
-    modImplementation "net.modificationstation:StationAPI:${stationapi_version}"
-    modImplementation "mod.azure.azurelib:azurelib-stationapi-${minecraft_version}:${azurelib_version}"
-    modLocalRuntime "net.glasslauncher.mods:AlwaysMoreItems:${alwaysmoreitems_version}"
-    modLocalRuntime "maven.modrinth:MTea0HEh:reBNQY2O"
-    modLocalRuntime "maven.modrinth:ros9lAuk:tk9tDFz1"
-    modLocalRuntime "maven.modrinth:zq6BznqT:H4DNrOdq"
-    modLocalRuntime "maven.modrinth:rFeWTq4G:JkTIrrTV"
+    clientExceptions ploceus.raven(project.client_raven_build, 'client')
+    serverExceptions ploceus.raven(project.server_raven_build, 'server')
+    clientSignatures ploceus.sparrow(project.client_sparrow_build, 'client')
+    serverSignatures ploceus.sparrow(project.server_sparrow_build, 'server')
+    clientNests ploceus.nests(project.client_nests_build, 'client')
+    serverNests ploceus.nests(project.server_nests_build, 'server')
+    mappings ploceus.featherMappings(project.feather_build)
 
-    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
-    implementation 'org.slf4j:slf4j-api:1.8.0-beta4'
-    implementation 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.1'
+    ploceus.dependOsl(project.osl_version)
+
+    // Published from the AzureLib b1.7.3 Ornithe project (`./gradlew publishToMavenLocal` there while developing).
+    modImplementation "mod.azure.azurelib:azurelib-ornithe-${minecraft_version}:${azurelib_version}"
+    modLocalRuntime "maven.modrinth:wIWtkL0s:MwJWQ1yw"
+    modLocalRuntime "maven.modrinth:LIGlLgiL:waXfar2S"
+
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
-}
-
-configurations.configureEach {
-    exclude group: 'babric'
 }
 
 processResources {
@@ -70,7 +66,13 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
+    it.options.encoding = 'UTF-8'
+    it.options.release = 8
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 idea {

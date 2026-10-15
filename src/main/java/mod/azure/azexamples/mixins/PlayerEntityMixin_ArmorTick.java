@@ -1,7 +1,7 @@
 package mod.azure.azexamples.mixins;
 
 import mod.azure.azurelib.platform.mc.Mc;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.mob.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,6 +18,7 @@ public abstract class PlayerEntityMixin_ArmorTick {
     @org.spongepowered.asm.mixin.Unique
     private static final DiamondArmorAnimationDispatcher AZEXAMPLES$DIAMOND = new DiamondArmorAnimationDispatcher();
 
+    // MCP: EntityPlayer.onUpdate
     @Inject(method = "tick", at = @At("TAIL"))
     private void azexamples$armorTick(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;

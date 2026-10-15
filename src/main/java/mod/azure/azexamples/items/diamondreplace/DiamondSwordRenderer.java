@@ -8,7 +8,7 @@ import mod.azure.azurelib.util.ResourceLocation;
 import mod.azure.azexamples.CommonMod;
 
 /**
- * Replaces the vanilla diamond sword's look (1.7.10 has no netherite). Its display transforms are read from
+ * Replaces the vanilla diamond sword's look (Beta has no netherite). Its display transforms are read from
  * {@code assets/minecraft/models/item/diamond_sword.json}.
  */
 public class DiamondSwordRenderer extends AzItemRenderer {

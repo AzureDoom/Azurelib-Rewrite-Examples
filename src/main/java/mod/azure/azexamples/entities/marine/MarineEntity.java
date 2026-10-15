@@ -2,15 +2,15 @@ package mod.azure.azexamples.entities.marine;
 
 import mod.azure.azurelib.platform.mc.Mc;
 import mod.azure.azurelib.util.AzEquipmentHolder;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 
 import mod.azure.azexamples.platform.ExMc;
 
-public class MarineEntity extends LivingEntity implements AzEquipmentHolder {
+public class MarineEntity extends MobEntity implements AzEquipmentHolder {
 
     private static final String EQUIPMENT_KEY = "AzExamplesEquipment";
 
@@ -19,9 +19,10 @@ public class MarineEntity extends LivingEntity implements AzEquipmentHolder {
 
     public MarineEntity(World world) {
         super(world);
-        this.setBoundingBoxSpacing(0.6F, 1.8F);
+        this.setSize(0.6F, 1.8F); // MCP: Entity.setSize
     }
 
+    // MCP: Entity.interact
     @Override
     public boolean interact(PlayerEntity player) {
         ItemStack stack = Mc.heldItem(player);
@@ -58,16 +59,16 @@ public class MarineEntity extends LivingEntity implements AzEquipmentHolder {
     }
 
     @Override
-    public boolean isCollidable() {
+    public boolean hasCollision() {
         return true;
     }
 
     /**
-     * Saves each non-empty slot as its own stack compound under {@value #EQUIPMENT_KEY}. StationAPI's stack NBT (and so
-     * AzureLib's item UUID) is saved with each stack.
+     * Saves each non-empty slot as its own stack compound under {@value #EQUIPMENT_KEY}. AzureLib's per-stack data (and
+     * so its item UUID) is saved with each stack.
      */
     @Override
-    public void writeNbt(NbtCompound compound) {
+    public boolean writeNbt(NbtCompound compound) {
         super.writeNbt(compound);
         NbtCompound equipmentTag = new NbtCompound();
         for (int i = 0; i < this.equipment.length; i++) {
@@ -76,6 +77,7 @@ public class MarineEntity extends LivingEntity implements AzEquipmentHolder {
             }
         }
         ExMc.putCompound(compound, EQUIPMENT_KEY, equipmentTag);
+        return true;
     }
 
     @Override

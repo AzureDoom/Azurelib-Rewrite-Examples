@@ -1,7 +1,7 @@
 package mod.azure.azexamples.entities.creeper;
 
 import mod.azure.azurelib.platform.mc.Mc;
-import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.monster.CreeperEntity;
 
 import java.util.Map;
 import java.util.WeakHashMap;

@@ -9,7 +9,7 @@ import mod.azure.azurelib.model.AzBone;
 import mod.azure.azurelib.platform.mc.Mc;
 import mod.azure.azurelib.util.ResourceLocation;
 import mod.azure.azurelib.util.math.Mth;
-import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.monster.CreeperEntity;
 
 import javax.annotation.Nonnull;
 

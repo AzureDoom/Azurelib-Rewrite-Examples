@@ -1,19 +1,18 @@
 package mod.azure.azexamples.items.gunwitharm;
 
+import mod.azure.azurelib.platform.Services;
 import mod.azure.azurelib.platform.mc.Mc;
+import mod.azure.azurelib.util.client.ClientUtils;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.modificationstation.stationapi.api.template.item.ItemTemplate;
-import net.modificationstation.stationapi.api.util.Identifier;
 
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import mod.azure.azexamples.CommonStrings;
 import mod.azure.azexamples.platform.ExMc;
 
 public class GunWithArmItem extends Item {
@@ -26,15 +25,14 @@ public class GunWithArmItem extends Item {
 
     private final Map<Entity, Long> nextShot = new WeakHashMap<>();
 
-    public GunWithArmItem(Identifier identifier) {
-        super(ItemTemplate.getNextId());
-        ItemTemplate.onConstructor(this, identifier);
-        this.setMaxCount(1);
+    public GunWithArmItem(int id) {
+        super(id);
+        this.setMaxStackSize(1);
         this.dispatcher = new GunWithArmDispatcher();
     }
 
     @Override
-    public ItemStack use(ItemStack stack, World world, PlayerEntity player) {
+    public ItemStack startUsing(ItemStack stack, World world, PlayerEntity player) {
         long now = Mc.time(world);
         Long allowedAt = nextShot.get(player);
         if (allowedAt == null || now >= allowedAt) {
@@ -46,18 +44,15 @@ public class GunWithArmItem extends Item {
 
     private void fire(World world, PlayerEntity player, ItemStack itemStack) {
         if (!Mc.isClientSide(world)) {
-            LivingEntity hit = raycastEntity(world, player, RANGE);
+            MobEntity hit = raycastEntity(world, player, RANGE);
             if (hit != null) {
                 ExMc.damage(hit, player, 5);
             }
         }
         dispatcher.serverFire(player, itemStack);
-        // TODO: Remove once item sound keyframes are working
-        ExMc.playSound(player, CommonStrings.MOD_ID + ":vigilance_fire", 1.0F, 1.0F);
-        // Kick the view on the client that owns this player (multiplayer client, or the single player world).
         if (
-            !mod.azure.azurelib.platform.Services.PLATFORM.isServerEnvironment()
-                && player == mod.azure.azurelib.util.client.ClientUtils.getClientPlayer()
+            !Services.PLATFORM.isServerEnvironment()
+                && player == ClientUtils.getClientPlayer()
         ) {
             ExMc.turnView(player, getRecoilX(world) * 5, -getRecoilY() * 5);
         }
@@ -72,7 +67,7 @@ public class GunWithArmItem extends Item {
     }
 
     /** The closest living entity on the player's line of sight, stopping at the first solid block. */
-    private static LivingEntity raycastEntity(World world, PlayerEntity player, double range) {
+    private static MobEntity raycastEntity(World world, PlayerEntity player, double range) {
         double sx = Mc.x(player);
         // A Beta player's y is its eye position (the bounding box sits yOffset below it).
         double sy = Mc.y(player);
@@ -85,10 +80,10 @@ public class GunWithArmItem extends Item {
 
         double maxDistance = blockDistance(world, sx, sy, sz, dx, dy, dz, range);
 
-        LivingEntity closest = null;
+        MobEntity closest = null;
         double closestDistance = maxDistance;
         for (Entity entity : Mc.entities(world)) {
-            if (entity == player || !(entity instanceof LivingEntity) || !Mc.isAlive(entity))
+            if (entity == player || !(entity instanceof MobEntity) || !Mc.isAlive(entity))
                 continue;
             double half = Mc.width(entity) / 2.0D + 0.1D;
             double t = rayBox(
@@ -107,7 +102,7 @@ public class GunWithArmItem extends Item {
             );
             if (t >= 0 && t <= closestDistance) {
                 closestDistance = t;
-                closest = (LivingEntity) entity;
+                closest = (MobEntity) entity;
             }
         }
         return closest;

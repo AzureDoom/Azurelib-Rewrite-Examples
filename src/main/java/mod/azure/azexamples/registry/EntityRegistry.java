@@ -14,7 +14,8 @@ import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marine.MarineEntity;
 
 /**
- * The examples' entities. Beta has no spawn eggs, so {@link ItemRegistry} creates an
+ * The examples' entities, registered from {@link mod.azure.azexamples.ExamplesMod} with network ids taken in this order
+ * from {@link ExamplesIds#FIRST_ENTITY}. Beta has no spawn eggs, so {@link ItemRegistry} creates an
  * {@link mod.azure.azexamples.items.spawnegg.ExampleSpawnEggItem} for each entry below.
  */
 public final class EntityRegistry {

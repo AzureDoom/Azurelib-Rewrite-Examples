@@ -1,0 +1,13 @@
+# Minecraft classes the examples use that the AzureLib port did NOT already confirm.
+# Classes AzureLib already uses (Entity, MobEntity, PlayerEntity, CreeperEntity, Item, ArmorItem, ItemStack,
+# NbtCompound, World, Block, BlockEntity, ModelPart, HumanoidModel) are taken from your fixed AzureLib sources.
+#
+# Column 1: name currently in the source. Column 2: correct Feather name. Fix column 2, then ./scripts/feather-remap.sh
+#
+# current_name	correct_name	# MCP (b1.7.3)
+net.minecraft.entity.mob.monster.MonsterEntity	net.minecraft.entity.mob.monster.MonsterEntity	# EntityMob
+net.minecraft.entity.mob.animal.AnimalEntity	net.minecraft.entity.mob.animal.AnimalEntity	# EntityAnimal
+net.minecraft.entity.data.DataTracker	net.minecraft.entity.data.DataTracker	# DataWatcher
+net.minecraft.block.BlockWithEntity	net.minecraft.block.BlockWithEntity	# BlockContainer
+net.minecraft.block.material.Material	net.minecraft.block.material.Material	# Material
+net.minecraft.client.resource.language.TranslationStorage	net.minecraft.client.resource.language.TranslationStorage	# StringTranslate

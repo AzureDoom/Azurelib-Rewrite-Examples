@@ -8,7 +8,7 @@ import mod.azure.azurelib.render.layer.AzAutoGlowingLayer;
 import mod.azure.azurelib.render.vertex.OverlayTexture;
 import mod.azure.azurelib.util.ResourceLocation;
 import mod.azure.azurelib.util.math.Mth;
-import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.monster.CreeperEntity;
 
 import java.util.UUID;
 

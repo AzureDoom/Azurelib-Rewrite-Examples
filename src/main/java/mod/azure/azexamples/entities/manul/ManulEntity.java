@@ -1,10 +1,10 @@
 package mod.azure.azexamples.entities.manul;
 
 import mod.azure.azurelib.platform.mc.Mc;
-import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.world.World;
 
-public class ManulEntity extends AnimalEntity {
+public class ManulEntity extends MobEntity {
 
     private static final int STATE_SWITCH_TICKS = 5;
 
@@ -18,7 +18,7 @@ public class ManulEntity extends AnimalEntity {
 
     public ManulEntity(World world) {
         super(world);
-        this.setBoundingBoxSpacing(1.2F, 1.1F);
+        this.setSize(1.2F, 1.1F);
         this.animationDispatcher = new ManulAnimationDispatcher(this);
     }
 

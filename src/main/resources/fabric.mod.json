@@ -2,36 +2,34 @@
   "schemaVersion": 1,
   "id": "azexamples",
   "version": "${version}",
-
   "name": "AzureLib Examples",
-  "description": "Example entities, items, armor and blocks for AzureLib on Beta 1.7.3 (StationAPI).",
+  "description": "Example entities, items, armor and blocks for AzureLib on Beta 1.7.3 (Ornithe).",
   "authors": [
     "AzureDoom"
   ],
   "contact": {
     "sources": "https://github.com/AzureDoom/AzureLib"
   },
-
   "license": "MIT",
   "icon": "logo.png",
-
   "environment": "*",
   "entrypoints": {
-    "stationapi:event_bus": [
-      "mod.azure.azexamples.registry.ExamplesEvents"
+    "init": [
+      "mod.azure.azexamples.ExamplesMod"
     ],
-    "stationapi:event_bus_client": [
-      "mod.azure.azexamples.client.ExamplesClientEvents"
+    "client-init": [
+      "mod.azure.azexamples.client.ExamplesClient"
     ]
   },
   "mixins": [
     "azexamples.mixins.json"
   ],
-
   "depends": {
     "minecraft": "1.0.0-beta.7.3",
     "fabricloader": ">=0.19.5",
-    "stationapi": "*",
+    "osl-entrypoints": "*",
+    "osl-blocks": "*",
+    "osl-items": "*",
     "azurelib": "*"
   }
 }

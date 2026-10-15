@@ -1,12 +1,10 @@
 package mod.azure.azexamples.blocks;
 
 import mod.azure.azurelib.platform.mc.Mc;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.mob.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.modificationstation.stationapi.api.template.item.ItemTemplate;
-import net.modificationstation.stationapi.api.util.Identifier;
 
 import mod.azure.azexamples.platform.ExMc;
 import mod.azure.azexamples.registry.BlockRegistry;
@@ -14,10 +12,10 @@ import mod.azure.azexamples.registry.BlockRegistry;
 /**
  * The stargate's item: a plain item that places the block.
  * <p>
- * Why not the block's own item: StationAPI's Arsenic renderer gives block items the block's JSON model and draws them
- * itself in the GUI, first person and third person, cancelling before AzureLib's item hooks run. Plain items without a
- * JSON model use Arsenic's vanilla fallback, which is where AzureLib's hooks take over (the same path the pistol and
- * diamond sword use), so this item gets AzureLib rendering everywhere, including its {@code display} transforms.
+ * Why not a block item: Beta only creates block items for the vanilla blocks that exist when its block class first
+ * loads, so a mod block has no item of its own. A plain item that places the block also takes the same AzureLib
+ * rendering path as the pistol and diamond sword (GUI, first and third person, with its {@code display} transforms)
+ * instead of Beta's 3D block-item path.
  */
 public class StargateItem extends Item {
 
@@ -29,13 +27,12 @@ public class StargateItem extends Item {
         { -1, 0, 0 },
         { 1, 0, 0 } };
 
-    public StargateItem(Identifier identifier) {
-        super(ItemTemplate.getNextId());
-        ItemTemplate.onConstructor(this, identifier);
+    public StargateItem(int id) {
+        super(id);
     }
 
     @Override
-    public boolean useOnBlock(ItemStack stack, PlayerEntity player, World world, int x, int y, int z, int side) {
+    public boolean useOn(ItemStack stack, PlayerEntity player, World world, int x, int y, int z, int side) {
         if (Mc.count(stack) <= 0) {
             return false;
         }

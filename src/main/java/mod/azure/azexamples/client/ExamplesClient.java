@@ -2,15 +2,12 @@ package mod.azure.azexamples.client;
 
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
-import net.mine_diver.unsafeevents.listener.EventListener;
-import net.minecraft.entity.mob.CreeperEntity;
+import mod.azure.azurelib.render.item.icon.AzItemIcons;
+import mod.azure.azurelib.render.registry.AzBlockEntityRendererRegistry;
+import mod.azure.azurelib.render.registry.AzEntityRendererRegistry;
+import net.minecraft.entity.mob.monster.CreeperEntity;
 import net.minecraft.item.Item;
-import net.modificationstation.stationapi.api.client.event.block.entity.BlockEntityRendererRegisterEvent;
-import net.modificationstation.stationapi.api.client.event.render.entity.EntityRendererRegisterEvent;
-import net.modificationstation.stationapi.api.client.event.texture.TextureRegisterEvent;
-import net.modificationstation.stationapi.api.mod.entrypoint.EntrypointManager;
-
-import java.lang.invoke.MethodHandles;
+import net.ornithemc.osl.entrypoints.api.client.ClientModInitializer;
 
 import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
@@ -36,58 +33,46 @@ import mod.azure.azexamples.items.diamondreplace.armor.DiamondArmorRenderer;
 import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
 import mod.azure.azexamples.platform.ExMc;
 import mod.azure.azexamples.registry.BlockRegistry;
-import mod.azure.azexamples.registry.ExamplesEvents;
 import mod.azure.azexamples.registry.ItemRegistry;
 
-public final class ExamplesClientEvents {
+/**
+ * OSL {@code client-init} entrypoint. Entity and block entity renderers are registered straight away; item and armor
+ * renderers wait for the examples' items (see {@link ItemRegistry#whenRegistered(Runnable)}).
+ */
+public final class ExamplesClient implements ClientModInitializer {
 
-    static {
-        EntrypointManager.registerLookup(MethodHandles.lookup());
-    }
-
-    @EventListener
-    private static void registerEntityRenderers(EntityRendererRegisterEvent event) {
-        event.renderers.put(DoomHunterEntity.class, new DoomHunterRenderer());
-        event.renderers.put(MarauderEntity.class, new MarauderRenderer());
-        event.renderers.put(ManulEntity.class, new ManulRenderer());
-        event.renderers.put(JuravenatorEntity.class, new JuravenatorRenderer());
-        event.renderers.put(MarineEntity.class, new MarineRenderer());
-        event.renderers.put(GremlinEntity.class, new GremlinRenderer());
+    @Override
+    public void initClient() {
+        AzEntityRendererRegistry.register(DoomHunterEntity.class, DoomHunterRenderer::new);
+        AzEntityRendererRegistry.register(MarauderEntity.class, MarauderRenderer::new);
+        AzEntityRendererRegistry.register(ManulEntity.class, ManulRenderer::new);
+        AzEntityRendererRegistry.register(JuravenatorEntity.class, JuravenatorRenderer::new);
+        AzEntityRendererRegistry.register(MarineEntity.class, MarineRenderer::new);
+        AzEntityRendererRegistry.register(GremlinEntity.class, GremlinRenderer::new);
         // Replaces the vanilla creeper renderer, showing AzureLib driving a vanilla entity.
-        event.renderers.put(CreeperEntity.class, new CreeperRenderer());
+        AzEntityRendererRegistry.register(CreeperEntity.class, CreeperRenderer::new);
+
+        AzBlockEntityRendererRegistry.register(StargateBlockEntity.class, StargateBlockRenderer::new);
+
+        // Item and armor renderers need the items, which OSL's item register event creates; that may happen before
+        // or after this entrypoint runs.
+        ItemRegistry.whenRegistered(ExamplesClient::registerItemRenderers);
     }
 
-    @EventListener
-    private static void registerBlockEntityRenderers(BlockEntityRendererRegisterEvent event) {
-        event.renderers.put(StargateBlockEntity.class, new StargateBlockRenderer());
-    }
+    private static void registerItemRenderers() {
+        // Inventory, held and dropped icons. Doomicorn armor gets its own; vanilla diamond armor is reskinned with the
+        // cultist icons to match its AzureLib armor model.
+        icon(ItemRegistry.DOOMICORN_HELMET, "doomicorn_helmet");
+        icon(ItemRegistry.DOOMICORN_CHESTPLATE, "doomicorn_chestplate");
+        icon(ItemRegistry.DOOMICORN_LEGGINGS, "doomicorn_leggings");
+        icon(ItemRegistry.DOOMICORN_BOOTS, "doomicorn_boots");
+        icon(ExMc.diamondHelmet(), "cultist_helmet");
+        icon(ExMc.diamondChestplate(), "cultist_chestplate");
+        icon(ExMc.diamondLeggings(), "cultist_leggings");
+        icon(ExMc.diamondBoots(), "cultist_boots");
 
-    @EventListener
-    private static void registerTextures(TextureRegisterEvent event) {
-        icon(ItemRegistry.DOOMICORN_HELMET, "item/doomicorn_helmet");
-        icon(ItemRegistry.DOOMICORN_CHESTPLATE, "item/doomicorn_chestplate");
-        icon(ItemRegistry.DOOMICORN_LEGGINGS, "item/doomicorn_leggings");
-        icon(ItemRegistry.DOOMICORN_BOOTS, "item/doomicorn_boots");
-
-        // The diamond armor is replaced by the cultist armor model, so give the vanilla items the cultist icons too.
-        icon(ExMc.diamondHelmet(), "item/cultist_helmet");
-        icon(ExMc.diamondChestplate(), "item/cultist_chestplate");
-        icon(ExMc.diamondLeggings(), "item/cultist_leggings");
-        icon(ExMc.diamondBoots(), "item/cultist_boots");
-
-        registerAzureLibRenderers();
-    }
-
-    private static boolean azureLibRenderersRegistered;
-
-    private static void registerAzureLibRenderers() {
-        if (azureLibRenderersRegistered) {
-            return;
-        }
-        azureLibRenderersRegistered = true;
-
-        // Beta items have no registry names, so the item model JSON (for Blockbench "display" transforms) is given
-        // explicitly.
+        // AzureLib can't derive an item's model JSON path (for Blockbench "display" transforms) from the item on Beta,
+        // so it is given explicitly.
         AzItemRendererRegistry.register(
             ExMc.diamondSword(),
             CommonMod.modResource("models/item/diamond_sword.json"),
@@ -124,11 +109,7 @@ public final class ExamplesClientEvents {
         );
     }
 
-    /**
-     * Icon at {@code assets/azexamples/stationapi/textures/<path>.png}. MAPPING/API: StationAPI's
-     * {@code StationRendererItem#setTexture(Identifier)}.
-     */
-    private static void icon(Item item, String path) {
-        item.setTexture(ExamplesEvents.id(path));
+    private static void icon(Item item, String name) {
+        AzItemIcons.register(item, CommonMod.modResource("textures/icons/item/" + name + ".png"));
     }
 }

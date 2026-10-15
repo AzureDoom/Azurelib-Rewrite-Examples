@@ -1,0 +1,14 @@
+item.azexamples.pistol.name=Pistol
+item.azexamples.peacemaker.name=Peacemaker
+item.azexamples.doomicorn_helmet.name=Doomicorn Helmet
+item.azexamples.doomicorn_chestplate.name=Doomicorn Chestplate
+item.azexamples.doomicorn_leggings.name=Doomicorn Leggings
+item.azexamples.doomicorn_boots.name=Doomicorn Boots
+item.azexamples.marauder_spawn_egg.name=Marauder Spawn Egg
+item.azexamples.manul_spawn_egg.name=Manul Spawn Egg
+item.azexamples.doomhunter_spawn_egg.name=Doomhunter Spawn Egg
+item.azexamples.juravenator_spawn_egg.name=Juravenator Spawn Egg
+item.azexamples.marine_spawn_egg.name=Marine Spawn Egg
+item.azexamples.gremlin_spawn_egg.name=Gremlin Spawn Egg
+item.azexamples.stargate.name=Stargate
+tile.azexamples.stargate.name=Stargate (Block)

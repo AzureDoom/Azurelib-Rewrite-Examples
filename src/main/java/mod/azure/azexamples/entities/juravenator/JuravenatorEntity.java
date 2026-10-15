@@ -1,10 +1,10 @@
 package mod.azure.azexamples.entities.juravenator;
 
 import mod.azure.azurelib.util.MoveAnalysis;
-import net.minecraft.entity.mob.MonsterEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.world.World;
 
-public class JuravenatorEntity extends MonsterEntity {
+public class JuravenatorEntity extends MobEntity {
 
     private final MoveAnalysis moveAnalysis;
 
@@ -12,7 +12,7 @@ public class JuravenatorEntity extends MonsterEntity {
 
     public JuravenatorEntity(World world) {
         super(world);
-        this.setBoundingBoxSpacing(3.0F, 7.0F);
+        this.setSize(3.0F, 7.0F);
         this.moveAnalysis = new MoveAnalysis(this);
         this.animationDispatcher = new JuravenatorAnimationDispatcher(this);
     }
