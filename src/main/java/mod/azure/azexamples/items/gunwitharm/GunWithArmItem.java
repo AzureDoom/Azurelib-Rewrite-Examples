@@ -1,6 +1,8 @@
 package mod.azure.azexamples.items.gunwitharm;
 
+import mod.azure.azurelib.platform.Services;
 import mod.azure.azurelib.platform.mc.Mc;
+import mod.azure.azurelib.util.client.ClientUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,7 +15,6 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import mod.azure.azexamples.CommonStrings;
 import mod.azure.azexamples.platform.ExMc;
 
 public class GunWithArmItem extends Item {
@@ -52,12 +53,10 @@ public class GunWithArmItem extends Item {
             }
         }
         dispatcher.serverFire(player, itemStack);
-        // TODO: Remove once item sound keyframes are working
-        ExMc.playSound(player, CommonStrings.MOD_ID + ":vigilance_fire", 1.0F, 1.0F);
         // Kick the view on the client that owns this player (multiplayer client, or the single player world).
         if (
-            !mod.azure.azurelib.platform.Services.PLATFORM.isServerEnvironment()
-                && player == mod.azure.azurelib.util.client.ClientUtils.getClientPlayer()
+            !Services.PLATFORM.isServerEnvironment()
+                && player == ClientUtils.getClientPlayer()
         ) {
             ExMc.turnView(player, getRecoilX(world) * 5, -getRecoilY() * 5);
         }
