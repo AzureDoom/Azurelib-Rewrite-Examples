@@ -18,13 +18,6 @@ public class DoomHunterRenderer extends AzEntityRenderer<DoomHunterEntity> {
     public DoomHunterRenderer(RenderManager renderManager) {
         super(
             AzEntityRendererConfig.<DoomHunterEntity>builder(MODEL, TEXTURE)
-                .setRenderEntry(contextPipeline -> {
-                    if (!contextPipeline.animatable().isAggressive()) {
-                        contextPipeline.animatable().animationDispatcher.clientIdle();
-                    }
-                    contextPipeline.animatable().updateAnimations();
-                    return contextPipeline;
-                })
                 .setAnimatorProvider(DoomHunterAnimator::new)
                 .addRenderLayer(new AzAutoGlowingLayer<>())
                 .setShadowRadius(3.0F)
