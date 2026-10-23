@@ -17,7 +17,7 @@ import java.util.WeakHashMap;
 
 public class GunWithArmItem extends Item {
 
-    private static final int FIRE_COOLDOWN_TICKS = 5;
+    private static final int FIRE_COOLDOWN_TICKS = 10;
 
     final GunWithArmDispatcher dispatcher;
 
