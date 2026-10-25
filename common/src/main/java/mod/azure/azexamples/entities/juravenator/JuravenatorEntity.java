@@ -22,6 +22,10 @@ public class JuravenatorEntity extends Monster {
     public void tick() {
         super.tick();
         moveAnalysis.update();
+
+        if (level.isClientSide()) {
+            updateAnimations();
+        }
     }
 
     public void updateAnimations() {

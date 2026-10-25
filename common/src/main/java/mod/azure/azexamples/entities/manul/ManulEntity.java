@@ -31,6 +31,10 @@ public class ManulEntity extends PathfinderMob {
     public void tick() {
         super.tick();
         updateMovementState();
+
+        if (level.isClientSide()) {
+            updateAnimations();
+        }
     }
 
     /**
