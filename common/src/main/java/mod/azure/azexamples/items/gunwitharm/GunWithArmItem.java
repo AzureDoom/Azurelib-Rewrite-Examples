@@ -87,7 +87,7 @@ public class GunWithArmItem extends Item {
             damageEntity(level, player, hitResult);
         }
         dispatcher.serverFire(player, itemStack);
-        player.getCooldowns().addCooldown(itemStack.getItem(), 5);
+        player.getCooldowns().addCooldown(itemStack.getItem(), 10);
         if (level.isClientSide()) {
             ClientUtils.getClientPlayer().turn(getRecoilX(player) * 5, -getRecoilY() * 5);
         }
