@@ -17,10 +17,6 @@ public class JuravenatorRenderer extends AzEntityRenderer<JuravenatorEntity> {
     public JuravenatorRenderer(RenderManager renderManager) {
         super(
             AzEntityRendererConfig.<JuravenatorEntity>builder(MODEL, TEXTURE)
-                .setRenderEntry(contextPipeline -> {
-                    contextPipeline.animatable().updateAnimations();
-                    return contextPipeline;
-                })
                 .setAnimatorProvider(JuravenatorAnimator::new)
                 .setShadowRadius(0.5F)
                 .build(),

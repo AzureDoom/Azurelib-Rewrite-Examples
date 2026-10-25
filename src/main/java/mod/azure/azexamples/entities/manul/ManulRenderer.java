@@ -17,10 +17,6 @@ public class ManulRenderer extends AzEntityRenderer<ManulEntity> {
     public ManulRenderer(RenderManager renderManager) {
         super(
             AzEntityRendererConfig.<ManulEntity>builder(MODEL, TEXTURE)
-                .setRenderEntry(contextPipeline -> {
-                    contextPipeline.animatable().updateAnimations();
-                    return contextPipeline;
-                })
                 .setAnimatorProvider(ManulAnimator::new)
                 .setShadowRadius(0.5F)
                 .build(),

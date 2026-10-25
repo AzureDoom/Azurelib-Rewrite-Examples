@@ -23,6 +23,10 @@ public class JuravenatorEntity extends EntityMob {
     public void onUpdate() {
         super.onUpdate();
         moveAnalysis.update();
+
+        if (world.isRemote) {
+            updateAnimations();
+        }
     }
 
     public void updateAnimations() {

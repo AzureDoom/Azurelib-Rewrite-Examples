@@ -26,6 +26,10 @@ public class ManulEntity extends EntityCreature {
     public void onUpdate() {
         super.onUpdate();
         updateMovementState();
+
+        if (world.isRemote) {
+            updateAnimations();
+        }
     }
 
     private void updateMovementState() {
