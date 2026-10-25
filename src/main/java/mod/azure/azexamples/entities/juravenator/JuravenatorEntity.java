@@ -21,6 +21,10 @@ public class JuravenatorEntity extends MonsterEntity {
     public void tick() {
         super.tick();
         moveAnalysis.update();
+
+        if (!world.isRemote) {
+            updateAnimations();
+        }
     }
 
     public void updateAnimations() {

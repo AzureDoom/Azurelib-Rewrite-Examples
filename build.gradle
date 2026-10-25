@@ -25,6 +25,7 @@ repositories {
     maven { url = 'https://maven.azuredoom.com/mods' }
     maven { url = 'https://maven.minecraftforge.net/' }
     maven { url = 'https://jitpack.io/' }
+    maven { url = 'https://libraries.minecraft.net/' }
     exclusiveContent {
         forRepository {
             maven {
@@ -51,6 +52,8 @@ dependencies {
     modLocalRuntime "maven.modrinth:ros9lAuk:tk9tDFz1"
     modLocalRuntime "maven.modrinth:zq6BznqT:H4DNrOdq"
     modLocalRuntime "maven.modrinth:rFeWTq4G:JkTIrrTV"
+    modLocalRuntime "maven.modrinth:NhFO9av6:kpncS0z4"
+    modImplementation "maven.modrinth:wIWtkL0s:6THYblPw"
 
     implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
     implementation 'org.slf4j:slf4j-api:1.8.0-beta4'

@@ -26,6 +26,10 @@ public class ManulEntity extends AnimalEntity {
     public void tick() {
         super.tick();
         updateMovementState();
+
+        if (!world.isRemote) {
+            updateAnimations();
+        }
     }
 
     private void updateMovementState() {
