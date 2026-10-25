@@ -21,6 +21,10 @@ public class JuravenatorEntity extends MobEntity {
     public void tick() {
         super.tick();
         moveAnalysis.update();
+
+        if (!world.isMultiplayer) {
+            updateAnimations();
+        }
     }
 
     public void updateAnimations() {

@@ -26,6 +26,10 @@ public class ManulEntity extends MobEntity {
     public void tick() {
         super.tick();
         updateMovementState();
+
+        if (!world.isMultiplayer) {
+            updateAnimations();
+        }
     }
 
     private void updateMovementState() {
