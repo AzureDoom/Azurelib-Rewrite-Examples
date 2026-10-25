@@ -33,7 +33,7 @@ public class ExampleSpawnEggItem extends Item {
 
     private static EntityRegistry.Entry entry(ItemStack stack) {
         List<EntityRegistry.Entry> entries = EntityRegistry.entries();
-        int index = stack.getCurrentDurability();
+        int index = stack.getItemDamage();
         return index >= 0 && index < entries.size() ? entries.get(index) : null;
     }
 

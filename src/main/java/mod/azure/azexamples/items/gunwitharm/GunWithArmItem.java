@@ -89,7 +89,7 @@ public class GunWithArmItem extends Item {
         double endZ = startZ + dirZ * range;
 
         // Give the block raycast its own vectors.
-        MovingObjectPosition blockHit = world.rayTraceBlocks(
+        MovingObjectPosition blockHit = world.func_147447_a(
             Vec3.createVectorHelper(startX, startY, startZ),
             Vec3.createVectorHelper(endX, endY, endZ),
             false,
@@ -120,12 +120,11 @@ public class GunWithArmItem extends Item {
         double closestDistance = maxDistance;
 
         for (
-            Object obj : world.getEntitiesWithinAABBExcludingEntity(
+            Entity entity : world.getEntitiesWithinAABBExcludingEntity(
                 player,
                 searchBox
             )
         ) {
-            Entity entity = (Entity) obj;
 
             if (
                 !(entity instanceof EntityLivingBase)

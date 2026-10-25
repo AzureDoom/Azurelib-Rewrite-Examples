@@ -1,8 +1,10 @@
 {
   "required": true,
+  "minVersion": "0.8",
   "package": "mod.azure.azexamples.mixins",
+  "refmap": "mixins.azexamples.refmap.json",
+  "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "azexamples.refmap.json",
   "mixins": [
     "EntityLivingBaseMixin",
     "EntityVillagerMixin"
@@ -12,7 +14,6 @@
     "ItemRendererMixin",
     "MinecraftMixin"
   ],
-  "minVersion": "0.8",
   "injectors": {
     "defaultRequire": 1
   }

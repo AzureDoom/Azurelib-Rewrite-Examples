@@ -15,8 +15,8 @@ public final class BlockRegistry {
     private BlockRegistry() {}
 
     public static void register() {
-        STARGATE.setUnlocalizedName(CommonStrings.MOD_ID + ".stargate");
-        STARGATE.setTextureName(CommonStrings.MOD_ID + ":stargate");
+        STARGATE.setBlockName(CommonStrings.MOD_ID + ".stargate");
+        STARGATE.setBlockTextureName(CommonStrings.MOD_ID + ":stargate");
         STARGATE.setCreativeTab(AzExamplesTab.TAB);
         GameRegistry.registerBlock(STARGATE, StargateBlockItem.class, "stargate");
         GameRegistry.registerTileEntity(StargateBlockEntity.class, CommonStrings.MOD_ID + ":stargate_block_entity");

@@ -1,0 +1,8 @@
+dependencies {
+    // @Nullable / @Nonnull; annotations only, nothing needed at runtime.
+    compileOnly('com.google.code.findbugs:jsr305:3.0.2')
+
+    devOnlyNonPublishable("mod.azure.azurelib:azurelib-forge-${minecraftVersion}:${azurelibVersion}:dev") {
+        transitive = false
+    }
+}

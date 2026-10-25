@@ -1,0 +1,7 @@
+repositories {
+    maven {
+        name = 'AzureDoom'
+        url = 'https://maven.azuredoom.com/mods'
+        content { includeGroup 'mod.azure.azurelib' }
+    }
+}

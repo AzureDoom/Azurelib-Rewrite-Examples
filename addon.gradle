@@ -1,0 +1,34 @@
+apply plugin: 'com.diffplug.spotless'
+
+spotless {
+    java {
+        target 'src/*/java/**/*.java'
+        eclipse('4.13.0').configFile("$rootDir/eclipse-formatter.xml")
+        endWithNewline()
+        importOrder('', 'java', 'mod.azure.azurelib', 'mod.azure.azexamples', '\\#')
+        indentWithSpaces(4)
+        removeUnusedImports()
+        trimTrailingWhitespace()
+    }
+}
+
+tasks.named('compileJava') {
+    dependsOn 'spotlessApply'
+}
+
+tasks.matching { it.name.startsWith('runClient') || it.name.startsWith('runServer') }.configureEach {
+    extraArgs.addAll('--mixin', 'azurelib.mixins.json')
+}
+
+tasks.named('processResources', ProcessResources) {
+    def packProps = [
+            mod_id            : modId,
+            mod_name          : modName,
+            mod_description   : modDescription,
+            pack_format_number: packFormatNumber
+    ]
+    inputs.properties packProps
+    filesMatching('pack.mcmeta') {
+        expand packProps
+    }
+}
