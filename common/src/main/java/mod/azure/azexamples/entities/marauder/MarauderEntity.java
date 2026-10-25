@@ -437,8 +437,6 @@ public class MarauderEntity extends Monster implements AzHitboxHolder {
         this.animationDispatcher.clientIdle();
     }
 
-    // ---------------------------------------------------------------- attacks
-
     public MeleeSwingProfile getMeleeProfile() {
         return MELEE_PROFILE;
     }
