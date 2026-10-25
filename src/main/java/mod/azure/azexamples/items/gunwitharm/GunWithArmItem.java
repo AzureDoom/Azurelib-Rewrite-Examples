@@ -176,7 +176,7 @@ public class GunWithArmItem extends Item {
         player.getCooldownTracker()
             .setCooldown(
                 itemStack.getItem(),
-                5
+                10
             );
 
         if (world.isRemote) {
