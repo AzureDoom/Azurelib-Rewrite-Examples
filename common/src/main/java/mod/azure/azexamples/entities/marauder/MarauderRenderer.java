@@ -1,6 +1,7 @@
 package mod.azure.azexamples.entities.marauder;
 
 import com.mojang.math.Axis;
+import mod.azure.azurelib.hitbox.AzHitboxes;
 import mod.azure.azurelib.model.AzBone;
 import mod.azure.azurelib.render.AzRendererPipelineContext;
 import mod.azure.azurelib.render.entity.AzEntityRenderer;
@@ -12,6 +13,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
+import org.jspecify.annotations.NonNull;
 
 import java.util.UUID;
 
@@ -73,5 +76,10 @@ public class MarauderRenderer extends AzEntityRenderer<MarauderEntity> {
                 .build(),
             context
         );
+    }
+
+    @Override
+    protected @NonNull AABB getBoundingBoxForCulling(@NonNull MarauderEntity entity, float partialTicks) {
+        return AzHitboxes.getCullingBox(entity, super.getBoundingBoxForCulling(entity, partialTicks));
     }
 }
