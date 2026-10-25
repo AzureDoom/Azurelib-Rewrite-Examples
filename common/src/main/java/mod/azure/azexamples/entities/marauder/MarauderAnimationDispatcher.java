@@ -7,13 +7,12 @@ import mod.azure.azurelib.animation.play_behavior.AzPlayBehaviors;
 import mod.azure.azexamples.CommonStrings;
 
 /**
- * The MarauderAnimationDispatcher class is responsible for managing and dispatching animation commands for entities,
- * specifically tailored for the Marauder entity. It uses predefined animation commands to sync animations with specific
- * entity actions such as idling, walking, running, melee attacking, spawning, or dying. This dispatcher operates
- * independently, providing a clean and centralized way to handle animation transitions, triggered by client or server
- * events.
+ * Dispatches the Marauder's animation commands (idle, walk, run, melee, energy slash, spawn, death) on the client,
+ * driven from the synced entity state in {@link MarauderEntity#updateAnimations()}.
  */
 public class MarauderAnimationDispatcher {
+
+    private static final String ENERGY_SLASH_ANIMATION_NAME = "energy_slash";
 
     private final AzCommand deathCommand = AzCommand.create(
         CommonStrings.BASE_CONTROLLER,
@@ -39,14 +38,24 @@ public class MarauderAnimationDispatcher {
         AzPlayBehaviors.LOOP
     );
 
-    AzSequence attackSequence = AzSequence.create()
-        .then(CommonStrings.RUN_ANIMATION_NAME, AzPlayBehaviors.PLAY_ONCE)
-        .then(CommonStrings.MELEE_ANIMATION_NAME, AzPlayBehaviors.PLAY_ONCE)
-        .then("idle", AzPlayBehaviors.LOOP);
+    private static final AzSequence meleeSequence = AzSequence.builder()
+        .play(CommonStrings.MELEE_ANIMATION_NAME)
+        .then(CommonStrings.IDLE_ANIMATION_NAME, AzPlayBehaviors.LOOP)
+        .build();
 
     private final AzCommand meleeCommand = AzCommand.create(
         CommonStrings.BASE_CONTROLLER,
-        attackSequence
+        meleeSequence
+    );
+
+    private static final AzSequence energySlashSequence = AzSequence.builder()
+        .play(ENERGY_SLASH_ANIMATION_NAME)
+        .then(CommonStrings.IDLE_ANIMATION_NAME, AzPlayBehaviors.LOOP)
+        .build();
+
+    private final AzCommand energySlashCommand = AzCommand.create(
+        CommonStrings.BASE_CONTROLLER,
+        energySlashSequence
     );
 
     private static final AzSequence spawnSequence = AzSequence.builder()
@@ -77,8 +86,12 @@ public class MarauderAnimationDispatcher {
         runCommand.sendForEntity(marauder);
     }
 
-    public void serverMelee() {
+    public void clientMelee() {
         meleeCommand.sendForEntity(marauder);
+    }
+
+    public void clientEnergySlash() {
+        energySlashCommand.sendForEntity(marauder);
     }
 
     public void clientDeath() {
