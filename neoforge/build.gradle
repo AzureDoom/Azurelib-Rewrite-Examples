@@ -39,4 +39,5 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     implementation "mod.azure.azurelib:azurelib-neo-${minecraft_version}:${azurelib_version}"
+    implementation "curse.maven:medieval-armory-armor-classes-1404819:8781348"
 }
