@@ -6,10 +6,10 @@ import mod.azure.azurelib.render.entity.AzEntityRendererConfig;
 import mod.azure.azurelib.render.layer.AzAutoGlowingLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;
-
-import mod.azure.azexamples.CommonMod;
 import net.minecraft.world.phys.AABB;
 import org.jspecify.annotations.NonNull;
+
+import mod.azure.azexamples.CommonMod;
 
 public class DoomHunterRenderer extends AzEntityRenderer<DoomHunterEntity> {
 
