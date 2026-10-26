@@ -12,6 +12,18 @@ import net.minecraft.world.World;
 
 public class DoomHunterEntity extends MobEntity implements AzHitboxHolder {
 
+    /** Ticks spent idling between bursts. */
+    private static final int IDLE_TICKS = 60;
+
+    /** Ticks spent firing per burst, counted from the start of the fade-in. */
+    private static final int FIRING_TICKS = 80;
+
+    /**
+     * Whether the Doom Hunter is firing. Decided on the server and synced, so every client fades on the same edges and
+     * a client that starts tracking mid-burst snaps to the right state instead of waiting for the next one.
+     */
+    private static final int FIRING = 20;
+
     private static final AzHitboxSet HITBOXES = AzHitboxSet.builder()
 
         .add("eye", h -> h.damageMultiplier(3f).tag("weak_point").tag("critical"))
@@ -175,6 +187,9 @@ public class DoomHunterEntity extends MobEntity implements AzHitboxHolder {
 
     protected final DoomHunterAnimationDispatcher animationDispatcher;
 
+    /** Client-side: the firing state seen last tick, or {@code null} before the first client tick. */
+    private Boolean lastFiring;
+
     public DoomHunterEntity(World world) {
         super(world);
         this.setSize(3.0F, 7.0F);
@@ -186,27 +201,71 @@ public class DoomHunterEntity extends MobEntity implements AzHitboxHolder {
     protected void registerSyncedData() {
         super.registerSyncedData();
         this.syncedData.register(AGGRESSIVE, (byte) 0);
+        this.syncedData.register(FIRING, (byte) 0);
+    }
+
+    public boolean isFiring() {
+        return this.syncedData.getByte(FIRING) != 0;
+    }
+
+    public void setFiring(boolean firing) {
+        if (!this.world.isMultiplayer) {
+            this.syncedData.update(FIRING, (byte) (firing ? 1 : 0));
+        }
     }
 
     @Override
     public void tick() {
         super.tick();
         if (!Mc.isClientSide(this.world)) {
-            // this.syncedData.update(AGGRESSIVE, (byte) (this.walkTarget != null ? 1 : 0));
+            this.syncedData.update(AGGRESSIVE, (byte) (this.getLookTarget() != null ? 1 : 0));
         }
 
         if (!world.isMultiplayer) {
             updateAnimations();
+        } else {
+            updateFiringCycle();
         }
+    }
+
+    /**
+     * Server-side showcase loop: idle for {@link #IDLE_TICKS}, then fire for {@link #FIRING_TICKS}, forever. Only the
+     * edges change the synced value, so this costs nothing on ticks where the state holds.
+     */
+    private void updateFiringCycle() {
+        setFiring(ticks % (IDLE_TICKS + FIRING_TICKS) >= IDLE_TICKS);
     }
 
     public boolean isAggressive() {
         return this.syncedData.getByte(AGGRESSIVE) != 0;
     }
 
+    /**
+     * Drives idle -> fade-in -> active firing -> fade-out on the client. The idle is sent once and never again, so the
+     * base layer loops uninterrupted; every later change only moves the weight of the additive attack layer.
+     */
     public void updateAnimations() {
-        animationDispatcher.clientIdle();
-        animationDispatcher.clientFlamethrower();
+        boolean firing = isFiring();
+
+        if (lastFiring == null) {
+            // First client tick: start the base loop and snap the attack layer to the current state, no fade.
+            animationDispatcher.clientIdle();
+
+            if (firing) {
+                animationDispatcher.clientFlamethrowerActive();
+            } else {
+                animationDispatcher.clientFlamethrowerOff();
+            }
+        } else if (firing != lastFiring) {
+            // Firing edge: fade rather than pop. Active firing is just the weight holding at its peak.
+            if (firing) {
+                animationDispatcher.clientFlamethrowerFadeIn();
+            } else {
+                animationDispatcher.clientFlamethrowerFadeOut();
+            }
+        }
+
+        lastFiring = firing;
     }
 
     @Override
