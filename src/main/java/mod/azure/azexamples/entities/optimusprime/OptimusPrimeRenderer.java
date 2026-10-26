@@ -1,9 +1,10 @@
 package mod.azure.azexamples.entities.optimusprime;
 
-import mod.azure.azexamples.CommonMod;
 import mod.azure.azurelib.render.entity.AzEntityRenderer;
 import mod.azure.azurelib.render.entity.AzEntityRendererConfig;
 import mod.azure.azurelib.util.ResourceLocation;
+
+import mod.azure.azexamples.CommonMod;
 
 /**
  * Credit to <a href="https://github.com/MARCTR0N">Marctron</a> for the model/textures/animations of this example.

@@ -13,3 +13,7 @@ item.azexamples.gremlin_spawn_egg.name=Gremlin Spawn Egg
 item.azexamples.optimusprime_spawn_egg.name=Optimus Prime Spawn Egg
 item.azexamples.stargate.name=Stargate
 tile.azexamples.stargate.name=Stargate (Block)
+message.azexamples.stargate.idle=Stargate: Idle (single looping animation)
+message.azexamples.stargate.dial=Stargate: Dialing (sequence, per-stage reverse, ping-pong)
+message.azexamples.stargate.shutdown=Stargate: Shutting down (controller reverse)
+message.azexamples.stargate.jam=Stargate: Jammed (freeze on frame)

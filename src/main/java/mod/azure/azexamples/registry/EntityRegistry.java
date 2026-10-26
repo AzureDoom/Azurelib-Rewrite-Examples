@@ -1,6 +1,5 @@
 package mod.azure.azexamples.registry;
 
-import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 import net.minecraft.entity.Entity;
 
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marine.MarineEntity;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 
 /**
  * The examples' entities, registered from {@link mod.azure.azexamples.ExamplesMod} with network ids taken in this order

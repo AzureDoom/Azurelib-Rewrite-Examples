@@ -1,8 +1,9 @@
 package mod.azure.azexamples.entities.optimusprime;
 
-import mod.azure.azexamples.CommonStrings;
 import mod.azure.azurelib.animation.dispatch.command.AzCommand;
 import mod.azure.azurelib.animation.play_behavior.AzPlayBehaviors;
+
+import mod.azure.azexamples.CommonStrings;
 
 /**
  * Credit to <a href="https://github.com/MARCTR0N">Marctron</a> for the model/textures/animations of this example.

@@ -1,7 +1,5 @@
 package mod.azure.azexamples.entities.optimusprime;
 
-import mod.azure.azexamples.CommonMod;
-import mod.azure.azexamples.CommonStrings;
 import mod.azure.azurelib.animation.AzAnimatorConfig;
 import mod.azure.azurelib.animation.controller.AzAnimationController;
 import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
@@ -9,6 +7,9 @@ import mod.azure.azurelib.animation.controller.AzBlendMode;
 import mod.azure.azurelib.animation.impl.AzEntityAnimator;
 import mod.azure.azurelib.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
+
+import mod.azure.azexamples.CommonMod;
+import mod.azure.azexamples.CommonStrings;
 
 /**
  * Credit to <a href="https://github.com/MARCTR0N">Marctron</a> for the model/textures/animations of this example.

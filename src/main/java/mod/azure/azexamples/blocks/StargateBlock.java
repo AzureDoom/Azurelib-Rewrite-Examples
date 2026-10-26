@@ -4,6 +4,8 @@ import mod.azure.azurelib.platform.mc.Mc;
 import net.minecraft.block.BlockWithBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.mob.player.PlayerEntity;
+import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -41,5 +43,17 @@ public class StargateBlock extends BlockWithBlockEntity {
     @Override
     public boolean isCube() {
         return false;
+    }
+
+    @Override
+    public boolean use(World world, int x, int y, int z, PlayerEntity player) {
+        if (!world.isMultiplayer) {
+            int next = StargateBlockEntity.Mode.byId(world.getBlockMetadata(x, y, z)).next().ordinal();
+            if (world.setBlockMetadataQuietly(x, y, z, next)) {
+                world.notifyBlockChanged(x, y, z);
+            }
+        }
+
+        return true;
     }
 }
