@@ -2,8 +2,6 @@ package mod.azure.azexamples.entities.marine;
 
 import mod.azure.azurelib.platform.mc.Mc;
 import mod.azure.azurelib.util.AzEquipmentHolder;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

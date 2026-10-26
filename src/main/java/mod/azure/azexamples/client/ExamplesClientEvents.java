@@ -29,6 +29,8 @@ import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.entities.marine.MarineEntity;
 import mod.azure.azexamples.entities.marine.MarineRenderer;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
 import mod.azure.azexamples.items.diamondreplace.DiamondSwordRenderer;
@@ -53,6 +55,7 @@ public final class ExamplesClientEvents {
         event.renderers.put(JuravenatorEntity.class, new JuravenatorRenderer());
         event.renderers.put(MarineEntity.class, new MarineRenderer());
         event.renderers.put(GremlinEntity.class, new GremlinRenderer());
+        event.renderers.put(OptimusPrimeEntity.class, new OptimusPrimeRenderer());
         // Replaces the vanilla creeper renderer, showing AzureLib driving a vanilla entity.
         event.renderers.put(CreeperEntity.class, new CreeperRenderer());
     }

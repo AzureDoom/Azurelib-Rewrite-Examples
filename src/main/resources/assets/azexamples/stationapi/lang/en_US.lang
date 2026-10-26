@@ -10,5 +10,6 @@ item.@.doomhunter_spawn_egg.name=Doomhunter Spawn Egg
 item.@.juravenator_spawn_egg.name=Juravenator Spawn Egg
 item.@.marine_spawn_egg.name=Marine Spawn Egg
 item.@.gremlin_spawn_egg.name=Gremlin Spawn Egg
+item.@.optimusprime_spawn_egg.name=Optimus Prime Spawn Egg
 item.@.stargate.name=Stargate
 tile.@.stargate.name=Stargate (Block)

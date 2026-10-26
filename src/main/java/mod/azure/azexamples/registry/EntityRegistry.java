@@ -12,6 +12,7 @@ import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marine.MarineEntity;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 
 /**
  * The examples' entities. Beta has no spawn eggs, so {@link ItemRegistry} creates an
@@ -28,6 +29,7 @@ public final class EntityRegistry {
         add(JuravenatorEntity.class, "juravenator");
         add(MarineEntity.class, "marine");
         add(GremlinEntity.class, "gremlin");
+        add(OptimusPrimeEntity.class, "optimusprime");
     }
 
     private EntityRegistry() {}
