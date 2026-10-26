@@ -3,7 +3,6 @@ package mod.azure.azexamples.blocks.blockentity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.modificationstation.stationapi.api.block.BlockState;
 
 import java.util.Locale;
@@ -42,8 +41,6 @@ public class StargateBlockEntity extends BlockEntity {
         }
     }
 
-    private static final String MODE_KEY = "mode";
-
     private static final boolean CLIENT = FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT;
 
     public final StargateBlockAnimationDispatcher animationDispatcher;
@@ -68,35 +65,13 @@ public class StargateBlockEntity extends BlockEntity {
             return;
         }
 
-        mode = mode.next();
-        markDirty();
-        syncMode();
-    }
-
-    @Override
-    public void writeNbt(NbtCompound tag) {
-        super.writeNbt(tag);
-        tag.putInt(MODE_KEY, mode.ordinal());
-    }
-
-    @Override
-    public void readNbt(NbtCompound tag) {
-        super.readNbt(tag);
-        mode = Mode.byId(tag.getInt(MODE_KEY));
-    }
-
-    // Called on the client when a synchronization packet arrives.
-    public void setClientMode(int modeId) {
-        mode = Mode.byId(modeId);
-
-        if (world != null) {
-            // Request a render update using your mapped World method.
+        BlockState state = world.getBlockState(x, y, z);
+        if (!state.contains(StargateBlock.MODE)) {
+            return;
         }
-    }
 
-    private void syncMode() {
-        // Send block coordinates and mode.ordinal() to
-        // players tracking this block's chunk.
+        int next = Mode.byId(state.get(StargateBlock.MODE)).next().ordinal();
+        world.setBlockState(x, y, z, state.with(StargateBlock.MODE, next));
     }
 
     @Override

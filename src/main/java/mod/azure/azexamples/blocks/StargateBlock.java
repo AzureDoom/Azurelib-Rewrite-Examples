@@ -59,10 +59,11 @@ public class StargateBlock extends BlockWithEntity {
     @Override
     public boolean onUse(World world, int x, int y, int z, PlayerEntity player) {
         if (!world.isRemote) {
-            int next = StargateBlockEntity.Mode.byId(world.getBlockId(x, y, z)).next().ordinal();
-            if (world.setBlockMetaWithoutNotifyingNeighbors(x, y, z, next)) {
-                world.blockUpdateEvent(x, y, z);
-            }
+            BlockState state = world.getBlockState(x, y, z);
+            int next = StargateBlockEntity.Mode.byId(state.get(MODE)).next().ordinal();
+            world.setBlockState(x, y, z, state.with(MODE, next));
+            world.blockUpdateEvent(x, y, z);
+            player.sendMessage(StargateBlockEntity.Mode.byId(next).translationKey());
         }
 
         return true;
