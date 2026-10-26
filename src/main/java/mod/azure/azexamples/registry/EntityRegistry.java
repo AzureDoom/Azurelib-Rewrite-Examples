@@ -13,6 +13,7 @@ import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marine.MarineEntity;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 
 /**
  * Entity registration. 1.7.10 only gives spawn eggs to entities with global IDs, so the examples use their own
@@ -31,6 +32,7 @@ public final class EntityRegistry {
         add(JuravenatorEntity.class, "juravenator", 0xc09e58, 0x574028);
         add(MarineEntity.class, "marine", 0xc09e58, 0x574028);
         add(GremlinEntity.class, "gremlin", 0x424242, 0x606060);
+        add(OptimusPrimeEntity.class, "optimusprime", 0x424242, 0x606060);
     }
 
     public static List<Entry> entries() {
