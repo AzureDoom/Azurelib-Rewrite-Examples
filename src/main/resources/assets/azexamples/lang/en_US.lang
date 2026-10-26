@@ -14,3 +14,7 @@ item.azexamples.peacemaker.name=Peacemaker
 tile.azexamples.stargate.name=Stargate
 itemGroup.azexamples.examplemod_items=AzureLib Examples
 item.azexamples.spawn_egg.name=Spawn %s
+message.azexamples.stargate.idle=Stargate: Idle (single looping animation)
+message.azexamples.stargate.dial=Stargate: Dialing (sequence, per-stage reverse, ping-pong)
+message.azexamples.stargate.shutdown=Stargate: Shutting down (controller reverse)
+message.azexamples.stargate.jam=Stargate: Jammed (freeze on frame)
