@@ -32,7 +32,7 @@ public class DoomHunterAnimator extends AzEntityAnimator<DoomHunterEntity> {
     public static final float FLAMETHROWER_WEIGHT = 0.6F;
 
     private static final ResourceLocation ANIMATIONS = CommonMod.modResource(
-            "animations/entity/doomhunter.animation.json"
+        "animations/entity/doomhunter.animation.json"
     );
 
     public DoomHunterAnimator() {
@@ -42,13 +42,13 @@ public class DoomHunterAnimator extends AzEntityAnimator<DoomHunterEntity> {
     @Override
     public void registerControllers(AzAnimationControllerContainer<DoomHunterEntity> animationControllerContainer) {
         animationControllerContainer.add(
-                // Base layer: OVERRIDE at the default weight of 1. Holds the idle loop for the entity's whole life.
-                AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).setTransitionLength(10).build(),
-                // Attack layer: ADDITIVE, starting silent. Its weight is faded at runtime up to FLAMETHROWER_WEIGHT.
-                AzAnimationController.builder(this, CommonStrings.ATTACK_CONTROLLER)
-                        .setBlendMode(AzBlendMode.ADDITIVE)
-                        .setWeight(0)
-                        .build()
+            // Base layer: OVERRIDE at the default weight of 1. Holds the idle loop for the entity's whole life.
+            AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).setTransitionLength(10).build(),
+            // Attack layer: ADDITIVE, starting silent. Its weight is faded at runtime up to FLAMETHROWER_WEIGHT.
+            AzAnimationController.builder(this, CommonStrings.ATTACK_CONTROLLER)
+                .setBlendMode(AzBlendMode.ADDITIVE)
+                .setWeight(0)
+                .build()
         );
     }
 

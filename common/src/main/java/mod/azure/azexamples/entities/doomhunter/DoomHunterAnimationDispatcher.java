@@ -26,36 +26,36 @@ public class DoomHunterAnimationDispatcher {
     public static final float FADE_OUT_TICKS = 20F;
 
     private final AzCommand idleCommand = AzCommand
-            .create(CommonStrings.BASE_CONTROLLER, CommonStrings.IDLE_ANIMATION_NAME, AzPlayBehaviors.LOOP);
+        .create(CommonStrings.BASE_CONTROLLER, CommonStrings.IDLE_ANIMATION_NAME, AzPlayBehaviors.LOOP);
 
     private final AzCommand flamethrowerCommand = AzCommand
-            .create(CommonStrings.ATTACK_CONTROLLER, "flamethrower", AzPlayBehaviors.LOOP);
+        .create(CommonStrings.ATTACK_CONTROLLER, "flamethrower", AzPlayBehaviors.LOOP);
 
     /** Starts the flamethrower loop and eases the additive layer in. */
     private final AzCommand flamethrowerFadeInCommand = AzCommand.compose(
-            flamethrowerCommand,
-            AzCommand.controllerBuilder()
-                    .fadeWeight(CommonStrings.ATTACK_CONTROLLER, DoomHunterAnimator.FLAMETHROWER_WEIGHT, FADE_IN_TICKS)
-                    .build()
+        flamethrowerCommand,
+        AzCommand.controllerBuilder()
+            .fadeWeight(CommonStrings.ATTACK_CONTROLLER, DoomHunterAnimator.FLAMETHROWER_WEIGHT, FADE_IN_TICKS)
+            .build()
     );
 
     /** Eases the additive layer out. The loop keeps running underneath at weight 0, so it never restarts. */
     private final AzCommand flamethrowerFadeOutCommand = AzCommand.controllerBuilder()
-            .fadeWeight(CommonStrings.ATTACK_CONTROLLER, 0F, FADE_OUT_TICKS)
-            .build();
+        .fadeWeight(CommonStrings.ATTACK_CONTROLLER, 0F, FADE_OUT_TICKS)
+        .build();
 
     /** Snaps straight to the firing state, for when the entity is first seen mid-fire. */
     private final AzCommand flamethrowerActiveCommand = AzCommand.compose(
-            flamethrowerCommand,
-            AzCommand.controllerBuilder()
-                    .setWeight(CommonStrings.ATTACK_CONTROLLER, DoomHunterAnimator.FLAMETHROWER_WEIGHT)
-                    .build()
+        flamethrowerCommand,
+        AzCommand.controllerBuilder()
+            .setWeight(CommonStrings.ATTACK_CONTROLLER, DoomHunterAnimator.FLAMETHROWER_WEIGHT)
+            .build()
     );
 
     /** Snaps straight to the idle state, for when the entity is first seen while not firing. */
     private final AzCommand flamethrowerOffCommand = AzCommand.controllerBuilder()
-            .setWeight(CommonStrings.ATTACK_CONTROLLER, 0F)
-            .build();
+        .setWeight(CommonStrings.ATTACK_CONTROLLER, 0F)
+        .build();
 
     private final DoomHunterEntity doomHunter;
 
