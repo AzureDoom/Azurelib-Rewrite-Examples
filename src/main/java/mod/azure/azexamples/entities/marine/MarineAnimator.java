@@ -1,7 +1,7 @@
 package mod.azure.azexamples.entities.marine;
 
-import mod.azure.azexamples.CommonMod;
-import mod.azure.azexamples.CommonStrings;
+import net.minecraft.util.ResourceLocation;
+
 import mod.azure.azurelib.animation.AzAnimatorConfig;
 import mod.azure.azurelib.animation.controller.AzAnimationController;
 import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
@@ -11,7 +11,9 @@ import mod.azure.azurelib.animation.dispatch.command.AzCommand;
 import mod.azure.azurelib.animation.impl.AzEntityAnimator;
 import mod.azure.azurelib.animation.play_behavior.AzPlayBehaviors;
 import mod.azure.azurelib.util.math.Mth;
-import net.minecraft.util.ResourceLocation;
+
+import mod.azure.azexamples.CommonMod;
+import mod.azure.azexamples.CommonStrings;
 
 /**
  * Animator for the Marine, showing a controller that only affects a chosen bone hierarchy.
@@ -113,9 +115,9 @@ public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
 
         // Legs: walk or idle, decided independently of aiming.
         boolean walking = Mth.lerp(
-                partialTicks,
-                animatable.prevLimbSwingAmount,
-                animatable.limbSwingAmount
+            partialTicks,
+            animatable.prevLimbSwingAmount,
+            animatable.limbSwingAmount
         ) > WALK_THRESHOLD;
         (walking ? WALK : IDLE).sendForEntity(animatable);
 
