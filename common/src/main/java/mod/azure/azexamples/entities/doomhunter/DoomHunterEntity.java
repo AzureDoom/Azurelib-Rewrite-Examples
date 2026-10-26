@@ -2,11 +2,29 @@ package mod.azure.azexamples.entities.doomhunter;
 
 import mod.azure.azurelib.hitbox.AzHitboxHolder;
 import mod.azure.azurelib.hitbox.AzHitboxSet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 
 public class DoomHunterEntity extends Monster implements AzHitboxHolder {
+
+    /** Ticks spent idling between bursts. */
+    private static final int IDLE_TICKS = 60;
+
+    /** Ticks spent firing per burst, counted from the start of the fade-in. */
+    private static final int FIRING_TICKS = 80;
+
+    /**
+     * Whether the Doom Hunter is firing. Decided on the server and synced, so every client fades on the same edges and
+     * a client that starts tracking mid-burst snaps to the right state instead of waiting for the next one.
+     */
+    private static final EntityDataAccessor<Boolean> FIRING = SynchedEntityData.defineId(
+        DoomHunterEntity.class,
+        EntityDataSerializers.BOOLEAN
+    );
 
     private static final AzHitboxSet HITBOXES = AzHitboxSet.builder()
 
@@ -169,11 +187,26 @@ public class DoomHunterEntity extends Monster implements AzHitboxHolder {
 
     protected final DoomHunterAnimationDispatcher animationDispatcher;
 
-    private boolean animationStarted;
+    /** Client-side: the firing state seen last tick, or {@code null} before the first client tick. */
+    private Boolean lastFiring;
 
     public DoomHunterEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
         this.animationDispatcher = new DoomHunterAnimationDispatcher(this);
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(FIRING, false);
+    }
+
+    public boolean isFiring() {
+        return entityData.get(FIRING);
+    }
+
+    public void setFiring(boolean firing) {
+        entityData.set(FIRING, firing);
     }
 
     @Override
@@ -187,7 +220,17 @@ public class DoomHunterEntity extends Monster implements AzHitboxHolder {
 
         if (level().isClientSide()) {
             updateAnimations();
+        } else {
+            updateFiringCycle();
         }
+    }
+
+    /**
+     * Server-side showcase loop: idle for {@link #IDLE_TICKS}, then fire for {@link #FIRING_TICKS}, forever. Only the
+     * edges change the synced value, so this costs nothing on ticks where the state holds.
+     */
+    private void updateFiringCycle() {
+        setFiring(tickCount % (IDLE_TICKS + FIRING_TICKS) >= IDLE_TICKS);
     }
 
     @Override
@@ -195,13 +238,31 @@ public class DoomHunterEntity extends Monster implements AzHitboxHolder {
         return true;
     }
 
+    /**
+     * Drives idle -> fade-in -> active firing -> fade-out on the client. The idle is sent once and never again, so the
+     * base layer loops uninterrupted; every later change only moves the weight of the additive attack layer.
+     */
     public void updateAnimations() {
-        if (animationStarted) {
-            return;
-        }
-        animationStarted = true;
+        var firing = isFiring();
 
-        animationDispatcher.clientIdle();
-        animationDispatcher.clientFlamethrower();
+        if (lastFiring == null) {
+            // First client tick: start the base loop and snap the attack layer to the current state, no fade.
+            animationDispatcher.clientIdle();
+
+            if (firing) {
+                animationDispatcher.clientFlamethrowerActive();
+            } else {
+                animationDispatcher.clientFlamethrowerOff();
+            }
+        } else if (firing != lastFiring) {
+            // Firing edge: fade rather than pop. Active firing is just the weight holding at its peak.
+            if (firing) {
+                animationDispatcher.clientFlamethrowerFadeIn();
+            } else {
+                animationDispatcher.clientFlamethrowerFadeOut();
+            }
+        }
+
+        lastFiring = firing;
     }
 }
