@@ -17,6 +17,7 @@ public class MarineRenderer extends AzEntityRenderer<MarineEntity> {
     public MarineRenderer(RenderManager renderManager) {
         super(
             AzEntityRendererConfig.<MarineEntity>builder(MODEL, TEXTURE)
+                    .setAnimatorProvider(MarineAnimator::new)
                 .addRenderLayer(new MarineArmorLayer())
                 .addRenderLayer(new MarineItemLayer())
                 .setShadowRadius(0.5F)
