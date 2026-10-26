@@ -35,6 +35,7 @@ public class CreativeTabRegistry {
                     entries.accept(ItemRegistry.JURAVENATOR_SPAWN_EGG.get());
                     entries.accept(ItemRegistry.MARINE_SPAWN_EGG.get());
                     entries.accept(ItemRegistry.GREMLIN_SPAWN_EGG.get());
+                    entries.accept(ItemRegistry.OPTIMUSPRIME_SPAWN_EGG.get());
                 })
                 .build()
         );
