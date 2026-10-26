@@ -4,7 +4,10 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +18,18 @@ public class MarineEntity extends Monster {
 
     public MarineEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
+    }
+
+    /**
+     * Wandering only, so the walk cycle has something to show. Aiming and firing are driven entirely by
+     * {@link MarineAnimator} from the held item, independent of movement.
+     */
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.3));
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
     }
 
     /**
@@ -38,10 +53,5 @@ public class MarineEntity extends Monster {
         setItemSlot(slot, new ItemStack(stack.getItem(), 1));
 
         return InteractionResult.SUCCESS;
-    }
-
-    @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(7, new RandomStrollGoal(this, 0.3F));
     }
 }
