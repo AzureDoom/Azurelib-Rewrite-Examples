@@ -1,6 +1,9 @@
 package mod.azure.azexamples.blocks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -8,6 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
@@ -50,6 +54,26 @@ public class StargateBlock extends BaseEntityBlock {
         @NotNull BlockEntityType<T> type
     ) {
         return createTickerHelper(type, EntityRegistry.STARGATE_BLOCK_ENTITY.get(), StargateBlockEntity::tick);
+    }
+
+    /**
+     * Steps the gate to its next playback demo (idle, dial, shutdown, jam). The mode lives on the server and is synced
+     * to clients, which pick the matching animation command.
+     */
+    @Override
+    protected @NotNull InteractionResult useWithoutItem(
+        @NotNull BlockState state,
+        @NotNull Level level,
+        @NotNull BlockPos pos,
+        @NotNull Player player,
+        @NotNull BlockHitResult hitResult
+    ) {
+        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof StargateBlockEntity stargate) {
+            stargate.cycleMode();
+            player.sendSystemMessage(Component.translatable(stargate.getMode().translationKey()));
+        }
+
+        return InteractionResult.SUCCESS;
     }
 
     @Override
