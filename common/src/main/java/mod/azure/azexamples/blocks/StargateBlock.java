@@ -2,6 +2,9 @@ package mod.azure.azexamples.blocks;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -9,6 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,6 +61,16 @@ public class StargateBlock extends BaseEntityBlock {
         @NotNull BlockEntityType<T> type
     ) {
         return createTickerHelper(type, EntityRegistry.STARGATE_BLOCK_ENTITY.get(), StargateBlockEntity::tick);
+    }
+
+    @Override
+    protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hitResult) {
+        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof StargateBlockEntity stargate) {
+            stargate.cycleMode();
+            player.sendSystemMessage(Component.translatable(stargate.getMode().translationKey()));
+        }
+
+        return InteractionResult.SUCCESS;
     }
 
     @Override
