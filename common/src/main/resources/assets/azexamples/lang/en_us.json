@@ -21,5 +21,9 @@
   "item.azexamples.peacemaker": "Peacemaker",
   "block.azexamples.stargate": "Stargate",
   "itemGroup.examplemod_items": "AzureLib Examples",
-  "itemGroup.azexamples.examplemod_items": "AzureLib Examples"
+  "itemGroup.azexamples.examplemod_items": "AzureLib Examples",
+  "message.azexamples.stargate.idle": "Stargate: Idle (single looping animation)",
+  "message.azexamples.stargate.dial": "Stargate: Dialing (sequence, per-stage reverse, ping-pong)",
+  "message.azexamples.stargate.shutdown": "Stargate: Shutting down (controller reverse)",
+  "message.azexamples.stargate.jam": "Stargate: Jammed (freeze on frame)"
 }

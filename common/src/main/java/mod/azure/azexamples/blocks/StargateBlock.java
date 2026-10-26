@@ -1,12 +1,17 @@
 package mod.azure.azexamples.blocks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,6 +35,16 @@ public class StargateBlock extends BaseEntityBlock {
     @Override
     public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return EntityRegistry.STARGATE_BLOCK_ENTITY.get().create(pos, state);
+    }
+
+    @Override
+    public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof StargateBlockEntity stargate) {
+            stargate.cycleMode();
+            player.sendSystemMessage(Component.translatable(stargate.getMode().translationKey()));
+        }
+
+        return InteractionResult.SUCCESS;
     }
 
     /**
