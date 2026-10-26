@@ -2,7 +2,7 @@ package mod.azure.azexamples.entities.marine;
 
 import mod.azure.azurelib.platform.mc.Mc;
 import mod.azure.azurelib.util.AzEquipmentHolder;
-import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.animal.AnimalEntity;
 import net.minecraft.entity.mob.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import mod.azure.azexamples.platform.ExMc;
 
-public class MarineEntity extends MobEntity implements AzEquipmentHolder {
+public class MarineEntity extends AnimalEntity implements AzEquipmentHolder {
 
     private static final String EQUIPMENT_KEY = "AzExamplesEquipment";
 
