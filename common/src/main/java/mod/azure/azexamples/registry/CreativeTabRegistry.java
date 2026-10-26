@@ -64,7 +64,8 @@ public class CreativeTabRegistry {
                     ItemRegistry.MANUL_SPAWN_EGG,
                     ItemRegistry.JURAVENATOR_SPAWN_EGG,
                     ItemRegistry.MARINE_SPAWN_EGG,
-                    ItemRegistry.GREMLIN_SPAWN_EGG
+                    ItemRegistry.GREMLIN_SPAWN_EGG,
+                    ItemRegistry.OPTIMUSPRIME_SPAWN_EGG
                 )
                 .title(Component.translatable(CommonStrings.CREATIVE_TAB))
                 .icon(() -> BlockRegistry.STARGATE_ITEM.get().getDefaultInstance())

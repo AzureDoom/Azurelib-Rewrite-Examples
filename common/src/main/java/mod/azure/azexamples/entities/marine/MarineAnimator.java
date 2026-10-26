@@ -32,7 +32,7 @@ import mod.azure.azexamples.CommonStrings;
 public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
 
     private static final Identifier ANIMATIONS = CommonMod.modResource(
-            "animations/entity/marine.animation.json"
+        "animations/entity/marine.animation.json"
     );
 
     public static final String AIM_CONTROLLER = "aim_controller";
@@ -59,23 +59,23 @@ public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
     private static final int FIRE_WINDOW = 2;
 
     private static final AzCommand IDLE = AzCommand.create(
-            CommonStrings.BASE_CONTROLLER,
-            CommonStrings.IDLE_ANIMATION_NAME,
-            AzPlayBehaviors.LOOP
+        CommonStrings.BASE_CONTROLLER,
+        CommonStrings.IDLE_ANIMATION_NAME,
+        AzPlayBehaviors.LOOP
     );
 
     private static final AzCommand WALK = AzCommand.create(CommonStrings.BASE_CONTROLLER, "walk", AzPlayBehaviors.LOOP);
 
     /** Starts the aim loop (a no-op once running) and eases the masked layer in over the arms. */
     private static final AzCommand AIM_IN = AzCommand.compose(
-            AzCommand.create(AIM_CONTROLLER, "aim", AzPlayBehaviors.LOOP),
-            AzCommand.controllerBuilder().fadeWeight(AIM_CONTROLLER, 1F, AIM_FADE_IN_TICKS).build()
+        AzCommand.create(AIM_CONTROLLER, "aim", AzPlayBehaviors.LOOP),
+        AzCommand.controllerBuilder().fadeWeight(AIM_CONTROLLER, 1F, AIM_FADE_IN_TICKS).build()
     );
 
     /** Hands the arms back to the base controller, so the walk's arm swing returns. */
     private static final AzCommand AIM_OUT = AzCommand.controllerBuilder()
-            .fadeWeight(AIM_CONTROLLER, 0F, AIM_FADE_OUT_TICKS)
-            .build();
+        .fadeWeight(AIM_CONTROLLER, 0F, AIM_FADE_OUT_TICKS)
+        .build();
 
     private static final AzCommand FIRE = AzCommand.create(FIRE_CONTROLLER, "fire", AzPlayBehaviors.PLAY_ONCE);
 
@@ -89,17 +89,17 @@ public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
     @Override
     public void registerControllers(AzAnimationControllerContainer<MarineEntity> animationControllerContainer) {
         animationControllerContainer.add(
-                // Whole body: walk or idle.
-                AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).setTransitionLength(5).build(),
-                // Arms only: OVERRIDE so the aim pose replaces the walk's arm swing, legs untouched.
-                AzAnimationController.builder(this, AIM_CONTROLLER)
-                        .setBoneMask(ARMS)
-                        .setWeight(0)
-                        .build(),
-                // Recoil added on top of whichever arm pose is active.
-                AzAnimationController.builder(this, FIRE_CONTROLLER)
-                        .setBlendMode(AzBlendMode.ADDITIVE)
-                        .build()
+            // Whole body: walk or idle.
+            AzAnimationController.builder(this, CommonStrings.BASE_CONTROLLER).setTransitionLength(5).build(),
+            // Arms only: OVERRIDE so the aim pose replaces the walk's arm swing, legs untouched.
+            AzAnimationController.builder(this, AIM_CONTROLLER)
+                .setBoneMask(ARMS)
+                .setWeight(0)
+                .build(),
+            // Recoil added on top of whichever arm pose is active.
+            AzAnimationController.builder(this, FIRE_CONTROLLER)
+                .setBlendMode(AzBlendMode.ADDITIVE)
+                .build()
         );
     }
 

@@ -21,6 +21,7 @@ import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marine.MarineEntity;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 import mod.azure.azexamples.services.AzExampleServices;
 
 /**
@@ -86,6 +87,14 @@ public class EntityRegistry {
         MobCategory.MONSTER,
         0.6f,
         1.8f
+    );
+
+    public static final Supplier<EntityType<OptimusPrimeEntity>> OPTIMUSPRIME = registerEntity(
+        "optimusprime",
+        OptimusPrimeEntity::new,
+        MobCategory.MONSTER,
+        3.0f,
+        7.0f
     );
 
     /**

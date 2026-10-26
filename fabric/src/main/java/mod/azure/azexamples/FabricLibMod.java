@@ -39,6 +39,10 @@ public final class FabricLibMod implements ModInitializer {
             EntityRegistry.GREMLIN.get(),
             Mob.createMobAttributes()
         );
+        FabricDefaultAttributeRegistry.register(
+            EntityRegistry.OPTIMUSPRIME.get(),
+            Mob.createMobAttributes()
+        );
         AzIdentityRegistry.register(
             ItemRegistry.PISTOL.get(),
             ItemRegistry.PEACEMAKER.get(),

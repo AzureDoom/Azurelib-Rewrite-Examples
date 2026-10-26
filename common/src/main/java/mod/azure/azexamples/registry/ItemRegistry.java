@@ -104,6 +104,12 @@ public class ItemRegistry {
             EntityRegistry.GREMLIN
         );
 
+    public static final Supplier<SpawnEggItem> OPTIMUSPRIME_SPAWN_EGG =
+        AzExampleServices.COMMON_REGISTRY.registerSpawnEgg(
+            "optimusprime_spawn_egg",
+            EntityRegistry.OPTIMUSPRIME
+        );
+
     /**
      * Registers a new Item.
      *
