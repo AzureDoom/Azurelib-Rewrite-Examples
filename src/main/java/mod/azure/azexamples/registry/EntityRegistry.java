@@ -15,6 +15,7 @@ import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marine.MarineEntity;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 
 /**
  * Entity entries. On 1.12.2 entity size is set in each entity's constructor, and spawn eggs come from
@@ -33,6 +34,7 @@ public final class EntityRegistry {
         add(JuravenatorEntity.class, "juravenator", 0xc09e58, 0x574028);
         add(MarineEntity.class, "marine", 0xc09e58, 0x574028);
         add(GremlinEntity.class, "gremlin", 0x424242, 0x606060);
+        add(OptimusPrimeEntity.class, "optimusprime", 0x424242, 0x606060);
     }
 
     private EntityRegistry() {}

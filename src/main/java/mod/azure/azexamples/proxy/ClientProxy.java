@@ -25,6 +25,8 @@ import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.entities.marine.MarineEntity;
 import mod.azure.azexamples.entities.marine.MarineRenderer;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
 import mod.azure.azexamples.items.diamondreplace.DiamondSwordRenderer;
@@ -44,6 +46,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(JuravenatorEntity.class, JuravenatorRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(MarineEntity.class, MarineRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(GremlinEntity.class, GremlinRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(OptimusPrimeEntity.class, OptimusPrimeRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCreeper.class, CreeperRenderer::new);
     }
 
