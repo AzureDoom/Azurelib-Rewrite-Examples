@@ -111,6 +111,16 @@ public class ItemRegistry {
         )
     );
 
+    public static final Supplier<SpawnEggItem> OPTIMUSPRIME_SPAWN_EGG = registerItem(
+        "optimusprime_spawn_egg",
+        AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+            EntityRegistry.OPTIMUSPRIME,
+            0x424242,
+            0x606060,
+            new Item.Properties()
+        )
+    );
+
     /**
      * Registers a new Item.
      *
