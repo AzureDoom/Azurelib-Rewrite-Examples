@@ -11,6 +11,7 @@ import java.util.Random;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.registry.ItemRegistry;
+import net.ornithemc.osl.blockstates.api.block.state.BlockState;
 
 public class StargateBlock extends BlockWithBlockEntity {
 
@@ -51,6 +52,7 @@ public class StargateBlock extends BlockWithBlockEntity {
             int next = StargateBlockEntity.Mode.byId(world.getBlockMetadata(x, y, z)).next().ordinal();
             if (world.setBlockMetadataQuietly(x, y, z, next)) {
                 world.notifyBlockChanged(x, y, z);
+                player.addMessage(StargateBlockEntity.Mode.byId(next).translationKey());
             }
         }
 
