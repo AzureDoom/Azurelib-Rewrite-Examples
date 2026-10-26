@@ -1,5 +1,6 @@
 package mod.azure.azexamples.registry;
 
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 import net.minecraft.entity.Entity;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public final class EntityRegistry {
         add(JuravenatorEntity.class, "juravenator");
         add(MarineEntity.class, "marine");
         add(GremlinEntity.class, "gremlin");
+        add(OptimusPrimeEntity.class, "optimusprime");
     }
 
     private EntityRegistry() {}

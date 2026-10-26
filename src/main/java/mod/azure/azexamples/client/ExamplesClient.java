@@ -1,5 +1,7 @@
 package mod.azure.azexamples.client;
 
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeRenderer;
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import mod.azure.azurelib.render.item.icon.AzItemIcons;
@@ -49,6 +51,7 @@ public final class ExamplesClient implements ClientModInitializer {
         AzEntityRendererRegistry.register(JuravenatorEntity.class, JuravenatorRenderer::new);
         AzEntityRendererRegistry.register(MarineEntity.class, MarineRenderer::new);
         AzEntityRendererRegistry.register(GremlinEntity.class, GremlinRenderer::new);
+        AzEntityRendererRegistry.register(OptimusPrimeEntity.class, OptimusPrimeRenderer::new);
         // Replaces the vanilla creeper renderer, showing AzureLib driving a vanilla entity.
         AzEntityRendererRegistry.register(CreeperEntity.class, CreeperRenderer::new);
 
