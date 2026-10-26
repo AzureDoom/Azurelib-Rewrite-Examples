@@ -98,5 +98,6 @@ public final class ForgeMod {
         event.put(EntityRegistry.JURAVENATOR.get(), Mob.createMobAttributes().build());
         event.put(EntityRegistry.MARINE.get(), Mob.createMobAttributes().build());
         event.put(EntityRegistry.GREMLIN.get(), Mob.createMobAttributes().build());
+        event.put(EntityRegistry.OPTIMUSPRIME.get(), Mob.createMobAttributes().build());
     }
 }

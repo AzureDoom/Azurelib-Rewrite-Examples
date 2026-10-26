@@ -62,5 +62,9 @@ public final class FabricLibMod implements ModInitializer {
             EntityRegistry.GREMLIN.get(),
             Mob.createMobAttributes()
         );
+        FabricDefaultAttributeRegistry.register(
+            EntityRegistry.OPTIMUSPRIME.get(),
+            Mob.createMobAttributes()
+        );
     }
 }

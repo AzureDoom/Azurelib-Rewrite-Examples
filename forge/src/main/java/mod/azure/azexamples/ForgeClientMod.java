@@ -22,6 +22,7 @@ import mod.azure.azexamples.entities.juravenator.JuravenatorRenderer;
 import mod.azure.azexamples.entities.manul.ManulRenderer;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.entities.marine.MarineRenderer;
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
 import mod.azure.azexamples.items.armors.DoomicornArmorRenderer;
 import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
@@ -67,6 +68,7 @@ public class ForgeClientMod {
         event.registerEntityRenderer(EntityRegistry.JURAVENATOR.get(), JuravenatorRenderer::new);
         event.registerEntityRenderer(EntityRegistry.MARINE.get(), MarineRenderer::new);
         event.registerEntityRenderer(EntityRegistry.GREMLIN.get(), GremlinRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.OPTIMUSPRIME.get(), OptimusPrimeRenderer::new);
         event.registerBlockEntityRenderer(
             EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
