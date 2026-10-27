@@ -10,11 +10,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-
-import mod.azure.azexamples.registry.EntityRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
+
+import mod.azure.azexamples.registry.EntityRegistry;
 
 public class StargateBlockEntity extends BlockEntity {
 
