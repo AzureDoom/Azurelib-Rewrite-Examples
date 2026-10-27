@@ -11,7 +11,6 @@ import java.util.Random;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.registry.ItemRegistry;
-import net.ornithemc.osl.blockstates.api.block.state.BlockState;
 
 public class StargateBlock extends BlockWithBlockEntity {
 

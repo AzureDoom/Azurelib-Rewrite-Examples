@@ -1,6 +1,5 @@
 package mod.azure.azexamples.blocks.blockentity;
 
-import mod.azure.azurelib.platform.mc.Mc;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.entity.BlockEntity;
