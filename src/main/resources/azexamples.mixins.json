@@ -4,6 +4,7 @@
   "package": "mod.azure.azexamples.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "JukeboxBlockMixin",
     "EntityAccessor_DataTracker",
     "PlayerEntityMixin_ArmorTick"
   ],

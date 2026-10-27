@@ -3,6 +3,7 @@ package mod.azure.azexamples.client;
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import net.mine_diver.unsafeevents.listener.EventListener;
+import net.minecraft.block.entity.JukeboxBlockEntity;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.item.Item;
 import net.modificationstation.stationapi.api.client.event.block.entity.BlockEntityRendererRegisterEvent;
@@ -16,6 +17,7 @@ import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockRenderer;
+import mod.azure.azexamples.blocks.jukebox.JukeboxResonatorRenderer;
 import mod.azure.azexamples.entities.creeper.CreeperRenderer;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
@@ -63,6 +65,7 @@ public final class ExamplesClientEvents {
     @EventListener
     private static void registerBlockEntityRenderers(BlockEntityRendererRegisterEvent event) {
         event.renderers.put(StargateBlockEntity.class, new StargateBlockRenderer());
+        event.renderers.put(JukeboxBlockEntity.class, new JukeboxResonatorRenderer());
     }
 
     @EventListener

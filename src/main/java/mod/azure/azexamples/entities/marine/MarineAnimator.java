@@ -159,9 +159,9 @@ public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
 
         // Legs: walk or idle, decided independently of aiming.
         boolean walking = Mth.lerp(
-                partialTicks,
-                animatable.prevHorizontalSpeed,
-                animatable.horizontalSpeed
+            partialTicks,
+            animatable.prevHorizontalSpeed,
+            animatable.horizontalSpeed
         ) > WALK_THRESHOLD;
         (walking ? WALK : IDLE).sendForEntity(animatable);
 
