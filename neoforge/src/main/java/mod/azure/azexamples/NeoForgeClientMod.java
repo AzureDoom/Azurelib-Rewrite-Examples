@@ -1,10 +1,13 @@
 package mod.azure.azexamples;
 
+import mod.azure.azexamples.blocks.jukebox.JukeboxResonatorRenderer;
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -70,6 +73,7 @@ public class NeoForgeClientMod {
             EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
         );
+        event.registerBlockEntityRenderer(BlockEntityTypes.JUKEBOX, ctx -> new JukeboxResonatorRenderer());
         event.registerEntityRenderer(EntityTypes.CREEPER, CreeperRenderer::new);
     }
 }
