@@ -1,5 +1,6 @@
 package mod.azure.azexamples.proxy;
 
+import net.minecraft.block.BlockJukebox;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.Items;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -12,6 +13,7 @@ import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockRenderer;
+import mod.azure.azexamples.blocks.jukebox.JukeboxResonatorRenderer;
 import mod.azure.azexamples.entities.creeper.CreeperRenderer;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
@@ -55,6 +57,10 @@ public class ClientProxy extends CommonProxy {
         ClientCommandHandler.instance.registerCommand(new AzProfilerCommand());
 
         ClientRegistry.bindTileEntitySpecialRenderer(StargateBlockEntity.class, new StargateBlockRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(
+            BlockJukebox.TileEntityJukebox.class,
+            new JukeboxResonatorRenderer()
+        );
 
         AzItemRendererRegistry.register(Items.DIAMOND_SWORD, DiamondSwordRenderer::new);
         AzArmorRendererRegistry.register(
