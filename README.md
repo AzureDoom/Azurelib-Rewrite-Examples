@@ -48,6 +48,7 @@ This README is a **shared feature index for the AzureLib examples**. The linked 
 
 - **Animated block entity:** [Stargate](common/src/main/java/mod/azure/azexamples/blocks/blockentity/) - block renderer, animator, sequences, and playback state.
 - **Animated block item:** [Stargate Block Item](common/src/main/java/mod/azure/azexamples/blocks/StargateBlockItem.java) - animated item form of the block.
+- **Replaced vanilla block:** [Jukebox / Resonator](common/src/main/java/mod/azure/azexamples/blocks/jukebox/) - replaces vanilla jukebox visuals with an AzureLib block entity renderer and animator. The [mixin](common/src/main/java/mod/azure/azexamples/mixins/JukeboxBlockMixin.java) changes render and occlusion shapes, while disc insertion/removal drives activation, spinning, and deactivation animations.
 
 ### Armor
 

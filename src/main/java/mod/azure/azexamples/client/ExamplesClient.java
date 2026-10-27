@@ -5,6 +5,7 @@ import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import mod.azure.azurelib.render.item.icon.AzItemIcons;
 import mod.azure.azurelib.render.registry.AzBlockEntityRendererRegistry;
 import mod.azure.azurelib.render.registry.AzEntityRendererRegistry;
+import net.minecraft.block.JukeboxBlock;
 import net.minecraft.entity.mob.monster.CreeperEntity;
 import net.minecraft.item.Item;
 import net.ornithemc.osl.entrypoints.api.client.ClientModInitializer;
@@ -13,6 +14,7 @@ import mod.azure.azexamples.CommonMod;
 import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockRenderer;
+import mod.azure.azexamples.blocks.jukebox.JukeboxResonatorRenderer;
 import mod.azure.azexamples.entities.creeper.CreeperRenderer;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
@@ -56,6 +58,7 @@ public final class ExamplesClient implements ClientModInitializer {
         AzEntityRendererRegistry.register(CreeperEntity.class, CreeperRenderer::new);
 
         AzBlockEntityRendererRegistry.register(StargateBlockEntity.class, StargateBlockRenderer::new);
+        AzBlockEntityRendererRegistry.register(JukeboxBlock.JukeboxBlockEntity.class, JukeboxResonatorRenderer::new);
 
         // Item and armor renderers need the items, which OSL's item register event creates; that may happen before
         // or after this entrypoint runs.
