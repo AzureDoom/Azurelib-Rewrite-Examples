@@ -13,7 +13,7 @@ import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
 public abstract class MinecraftMixin {
 
     @Inject(
-        method = { "func_147115_a", "sendClickBlockToController" },
+        method = { "func_147115_a" },
         at = @At("HEAD"),
         cancellable = true
     )
@@ -27,7 +27,7 @@ public abstract class MinecraftMixin {
     }
 
     @Inject(
-        method = { "func_147116_af", "clickMouse" },
+        method = { "func_147116_af" },
         at = @At("HEAD"),
         cancellable = true
     )

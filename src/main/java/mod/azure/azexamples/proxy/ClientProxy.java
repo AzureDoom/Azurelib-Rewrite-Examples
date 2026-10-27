@@ -2,6 +2,7 @@ package mod.azure.azexamples.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraft.block.BlockJukebox;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.init.Items;
 
@@ -11,6 +12,7 @@ import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockRenderer;
+import mod.azure.azexamples.blocks.jukebox.JukeboxResonatorRenderer;
 import mod.azure.azexamples.entities.creeper.CreeperRenderer;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
@@ -50,6 +52,10 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityCreeper.class, new CreeperRenderer());
 
         ClientRegistry.bindTileEntitySpecialRenderer(StargateBlockEntity.class, new StargateBlockRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(
+            BlockJukebox.TileEntityJukebox.class,
+            new JukeboxResonatorRenderer()
+        );
 
         // These also register Forge IItemRenderers for the items.
         AzItemRendererRegistry.register(Items.diamond_sword, DiamondSwordRenderer::new);
