@@ -8,6 +8,7 @@ import mod.azure.azurelib.animation.controller.AzBoneMask;
 import mod.azure.azurelib.animation.dispatch.command.AzCommand;
 import mod.azure.azurelib.animation.impl.AzEntityAnimator;
 import mod.azure.azurelib.animation.play_behavior.AzPlayBehaviors;
+import mod.azure.azurelib.core.molang.MolangScope;
 import mod.azure.azurelib.util.ResourceLocation;
 import mod.azure.azurelib.util.math.Mth;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +26,10 @@ import mod.azure.azexamples.CommonStrings;
  * over the arms (and everything parented to them: the held-item bones and arm armor) while the legs keep walking,
  * because bones outside the mask are never evaluated or written by this controller.</li>
  * <li><b>Fire</b>: an additive recoil kick played once per shot on top of whatever pose the arms are in.</li>
+ * <li><b>Heat</b>: an additive layer whose keyframes are Molang programs. They keep a weapon-heat state machine per
+ * Marine in {@code variable.*}: heat builds while aiming, the Marine vents (arms down, head shake) once it maxes out,
+ * and holds fire until it has cooled. Code reads {@code v.venting} back to stop the recoil shots, so state flows both
+ * ways between code and Molang. See {@link #applyMolangQueries} and the {@code heat} animation.</li>
  * </ul>
  * All of the state selection lives in {@link #setCustomAnimations}. It runs on the client every frame the Marine is
  * rendered, after the controllers have been applied, so commands sent here take effect from the next frame. Re-sending
@@ -39,6 +44,8 @@ public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
     public static final String AIM_CONTROLLER = "aim_controller";
 
     public static final String FIRE_CONTROLLER = "fire_controller";
+
+    public static final String HEAT_CONTROLLER = "heat_controller";
 
     /** The bone hierarchies the aim controller is allowed to touch. Children (hands, arm armor) are included. */
     private static final AzBoneMask ARMS = AzBoneMask.only("gRightArm", "gLeftArm");
@@ -80,6 +87,18 @@ public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
 
     private static final AzCommand FIRE = AzCommand.create(FIRE_CONTROLLER, "fire", AzPlayBehaviors.PLAY_ONCE);
 
+    /**
+     * Always running. All of its motion comes from Molang in the {@code heat} animation, which reads and writes this
+     * Marine's own {@code variable.*} values, so two Marines heat up and vent independently:
+     * <ul>
+     * <li>{@code v.heat}, {@code v.venting}, {@code v.last_time}: state the animation owns. Assigned in the
+     * {@code gBody} keyframe, persisted per Marine across frames, and read by the other bones.</li>
+     * <li>{@code v.aiming}, {@code v.seed}: inputs set from code in {@link #applyMolangQueries}.</li>
+     * <li>{@code t.*}: scratch values that start at 0 every evaluation, like the loop counter in the arm jitter.</li>
+     * </ul>
+     */
+    private static final AzCommand HEAT = AzCommand.create(HEAT_CONTROLLER, "heat", AzPlayBehaviors.LOOP);
+
     /** Aim state seen on the previous frame, or {@code null} before the first frame. */
     private Boolean lastAiming;
 
@@ -100,6 +119,10 @@ public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
             // Recoil added on top of whichever arm pose is active.
             AzAnimationController.builder(this, FIRE_CONTROLLER)
                 .setBlendMode(AzBlendMode.ADDITIVE)
+                .build(),
+            // Molang-driven heat sway, venting slump and jitter, added on top of everything else.
+            AzAnimationController.builder(this, HEAT_CONTROLLER)
+                .setBlendMode(AzBlendMode.ADDITIVE)
                 .build()
         );
     }
@@ -109,15 +132,36 @@ public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
         return ANIMATIONS;
     }
 
+    /**
+     * Feeds this Marine's inputs into its own Molang scope before any keyframe is evaluated. Values set here are only
+     * visible to this Marine's animations: another Marine reading {@code v.aiming} gets its own value.
+     */
+    @Override
+    protected void applyMolangQueries(MarineEntity animatable, double animTime, float partialTicks) {
+        super.applyMolangQueries(animatable, animTime, partialTicks);
+
+        MolangScope scope = context().molangScope();
+
+        // Input that changes every frame.
+        scope.set("v.aiming", animatable.getHeldItem() == null ? 0 : 1);
+
+        // Input set once and then left alone: offsets the jitter so a squad doesn't shake in sync.
+        if (!scope.isSet("v.seed")) {
+            scope.set("v.seed", animatable.id % 7);
+        }
+    }
+
     @Override
     public void setCustomAnimations(MarineEntity animatable, float partialTicks) {
         super.setCustomAnimations(animatable, partialTicks);
 
+        HEAT.sendForEntity(animatable);
+
         // Legs: walk or idle, decided independently of aiming.
         boolean walking = Mth.lerp(
-            partialTicks,
-            animatable.prevHorizontalSpeed,
-            animatable.horizontalSpeed
+                partialTicks,
+                animatable.prevHorizontalSpeed,
+                animatable.horizontalSpeed
         ) > WALK_THRESHOLD;
         (walking ? WALK : IDLE).sendForEntity(animatable);
 
@@ -134,8 +178,11 @@ public class MarineAnimator extends AzEntityAnimator<MarineEntity> {
 
         lastAiming = aiming;
 
-        // Recoil: one shot per interval while aiming.
-        if (aiming && animatable.age % FIRE_INTERVAL < FIRE_WINDOW) {
+        // Recoil: one shot per interval while aiming, except while the heat animation has this Marine venting. The
+        // venting flag is written by Molang in the heat animation and read back here from this Marine's scope.
+        boolean venting = context().molangScope().get("v.venting") != 0;
+
+        if (aiming && !venting && animatable.age % FIRE_INTERVAL < FIRE_WINDOW) {
             FIRE.sendForEntity(animatable);
         }
     }

@@ -1,29 +1,80 @@
-<center>
-<img src="https://wsrv.nl/?url=https%3A%2F%2Fwww.bisecthosting.com%2Fimages%2FCF%2FAzureLib%2FBH_AL_header.png&n=-1" alt="logo"/>
-<br>	
+<p align="center">
+  <img src="https://wsrv.nl/?url=https%3A%2F%2Fwww.bisecthosting.com%2Fimages%2FCF%2FAzureLib%2FBH_AL_header.png&n=-1" alt="AzureLib" />
+</p>
 
-# AzureLib Examples on how to do various things like Items, Blocks, Armors and Entities.
+# AzureLib Rewrite Examples
 
+Working examples of using **AzureLib** to animate entities, items, armor, and block entities, including advanced animation controllers, rendering layers, animation commands, and bone-based hitboxes.
 
-## Items
-Normal Item:
-<br><br>
-Replaced Item:
+**Documentation:** [AzureLib Wiki](https://wiki.azuredoom.com/)
 
-## Blocks
-Normal Block:
-<br><br>
-Replaced Block:
+This README is a **shared feature index for the AzureLib examples**. The linked Java examples use relative paths, so links follow the branch you are browsing.
 
-## Armors
-Normal Armor:
-<br><br>
-Replaced Armor:
+> These examples show different approaches to animation and rendering. You do not need to copy every component into your own mod; start with the example closest to your use case.
 
-## Entities
-Normal Entity:
-<br><br>
-Replaced Entity:
+## Feature Index
 
-</center>
+| Feature                                         | Example                                                                                                                                                                                                                                                                                                                                       | What it demonstrates                                                                                                                                                            |
+|-------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Basic animated entities                         | [Juravenator](common/src/main/java/mod/azure/azexamples/entities/juravenator/), [Manul](common/src/main/java/mod/azure/azexamples/entities/manul/)                                                                                                                                                                                            | Entity, animator, renderer, and animation dispatcher setup                                                                                                                      |
+| Vanilla entity renderer replacement             | [Creeper](common/src/main/java/mod/azure/azexamples/entities/creeper/)                                                                                                                                                                                                                                                                        | Rendering a vanilla entity with `AzEntityRenderer`                                                                                                                              |
+| Concurrent controllers and additive blending    | [Doom Hunter](common/src/main/java/mod/azure/azexamples/entities/doomhunter/)                                                                                                                                                                                                                                                                 | Base animation and additive flamethrower layer                                                                                                                                  |
+| Dynamic controller weights and fades            | [Doom Hunter dispatcher](common/src/main/java/mod/azure/azexamples/entities/doomhunter/DoomHunterAnimationDispatcher.java)                                                                                                                                                                                                                    | `setWeight`, `fadeWeight`, fade-in/fade-out, and immediate state changes                                                                                                        |
+| Hierarchical bone masks                         | [Marine animator](common/src/main/java/mod/azure/azexamples/entities/marine/MarineAnimator.java)                                                                                                                                                                                                                                              | `AzBoneMask.only(...)` to limit aiming to the arms                                                                                                                              |
+| Walking, aiming, and recoil together            | [Marine](common/src/main/java/mod/azure/azexamples/entities/marine/)                                                                                                                                                                                                                                                                          | Full-body movement, masked aim, and additive firing recoil                                                                                                                      |
+| Animation sequences and playback behaviors      | [Stargate dispatcher](common/src/main/java/mod/azure/azexamples/blocks/blockentity/StargateBlockAnimationDispatcher.java)                                                                                                                                                                                                                     | Chained stages, reverse playback, ping-pong, and freeze-on-frame                                                                                                                |
+| Per-stage animation settings                    | [Stargate dispatcher](common/src/main/java/mod/azure/azexamples/blocks/blockentity/StargateBlockAnimationDispatcher.java) · [Sequence docs](https://github.com/AzureDoom/AzureLib/blob/26.3/docs/azurelib/misc/animating/azsequence.mdx)                                                                                                      | Stage-specific speed, transition length, easing, direction, offsets, and repeat settings (updated example in branches with the sequence changes)                                |
+| MoLang assignments and per-animatable variables | [Marine animator](common/src/main/java/mod/azure/azexamples/entities/marine/MarineAnimator.java), [heat animation](common/src/main/resources/assets/azexamples/animations/entity/marine.animation.json)                                                                                                                                       | Per-Marine persistent `v.heat`/`v.venting`, code-fed `v.aiming`/`v.seed`, and reading Molang state back in Java                                                                 |
+| Advanced MoLang expressions                     | [Marine heat animation](common/src/main/resources/assets/azexamples/animations/entity/marine.animation.json), [Marine animator](common/src/main/java/mod/azure/azexamples/entities/marine/MarineAnimator.java)                                                                                                                                | Multi-statement expressions, `t.*` scratch variables, assignments, conditional blocks, `return`, and `loop(...)` for independent heat/venting and arm jitter                    |
+| Animated block entities                         | [Stargate block entity](common/src/main/java/mod/azure/azexamples/blocks/blockentity/)                                                                                                                                                                                                                                                        | Block entity animator, renderer, and dispatcher                                                                                                                                 |
+| Animated block items                            | [Stargate block item](common/src/main/java/mod/azure/azexamples/blocks/)                                                                                                                                                                                                                                                                      | Item rendering and animation for a block's item form                                                                                                                            |
+| Animated items and command dispatch             | [Pistol](common/src/main/java/mod/azure/azexamples/items/PistolItem.java), [dispatcher](common/src/main/java/mod/azure/azexamples/items/PistolAnimationDispatcher.java)                                                                                                                                                                       | Server-initiated item animation commands                                                                                                                                        |
+| Separate first-person animator                  | [Gun With Arm](common/src/main/java/mod/azure/azexamples/items/gunwitharm/)                                                                                                                                                                                                                                                                   | `useSeparateFirstPersonAnimator()` and disabled GUI animation                                                                                                                   |
+| Sound keyframe callbacks                        | [Gun With Arm animator](common/src/main/java/mod/azure/azexamples/items/gunwitharm/GunWithArmAnimator.java), [Marauder animator](common/src/main/java/mod/azure/azexamples/entities/marauder/MarauderAnimator.java)                                                                                                                           | Playing sounds from authored keyframe events                                                                                                                                    |
+| Animated armor                                  | [Doomicorn armor](common/src/main/java/mod/azure/azexamples/items/armors/)                                                                                                                                                                                                                                                                    | Armor-specific animator, dispatcher, and renderer                                                                                                                               |
+| Entity equipment render layers                  | [Marine renderer](common/src/main/java/mod/azure/azexamples/entities/marine/MarineRenderer.java)                                                                                                                                                                                                                                              | Attached armor and held-item rendering layers                                                                                                                                   |
+| Replacing vanilla item rendering                | [Netherite sword](common/src/main/java/mod/azure/azexamples/items/netheritereplace/)                                                                                                                                                                                                                                                          | Custom animated rendering for a vanilla item                                                                                                                                    |
+| Replacing vanilla armor rendering               | [Netherite armor](common/src/main/java/mod/azure/azexamples/items/netheritereplace/armor/)                                                                                                                                                                                                                                                    | Custom animated rendering for vanilla armor                                                                                                                                     |
 
+## Browse Examples by Type
+
+### Items
+
+- **Normal animated item:** [Pistol](common/src/main/java/mod/azure/azexamples/items/PistolItem.java) - see its [animator](common/src/main/java/mod/azure/azexamples/items/PistolAnimator.java), [renderer](common/src/main/java/mod/azure/azexamples/items/PistolRenderer.java), and [dispatcher](common/src/main/java/mod/azure/azexamples/items/PistolAnimationDispatcher.java).
+- **Advanced held item:** [Gun With Arm / Peacemaker](common/src/main/java/mod/azure/azexamples/items/gunwitharm/) - separate first-person animator and sound keyframes.
+- **Replaced vanilla item:** [Netherite Sword](common/src/main/java/mod/azure/azexamples/items/netheritereplace/) - custom item animations and rendering for an existing vanilla item.
+
+### Blocks
+
+- **Animated block entity:** [Stargate](common/src/main/java/mod/azure/azexamples/blocks/blockentity/) - block renderer, animator, sequences, and playback state.
+- **Animated block item:** [Stargate Block Item](common/src/main/java/mod/azure/azexamples/blocks/StargateBlockItem.java) - animated item form of the block.
+
+### Armor
+
+- **Animated custom armor:** [Doomicorn Armor](common/src/main/java/mod/azure/azexamples/items/armors/) - custom armor renderer, animator, and dispatcher.
+- **Entity armor layer:** [Marine Armor Layer](common/src/main/java/mod/azure/azexamples/entities/marine/MarineArmorLayer.java) - armor attached to an animated entity.
+- **Replaced vanilla armor:** [Netherite Armor](common/src/main/java/mod/azure/azexamples/items/netheritereplace/armor/) - custom rendering for existing vanilla armor.
+
+### Entities
+
+- **Basic animated entities:** [Juravenator](common/src/main/java/mod/azure/azexamples/entities/juravenator/), [Manul](common/src/main/java/mod/azure/azexamples/entities/manul/), and [Gremlin](common/src/main/java/mod/azure/azexamples/entities/gremlin/).
+- **Advanced animation blending:** [Doom Hunter](common/src/main/java/mod/azure/azexamples/entities/doomhunter/) and [Optimus Prime](common/src/main/java/mod/azure/azexamples/entities/optimusprime/).
+- **Bone masks, layered aiming, and MoLang scripting:** [Marine](common/src/main/java/mod/azure/azexamples/entities/marine/) - combined aiming/recoil controllers and a stateful heat-and-venting animation.
+- **Replaced vanilla entity rendering:** [Creeper](common/src/main/java/mod/azure/azexamples/entities/creeper/) - uses the standard AzureLib entity renderer for a vanilla entity.
+
+## Updated Animation and MoLang Features
+
+The maintained AzureLib branches also include or are receiving the following engine updates. These are **engine capabilities**; an example link in the feature table means the corresponding example demonstrates the feature on branches where the update is present, not that every branch has identical example code at all times.
+
+- **Per-stage playback control:** Override animation speed, transition length, easing, playback direction, repeat count, and offsets for one sequence stage without changing subsequent stages.
+- **Reliable freeze-on-frame behavior:** Freeze-point settings apply to freeze behavior rather than stalling later looping or normally playing animations.
+- **Speed/transition-aware sequence events:** [Optimus Prime](common/src/main/java/mod/azure/azexamples/entities/optimusprime/) demonstrates `eventAt`, `eventOnStart`, and `eventOnEnd` with `AzSequencePlayer` and `AzSequenceTiming` to drive server-side gameplay at normal and enraged playback speeds. Server timing requires matching animation lengths and controller settings.
+- **Expanded MoLang expressions:** [Marine](common/src/main/java/mod/azure/azexamples/entities/marine/) uses assignments, multi-statement blocks, conditionals, and counted loops to simulate heat and venting. `variable.*` values persist per animatable, while `temp.*` values are temporary. The animator also reads Molang state back to suppress recoil while venting.
+
+See the [AzureLib sequence guide](https://github.com/AzureDoom/AzureLib/blob/26.3/docs/azurelib/misc/animating/azsequence.mdx) and [MoLang guide](https://github.com/AzureDoom/AzureLib/blob/26.3/docs/azurelib/molang/molang.mdx) for API details and examples.
+
+## Where to Start
+
+If you're new to AzureLib, start with **Juravenator** or **Manul** for a typical animated entity, **Pistol** for an animated item, or **Stargate** for a block entity. For advanced controller composition, compare **Doom Hunter** and **Marine**. For animation-driven combat and hitbox geometry, inspect **Marauder**. For server-timed animation events, inspect **Optimus Prime**; for stateful MoLang scripting, inspect the **Marine** heat animation.
+
+The code is organized into a shared `common` module, with loader-specific registration modules depending on the Minecraft branch (for example, [Fabric](fabric/src/main/java/mod/azure/azexamples/) and [NeoForge](neoforge/src/main/java/mod/azure/azexamples/) where applicable).

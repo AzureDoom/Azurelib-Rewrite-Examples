@@ -314,6 +314,40 @@
           }
         }
       }
+    },
+    "heat": {
+      "loop": true,
+      "animation_length": 1.0,
+      "bones": {
+        "gBody": {
+          "rotation": [
+            "t.dt = math.clamp(q.life_time - (v.last_time ?? q.life_time), 0, 0.25);\nv.last_time = q.life_time;\nt.heat = v.heat ?? 0;\nv.aiming && !(v.venting ?? 0) ? { t.heat = t.heat + t.dt * 0.2; } : { t.heat = t.heat - t.dt * ((v.venting ?? 0) ? 0.6 : 0.25); };\nv.heat = math.clamp(t.heat, 0, 1);\nv.heat >= 1 ? { v.venting = 1; };\nv.heat <= 0.3 ? { v.venting = 0; };\nreturn (v.venting ?? 0) * -6;",
+            0,
+            0
+          ]
+        },
+        "gHead": {
+          "rotation": [
+            0,
+            "(v.venting ?? 0) ? math.sin(q.life_time * 900) * 4 : 0",
+            0
+          ]
+        },
+        "gRightArm": {
+          "rotation": [
+            "t.jitter = 0;\nloop(3, {\n  t.k = t.k + 1;\n  t.jitter = t.jitter + math.sin(q.life_time * 360 * 2.3 * t.k + (v.seed ?? 0) * 51 * t.k) / t.k;\n});\nreturn (v.venting ?? 0) * 35 + t.jitter * (v.heat ?? 0) * 4;",
+            0,
+            0
+          ]
+        },
+        "gLeftArm": {
+          "rotation": [
+            "t.jitter = 0;\nloop(3, {\n  t.k = t.k + 1;\n  t.jitter = t.jitter + math.sin(q.life_time * 360 * 2.3 * t.k + (v.seed ?? 0) * 51 * t.k + 90) / t.k;\n});\nreturn (v.venting ?? 0) * 35 + t.jitter * (v.heat ?? 0) * 4;",
+            0,
+            0
+          ]
+        }
+      }
     }
   }
 }

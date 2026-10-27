@@ -19,6 +19,8 @@ import mod.azure.azexamples.CommonStrings;
  * <li><b>Controller reverse</b>: {@link #SHUTDOWN} flips the whole controller, so the kawoosh plays backwards and the
  * event horizon collapses.</li>
  * <li><b>Freezing</b>: {@link #JAM} plays {@code ring_spin} and freezes it partway through, at a tick set in code.</li>
+ * <li><b>Stage settings</b>: {@link #DIAL} plays its last chevron lock at double speed with a longer blend into the
+ * kawoosh. Those values belong to their stages only, so nothing has to reset them afterward.</li>
  * </ul>
  * The commands are sent from the client every tick. Sending a command or sequence that is already playing does nothing,
  * so this never restarts anything, and a client that loads the gate mid-mode still catches up.
@@ -43,8 +45,8 @@ public class StargateBlockAnimationDispatcher {
         .then("ring_spin", AzPlayBehaviors.PLAY_ONCE, props -> props.withShouldReverse(true))
         .play("chevron_lock")
         .play("ring_spin")
-        .play("chevron_lock")
-        .play("kawoosh")
+        .then("chevron_lock", AzPlayBehaviors.PLAY_ONCE, props -> props.withAnimationSpeed(2))
+        .then("kawoosh", AzPlayBehaviors.PLAY_ONCE, props -> props.withTransitionLength(10))
         .then("portal_ripple", AzPlayBehaviors.PING_PONG)
         .build();
 
@@ -76,8 +78,11 @@ public class StargateBlockAnimationDispatcher {
     );
 
     /**
-     * The full {@code create} overload sets every playback property at once: here the freeze point, plus forward
-     * direction to undo {@link #SHUTDOWN}'s reverse.
+     * The full {@code create} overload sets every playback property on the controller at once: here the freeze point,
+     * plus forward direction to undo {@link #SHUTDOWN}'s reverse. These stay on the controller afterward, but a freeze
+     * point only ever applies to freeze_on_frame animations, so it doesn't stall the loops, ping-pong and sequence
+     * stages the other modes play. (To keep the freeze point off the controller entirely, use a sequence stage instead:
+     * {@code AzSequence.builder().freeze("ring_spin", JAM_FREEZE_TICK).build().toCommand(CONTROLLER)}.)
      */
     private static final AzCommand JAM = AzCommand.create(
         CONTROLLER,
@@ -100,21 +105,14 @@ public class StargateBlockAnimationDispatcher {
     public void clientPlay(StargateBlockEntity.Mode mode) {
         AzCommand command;
 
-        switch (mode) {
-            case IDLE:
-                command = IDLE;
-                break;
-            case DIAL:
-                command = DIAL;
-                break;
-            case SHUTDOWN:
-                command = SHUTDOWN;
-                break;
-            case JAM:
-                command = JAM;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected mode: " + mode);
+        if (mode == StargateBlockEntity.Mode.IDLE) {
+            command = IDLE;
+        } else if (mode == StargateBlockEntity.Mode.DIAL) {
+            command = DIAL;
+        } else if (mode == StargateBlockEntity.Mode.SHUTDOWN) {
+            command = SHUTDOWN;
+        } else {
+            command = JAM;
         }
 
         command.sendForBlockEntity(stargateBlockEntity);
