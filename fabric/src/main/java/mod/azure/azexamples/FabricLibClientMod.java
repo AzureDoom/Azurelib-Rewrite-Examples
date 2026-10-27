@@ -1,5 +1,6 @@
 package mod.azure.azexamples;
 
+import mod.azure.azexamples.blocks.jukebox.JukeboxResonatorRenderer;
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -29,6 +30,7 @@ import mod.azure.azexamples.items.netheritereplace.armor.NetheriteArmorRenderer;
 import mod.azure.azexamples.registry.BlockRegistry;
 import mod.azure.azexamples.registry.EntityRegistry;
 import mod.azure.azexamples.registry.ItemRegistry;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class FabricLibClientMod implements ClientModInitializer {
 
@@ -65,5 +67,6 @@ public class FabricLibClientMod implements ClientModInitializer {
             EntityRegistry.STARGATE_BLOCK_ENTITY.get(),
             (BlockEntityRendererProvider.Context rendererDispatcherIn) -> new StargateBlockRenderer()
         );
+        BlockEntityRenderers.register(BlockEntityType.JUKEBOX, ctx -> new JukeboxResonatorRenderer());
     }
 }
