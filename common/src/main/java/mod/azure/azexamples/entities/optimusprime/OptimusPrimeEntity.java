@@ -151,7 +151,7 @@ public class OptimusPrimeEntity extends Monster {
                 LivingEntity.class,
                 area,
                 entity -> entity != this && entity.isAlive() && entity.distanceToSqr(center) <= Mth.square(
-                        3.5 + entity.getBbWidth() / 2
+                    3.5 + entity.getBbWidth() / 2
                 )
             )
         ) {
@@ -166,9 +166,9 @@ public class OptimusPrimeEntity extends Monster {
             center.y + 0.2,
             center.z,
             8,
-                3.5 / 2,
+            3.5 / 2,
             0.1,
-                3.5 / 2,
+            3.5 / 2,
             0.0
         );
         serverLevel.sendParticles(
@@ -177,9 +177,9 @@ public class OptimusPrimeEntity extends Monster {
             center.y + 0.1,
             center.z,
             30,
-                3.5 / 2,
+            3.5 / 2,
             0.05,
-                3.5 / 2,
+            3.5 / 2,
             0.15
         );
         serverLevel.playSound(
