@@ -27,5 +27,19 @@
   "message.azexamples.stargate.idle": "Stargate: Idle (single looping animation)",
   "message.azexamples.stargate.dial": "Stargate: Dialing (sequence, per-stage reverse, ping-pong)",
   "message.azexamples.stargate.shutdown": "Stargate: Shutting down (controller reverse)",
-  "message.azexamples.stargate.jam": "Stargate: Jammed (freeze on frame)"
+  "message.azexamples.stargate.jam": "Stargate: Jammed (freeze on frame)",
+  "entity.azexamples.mesh_test_rigid": "Mesh Test: Rigid Mesh",
+  "item.azexamples.mesh_test_rigid_spawn_egg": "Mesh Test: Rigid Mesh Spawn Egg",
+  "entity.azexamples.mesh_test_animated": "Mesh Test: Animated Mesh",
+  "item.azexamples.mesh_test_animated_spawn_egg": "Mesh Test: Animated Mesh Spawn Egg",
+  "entity.azexamples.mesh_test_mixed": "Mesh Test: Mixed Geometry",
+  "item.azexamples.mesh_test_mixed_spawn_egg": "Mesh Test: Mixed Geometry Spawn Egg",
+  "entity.azexamples.mesh_test_skinned": "Mesh Test: Two-Joint Skinning",
+  "item.azexamples.mesh_test_skinned_spawn_egg": "Mesh Test: Two-Joint Skinning Spawn Egg",
+  "entity.azexamples.mesh_test_scaled": "Mesh Test: Non-uniform Scaling",
+  "item.azexamples.mesh_test_scaled_spawn_egg": "Mesh Test: Non-uniform Scaling Spawn Egg",
+  "entity.azexamples.mesh_test_copies": "Mesh Test: Model Copies",
+  "item.azexamples.mesh_test_copies_spawn_egg": "Mesh Test: Model Copies Spawn Egg",
+  "entity.azexamples.mesh_test_animated_owner": "Mesh Test: Skinned Mesh on Animated Bone",
+  "item.azexamples.mesh_test_animated_owner_spawn_egg": "Mesh Test: Skinned Mesh on Animated Bone Spawn Egg"
 }

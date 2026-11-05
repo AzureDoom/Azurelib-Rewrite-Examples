@@ -69,6 +69,7 @@ public class CreativeTabRegistry {
                     entries.accept(ItemRegistry.MARINE_SPAWN_EGG.get());
                     entries.accept(ItemRegistry.GREMLIN_SPAWN_EGG.get());
                     entries.accept(ItemRegistry.OPTIMUSPRIME_SPAWN_EGG.get());
+                    ItemRegistry.MESH_TEST_SPAWN_EGGS.forEach(egg -> entries.accept(egg.get()));
                     // entries.accept(ItemRegistry.TEST.get());
                 })
                 .build()
