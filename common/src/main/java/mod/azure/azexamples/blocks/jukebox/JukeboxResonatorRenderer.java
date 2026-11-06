@@ -1,10 +1,11 @@
 package mod.azure.azexamples.blocks.jukebox;
 
-import mod.azure.azexamples.CommonMod;
 import mod.azure.azurelib.render.block.AzBlockEntityRenderer;
 import mod.azure.azurelib.render.block.AzBlockEntityRendererConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
+
+import mod.azure.azexamples.CommonMod;
 
 /**
  * Replaces how vanilla's jukebox looks: registered as the block entity renderer for

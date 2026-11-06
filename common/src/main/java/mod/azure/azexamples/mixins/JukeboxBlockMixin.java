@@ -19,13 +19,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * <ul>
  * <li>Render shape: vanilla draws the jukebox as a block model. {@code ENTITYBLOCK_ANIMATED} draws nothing for the
  * block itself, leaving it to the block entity renderer, and still uses the block's particles when it's broken.</li>
- * <li>Occlusion shape: vanilla's jukebox is a solid, opaque cube, which causes two problems for a model smaller than
- * a block: neighbouring blocks skip drawing the faces touching it (leaving see-through holes around the resonator),
- * and no light reaches inside it (so the resonator would render pitch black). An empty occlusion shape fixes both.
+ * <li>Occlusion shape: vanilla's jukebox is a solid, opaque cube, which causes two problems for a model smaller than a
+ * block: neighbouring blocks skip drawing the faces touching it (leaving see-through holes around the resonator), and
+ * no light reaches inside it (so the resonator would render pitch black). An empty occlusion shape fixes both.
  * Collision, selection, redstone and mob spawning use other shapes and are unchanged.</li>
  * </ul>
- * Register in the common mixin list (not client-only): occlusion also drives lighting, which the server computes
- * too.
+ * Register in the common mixin list (not client-only): occlusion also drives lighting, which the server computes too.
  */
 @Mixin(JukeboxBlock.class)
 public abstract class JukeboxBlockMixin extends BaseEntityBlock {

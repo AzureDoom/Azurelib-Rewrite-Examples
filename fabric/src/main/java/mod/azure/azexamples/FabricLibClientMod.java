@@ -1,6 +1,6 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.blocks.jukebox.JukeboxResonatorRenderer;
+import mod.azure.azexamples.entities.meshtest.MeshTestRenderer;
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -9,11 +9,14 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockRenderer;
+import mod.azure.azexamples.blocks.jukebox.JukeboxResonatorRenderer;
 import mod.azure.azexamples.entities.creeper.CreeperRenderer;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
 import mod.azure.azexamples.entities.gremlin.GremlinRenderer;
@@ -30,7 +33,6 @@ import mod.azure.azexamples.items.netheritereplace.armor.NetheriteArmorRenderer;
 import mod.azure.azexamples.registry.BlockRegistry;
 import mod.azure.azexamples.registry.EntityRegistry;
 import mod.azure.azexamples.registry.ItemRegistry;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class FabricLibClientMod implements ClientModInitializer {
 
@@ -61,6 +63,7 @@ public class FabricLibClientMod implements ClientModInitializer {
         EntityRendererRegistry.register(EntityRegistry.MARINE.get(), MarineRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.GREMLIN.get(), GremlinRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.OPTIMUSPRIME.get(), OptimusPrimeRenderer::new);
+        EntityRegistry.MESH_TESTS.forEach(type -> EntityRendererRegistry.register(type.get(), MeshTestRenderer::new));
         EntityRendererRegistry.register(EntityType.CREEPER, CreeperRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(BlockRegistry.STARGATE.get(), RenderType.translucent());
         BlockEntityRenderers.register(

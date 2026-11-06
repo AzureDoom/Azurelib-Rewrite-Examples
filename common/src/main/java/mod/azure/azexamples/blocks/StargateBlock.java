@@ -38,7 +38,14 @@ public class StargateBlock extends BaseEntityBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+    public @NotNull InteractionResult use(
+        @NotNull BlockState state,
+        Level level,
+        @NotNull BlockPos pos,
+        @NotNull Player player,
+        @NotNull InteractionHand hand,
+        @NotNull BlockHitResult hit
+    ) {
         if (!level.isClientSide() && level.getBlockEntity(pos) instanceof StargateBlockEntity stargate) {
             stargate.cycleMode();
             player.sendSystemMessage(Component.translatable(stargate.getMode().translationKey()));
