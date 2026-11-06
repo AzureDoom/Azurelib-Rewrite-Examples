@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import mod.azure.azexamples.AzExamplesMod;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterEntity;
@@ -13,6 +14,8 @@ import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marine.MarineEntity;
+import mod.azure.azexamples.entities.meshtest.MeshTestEntity;
+import mod.azure.azexamples.entities.meshtest.MeshTestVariant;
 import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 
 /**
@@ -33,6 +36,9 @@ public final class EntityRegistry {
         add(MarineEntity.class, "marine", 0xc09e58, 0x574028);
         add(GremlinEntity.class, "gremlin", 0x424242, 0x606060);
         add(OptimusPrimeEntity.class, "optimusprime", 0x424242, 0x606060);
+        for (MeshTestVariant variant : MeshTestVariant.values()) {
+            addMeshTest(variant);
+        }
     }
 
     public static List<Entry> entries() {
@@ -51,6 +57,40 @@ public final class EntityRegistry {
             true
         );
         ENTRIES.add(new Entry(type, name, primaryEgg, secondaryEgg));
+    }
+
+    private static void addMeshTest(MeshTestVariant variant) {
+        String name = "mesh_test_" + variant.name().toLowerCase(Locale.ROOT);
+
+        add(
+            meshTestClass(variant),
+            name,
+            0x777777,
+            0x44AAFF
+        );
+    }
+
+    private static Class<? extends Entity> meshTestClass(MeshTestVariant variant) {
+        switch (variant) {
+            case RIGID:
+                return MeshTestEntity.Rigid.class;
+            case ANIMATED:
+                return MeshTestEntity.Animated.class;
+            case MIXED:
+                return MeshTestEntity.Mixed.class;
+            case SKINNED:
+                return MeshTestEntity.Skinned.class;
+            case SCALED:
+                return MeshTestEntity.Scaled.class;
+            case COPIES:
+                return MeshTestEntity.Copies.class;
+            case ANIMATED_OWNER:
+                return MeshTestEntity.AnimatedOwner.class;
+            default:
+                throw new IllegalArgumentException(
+                    "Unknown mesh test variant: " + variant
+                );
+        }
     }
 
     public static final class Entry {
