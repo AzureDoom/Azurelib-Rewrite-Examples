@@ -7,6 +7,8 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Supplier;
 
 import mod.azure.azexamples.blocks.blockentity.StargateBlockEntity;
@@ -17,6 +19,8 @@ import mod.azure.azexamples.entities.juravenator.JuravenatorEntity;
 import mod.azure.azexamples.entities.manul.ManulEntity;
 import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marine.MarineEntity;
+import mod.azure.azexamples.entities.meshtest.MeshTestEntity;
+import mod.azure.azexamples.entities.meshtest.MeshTestVariant;
 import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 import mod.azure.azexamples.services.AzExampleServices;
 
@@ -92,6 +96,21 @@ public class EntityRegistry {
         3.0f,
         7.0f
     );
+
+    /**
+     * One entity type per {@link MeshTestVariant}, registered as {@code mesh_test_<variant>}, in enum order.
+     */
+    public static final List<Supplier<EntityType<MeshTestEntity>>> MESH_TESTS = Arrays.stream(MeshTestVariant.values())
+        .map(
+            variant -> registerEntity(
+                "mesh_test_" + variant.name().toLowerCase(),
+                (EntityType.EntityFactory<MeshTestEntity>) (type, level) -> new MeshTestEntity(type, level, variant),
+                MobCategory.MISC,
+                1.0f,
+                1.75f
+            )
+        )
+        .toList();
 
     /**
      * Registers a new Block Entity.

@@ -1,12 +1,13 @@
 package mod.azure.azexamples.entities.optimusprime.ai;
 
-import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
+
+import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 
 /**
  * Server side: when a player comes within reach, Optimus Prime turns to face them and plays his sword strike. The goal

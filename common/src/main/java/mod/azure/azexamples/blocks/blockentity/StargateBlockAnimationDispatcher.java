@@ -40,32 +40,32 @@ public class StargateBlockAnimationDispatcher {
      * stage but the last plays once and moves on; the ping-pong never finishes, so it has to be last.
      */
     private static final AzSequence DIAL_SEQUENCE = AzSequence.builder()
-            .play("ring_spin")
-            .play("chevron_lock")
-            .then("ring_spin", AzPlayBehaviors.PLAY_ONCE, props -> props.withShouldReverse(true))
-            .play("chevron_lock")
-            .play("ring_spin")
-            .then("chevron_lock", AzPlayBehaviors.PLAY_ONCE, props -> props.withAnimationSpeed(2))
-            .then("kawoosh", AzPlayBehaviors.PLAY_ONCE, props -> props.withTransitionLength(10))
-            .then("portal_ripple", AzPlayBehaviors.PING_PONG)
-            .build();
+        .play("ring_spin")
+        .play("chevron_lock")
+        .then("ring_spin", AzPlayBehaviors.PLAY_ONCE, props -> props.withShouldReverse(true))
+        .play("chevron_lock")
+        .play("ring_spin")
+        .then("chevron_lock", AzPlayBehaviors.PLAY_ONCE, props -> props.withAnimationSpeed(2))
+        .then("kawoosh", AzPlayBehaviors.PLAY_ONCE, props -> props.withTransitionLength(10))
+        .then("portal_ripple", AzPlayBehaviors.PING_PONG)
+        .build();
 
     /** The kawoosh again, ending on the closed idle pose once it has finished collapsing. */
     private static final AzSequence SHUTDOWN_SEQUENCE = AzSequence.builder()
-            .play("kawoosh")
-            .loop(CommonStrings.IDLE_ANIMATION_NAME)
-            .build();
+        .play("kawoosh")
+        .loop(CommonStrings.IDLE_ANIMATION_NAME)
+        .build();
 
     /** Closed gate. Also clears the controller-level reverse that {@link #SHUTDOWN} leaves behind. */
     private static final AzCommand IDLE = AzCommand.controllerBuilder()
-            .setReverseAnimation(CONTROLLER, false)
-            .play(CONTROLLER, CommonStrings.IDLE_ANIMATION_NAME)
-            .build();
+        .setReverseAnimation(CONTROLLER, false)
+        .play(CONTROLLER, CommonStrings.IDLE_ANIMATION_NAME)
+        .build();
 
     /** Clears any leftover controller reverse first, so the per-stage reverse is the only one in play. */
     private static final AzCommand DIAL = AzCommand.compose(
-            AzCommand.controllerBuilder().setReverseAnimation(CONTROLLER, false).build(),
-            DIAL_SEQUENCE.toCommand(CONTROLLER)
+        AzCommand.controllerBuilder().setReverseAnimation(CONTROLLER, false).build(),
+        DIAL_SEQUENCE.toCommand(CONTROLLER)
     );
 
     /**
@@ -73,8 +73,8 @@ public class StargateBlockAnimationDispatcher {
      * controller until something sets it back, which {@link #JAM} and {@link #IDLE} both do.
      */
     private static final AzCommand SHUTDOWN = AzCommand.compose(
-            AzCommand.controllerBuilder().setReverseAnimation(CONTROLLER, true).build(),
-            SHUTDOWN_SEQUENCE.toCommand(CONTROLLER)
+        AzCommand.controllerBuilder().setReverseAnimation(CONTROLLER, true).build(),
+        SHUTDOWN_SEQUENCE.toCommand(CONTROLLER)
     );
 
     /**
@@ -85,15 +85,15 @@ public class StargateBlockAnimationDispatcher {
      * {@code AzSequence.builder().freeze("ring_spin", JAM_FREEZE_TICK).build().toCommand(CONTROLLER)}.)
      */
     private static final AzCommand JAM = AzCommand.create(
-            CONTROLLER,
-            "ring_spin",
-            AzPlayBehaviors.FREEZE_ON_FRAME,
-            0F, // start tick offset
-            1F, // animation speed
-            TRANSITION_TICKS, // transition length
-            JAM_FREEZE_TICK, // freeze tick offset
-            1F, // repeat count (unused here)
-            false // forward
+        CONTROLLER,
+        "ring_spin",
+        AzPlayBehaviors.FREEZE_ON_FRAME,
+        0F, // start tick offset
+        1F, // animation speed
+        TRANSITION_TICKS, // transition length
+        JAM_FREEZE_TICK, // freeze tick offset
+        1F, // repeat count (unused here)
+        false // forward
     );
 
     private final StargateBlockEntity stargateBlockEntity;

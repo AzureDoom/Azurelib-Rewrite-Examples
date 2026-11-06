@@ -1,7 +1,6 @@
 package mod.azure.azexamples.blocks;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -61,7 +60,14 @@ public class StargateBlock extends BaseEntityBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+    public @NotNull InteractionResult use(
+        @NotNull BlockState state,
+        Level level,
+        @NotNull BlockPos pos,
+        @NotNull Player player,
+        @NotNull InteractionHand hand,
+        @NotNull BlockHitResult hit
+    ) {
         if (!level.isClientSide() && level.getBlockEntity(pos) instanceof StargateBlockEntity stargate) {
             stargate.cycleMode();
             player.displayClientMessage(new TranslatableComponent(stargate.getMode().translationKey()), true);

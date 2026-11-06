@@ -5,8 +5,11 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
 
+import mod.azure.azexamples.entities.meshtest.MeshTestVariant;
 import mod.azure.azexamples.items.PistolItem;
 import mod.azure.azexamples.items.armors.DoomicornArmor;
 import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
@@ -70,6 +73,24 @@ public class ItemRegistry {
             new Item.Properties().tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab())
         )
     );
+
+    /**
+     * Spawn eggs for {@link EntityRegistry#MESH_TESTS}, in the same order, named {@code mesh_test_<variant>_spawn_egg}.
+     */
+    public static final List<Supplier<SpawnEggItem>> MESH_TEST_SPAWN_EGGS = IntStream
+        .range(0, EntityRegistry.MESH_TESTS.size())
+        .mapToObj(
+            index -> registerItem(
+                "mesh_test_" + MeshTestVariant.values()[index].name().toLowerCase() + "_spawn_egg",
+                AzExampleServices.COMMON_REGISTRY.makeSpawnEggFor(
+                    EntityRegistry.MESH_TESTS.get(index),
+                    0xff8c00,
+                    0x1e3a8a + index * 0x0a1420,
+                    new Item.Properties().tab(AzExampleServices.COMMON_REGISTRY.getCreativeTab())
+                )
+            )
+        )
+        .toList();
 
     public static final Supplier<SpawnEggItem> MANUL_SPAWN_EGG = registerItem(
         "manul_spawn_egg",
