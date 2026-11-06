@@ -27,6 +27,8 @@ import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.entities.marine.MarineEntity;
 import mod.azure.azexamples.entities.marine.MarineRenderer;
+import mod.azure.azexamples.entities.meshtest.MeshTestRenderer;
+import mod.azure.azexamples.entities.meshtest.MeshTestVariant;
 import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 import mod.azure.azexamples.entities.optimusprime.OptimusPrimeRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
@@ -36,6 +38,7 @@ import mod.azure.azexamples.items.diamondreplace.armor.DiamondArmorRenderer;
 import mod.azure.azexamples.items.gunwitharm.GunWithArmRenderer;
 import mod.azure.azexamples.profiler.AzProfilerCommand;
 import mod.azure.azexamples.registry.BlockRegistry;
+import mod.azure.azexamples.registry.EntityRegistry;
 import mod.azure.azexamples.registry.ItemRegistry;
 
 public class ClientProxy extends CommonProxy {
@@ -50,6 +53,12 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(GremlinEntity.class, GremlinRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(OptimusPrimeEntity.class, OptimusPrimeRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCreeper.class, CreeperRenderer::new);
+        for (MeshTestVariant variant : MeshTestVariant.values()) {
+            RenderingRegistry.registerEntityRenderingHandler(
+                EntityRegistry.meshTestClass(variant),
+                MeshTestRenderer::new
+            );
+        }
     }
 
     @Override

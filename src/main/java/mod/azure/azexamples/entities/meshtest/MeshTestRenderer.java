@@ -1,0 +1,29 @@
+package mod.azure.azexamples.entities.meshtest;
+
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+
+import mod.azure.azurelib.render.entity.AzEntityRenderer;
+import mod.azure.azurelib.render.entity.AzEntityRendererConfig;
+import mod.azure.azurelib.render.vertex.RenderType;
+
+import mod.azure.azexamples.CommonMod;
+
+/**
+ * One renderer for every mesh test; the model comes from the entity's {@link MeshTestVariant}.
+ */
+public class MeshTestRenderer extends AzEntityRenderer<MeshTestEntity> {
+
+    private static final ResourceLocation TEXTURE = CommonMod.modResource("textures/entity/mesh_test.png");
+
+    public MeshTestRenderer(RenderManager renderManager) {
+        super(
+            AzEntityRendererConfig.<MeshTestEntity>builder(entity -> entity.variant().model(), entity -> TEXTURE)
+                .setAnimatorProvider(MeshTestAnimator::new)
+                .setRenderType(entity -> RenderType.entityCutoutNoCull(TEXTURE))
+                .setShadowRadius(0.4F)
+                .build(),
+            renderManager
+        );
+    }
+}
