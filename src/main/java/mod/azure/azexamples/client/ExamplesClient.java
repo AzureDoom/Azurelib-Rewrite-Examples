@@ -28,6 +28,8 @@ import mod.azure.azexamples.entities.marauder.MarauderEntity;
 import mod.azure.azexamples.entities.marauder.MarauderRenderer;
 import mod.azure.azexamples.entities.marine.MarineEntity;
 import mod.azure.azexamples.entities.marine.MarineRenderer;
+import mod.azure.azexamples.entities.meshtest.MeshTestEntity;
+import mod.azure.azexamples.entities.meshtest.MeshTestRenderer;
 import mod.azure.azexamples.entities.optimusprime.OptimusPrimeEntity;
 import mod.azure.azexamples.entities.optimusprime.OptimusPrimeRenderer;
 import mod.azure.azexamples.items.PistolRenderer;
@@ -54,6 +56,7 @@ public final class ExamplesClient implements ClientModInitializer {
         AzEntityRendererRegistry.register(MarineEntity.class, MarineRenderer::new);
         AzEntityRendererRegistry.register(GremlinEntity.class, GremlinRenderer::new);
         AzEntityRendererRegistry.register(OptimusPrimeEntity.class, OptimusPrimeRenderer::new);
+        AzEntityRendererRegistry.register(MeshTestEntity.class, MeshTestRenderer::new);
         // Replaces the vanilla creeper renderer, showing AzureLib driving a vanilla entity.
         AzEntityRendererRegistry.register(CreeperEntity.class, CreeperRenderer::new);
 
