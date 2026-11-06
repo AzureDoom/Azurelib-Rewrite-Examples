@@ -1,7 +1,5 @@
 package mod.azure.azexamples.entities.optimusprime;
 
-import mod.azure.azexamples.CommonStrings;
-import mod.azure.azexamples.entities.optimusprime.ai.OptimusStrikeGoal;
 import mod.azure.azurelib.animation.dispatch.command.sequence.AzSequence;
 import mod.azure.azurelib.animation.dispatch.command.sequence.AzSequenceEvent;
 import mod.azure.azurelib.animation.dispatch.command.sequence.AzSequencePlayer;
@@ -20,6 +18,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+
+import mod.azure.azexamples.CommonStrings;
+import mod.azure.azexamples.entities.optimusprime.ai.OptimusStrikeGoal;
 
 /**
  * Credit to <a href="https://github.com/MARCTR0N">Marctron</a> for the model/textures/animations of this example.
@@ -150,7 +151,7 @@ public class OptimusPrimeEntity extends Monster {
                 LivingEntity.class,
                 area,
                 entity -> entity != this && entity.isAlive() && entity.distanceToSqr(center) <= Mth.square(
-                        3.5 + entity.getBbWidth() / 2
+                    3.5 + entity.getBbWidth() / 2
                 )
             )
         ) {
@@ -165,9 +166,9 @@ public class OptimusPrimeEntity extends Monster {
             center.y + 0.2,
             center.z,
             8,
-                3.5 / 2,
+            3.5 / 2,
             0.1,
-                3.5 / 2,
+            3.5 / 2,
             0.0
         );
         serverLevel.sendParticles(
@@ -176,9 +177,9 @@ public class OptimusPrimeEntity extends Monster {
             center.y + 0.1,
             center.z,
             30,
-                3.5 / 2,
+            3.5 / 2,
             0.05,
-                3.5 / 2,
+            3.5 / 2,
             0.15
         );
         serverLevel.playSound(

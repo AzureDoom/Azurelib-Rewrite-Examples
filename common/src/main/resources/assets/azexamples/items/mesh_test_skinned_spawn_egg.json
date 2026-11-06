@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "azexamples:item/mesh_test_skinned_spawn_egg"
+  }
+}

@@ -1,6 +1,6 @@
 package mod.azure.azexamples;
 
-import mod.azure.azexamples.blocks.jukebox.JukeboxResonatorRenderer;
+import mod.azure.azexamples.entities.meshtest.MeshTestRenderer;
 import mod.azure.azurelib.render.armor.AzArmorRendererRegistry;
 import mod.azure.azurelib.render.item.AzItemRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -9,9 +9,11 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 
 import mod.azure.azexamples.blocks.StargateBlockItemRenderer;
 import mod.azure.azexamples.blocks.blockentity.StargateBlockRenderer;
+import mod.azure.azexamples.blocks.jukebox.JukeboxResonatorRenderer;
 import mod.azure.azexamples.entities.creeper.CreeperRenderer;
 import mod.azure.azexamples.entities.doomhunter.DoomHunterRenderer;
 import mod.azure.azexamples.entities.gremlin.GremlinRenderer;
@@ -28,8 +30,6 @@ import mod.azure.azexamples.items.netheritereplace.armor.NetheriteArmorRenderer;
 import mod.azure.azexamples.registry.BlockRegistry;
 import mod.azure.azexamples.registry.EntityRegistry;
 import mod.azure.azexamples.registry.ItemRegistry;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.BlockEntityTypes;
 
 public class FabricLibClientMod implements ClientModInitializer {
 
@@ -60,6 +60,7 @@ public class FabricLibClientMod implements ClientModInitializer {
         EntityRenderers.register(EntityRegistry.MARINE.get(), MarineRenderer::new);
         EntityRenderers.register(EntityRegistry.GREMLIN.get(), GremlinRenderer::new);
         EntityRenderers.register(EntityRegistry.OPTIMUSPRIME.get(), OptimusPrimeRenderer::new);
+        EntityRegistry.MESH_TESTS.forEach(type -> EntityRenderers.register(type.get(), MeshTestRenderer::new));
         EntityRenderers.register(EntityTypes.CREEPER, CreeperRenderer::new);
         BlockEntityRenderers.register(
             EntityRegistry.STARGATE_BLOCK_ENTITY.get(),

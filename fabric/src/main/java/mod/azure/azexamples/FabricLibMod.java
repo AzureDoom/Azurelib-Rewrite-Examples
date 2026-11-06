@@ -43,6 +43,9 @@ public final class FabricLibMod implements ModInitializer {
             EntityRegistry.OPTIMUSPRIME.get(),
             Mob.createMobAttributes()
         );
+        EntityRegistry.MESH_TESTS.forEach(
+                type -> FabricDefaultAttributeRegistry.register(type.get(), Mob.createMobAttributes())
+        );
         AzIdentityRegistry.register(
             ItemRegistry.PISTOL.get(),
             ItemRegistry.PEACEMAKER.get(),

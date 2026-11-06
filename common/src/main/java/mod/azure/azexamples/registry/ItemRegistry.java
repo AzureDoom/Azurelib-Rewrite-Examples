@@ -5,10 +5,13 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.equipment.ArmorMaterials;
 import net.minecraft.world.item.equipment.ArmorType;
 
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
+import java.util.stream.IntStream;
 
+import mod.azure.azexamples.entities.meshtest.MeshTestVariant;
 import mod.azure.azexamples.items.PistolItem;
 import mod.azure.azexamples.items.armors.DoomicornArmor;
 import mod.azure.azexamples.items.gunwitharm.GunWithArmItem;
@@ -109,6 +112,19 @@ public class ItemRegistry {
             "optimusprime_spawn_egg",
             EntityRegistry.OPTIMUSPRIME
         );
+
+    /**
+     * Spawn eggs for {@link EntityRegistry#MESH_TESTS}, in the same order, named {@code mesh_test_<variant>_spawn_egg}.
+     */
+    public static final List<Supplier<SpawnEggItem>> MESH_TEST_SPAWN_EGGS = IntStream
+        .range(0, EntityRegistry.MESH_TESTS.size())
+        .mapToObj(
+            index -> AzExampleServices.COMMON_REGISTRY.registerSpawnEgg(
+                "mesh_test_" + MeshTestVariant.values()[index].name().toLowerCase() + "_spawn_egg",
+                EntityRegistry.MESH_TESTS.get(index)
+            )
+        )
+        .toList();
 
     /**
      * Registers a new Item.

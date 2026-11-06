@@ -1,7 +1,5 @@
 package mod.azure.azexamples.blocks.jukebox;
 
-import mod.azure.azexamples.CommonMod;
-import mod.azure.azexamples.CommonStrings;
 import mod.azure.azurelib.animation.AzAnimatorConfig;
 import mod.azure.azurelib.animation.controller.AzAnimationController;
 import mod.azure.azurelib.animation.controller.AzAnimationControllerContainer;
@@ -12,6 +10,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.JukeboxBlock;
 import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import org.jetbrains.annotations.NotNull;
+
+import mod.azure.azexamples.CommonMod;
+import mod.azure.azexamples.CommonStrings;
 
 /**
  * Animates vanilla's jukebox as the resonator. Nothing is added to the jukebox itself: AzureLib caches an animator on

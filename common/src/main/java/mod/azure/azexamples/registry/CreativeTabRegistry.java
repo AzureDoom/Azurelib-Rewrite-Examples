@@ -3,7 +3,10 @@ package mod.azure.azexamples.registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.ItemLike;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 import mod.azure.azexamples.CommonStrings;
@@ -52,25 +55,35 @@ public class CreativeTabRegistry {
             "examplemod_items",
             () -> AzExampleServices.COMMON_REGISTRY
                 .newCreativeTabBuilder(
-                    BlockRegistry.STARGATE_ITEM,
-                    ItemRegistry.PISTOL,
-                    ItemRegistry.PEACEMAKER,
-                    ItemRegistry.DOOMICORN_HELMET,
-                    ItemRegistry.DOOMICORN_CHESTPLATE,
-                    ItemRegistry.DOOMICORN_LEGGINGS,
-                    ItemRegistry.DOOMICORN_BOOTS,
-                    ItemRegistry.MARAUDER_SPAWN_EGG,
-                    ItemRegistry.DOOMHUNTER_SPAWN_EGG,
-                    ItemRegistry.MANUL_SPAWN_EGG,
-                    ItemRegistry.JURAVENATOR_SPAWN_EGG,
-                    ItemRegistry.MARINE_SPAWN_EGG,
-                    ItemRegistry.GREMLIN_SPAWN_EGG,
-                    ItemRegistry.OPTIMUSPRIME_SPAWN_EGG
+                    creativeTabItems().toArray(Supplier[]::new)
                 )
                 .title(Component.translatable(CommonStrings.CREATIVE_TAB))
                 .icon(() -> BlockRegistry.STARGATE_ITEM.get().getDefaultInstance())
                 .build()
         );
+
+    private static List<Supplier<? extends ItemLike>> creativeTabItems() {
+        List<Supplier<? extends ItemLike>> items = new ArrayList<>();
+
+        items.add(BlockRegistry.STARGATE_ITEM);
+        items.add(ItemRegistry.PISTOL);
+        items.add(ItemRegistry.PEACEMAKER);
+        items.add(ItemRegistry.DOOMICORN_HELMET);
+        items.add(ItemRegistry.DOOMICORN_CHESTPLATE);
+        items.add(ItemRegistry.DOOMICORN_LEGGINGS);
+        items.add(ItemRegistry.DOOMICORN_BOOTS);
+        items.add(ItemRegistry.MARAUDER_SPAWN_EGG);
+        items.add(ItemRegistry.DOOMHUNTER_SPAWN_EGG);
+        items.add(ItemRegistry.MANUL_SPAWN_EGG);
+        items.add(ItemRegistry.JURAVENATOR_SPAWN_EGG);
+        items.add(ItemRegistry.MARINE_SPAWN_EGG);
+        items.add(ItemRegistry.GREMLIN_SPAWN_EGG);
+        items.add(ItemRegistry.OPTIMUSPRIME_SPAWN_EGG);
+
+        items.addAll(ItemRegistry.MESH_TEST_SPAWN_EGGS);
+
+        return items;
+    }
 
     public static void initialize() {}
 
